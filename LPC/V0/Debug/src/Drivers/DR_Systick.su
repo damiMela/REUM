@@ -1,0 +1,4 @@
+DR_Systick.c:73:6:inicializarSystick	4	static
+DR_Systick.c:87:6:SysTick_Handler	4	static
+DR_Systick.c:99:10:get_ticks	4	static
+DR_Systick.c:111:6:reset_ticks	4	static

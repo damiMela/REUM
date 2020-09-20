@@ -1,0 +1,6 @@
+DR_GPIO.c:71:6:setPinmode	16	static
+DR_GPIO.c:86:6:setPinmode_OP	16	static
+DR_GPIO.c:101:6:setDir	16	static
+DR_GPIO.c:118:6:setPin	16	static
+DR_GPIO.c:145:9:getPin	24	static
+DR_GPIO.c:160:9:getPin_raw	16	static
