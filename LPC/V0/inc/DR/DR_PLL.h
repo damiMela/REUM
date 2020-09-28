@@ -1,6 +1,6 @@
 #ifndef KITINIC_H_
 #define KITINIC_H_
-#include"DR_Tipos.h"
+#include <DR/DR_Tipos.h>
 	//!< ///////////////////   PCONP   //////////////////////////
 	//!<  Power Control for Peripherals register (PCONP - 0x400F C0C4) [pag. 62 user manual LPC1769]
 	//!< 0x400FC0C4UL : Direccion de inicio del registro de habilitación de dispositivos:
@@ -14,6 +14,7 @@
 	//!< Registros PCLKSEL
 	#define		PCLKSEL0	PCLKSEL[0]
 	#define		PCLKSEL1	PCLKSEL[1]
+		#define PCLK_ADC	24
 
 //////////////Registros del CLOCK y de sistema/////////////////
 //0x400FC1A0UL: Registro de control de sistema y registro de status:

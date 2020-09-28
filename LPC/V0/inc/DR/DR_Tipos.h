@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************//**
  *
- * @file		DR_GPIO.h
- * @brief		Breve descripción del objetivo del Módulo
+ * @file		DR_Tipos.h
+ * @brief		Definición de tipo de datos
  * @date		Sep 19, 2020
- * @author		Ing. Marcelo Trujillo
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 
@@ -11,45 +11,37 @@
  *** MODULO
  **********************************************************************************************************************************/
 
-#ifndef DRIVERS_DR_GPIO_H_
-#define DRIVERS_DR_GPIO_H_
+#ifndef DR_DR_TIPOS_H_
+#define DR_DR_TIPOS_H_
 
 /***********************************************************************************************************************************
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
-#include "DR_Tipos.h"
+
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define	MODE_PULLUP		0
-#define	MODE_REPEATER	1
-#define	MODE_NONE		2
-#define	MODE_PULLDOWN	3
+#define PORT0	0
+#define PORT1	1
+#define PORT2	2
+#define PORT3	3
+#define PORT4	4
 
-#define	MODE_OP_NHIGH	0 //Normal HIGH. Prendido con 0v
-#define	MODE_OP_NLOW	1 //Normal LOW.  Prendido con vcc
-
-//para lectura.
-#define ON_LOW 	0 //ON cuando hay un 0.
-#define ON_HIGH 1 //ON cuando hay un 1.
-
-#define INPUT	0
-#define OUTPUT	1
-
-//estados. Ambas opciones para comodidad y/o mejor uso.
-#define LOW 	0
-#define HIGH	1		//para escribir en pines
-
-#define OFF		0
-#define ON		1		//para leer estado de pines
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
  **********************************************************************************************************************************/
-
+#define     __R             volatile const 	//< solo lectura
+#define 	__W     		volatile 		//< solo escritura
+#define 	__RW            volatile 		//< lectura / escritura
 /***********************************************************************************************************************************
  *** TIPO DE DATOS GLOBALES
  **********************************************************************************************************************************/
-
+typedef	unsigned int		uint32_t;
+typedef	int					int32_t;
+typedef	short unsigned int	uint16_t;
+typedef	short int			int16_t;
+typedef	unsigned char		uint8_t ;
+typedef	char				int8_t;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES
  **********************************************************************************************************************************/
@@ -58,11 +50,5 @@
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void 	setPinmode(uint8_t port, uint8_t pin, uint8_t mode);
-void 	setPinmode_OP(uint8_t port, uint8_t pin, uint8_t mode);
-void 	setDir(uint8_t port, uint8_t pin, uint8_t mode);
-void 	setPin(uint8_t port, uint8_t pin, uint8_t state);
-uint8_t getPin(uint8_t port, uint8_t pin, uint8_t mode);
-uint8_t getPin_raw(uint8_t port, uint8_t pin);
 
-#endif /* DRIVERS_DR_GPIO_H_ */
+#endif /* DR_DR_TIPOS_H_ */

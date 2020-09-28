@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************//**
  *
- * @file		DR_Pinsel.h
- * @brief		Drivers para utilización del registro PINSEL
+ * @file		DR_GPIO.h
+ * @brief		Breve descripción del objetivo del Módulo
  * @date		Sep 19, 2020
- * @author		R2002 - Grupo2
+ * @author		Ing. Marcelo Trujillo
  *
  **********************************************************************************************************************************/
 
@@ -11,20 +11,37 @@
  *** MODULO
  **********************************************************************************************************************************/
 
-#ifndef DRIVERS_DR_PINSEL_H_
-#define DRIVERS_DR_PINSEL_H_
+#ifndef DR_DR_GPIO_H_
+#define DR_DR_GPIO_H_
 
 /***********************************************************************************************************************************
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
-#include "DR_Tipos.h"
+#include <DR/DR_Tipos.h>
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define FUNCION_0	0 // 0b00
-#define FUNCION_1	1 // 0b01
-#define FUNCION_2	2 // 0b10
-#define FUNCION_3	3 // 0b11
+#define	MODE_PULLUP		0
+#define	MODE_REPEATER	1
+#define	MODE_NONE		2
+#define	MODE_PULLDOWN	3
+
+#define	MODE_OP_NHIGH	0 //Normal HIGH. Prendido con 0v
+#define	MODE_OP_NLOW	1 //Normal LOW.  Prendido con vcc
+
+//para lectura.
+#define ON_LOW 	0 //ON cuando hay un 0.
+#define ON_HIGH 1 //ON cuando hay un 1.
+
+#define INPUT	0
+#define OUTPUT	1
+
+//estados. Ambas opciones para comodidad y/o mejor uso.
+#define LOW 	0
+#define HIGH	1		//para escribir en pines
+
+#define OFF		0
+#define ON		1		//para leer estado de pines
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
  **********************************************************************************************************************************/
@@ -41,6 +58,11 @@
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void setPinsel(uint8_t port, uint8_t pin, uint8_t f_number);
+void 	setPinmode(uint8_t port, uint8_t pin, uint8_t mode);
+void 	setPinmode_OP(uint8_t port, uint8_t pin, uint8_t mode);
+void 	setDir(uint8_t port, uint8_t pin, uint8_t mode);
+void 	setPin(uint8_t port, uint8_t pin, uint8_t state);
+uint8_t getPin(uint8_t port, uint8_t pin, uint8_t mode);
+uint8_t getPin_raw(uint8_t port, uint8_t pin);
 
-#endif /* DRIVERS_DR_PINSEL_H_ */
+#endif /* DR_DR_GPIO_H_ */

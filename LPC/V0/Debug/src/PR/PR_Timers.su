@@ -1,0 +1,8 @@
+PR_Timers.c:69:8:TimerStart	32	static
+PR_Timers.c:97:8:TimerPause	24	static
+PR_Timers.c:119:8:TimerStop	24	static
+PR_Timers.c:145:8:TimerSet	24	static
+PR_Timers.c:174:8:TimerGet	24	static
+PR_Timers.c:200:6:TimerClose	16	static
+PR_Timers.c:216:6:TimerDiscount	16	static
+PR_Timers.c:238:6:TimerLunchEvent	16	static

@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************//**
  *
- * @file		infotronic.h
+ * @file		DR_ADC.h
  * @brief		Breve descripción del objetivo del Módulo
- * @date		Sep 19, 2020
- * @author		Ing. Marcelo Trujillo
+ * @date		Sep 28, 2020
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 
@@ -11,101 +11,17 @@
  *** MODULO
  **********************************************************************************************************************************/
 
-#ifndef INFOTRONIC_H_
-#define INFOTRONIC_H_
+#ifndef DR_DR_ADC_H_
+#define DR_DR_ADC_H_
 
 /***********************************************************************************************************************************
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
 #include <DR/DR_Tipos.h>
+#include <DR/DR_PLL.h>
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-//!< Salidas Digitales/Relays
-#define		RELAY0			PORT2,0
-#define		RELAY1			PORT0,23
-#define		RELAY2			PORT0,21
-#define		RELAY3			PORT0,27
-
-//!< LED RGB
-#define 	RGB_R			PORT2, 2
-#define 	RGB_G			PORT2, 3
-#define 	RGB_B			PORT2, 1
-
-//!<Buzzer
-#define		BUZZER			PORT0,28
-
-//!<Entradas analógicas
-#define 	ADC0			PORT0, 31
-#define 	ADC1			PORT0, 24
-#define 	ADC2			PORT0, 25
-
-#define 	POTENCIOMETRO	ADC0
-
-//!< Entradas Digitales
-#define 	IN0				PORT1,26
-#define 	IN1				PORT4,29
-#define 	IN2				PORT2,11
-
-//!< LCD
-#define		LCD_D4			PORT0,5
-#define		LCD_D5			PORT0,10
-#define		LCD_D6			PORT2,4
-#define		LCD_D7			PORT2,5
-#define		LCD_RS			PORT2,6
-#define		LCD_BF			PORT0,28
-#define		LCD_EN			PORT0,4
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//!< Display siete segmentos
-#define    dg0       		PORT0,19    // exp 5
-#define    dg1       		PORT1,20   	// exp 4
-#define    dg2      		PORT1,23   	// exp 3
-#define    dg3       		PORT4,28   	// exp 2
-#define    dg4       		PORT1,29   	// exp1
-#define    dg5       		PORT2,7    	// exp0
-
-#define    seg_a        	PORT3,26 	// exp6 Correcto P3.26
-#define    seg_b       	 	PORT1,18	// exp15
-#define    seg_c        	PORT1,21	// exp14
-#define    seg_d        	PORT1,24	// exp13
-#define    seg_e        	PORT1,27	// exp12
-#define    seg_f        	PORT3,25	// exp11
-#define    seg_g        	PORT0,20	// exp10
-
-#define    seg_dp        	PORT1,19// P1.19  exp9
-
-#define    DIGITO_0         0
-#define    DIGITO_1         1
-#define    DIGITO_2         2
-#define    DIGITO_3         3
-#define    DIGITO_4         4
-#define    DIGITO_5         5
-
-
-//!< Teclas (teclado 4x1)
-#define		KEY0			PORT2,10
-#define		KEY1			PORT0,18
-#define		KEY2			PORT0,11
-#define		KEY3			PORT2,13		// EINT3
-
-
-
-
-
 
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
@@ -118,10 +34,13 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES
  **********************************************************************************************************************************/
-// extern tipo nombreVariable;
+extern uint8_t ADC_inUse;
 
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
+void inicializarADC(void);
+uint32_t ADC_getVal(void);
+void ADC_startConvertion(void);
 
-#endif /* INFOTRONIC_H_ */
+#endif /* DR_DR_ADC_H_ */

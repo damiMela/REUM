@@ -5,58 +5,93 @@ Archive member included to satisfy reference by file (symbol)
 
 Discarded input sections
 
- .group         0x0000000000000000        0xc ./src/Drivers/DR_GPIO.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_GPIO.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_GPIO.o
- .text          0x0000000000000000        0x0 ./src/Drivers/DR_GPIO.o
- .data          0x0000000000000000        0x0 ./src/Drivers/DR_GPIO.o
- .bss           0x0000000000000000        0x0 ./src/Drivers/DR_GPIO.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
+ .text          0x0000000000000000        0x0 ./src/PR/PR_Timers.o
+ .data          0x0000000000000000        0x0 ./src/PR/PR_Timers.o
+ .bss           0x0000000000000000        0x0 ./src/PR/PR_Timers.o
+ .text.TimerPause
+                0x0000000000000000       0x38 ./src/PR/PR_Timers.o
+ .text.TimerStop
+                0x0000000000000000       0x64 ./src/PR/PR_Timers.o
+ .text.TimerSet
+                0x0000000000000000       0x9c ./src/PR/PR_Timers.o
+ .text.TimerGet
+                0x0000000000000000       0xa0 ./src/PR/PR_Timers.o
+ .text.TimerClose
+                0x0000000000000000       0x28 ./src/PR/PR_Timers.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_ADC.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_ADC.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_ADC.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_ADC.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_ADC.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_ADC.o
+ .text.inicializarADC
+                0x0000000000000000       0xd4 ./src/DR/DR_ADC.o
+ .text.ADC_getVal
+                0x0000000000000000       0x14 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000000       0x3a ./src/DR/DR_ADC.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_GPIO.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_GPIO.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_GPIO.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
  .text.setPinmode
-                0x0000000000000000       0x94 ./src/Drivers/DR_GPIO.o
- .text.setPinmode_OP
-                0x0000000000000000       0x64 ./src/Drivers/DR_GPIO.o
- .text.getPin   0x0000000000000000       0x4a ./src/Drivers/DR_GPIO.o
+                0x0000000000000000       0x94 ./src/DR/DR_GPIO.o
+ .text.getPin   0x0000000000000000       0x4a ./src/DR/DR_GPIO.o
  .text.getPin_raw
-                0x0000000000000000       0x32 ./src/Drivers/DR_GPIO.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_PLL.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_PLL.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_PLL.o
- .text          0x0000000000000000        0x0 ./src/Drivers/DR_PLL.o
- .data          0x0000000000000000        0x0 ./src/Drivers/DR_PLL.o
- .bss           0x0000000000000000        0x0 ./src/Drivers/DR_PLL.o
- .debug_macro   0x0000000000000000      0xaa8 ./src/Drivers/DR_PLL.o
- .debug_macro   0x0000000000000000       0x3a ./src/Drivers/DR_PLL.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Pinsel.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Pinsel.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Pinsel.o
- .text          0x0000000000000000        0x0 ./src/Drivers/DR_Pinsel.o
- .data          0x0000000000000000        0x0 ./src/Drivers/DR_Pinsel.o
- .bss           0x0000000000000000        0x0 ./src/Drivers/DR_Pinsel.o
+                0x0000000000000000       0x32 ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000000000       0x3a ./src/DR/DR_GPIO.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_PLL.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_PLL.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_PLL.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_PLL.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_PLL.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000000000       0x3a ./src/DR/DR_PLL.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Pinsel.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Pinsel.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Pinsel.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_Pinsel.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_Pinsel.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_Pinsel.o
  .text.setPinsel
-                0x0000000000000000       0x9a ./src/Drivers/DR_Pinsel.o
- .debug_info    0x0000000000000000       0xac ./src/Drivers/DR_Pinsel.o
- .debug_abbrev  0x0000000000000000       0x78 ./src/Drivers/DR_Pinsel.o
+                0x0000000000000000       0x9a ./src/DR/DR_Pinsel.o
+ .debug_info    0x0000000000000000       0xac ./src/DR/DR_Pinsel.o
+ .debug_abbrev  0x0000000000000000       0x78 ./src/DR/DR_Pinsel.o
  .debug_aranges
-                0x0000000000000000       0x20 ./src/Drivers/DR_Pinsel.o
- .debug_ranges  0x0000000000000000       0x10 ./src/Drivers/DR_Pinsel.o
- .debug_macro   0x0000000000000000       0x2f ./src/Drivers/DR_Pinsel.o
- .debug_macro   0x0000000000000000      0xaa8 ./src/Drivers/DR_Pinsel.o
- .debug_macro   0x0000000000000000       0x3a ./src/Drivers/DR_Pinsel.o
- .debug_macro   0x0000000000000000       0x1c ./src/Drivers/DR_Pinsel.o
- .debug_line    0x0000000000000000       0xbd ./src/Drivers/DR_Pinsel.o
- .debug_str     0x0000000000000000     0x2f30 ./src/Drivers/DR_Pinsel.o
- .comment       0x0000000000000000       0x7a ./src/Drivers/DR_Pinsel.o
- .debug_frame   0x0000000000000000       0x38 ./src/Drivers/DR_Pinsel.o
+                0x0000000000000000       0x20 ./src/DR/DR_Pinsel.o
+ .debug_ranges  0x0000000000000000       0x10 ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000000000       0x2f ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000000000       0x3a ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000000000       0x1c ./src/DR/DR_Pinsel.o
+ .debug_line    0x0000000000000000       0xb6 ./src/DR/DR_Pinsel.o
+ .debug_str     0x0000000000000000     0x2f26 ./src/DR/DR_Pinsel.o
+ .comment       0x0000000000000000       0x7a ./src/DR/DR_Pinsel.o
+ .debug_frame   0x0000000000000000       0x38 ./src/DR/DR_Pinsel.o
  .ARM.attributes
-                0x0000000000000000       0x2d ./src/Drivers/DR_Pinsel.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Systick.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Systick.o
- .group         0x0000000000000000        0xc ./src/Drivers/DR_Systick.o
- .text          0x0000000000000000        0x0 ./src/Drivers/DR_Systick.o
- .data          0x0000000000000000        0x0 ./src/Drivers/DR_Systick.o
- .bss           0x0000000000000000        0x0 ./src/Drivers/DR_Systick.o
- .debug_macro   0x0000000000000000      0xaa8 ./src/Drivers/DR_Systick.o
- .debug_macro   0x0000000000000000       0x3a ./src/Drivers/DR_Systick.o
+                0x0000000000000000       0x2d ./src/DR/DR_Pinsel.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_Systick.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_Systick.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_Systick.o
+ .text.get_ticks
+                0x0000000000000000       0x14 ./src/DR/DR_Systick.o
+ .text.reset_ticks
+                0x0000000000000000       0x18 ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000       0x3a ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000      0x11e ./src/DR/DR_Systick.o
+ .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
@@ -68,8 +103,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x3a ./src/TPI_V0.o
- .debug_macro   0x0000000000000000       0x58 ./src/TPI_V0.o
- .debug_macro   0x0000000000000000      0x118 ./src/TPI_V0.o
+ .debug_macro   0x0000000000000000      0x11e ./src/TPI_V0.o
+ .debug_macro   0x0000000000000000       0x2e ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/cr_startup_lpc175x_6x.o
  .text          0x0000000000000000        0x0 ./src/cr_startup_lpc175x_6x.o
  .data          0x0000000000000000        0x0 ./src/cr_startup_lpc175x_6x.o
@@ -89,10 +124,12 @@ RamAHB32         0x000000002007c000 0x0000000000008000 xrw
 
 Linker script and memory map
 
-LOAD ./src/Drivers/DR_GPIO.o
-LOAD ./src/Drivers/DR_PLL.o
-LOAD ./src/Drivers/DR_Pinsel.o
-LOAD ./src/Drivers/DR_Systick.o
+LOAD ./src/PR/PR_Timers.o
+LOAD ./src/DR/DR_ADC.o
+LOAD ./src/DR/DR_GPIO.o
+LOAD ./src/DR/DR_PLL.o
+LOAD ./src/DR/DR_Pinsel.o
+LOAD ./src/DR/DR_Systick.o
 LOAD ./src/TPI_V0.o
 LOAD ./src/cr_startup_lpc175x_6x.o
 START GROUP
@@ -113,7 +150,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000      0x5a0
+.text           0x0000000000000000      0x84c
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -122,16 +159,16 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0x5a0 LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x84c LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
-                0x00000000000000d4        0x4 LONG 0x0 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0x5a0 LOADADDR (.data_RAM2)
+                0x00000000000000d4        0x4 LONG 0x4 SIZEOF (.data)
+                0x00000000000000d8        0x4 LONG 0x84c LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
                 0x00000000000000e4                __bss_section_table = .
-                0x00000000000000e4        0x4 LONG 0x10000000 ADDR (.bss)
-                0x00000000000000e8        0x4 LONG 0x4 SIZEOF (.bss)
+                0x00000000000000e4        0x4 LONG 0x10000004 ADDR (.bss)
+                0x00000000000000e8        0x4 LONG 0x1e8 SIZEOF (.bss)
                 0x00000000000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
                 0x00000000000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
                 0x00000000000000f4                __bss_section_table_end = .
@@ -175,7 +212,6 @@ END GROUP
                 0x000000000000021a                EINT1_IRQHandler
                 0x000000000000021a                TIMER1_IRQHandler
                 0x000000000000021a                UART2_IRQHandler
-                0x000000000000021a                ADC_IRQHandler
                 0x000000000000021a                SSP1_IRQHandler
                 0x000000000000021a                USB_IRQHandler
                 0x000000000000021a                BOD_IRQHandler
@@ -187,63 +223,77 @@ END GROUP
                 0x000000000000021a                MCPWM_IRQHandler
                 0x000000000000021a                ENET_IRQHandler
  *(.text*)
- .text.setDir   0x0000000000000220       0x76 ./src/Drivers/DR_GPIO.o
-                0x0000000000000220                setDir
- *fill*         0x0000000000000296        0x2 ff
- .text.setPin   0x0000000000000298       0xe8 ./src/Drivers/DR_GPIO.o
-                0x0000000000000298                setPin
+ .text.TimerStart
+                0x0000000000000220       0x9c ./src/PR/PR_Timers.o
+                0x0000000000000220                TimerStart
+ .text.TimerDiscount
+                0x00000000000002bc       0x6c ./src/PR/PR_Timers.o
+                0x00000000000002bc                TimerDiscount
+ .text.TimerLunchEvent
+                0x0000000000000328       0x48 ./src/PR/PR_Timers.o
+                0x0000000000000328                TimerLunchEvent
+ .text.ADC_IRQHandler
+                0x0000000000000370       0x78 ./src/DR/DR_ADC.o
+                0x0000000000000370                ADC_IRQHandler
+ .text.ADC_startConvertion
+                0x00000000000003e8       0x1c ./src/DR/DR_ADC.o
+                0x00000000000003e8                ADC_startConvertion
+ .text.setPinmode_OP
+                0x0000000000000404       0x64 ./src/DR/DR_GPIO.o
+                0x0000000000000404                setPinmode_OP
+ .text.setDir   0x0000000000000468       0x76 ./src/DR/DR_GPIO.o
+                0x0000000000000468                setDir
+ *fill*         0x00000000000004de        0x2 ff
+ .text.setPin   0x00000000000004e0       0xe8 ./src/DR/DR_GPIO.o
+                0x00000000000004e0                setPin
  .text.InicializarPLL
-                0x0000000000000380      0x140 ./src/Drivers/DR_PLL.o
-                0x0000000000000380                InicializarPLL
+                0x00000000000005c8      0x140 ./src/DR/DR_PLL.o
+                0x00000000000005c8                InicializarPLL
  .text.inicializarSystick
-                0x00000000000004c0       0x3c ./src/Drivers/DR_Systick.o
-                0x00000000000004c0                inicializarSystick
+                0x0000000000000708       0x40 ./src/DR/DR_Systick.o
+                0x0000000000000708                inicializarSystick
  .text.SysTick_Handler
-                0x00000000000004fc       0x1c ./src/Drivers/DR_Systick.o
-                0x00000000000004fc                SysTick_Handler
- .text.get_ticks
-                0x0000000000000518       0x14 ./src/Drivers/DR_Systick.o
-                0x0000000000000518                get_ticks
- .text.reset_ticks
-                0x000000000000052c       0x18 ./src/Drivers/DR_Systick.o
-                0x000000000000052c                reset_ticks
- .text.main     0x0000000000000544       0x58 ./src/TPI_V0.o
-                0x0000000000000544                main
+                0x0000000000000748       0x60 ./src/DR/DR_Systick.o
+                0x0000000000000748                SysTick_Handler
+ .text.func     0x00000000000007a8       0x40 ./src/TPI_V0.o
+                0x00000000000007a8                func
+ .text.main     0x00000000000007e8       0x60 ./src/TPI_V0.o
+                0x00000000000007e8                main
  .text.__weak_main
-                0x000000000000059c        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x000000000000059c                __main
-                0x000000000000059c                __weak_main
+                0x0000000000000848        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x0000000000000848                __main
+                0x0000000000000848                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
-                0x00000000000005a0                . = ALIGN (0x4)
+                0x000000000000084c                . = ALIGN (0x4)
 
-.glue_7         0x00000000000005a0        0x0
- .glue_7        0x00000000000005a0        0x0 linker stubs
+.glue_7         0x000000000000084c        0x0
+ .glue_7        0x000000000000084c        0x0 linker stubs
 
-.glue_7t        0x00000000000005a0        0x0
- .glue_7t       0x00000000000005a0        0x0 linker stubs
+.glue_7t        0x000000000000084c        0x0
+ .glue_7t       0x000000000000084c        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000005a0        0x0
- .vfp11_veneer  0x00000000000005a0        0x0 linker stubs
+.vfp11_veneer   0x000000000000084c        0x0
+ .vfp11_veneer  0x000000000000084c        0x0 linker stubs
 
-.v4_bx          0x00000000000005a0        0x0
- .v4_bx         0x00000000000005a0        0x0 linker stubs
+.v4_bx          0x000000000000084c        0x0
+ .v4_bx         0x000000000000084c        0x0 linker stubs
 
-.iplt           0x00000000000005a0        0x0
- .iplt          0x00000000000005a0        0x0 ./src/Drivers/DR_GPIO.o
+.iplt           0x000000000000084c        0x0
+ .iplt          0x000000000000084c        0x0 ./src/PR/PR_Timers.o
 
-.rel.dyn        0x00000000000005a0        0x0
- .rel.iplt      0x00000000000005a0        0x0 ./src/Drivers/DR_GPIO.o
+.rel.dyn        0x000000000000084c        0x0
+ .rel.iplt      0x000000000000084c        0x0 ./src/PR/PR_Timers.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x00000000000005a0        0x0
-                0x00000000000005a0                __exidx_start = .
+.ARM.exidx      0x000000000000084c        0x0
+                0x000000000000084c                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000000000005a0                __exidx_end = .
-                0x00000000000005a0                _etext = .
+                0x000000000000084c                __exidx_end = .
+                0x000000000000084c                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x00000000000005a0
+.data_RAM2      0x000000002007c000        0x0 load address 0x000000000000084c
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -264,7 +314,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x0 load address 0x00000000000005a0
+.data           0x0000000010000000        0x4 load address 0x000000000000084c
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -275,13 +325,15 @@ END GROUP
  *(DataQuickAccess)
  *(RamFunction)
  *(.data*)
-                0x0000000010000000                . = ALIGN (0x4)
-                0x0000000010000000                _edata = .
+ .data.state    0x0000000010000000        0x4 ./src/TPI_V0.o
+                0x0000000010000000                state
+                0x0000000010000004                . = ALIGN (0x4)
+                0x0000000010000004                _edata = .
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000000        0x0 load address 0x00000000000005a0
- .igot.plt      0x0000000010000000        0x0 ./src/Drivers/DR_GPIO.o
+.igot.plt       0x0000000010000004        0x0 load address 0x0000000000000850
+ .igot.plt      0x0000000010000004        0x0 ./src/PR/PR_Timers.o
 
 .bss_RAM2       0x000000002007c000        0x0
                 [!provide]                        PROVIDE (__start_bss_RAM2 = .)
@@ -294,16 +346,44 @@ END GROUP
                 [!provide]                        PROVIDE (__end_bss_RAM2 = .)
                 [!provide]                        PROVIDE (__end_bss_RamAHB32 = .)
 
-.bss            0x0000000010000000        0x4
-                0x0000000010000000                _bss = .
+.bss            0x0000000010000004      0x1e8
+                0x0000000010000004                _bss = .
                 [!provide]                        PROVIDE (__start_bss_RAM = .)
                 [!provide]                        PROVIDE (__start_bss_RamLoc32 = .)
  *(.bss*)
+ .bss.TmrRun    0x0000000010000004       0x78 ./src/PR/PR_Timers.o
+                0x0000000010000004                TmrRun
+ .bss.TmrFunciones
+                0x000000001000007c       0x78 ./src/PR/PR_Timers.o
+                0x000000001000007c                TmrFunciones
+ .bss.TmrFlags  0x00000000100000f4       0x1f ./src/PR/PR_Timers.o
+                0x00000000100000f4                TmrFlags
+ *fill*         0x0000000010000113        0x1 
+ .bss.TmrPause  0x0000000010000114       0x1e ./src/PR/PR_Timers.o
+                0x0000000010000114                TmrPause
+ *fill*         0x0000000010000132        0x2 
+ .bss.TmrBase   0x0000000010000134       0x1e ./src/PR/PR_Timers.o
+                0x0000000010000134                TmrBase
+ *fill*         0x0000000010000152        0x2 
+ .bss.ADC_buffer
+                0x0000000010000154       0x80 ./src/DR/DR_ADC.o
+ .bss.ADC_buffer_index
+                0x00000000100001d4        0x4 ./src/DR/DR_ADC.o
+ .bss.ADC_average
+                0x00000000100001d8        0x4 ./src/DR/DR_ADC.o
+ .bss.acummulator.3733
+                0x00000000100001dc        0x4 ./src/DR/DR_ADC.o
+ .bss.ADC_inUse
+                0x00000000100001e0        0x1 ./src/DR/DR_Systick.o
+                0x00000000100001e0                ADC_inUse
+ *fill*         0x00000000100001e1        0x3 
  .bss.systickCounter
-                0x0000000010000000        0x4 ./src/Drivers/DR_Systick.o
+                0x00000000100001e4        0x4 ./src/DR/DR_Systick.o
+ .bss.adc_counter.3720
+                0x00000000100001e8        0x4 ./src/DR/DR_Systick.o
  *(COMMON)
-                0x0000000010000004                . = ALIGN (0x4)
-                0x0000000010000004                _ebss = .
+                0x00000000100001ec                . = ALIGN (0x4)
+                0x00000000100001ec                _ebss = .
                 [!provide]                        PROVIDE (__end_bss_RAM = .)
                 [!provide]                        PROVIDE (__end_bss_RamLoc32 = .)
                 [!provide]                        PROVIDE (end = .)
@@ -319,94 +399,117 @@ END GROUP
                 [!provide]                        PROVIDE (__end_noinit_RAM2 = .)
                 [!provide]                        PROVIDE (__end_noinit_RamAHB32 = .)
 
-.noinit         0x0000000010000004        0x0
-                0x0000000010000004                _noinit = .
+.noinit         0x00000000100001ec        0x0
+                0x00000000100001ec                _noinit = .
                 [!provide]                        PROVIDE (__start_noinit_RAM = .)
                 [!provide]                        PROVIDE (__start_noinit_RamLoc32 = .)
  *(.noinit*)
-                0x0000000010000004                . = ALIGN (0x4)
-                0x0000000010000004                _end_noinit = .
+                0x00000000100001ec                . = ALIGN (0x4)
+                0x00000000100001ec                _end_noinit = .
                 [!provide]                        PROVIDE (__end_noinit_RAM = .)
                 [!provide]                        PROVIDE (__end_noinit_RamLoc32 = .)
                 [!provide]                        PROVIDE (_pvHeapStart = DEFINED (__user_heap_base)?__user_heap_base:.)
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xffffffffefff74da                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x00000000000005a0                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x00000000000005a0                _image_size = (_image_end - _image_start)
+                0x0000000000000850                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000000850                _image_size = (_image_end - _image_start)
 OUTPUT(TPI_V0.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000      0x76a
- .debug_info    0x0000000000000000      0x27f ./src/Drivers/DR_GPIO.o
- .debug_info    0x000000000000027f       0x72 ./src/Drivers/DR_PLL.o
- .debug_info    0x00000000000002f1      0x18d ./src/Drivers/DR_Systick.o
- .debug_info    0x000000000000047e       0x7a ./src/TPI_V0.o
- .debug_info    0x00000000000004f8      0x272 ./src/cr_startup_lpc175x_6x.o
+.debug_info     0x0000000000000000     0x114a
+ .debug_info    0x0000000000000000      0x355 ./src/PR/PR_Timers.o
+ .debug_info    0x0000000000000355      0x4e5 ./src/DR/DR_ADC.o
+ .debug_info    0x000000000000083a      0x27f ./src/DR/DR_GPIO.o
+ .debug_info    0x0000000000000ab9       0x72 ./src/DR/DR_PLL.o
+ .debug_info    0x0000000000000b2b      0x257 ./src/DR/DR_Systick.o
+ .debug_info    0x0000000000000d82      0x156 ./src/TPI_V0.o
+ .debug_info    0x0000000000000ed8      0x272 ./src/cr_startup_lpc175x_6x.o
 
-.debug_abbrev   0x0000000000000000      0x39d
- .debug_abbrev  0x0000000000000000       0xf7 ./src/Drivers/DR_GPIO.o
- .debug_abbrev  0x00000000000000f7       0x56 ./src/Drivers/DR_PLL.o
- .debug_abbrev  0x000000000000014d       0xdf ./src/Drivers/DR_Systick.o
- .debug_abbrev  0x000000000000022c       0x5a ./src/TPI_V0.o
- .debug_abbrev  0x0000000000000286      0x117 ./src/cr_startup_lpc175x_6x.o
+.debug_abbrev   0x0000000000000000      0x731
+ .debug_abbrev  0x0000000000000000      0x15b ./src/PR/PR_Timers.o
+ .debug_abbrev  0x000000000000015b      0x154 ./src/DR/DR_ADC.o
+ .debug_abbrev  0x00000000000002af       0xf7 ./src/DR/DR_GPIO.o
+ .debug_abbrev  0x00000000000003a6       0x56 ./src/DR/DR_PLL.o
+ .debug_abbrev  0x00000000000003fc      0x148 ./src/DR/DR_Systick.o
+ .debug_abbrev  0x0000000000000544       0xd6 ./src/TPI_V0.o
+ .debug_abbrev  0x000000000000061a      0x117 ./src/cr_startup_lpc175x_6x.o
 
-.debug_aranges  0x0000000000000000      0x140
+.debug_aranges  0x0000000000000000      0x1d8
  .debug_aranges
-                0x0000000000000000       0x48 ./src/Drivers/DR_GPIO.o
+                0x0000000000000000       0x58 ./src/PR/PR_Timers.o
  .debug_aranges
-                0x0000000000000048       0x20 ./src/Drivers/DR_PLL.o
+                0x0000000000000058       0x38 ./src/DR/DR_ADC.o
  .debug_aranges
-                0x0000000000000068       0x38 ./src/Drivers/DR_Systick.o
+                0x0000000000000090       0x48 ./src/DR/DR_GPIO.o
  .debug_aranges
-                0x00000000000000a0       0x20 ./src/TPI_V0.o
+                0x00000000000000d8       0x20 ./src/DR/DR_PLL.o
  .debug_aranges
-                0x00000000000000c0       0x80 ./src/cr_startup_lpc175x_6x.o
+                0x00000000000000f8       0x38 ./src/DR/DR_Systick.o
+ .debug_aranges
+                0x0000000000000130       0x28 ./src/TPI_V0.o
+ .debug_aranges
+                0x0000000000000158       0x80 ./src/cr_startup_lpc175x_6x.o
 
-.debug_ranges   0x0000000000000000       0xf0
- .debug_ranges  0x0000000000000000       0x38 ./src/Drivers/DR_GPIO.o
- .debug_ranges  0x0000000000000038       0x10 ./src/Drivers/DR_PLL.o
- .debug_ranges  0x0000000000000048       0x28 ./src/Drivers/DR_Systick.o
- .debug_ranges  0x0000000000000070       0x10 ./src/TPI_V0.o
- .debug_ranges  0x0000000000000080       0x70 ./src/cr_startup_lpc175x_6x.o
+.debug_ranges   0x0000000000000000      0x168
+ .debug_ranges  0x0000000000000000       0x48 ./src/PR/PR_Timers.o
+ .debug_ranges  0x0000000000000048       0x28 ./src/DR/DR_ADC.o
+ .debug_ranges  0x0000000000000070       0x38 ./src/DR/DR_GPIO.o
+ .debug_ranges  0x00000000000000a8       0x10 ./src/DR/DR_PLL.o
+ .debug_ranges  0x00000000000000b8       0x28 ./src/DR/DR_Systick.o
+ .debug_ranges  0x00000000000000e0       0x18 ./src/TPI_V0.o
+ .debug_ranges  0x00000000000000f8       0x70 ./src/cr_startup_lpc175x_6x.o
 
-.debug_macro    0x0000000000000000      0xff2
- .debug_macro   0x0000000000000000       0x3b ./src/Drivers/DR_GPIO.o
- .debug_macro   0x000000000000003b      0xaa8 ./src/Drivers/DR_GPIO.o
- .debug_macro   0x0000000000000ae3       0x3a ./src/Drivers/DR_GPIO.o
- .debug_macro   0x0000000000000b1d       0x58 ./src/Drivers/DR_GPIO.o
- .debug_macro   0x0000000000000b75       0x29 ./src/Drivers/DR_PLL.o
- .debug_macro   0x0000000000000b9e      0x112 ./src/Drivers/DR_PLL.o
- .debug_macro   0x0000000000000cb0       0x33 ./src/Drivers/DR_Systick.o
- .debug_macro   0x0000000000000ce3      0x118 ./src/Drivers/DR_Systick.o
- .debug_macro   0x0000000000000dfb       0x52 ./src/TPI_V0.o
- .debug_macro   0x0000000000000e4d       0x82 ./src/TPI_V0.o
- .debug_macro   0x0000000000000ecf      0x106 ./src/TPI_V0.o
- .debug_macro   0x0000000000000fd5       0x1d ./src/cr_startup_lpc175x_6x.o
+.debug_macro    0x0000000000000000     0x1162
+ .debug_macro   0x0000000000000000       0x29 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000029      0xaa8 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000ad1       0x3a ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000b0b       0x28 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000b33       0x4b ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000b7e      0x11e ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000c9c       0x3b ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000000cd7       0x58 ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000000d2f       0x29 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000000d58      0x118 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000000e70       0x4a ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000eba       0x2e ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000ee8       0x5f ./src/TPI_V0.o
+ .debug_macro   0x0000000000000f47       0x82 ./src/TPI_V0.o
+ .debug_macro   0x0000000000000fc9       0x5e ./src/TPI_V0.o
+ .debug_macro   0x0000000000001027      0x11e ./src/TPI_V0.o
+ .debug_macro   0x0000000000001145       0x1d ./src/cr_startup_lpc175x_6x.o
 
-.debug_line     0x0000000000000000      0x77a
- .debug_line    0x0000000000000000      0x1c3 ./src/Drivers/DR_GPIO.o
- .debug_line    0x00000000000001c3      0x1b2 ./src/Drivers/DR_PLL.o
- .debug_line    0x0000000000000375      0x116 ./src/Drivers/DR_Systick.o
- .debug_line    0x000000000000048b      0x190 ./src/TPI_V0.o
- .debug_line    0x000000000000061b      0x15f ./src/cr_startup_lpc175x_6x.o
+.debug_line     0x0000000000000000      0xc51
+ .debug_line    0x0000000000000000      0x2d9 ./src/PR/PR_Timers.o
+ .debug_line    0x00000000000002d9      0x158 ./src/DR/DR_ADC.o
+ .debug_line    0x0000000000000431      0x1bc ./src/DR/DR_GPIO.o
+ .debug_line    0x00000000000005ed      0x1ab ./src/DR/DR_PLL.o
+ .debug_line    0x0000000000000798      0x172 ./src/DR/DR_Systick.o
+ .debug_line    0x000000000000090a      0x1e8 ./src/TPI_V0.o
+ .debug_line    0x0000000000000af2      0x15f ./src/cr_startup_lpc175x_6x.o
 
-.debug_str      0x0000000000000000     0x3ebe
- .debug_str     0x0000000000000000     0x2ff8 ./src/Drivers/DR_GPIO.o
-                                       0x304e (size before relaxing)
- .debug_str     0x0000000000002ff8      0x55f ./src/Drivers/DR_PLL.o
-                                       0x33e8 (size before relaxing)
- .debug_str     0x0000000000003557       0xf4 ./src/Drivers/DR_Systick.o
-                                       0x34b5 (size before relaxing)
- .debug_str     0x000000000000364b      0x6ad ./src/TPI_V0.o
-                                       0x3b2b (size before relaxing)
- .debug_str     0x0000000000003cf8      0x1c6 ./src/cr_startup_lpc175x_6x.o
-                                       0x2fc1 (size before relaxing)
+.debug_str      0x0000000000000000     0x42d9
+ .debug_str     0x0000000000000000     0x2f7e ./src/PR/PR_Timers.o
+                                       0x2fc2 (size before relaxing)
+ .debug_str     0x0000000000002f7e      0x7ea ./src/DR/DR_ADC.o
+                                       0x3679 (size before relaxing)
+ .debug_str     0x0000000000003768      0x19a ./src/DR/DR_GPIO.o
+                                       0x3042 (size before relaxing)
+ .debug_str     0x0000000000003902       0x22 ./src/DR/DR_PLL.o
+                                       0x33ed (size before relaxing)
+ .debug_str     0x0000000000003924       0xef ./src/DR/DR_Systick.o
+                                       0x357b (size before relaxing)
+ .debug_str     0x0000000000003a13      0x700 ./src/TPI_V0.o
+                                       0x3c41 (size before relaxing)
+ .debug_str     0x0000000000004113      0x1c6 ./src/cr_startup_lpc175x_6x.o
+                                       0x2fc4 (size before relaxing)
 
 .comment        0x0000000000000000       0x79
- .comment       0x0000000000000000       0x79 ./src/Drivers/DR_GPIO.o
+ .comment       0x0000000000000000       0x79 ./src/PR/PR_Timers.o
                                          0x7a (size before relaxing)
- .comment       0x0000000000000079       0x7a ./src/Drivers/DR_PLL.o
- .comment       0x0000000000000079       0x7a ./src/Drivers/DR_Systick.o
+ .comment       0x0000000000000079       0x7a ./src/DR/DR_ADC.o
+ .comment       0x0000000000000079       0x7a ./src/DR/DR_GPIO.o
+ .comment       0x0000000000000079       0x7a ./src/DR/DR_PLL.o
+ .comment       0x0000000000000079       0x7a ./src/DR/DR_Systick.o
  .comment       0x0000000000000079       0x7a ./src/TPI_V0.o
  .comment       0x0000000000000079       0x7a ./src/cr_startup_lpc175x_6x.o
  .comment       0x0000000000000079       0x7a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
@@ -414,29 +517,40 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
 .ARM.attributes
                 0x0000000000000000       0x2d
  .ARM.attributes
-                0x0000000000000000       0x2d ./src/Drivers/DR_GPIO.o
+                0x0000000000000000       0x2d ./src/PR/PR_Timers.o
  .ARM.attributes
-                0x000000000000002d       0x2d ./src/Drivers/DR_PLL.o
+                0x000000000000002d       0x2d ./src/DR/DR_ADC.o
  .ARM.attributes
-                0x000000000000005a       0x2d ./src/Drivers/DR_Systick.o
+                0x000000000000005a       0x2d ./src/DR/DR_GPIO.o
  .ARM.attributes
-                0x0000000000000087       0x2d ./src/TPI_V0.o
+                0x0000000000000087       0x2d ./src/DR/DR_PLL.o
  .ARM.attributes
-                0x00000000000000b4       0x2d ./src/cr_startup_lpc175x_6x.o
+                0x00000000000000b4       0x2d ./src/DR/DR_Systick.o
  .ARM.attributes
-                0x00000000000000e1       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x00000000000000e1       0x2d ./src/TPI_V0.o
+ .ARM.attributes
+                0x000000000000010e       0x2d ./src/cr_startup_lpc175x_6x.o
+ .ARM.attributes
+                0x000000000000013b       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 
-.debug_frame    0x0000000000000000      0x364
- .debug_frame   0x0000000000000000      0x104 ./src/Drivers/DR_GPIO.o
- .debug_frame   0x0000000000000104       0x30 ./src/Drivers/DR_PLL.o
- .debug_frame   0x0000000000000134       0x90 ./src/Drivers/DR_Systick.o
- .debug_frame   0x00000000000001c4       0x30 ./src/TPI_V0.o
- .debug_frame   0x00000000000001f4      0x170 ./src/cr_startup_lpc175x_6x.o
+.debug_frame    0x0000000000000000      0x558
+ .debug_frame   0x0000000000000000      0x148 ./src/PR/PR_Timers.o
+ .debug_frame   0x0000000000000148       0x98 ./src/DR/DR_ADC.o
+ .debug_frame   0x00000000000001e0      0x104 ./src/DR/DR_GPIO.o
+ .debug_frame   0x00000000000002e4       0x30 ./src/DR/DR_PLL.o
+ .debug_frame   0x0000000000000314       0x8c ./src/DR/DR_Systick.o
+ .debug_frame   0x00000000000003a0       0x48 ./src/TPI_V0.o
+ .debug_frame   0x00000000000003e8      0x170 ./src/cr_startup_lpc175x_6x.o
 
 Cross Reference Table
 
 Symbol                                            File
-ADC_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
+ADC_IRQHandler                                    ./src/DR/DR_ADC.o
+ADC_getVal                                        ./src/DR/DR_ADC.o
+ADC_inUse                                         ./src/DR/DR_Systick.o
+                                                  ./src/DR/DR_ADC.o
+ADC_startConvertion                               ./src/DR/DR_ADC.o
+                                                  ./src/DR/DR_Systick.o
 BOD_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
 BusFault_Handler                                  ./src/cr_startup_lpc175x_6x.o
 CANActivity_IRQHandler                            ./src/cr_startup_lpc175x_6x.o
@@ -453,7 +567,7 @@ I2C0_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2C1_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2C2_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2S_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
-InicializarPLL                                    ./src/Drivers/DR_PLL.o
+InicializarPLL                                    ./src/DR/DR_PLL.o
                                                   ./src/TPI_V0.o
 IntDefaultHandler                                 ./src/cr_startup_lpc175x_6x.o
 MCPWM_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
@@ -471,11 +585,27 @@ SPI_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
 SSP0_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 SSP1_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 SVC_Handler                                       ./src/cr_startup_lpc175x_6x.o
-SysTick_Handler                                   ./src/Drivers/DR_Systick.o
+SysTick_Handler                                   ./src/DR/DR_Systick.o
 TIMER0_IRQHandler                                 ./src/cr_startup_lpc175x_6x.o
 TIMER1_IRQHandler                                 ./src/cr_startup_lpc175x_6x.o
 TIMER2_IRQHandler                                 ./src/cr_startup_lpc175x_6x.o
 TIMER3_IRQHandler                                 ./src/cr_startup_lpc175x_6x.o
+TimerClose                                        ./src/PR/PR_Timers.o
+TimerDiscount                                     ./src/PR/PR_Timers.o
+                                                  ./src/DR/DR_Systick.o
+TimerGet                                          ./src/PR/PR_Timers.o
+TimerLunchEvent                                   ./src/PR/PR_Timers.o
+                                                  ./src/TPI_V0.o
+TimerPause                                        ./src/PR/PR_Timers.o
+TimerSet                                          ./src/PR/PR_Timers.o
+TimerStart                                        ./src/PR/PR_Timers.o
+                                                  ./src/TPI_V0.o
+TimerStop                                         ./src/PR/PR_Timers.o
+TmrBase                                           ./src/PR/PR_Timers.o
+TmrFlags                                          ./src/PR/PR_Timers.o
+TmrFunciones                                      ./src/PR/PR_Timers.o
+TmrPause                                          ./src/PR/PR_Timers.o
+TmrRun                                            ./src/PR/PR_Timers.o
 UART0_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 UART1_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 UART2_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
@@ -494,21 +624,23 @@ __weak_main                                       /usr/local/mcuxpressoide-11.2.
 _vStackTop                                        ./src/cr_startup_lpc175x_6x.o
 bss_init                                          ./src/cr_startup_lpc175x_6x.o
 data_init                                         ./src/cr_startup_lpc175x_6x.o
+func                                              ./src/TPI_V0.o
 g_pfnVectors                                      ./src/cr_startup_lpc175x_6x.o
-getPin                                            ./src/Drivers/DR_GPIO.o
-getPin_raw                                        ./src/Drivers/DR_GPIO.o
-get_ticks                                         ./src/Drivers/DR_Systick.o
-                                                  ./src/TPI_V0.o
-inicializarSystick                                ./src/Drivers/DR_Systick.o
+getPin                                            ./src/DR/DR_GPIO.o
+getPin_raw                                        ./src/DR/DR_GPIO.o
+get_ticks                                         ./src/DR/DR_Systick.o
+inicializarADC                                    ./src/DR/DR_ADC.o
+inicializarSystick                                ./src/DR/DR_Systick.o
                                                   ./src/TPI_V0.o
 main                                              ./src/TPI_V0.o
                                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-reset_ticks                                       ./src/Drivers/DR_Systick.o
+reset_ticks                                       ./src/DR/DR_Systick.o
+setDir                                            ./src/DR/DR_GPIO.o
                                                   ./src/TPI_V0.o
-setDir                                            ./src/Drivers/DR_GPIO.o
+setPin                                            ./src/DR/DR_GPIO.o
                                                   ./src/TPI_V0.o
-setPin                                            ./src/Drivers/DR_GPIO.o
+setPinmode                                        ./src/DR/DR_GPIO.o
+setPinmode_OP                                     ./src/DR/DR_GPIO.o
                                                   ./src/TPI_V0.o
-setPinmode                                        ./src/Drivers/DR_GPIO.o
-setPinmode_OP                                     ./src/Drivers/DR_GPIO.o
-setPinsel                                         ./src/Drivers/DR_Pinsel.o
+setPinsel                                         ./src/DR/DR_Pinsel.o
+state                                             ./src/TPI_V0.o

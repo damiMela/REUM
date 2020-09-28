@@ -1,7 +1,7 @@
 /*******************************************************************************************************************************//**
  *
  * @file		DR_Systick.h
- * @brief		Driver para utilización systick timer
+ * @brief		Funciones para utilización systick timer
  * @date		Sep 19, 2020
  * @author		R2002 - Grupo2
  *
@@ -10,8 +10,7 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include "DR_Systick.h"
-#include "DR_PLL.h"
+#include <DR/DR_Systick.h>
 
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
@@ -48,7 +47,7 @@ typedef struct{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-
+uint8_t ADC_inUse = 0;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -71,7 +70,7 @@ static uint32_t systickCounter = 0;
  	\date Sep 19, 2020
 */
 void inicializarSystick(void){
-	SYSTICK->STRELOAD = SYSTICK->STCALIB;
+	SYSTICK->STRELOAD = SYSTICK->STCALIB/4 -1; //tick cada 2.5ms
 	SYSTICK->STCTRL.ClkSource = 1; //clock interno
 	SYSTICK->STCURR = 0;
 	SYSTICK->STCTRL.TickInt = 1;
@@ -85,7 +84,20 @@ void inicializarSystick(void){
  	\date Sep 19, 2020
 */
 void SysTick_Handler(void){
+	TimerDiscount();
 	systickCounter++;
+
+	if(ADC_inUse)
+	{
+		static uint32_t adc_counter = 0;
+		adc_counter++;
+		adc_counter %= 10;
+
+		if(!adc_counter){
+
+			ADC_startConvertion();
+		}
+	}
 }
 
 
