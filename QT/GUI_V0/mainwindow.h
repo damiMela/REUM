@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QWebEngineView>
+
 #include <QUrl>
-#include <QGraphicsScene>
-#include <QGraphicsProxyWidget>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
