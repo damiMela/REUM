@@ -47,6 +47,13 @@
 #define 	IN1				PORT4,29
 #define 	IN2				PORT2,11
 
+//!< Teclado
+#define 	SW1 			PORT2, 10
+#define 	SW2 			PORT0, 18
+#define 	SW3 			PORT0, 11
+#define 	SW4 			PORT2, 13
+#define 	SW5 			PORT1, 26
+
 //!Expansion
 #define		EXPANSION0		PORT2, 7
 #define		EXPANSION1		PORT1, 29

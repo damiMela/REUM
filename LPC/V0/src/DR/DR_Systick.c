@@ -84,19 +84,16 @@ void inicializarSystick(void){
  	\date Sep 19, 2020
 */
 void SysTick_Handler(void){
+	static uint32_t adc_counter = 0;
+
+	//timer counter function
 	TimerDiscount();
 
-	static uint32_t adc_counter = 0;
-	adc_counter++;
-	adc_counter %= 10;
+	//adc interations counter
+	adc_counter++;	adc_counter %= 10;
 
 	if(!adc_counter){
 		ADC_startConvertion();
-	}
-
-	if(ADC_inUse)
-	{
-
 	}
 }
 

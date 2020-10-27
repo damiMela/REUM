@@ -51,14 +51,7 @@ typedef struct{
 }ADC_GlobalData_t;
 
 typedef struct{
-	uint32_t intEn0:1;
-	uint32_t intEn1:1;
-	uint32_t intEn2:1;
-	uint32_t intEn3:1;
-	uint32_t intEn4:1;
-	uint32_t intEn5:1;
-	uint32_t intEn6:1;
-	uint32_t intEn7:1;
+	uint32_t intEn:8;
 	uint32_t globlalIntEnable:1;
 	uint32_t _RESERVED0:23;
 }ADC_IntEnable_t;
@@ -112,8 +105,8 @@ typedef struct{
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
 static volatile uint32_t ADC_buffer[ADC_BUFF_SIZE];
-static volatile uint32_t ADC_buffer_index = 0;
-static volatile uint32_t ADC_average = 0;
+static volatile uint32_t ADC_buffer_cycle = 0;
+static volatile uint32_t ADC_promedio = 0;
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -135,31 +128,20 @@ void inicializarADC()
 {
 
 	POWER_ADC_ON; //macro para encender ADC
+	ADC->ADCR.PDN = 1;
 
 	// set ADC time. (max. 200kHz) f_ADC = (f_CPU / div_PCLKSEL) / ((div_ADC + 1) * 65) = 192KHz
 	PCLKSEL0 &= ~(3 <<  PCLK_ADC);
-
-	ADC->ADCR.PDN = 1;
-	setPinsel(1, 31, 3);
-	ADC->ADCR.startMode = 0;
-
 	ADC->ADCR.clkDiv = 1;
 
-	ADC->ADCR.adcSel = (1<<5);
+	ADC->ADCR.startMode = 0;
 
-	ADC->ADINTEN.intEn0 = 0;
-	ADC->ADINTEN.intEn1 = 0;
-	ADC->ADINTEN.intEn2 = 0;
-	ADC->ADINTEN.intEn3 = 0;
-	ADC->ADINTEN.intEn4 = 0;
-	ADC->ADINTEN.intEn5 = 1;
-	ADC->ADINTEN.intEn6 = 0;
-	ADC->ADINTEN.intEn7 = 0;
+	ADC->ADCR.adcSel = (1 << 5);
+	ADC->ADINTEN.intEn = (1 << 5);
 	ADC->ADINTEN.globlalIntEnable = 0;
 
-
+	//activo interrupción global
 	ISER0 |= (1 << 22);
-	ADC_inUse = 1;
 }
 
 
@@ -175,15 +157,13 @@ void ADC_IRQHandler(void)
 
 	ADC_Data_t ADC5 = ADC->AD_data[5];
 
-	ADC_buffer[ADC_buffer_index] = ADC5.result;
-	acummulator += ADC_buffer[ADC_buffer_index];
+	ADC_buffer[ADC_buffer_cycle] = ADC5.result;
+	acummulator += ADC_buffer[ADC_buffer_cycle];
 
-	ADC_buffer_index++;
-	ADC_buffer_index %= ADC_BUFF_SIZE;
+	ADC_buffer_cycle++;		ADC_buffer_cycle %= ADC_BUFF_SIZE;
 
-	if(!ADC_buffer_index)
-	{
-		ADC_average = acummulator / ADC_BUFF_SIZE;
+	if(!ADC_buffer_cycle){
+		ADC_promedio = acummulator / ADC_BUFF_SIZE;
 		acummulator = 0;
 	}
 }
@@ -198,7 +178,7 @@ void ADC_IRQHandler(void)
 */
 uint32_t ADC_getVal(void)
 {
-	return ADC_average;
+	return ADC_promedio;
 }
 
 

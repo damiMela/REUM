@@ -19,7 +19,8 @@
 #include <DR/DR_PLL.h>
 #include <DR/DR_ADC.h>
 #include <DR/DR_Pinsel.h>
-#include "infotronic.h"
+#include <PR/PR_Botones.h>
+#include <PR/PR_Timers.h>
 
 //#define MY_DEBUG
 int state = HIGH;
@@ -32,10 +33,18 @@ void func(void){
 
 int main(void) {
 	uint32_t prueba = 0;
-	//para usar ADC flata en pinsel
-	inicializarSystick();
-	InicializarPLL();
-	inicializarADC();
+
+	setDir(RELAY0, OUTPUT);
+	setDir(RELAY1, OUTPUT);
+	setDir(RELAY3, OUTPUT);
+	setDir(IN0, INPUT);
+	setDir(SW2, INPUT);
+	setDir(SW3, INPUT);
+
+
+	setPinmode(IN0, MODE_PULLUP);
+	setPinmode(SW2, MODE_PULLUP);
+	setPinmode(SW3, MODE_PULLUP);
 
 	//apagar el maldito RGB
 	setPinmode_OP(RGB_R, MODE_OP_NLOW);
@@ -43,19 +52,27 @@ int main(void) {
 	setPinmode_OP(RGB_B, MODE_OP_NLOW);
 
 
+	//para usar ADC flata en pinsel
+	inicializarSystick();
+	InicializarPLL();
+	inicializarADC();
 
-	setDir(RELAY0, OUTPUT);
 	setPin(RELAY0, state);
-
-	setDir(RELAY3, OUTPUT);
+	setPin(RELAY1, OFF);
 	setPin(RELAY3, OFF);
 
 	TimerStart(0, 5, func, SEG);
 
     while(1) {
+    	debounceRead();
     	TimerLunchEvent();
+
     	prueba = ADC_getVal();
-    	if(prueba > 2000) setPin(RELAY3, ON);
+    	if(prueba > 1400) setPin(RELAY3, ON);
     	else setPin(RELAY3, OFF);
+
+    	if((InputBuff & (1 << 2)))
+    		setPin(RELAY1, ON);
+    	else setPin(RELAY1, OFF);
     }
 }
