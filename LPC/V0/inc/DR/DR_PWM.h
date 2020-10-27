@@ -41,6 +41,6 @@
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
 void InicializarPWM(void);
-void PWM_setDutyCicle(uint8_t port, uint8_t pin, uint16_t val);
+void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val);
 
 #endif /* DR_DR_PWM_H_ */

@@ -1,1 +1,2 @@
-DR_PWM.c:60:6:InicializarPWM	4	static
+DR_PWM.c:133:6:InicializarPWM	8	static
+DR_PWM.c:162:6:PWM_setDutyCicle	16	static

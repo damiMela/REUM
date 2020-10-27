@@ -28,9 +28,9 @@
 #define		RELAY3			PORT0,27
 
 //!< LED RGB
-#define 	RGB_R			PORT2, 2
-#define 	RGB_G			PORT2, 3
-#define 	RGB_B			PORT2, 1
+#define 	RGB_R			PORT2, 2 //PWM 1.3
+#define 	RGB_G			PORT2, 3 //PWM 1.4
+#define 	RGB_B			PORT2, 1 //PWM 1.2
 
 //!<Buzzer
 #define		BUZZER			PORT0,28
