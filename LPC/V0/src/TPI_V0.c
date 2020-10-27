@@ -18,6 +18,7 @@
 #include <DR/DR_Systick.h>
 #include <DR/DR_PLL.h>
 #include <DR/DR_ADC.h>
+#include <DR/DR_Pinsel.h>
 #include "infotronic.h"
 
 //#define MY_DEBUG
@@ -30,21 +31,31 @@ void func(void){
 }
 
 int main(void) {
+	uint32_t prueba = 0;
 	//para usar ADC flata en pinsel
 	inicializarSystick();
 	InicializarPLL();
+	inicializarADC();
 
 	//apagar el maldito RGB
 	setPinmode_OP(RGB_R, MODE_OP_NLOW);
 	setPinmode_OP(RGB_G, MODE_OP_NLOW);
 	setPinmode_OP(RGB_B, MODE_OP_NLOW);
 
+
+
 	setDir(RELAY0, OUTPUT);
 	setPin(RELAY0, state);
+
+	setDir(RELAY3, OUTPUT);
+	setPin(RELAY3, OFF);
 
 	TimerStart(0, 5, func, SEG);
 
     while(1) {
     	TimerLunchEvent();
+    	prueba = ADC_getVal();
+    	if(prueba > 2000) setPin(RELAY3, ON);
+    	else setPin(RELAY3, OFF);
     }
 }

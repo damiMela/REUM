@@ -14,16 +14,16 @@
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define		ADC_BUFF_SIZE	32
+#define		ADC_BUFF_SIZE	16
 
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-#define POWER_ADC_ON	PCONP |= (1 << PCADC);
-#define POWER_ADC_OFF	PCONP &= ~(1 << PCADC);
+#define POWER_ADC_ON	PCONP |= (1 << PCADC)
+#define POWER_ADC_OFF	PCONP &= ~(1 << PCADC)
 
 #define 	ADC			((ADC_t *)(0x40034000UL))
-#define		ISER0		(*(uint32_t *)(0xE000E100))
+#define		ISER0		(*(uint32_t *)(0xE000E100UL))
 
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
@@ -51,7 +51,14 @@ typedef struct{
 }ADC_GlobalData_t;
 
 typedef struct{
-	uint32_t intEnable:8;
+	uint32_t intEn0:1;
+	uint32_t intEn1:1;
+	uint32_t intEn2:1;
+	uint32_t intEn3:1;
+	uint32_t intEn4:1;
+	uint32_t intEn5:1;
+	uint32_t intEn6:1;
+	uint32_t intEn7:1;
 	uint32_t globlalIntEnable:1;
 	uint32_t _RESERVED0:23;
 }ADC_IntEnable_t;
@@ -88,6 +95,7 @@ typedef struct{
 typedef struct{
 	__RW ADC_ctrl_t ADCR;
 	__RW ADC_GlobalData_t ADGDR;
+	__RW uint32_t RESERVED_0;
 	__RW ADC_IntEnable_t ADINTEN;
 	__R ADC_Data_t AD_data[8];
 	__R ADC_Status_t ADSTAT;
@@ -125,21 +133,29 @@ static volatile uint32_t ADC_average = 0;
 */
 void inicializarADC()
 {
-	//power on ADC
-	POWER_ADC_ON
+
+	POWER_ADC_ON; //macro para encender ADC
+
+	// set ADC time. (max. 200kHz) f_ADC = (f_CPU / div_PCLKSEL) / ((div_ADC + 1) * 65) = 192KHz
+	PCLKSEL0 &= ~(3 <<  PCLK_ADC);
+
 	ADC->ADCR.PDN = 1;
+	setPinsel(1, 31, 3);
 	ADC->ADCR.startMode = 0;
 
-	//set ADC time. (max. 200kHz)
-	// f_ADC = (f_CPU / div_PCLKSEL) / ((div_ADC + 1) * 65) = 192KHz
-	PCLKSEL0 &= ~(3 <<  PCLK_ADC); //PCLK mode --> 00. f_CPU/4
 	ADC->ADCR.clkDiv = 1;
 
-	for(uint8_t i = 0; i < 8; i++)
-		ADC->ADINTEN.intEnable &= ~(1<<i);
+	ADC->ADCR.adcSel = (1<<5);
 
-	ADC->ADINTEN.intEnable |= (1<<5);
-	ADC->ADCR.adcSel |= (1<<5);
+	ADC->ADINTEN.intEn0 = 0;
+	ADC->ADINTEN.intEn1 = 0;
+	ADC->ADINTEN.intEn2 = 0;
+	ADC->ADINTEN.intEn3 = 0;
+	ADC->ADINTEN.intEn4 = 0;
+	ADC->ADINTEN.intEn5 = 1;
+	ADC->ADINTEN.intEn6 = 0;
+	ADC->ADINTEN.intEn7 = 0;
+	ADC->ADINTEN.globlalIntEnable = 0;
 
 
 	ISER0 |= (1 << 22);
@@ -157,7 +173,9 @@ void ADC_IRQHandler(void)
 {
 	static uint32_t acummulator = 0;
 
-	ADC_buffer[ADC_buffer_index] = ADC->AD_data[5].result;
+	ADC_Data_t ADC5 = ADC->AD_data[5];
+
+	ADC_buffer[ADC_buffer_index] = ADC5.result;
 	acummulator += ADC_buffer[ADC_buffer_index];
 
 	ADC_buffer_index++;

@@ -6,6 +6,8 @@
 	//!< 0x400FC0C4UL : Direccion de inicio del registro de habilitación de dispositivos:
 	#define 	PCONP	(* ( ( __RW uint32_t  * ) 0x400FC0C4UL ))
 		#define 	PCADC	12
+		#define 	PCPWM1	6
+		#define 	PCMCPWM	17
 
 	//!< ///////////////////   PCLKSEL   //////////////////////////
 	//!< Peripheral Clock Selection registers 0 and 1 (PCLKSEL0 -0x400F C1A8 and PCLKSEL1 - 0x400F C1AC) [pag. 56 user manual]
@@ -15,6 +17,7 @@
 	#define		PCLKSEL0	PCLKSEL[0]
 	#define		PCLKSEL1	PCLKSEL[1]
 		#define PCLK_ADC	24
+		#define PCLK_PWM1	12
 
 //////////////Registros del CLOCK y de sistema/////////////////
 //0x400FC1A0UL: Registro de control de sistema y registro de status:

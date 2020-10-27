@@ -85,18 +85,18 @@ void inicializarSystick(void){
 */
 void SysTick_Handler(void){
 	TimerDiscount();
-	systickCounter++;
+
+	static uint32_t adc_counter = 0;
+	adc_counter++;
+	adc_counter %= 10;
+
+	if(!adc_counter){
+		ADC_startConvertion();
+	}
 
 	if(ADC_inUse)
 	{
-		static uint32_t adc_counter = 0;
-		adc_counter++;
-		adc_counter %= 10;
 
-		if(!adc_counter){
-
-			ADC_startConvertion();
-		}
 	}
 }
 

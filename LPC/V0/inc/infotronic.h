@@ -36,7 +36,7 @@
 #define		BUZZER			PORT0,28
 
 //!<Entradas analógicas
-#define 	ADC0			PORT0, 31
+#define 	ADC0			PORT1, 31
 #define 	ADC1			PORT0, 24
 #define 	ADC2			PORT0, 25
 
@@ -46,6 +46,28 @@
 #define 	IN0				PORT1,26
 #define 	IN1				PORT4,29
 #define 	IN2				PORT2,11
+
+//!Expansion
+#define		EXPANSION0		PORT2, 7
+#define		EXPANSION1		PORT1, 29
+#define		EXPANSION2		PORT4, 28
+#define		EXPANSION3		PORT1, 23
+#define		EXPANSION4		PORT1, 20
+#define		EXPANSION5		PORT0, 19 //SDA
+#define		EXPANSION6		PORT3, 26 //PWM 1.3
+#define		EXPANSION7		PORT1, 25
+#define		EXPANSION8		PORT1, 22
+#define		EXPANSION9		PORT1, 19
+#define		EXPANSION10		PORT0, 20 //SCL
+#define		EXPANSION11		PORT3, 25 //PWM 1.2
+#define		EXPANSION12		PORT1, 27
+#define		EXPANSION13		PORT1, 24
+#define		EXPANSION14		PORT1, 21
+#define		EXPANSION15		PORT1, 18
+#define		EXPANSION16		PORT2, 8
+#define		EXPANSION17		PORT2, 12
+
+
 
 //!< LCD
 #define		LCD_D4			PORT0,5

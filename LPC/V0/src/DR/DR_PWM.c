@@ -1,8 +1,8 @@
 /*******************************************************************************************************************************//**
  *
- * @file		DR_Pinsel.c
- * @brief		Funciones para utilización del registro PINSEL
- * @date		Sep 19, 2020
+ * @file		DR_PWM.c
+ * @brief		Descripcion del modulo
+ * @date		Oct 24, 2020
  * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
@@ -10,7 +10,7 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <DR/DR_Pinsel.h>
+#include <DR/DR_PWM.h>
 
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
@@ -19,7 +19,8 @@
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-#define  PINSEL  ((__RW uint32_t* ) 0x4002C000UL)
+#define POWER_PWM_ON	PCONP |= (1 << PCPWM1)
+#define POWER_PWM_OFF	PCONP &= ~(1 << PCPWM1)
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -48,17 +49,17 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  setPinsel
-	\brief Setea un pin determinado para ser utilizado con el modo especificado.
+	\fn  Nombre de la Funcion
+	\brief Descripcion
  	\author R2002 - Grupo2
- 	\date Sep 19, 2020
- 	\param [in] Número de puerto.
- 	\param [in] Número de pin.
- 	\param [in] Número de función. USAR DEFINES "FUNCION_N"
- */
-void setPinsel(uint8_t port, uint8_t pin, uint8_t f_number){
-	if(f_number > 0x03) f_number = 0;
+ 	\date Oct 24, 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
+*/
+void InicializarPWM(void){
+	POWER_PWM_ON;
+	PCLKSEL0 &= ~(3 << PCLK_PWM1);
 
-	PINSEL[(port * 2) + (pin / 16)] &= ~(0x03 << ((pin % 16) * 2));
-	PINSEL[(port * 2) + (pin / 16)] |= (f_number << ((pin % 16) * 2));
 }
+
