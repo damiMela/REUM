@@ -17,6 +17,23 @@
  **********************************************************************************************************************************/
 #define 	PWM1			((PWM_t *)(0x40018000UL))
 #define		ISER0		(*(uint32_t *)(0xE000E100UL))
+#define 	PWM_ISER	(1 << 9)
+
+#define LER_EN0	(1 << 0)
+#define LER_EN1	(1 << 1)
+#define LER_EN2	(1 << 2)
+#define LER_EN3	(1 << 3)
+#define LER_EN4	(1 << 4)
+#define LER_EN5	(1 << 5)
+#define LER_EN6	(1 << 6)
+
+#define PWM_EN1 (1<< 0)
+#define PWM_EN2 (1<< 1)
+#define PWM_EN3 (1<< 2)
+#define PWM_EN4 (1<< 3)
+#define PWM_EN5 (1<< 4)
+#define PWM_EN6 (1<< 5)
+
 
 enum {PWMM_I, PWMM_R, PWMM_S};
 enum {RAISING, FALLING, EVENT};
@@ -30,7 +47,7 @@ enum {RAISING, FALLING, EVENT};
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
 typedef struct{
-	uint32_t PWMMR_flags0: 4;
+	uint32_t PWMMR_flags1: 4;
 	uint32_t PWMCAP_flag: 2;
 	uint32_t RESERVED_0: 2;
 	uint32_t PWMMR_flags2: 3;
@@ -109,7 +126,7 @@ typedef struct{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-
+static uint32_t match_counter = 0;
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -135,36 +152,58 @@ void InicializarPWM(void){
 
 	PCLKSEL0 &= ~(3 << PCLK_PWM1);
 
-	PWM1->PWMCtrl.PWMSel = 0;
+	PWM1->PWMCtrl.PWMSel = 0; //set every pwm to single controlled edge
 	PWM1->PLLReg= 24;
 
-	PWM1->MatchReg_1[0] = 1000;
-	PWM1->MatchReg_1[1] = 800;
-	PWM1->MatchReg_1[2] = 800; //pwm2
-	PWM1->MatchReg_1[3] = 800; //pwm3
-	PWM1->MatchReg_2[0] = 800; //pwm4
+	PWM1->TimerCtrl.CounterRst = 1;
+	PWM1->MatchCtrl.PWMMR0 |= (1 << PWMM_R); //match compare on reset
 
-	PWM1->MatchCtrl.PWMMR0 |= (1 << PWMM_R);
+	match_counter = 0;
 
-	PWM1->LatchEn.MatchLatchEn |= (1 << 0) | (1 << 2) | (1 << 3) | (1 << 4);
-	PWM1->PWMCtrl.PWM_En |= (1 << 1) | (1 << 2) | (1 << 3);
+	PWM1->MatchReg_1[0] = 1000; //match reset value
+	//PWM1->MatchReg_1[1] = 800;
+	PWM1->MatchReg_1[2] = 800;  //pwm2. duty cycle of 80%
+	PWM1->MatchReg_1[3] = 800;  //pwm3
+	PWM1->MatchReg_2[0] = 800;  //pwm4
+
+
+	//latch and PWM enable
+	PWM1->LatchEn.MatchLatchEn |= LER_EN0 | LER_EN2| LER_EN3 | LER_EN4;
+	PWM1->PWMCtrl.PWM_En |= PWM_EN2 | PWM_EN3 | PWM_EN4;
 
 	PWM1->TimerCtrl.CounterRst = 1;
 	PWM1->TimerCtrl.CounterEn = 1;
 	PWM1->TimerCtrl.PWMEn = 1;
-
-
-
 }
 
 void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val){
-	if(!PWM_n || (val > 1000)) return;
-	if(PWM_n > 3){
-		PWM1->MatchReg_2[PWM_n%4] = val;
-	}
+	if(!PWM_n || (val > 1000) || (PWM_n > 6)) return; //el MR0 no se cambia
+	if(PWM_n > 3)
+		PWM1->MatchReg_2[PWM_n%4] = val; //camiar duty cycles del pwm 4 al 6
 	else{
 		PWM1->MatchReg_1[PWM_n] = val;
 	}
 	PWM1->LatchEn.MatchLatchEn |= (1 << (PWM_n));
 }
 
+void PWM_run(){
+	if ( match_counter != 0 )
+	{
+	  match_counter = 0;
+	  PWM_setDutyCicle(2, 800);
+	  PWM_setDutyCicle(3, 800);
+	  PWM_setDutyCicle(4, 800);
+	}
+}
+
+void PWM1_IRQHandler (void)
+{
+  uint32_t regVal;
+
+  regVal = PWM1->Interrupts.PWMMR_flags1 &= (1 << 0);
+  if ( regVal ){
+	  match_counter++;
+	  PWM1->Interrupts.PWMMR_flags1 &= ~(1 << 0);
+  }
+  return;
+}

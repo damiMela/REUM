@@ -17,7 +17,8 @@
 #include <DR/DR_GPIO.h>
 #include <DR/DR_Systick.h>
 #include <DR/DR_PLL.h>
-#include <DR/DR_ADC.h>include <DR/DR_Pinsel.h>
+#include <DR/DR_ADC.h>
+#include <DR/DR_Pinsel.h>
 #include <PR/PR_Botones.h>
 #include <PR/PR_Timers.h>
 #include <DR/DR_PWM.h>
@@ -33,6 +34,11 @@ void func(void){
 
 int main(void) {
 	uint32_t prueba = 0;
+
+	//apagar el maldito RGB
+	setPinmode_OP(RGB_R, MODE_OP_NLOW);
+	setPinmode_OP(RGB_G, MODE_OP_NLOW);
+	setPinmode_OP(RGB_B, MODE_OP_NLOW);
 
 	setPinsel(ADC0, FUNCION_3);
 	setPinsel(RGB_R, FUNCION_1);
@@ -51,12 +57,6 @@ int main(void) {
 	setPinmode(SW2, MODE_PULLUP);
 	setPinmode(SW3, MODE_PULLUP);
 
-	//apagar el maldito RGB
-
-	setPinmode_OP(RGB_R, MODE_OP_NHIGH);
-	setPinmode_OP(RGB_G, MODE_OP_NHIGH);
-	setPinmode_OP(RGB_B, MODE_OP_NHIGH);
-
 
 	//para usar ADC flata en pinsel
 	inicializarSystick();
@@ -71,6 +71,7 @@ int main(void) {
 	TimerStart(0, 5, func, SEG);
 
     while(1) {
+    	PWM_run();
     	debounceRead();
     	TimerLunchEvent();
 
