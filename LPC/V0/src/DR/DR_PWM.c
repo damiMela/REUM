@@ -138,19 +138,18 @@ static uint32_t match_counter = 0;
  /***********************************************************************************************************************************
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
+
 /**
-	\fn  Nombre de la Funcion
-	\brief Descripcion
+	\fn  InicializarPWM
+	\brief Inicializa PWM con frecuencia 1ms
  	\author R2002 - Grupo2
- 	\date Oct 24, 2020
- 	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
+ 	\date oct 27, 2020
 */
 void InicializarPWM(void){
 	POWER_PWM_ON;
 
 	PCLKSEL0 &= ~(3 << PCLK_PWM1);
+	PCLKSEL0 |= (0x00 << PCLK_PWM1);
 
 	PWM1->PWMCtrl.PWMSel = 0; //set every pwm to single controlled edge
 	PWM1->PLLReg= 24;
@@ -162,48 +161,36 @@ void InicializarPWM(void){
 
 	PWM1->MatchReg_1[0] = 1000; //match reset value
 	//PWM1->MatchReg_1[1] = 800;
-	PWM1->MatchReg_1[2] = 800;  //pwm2. duty cycle of 80%
-	PWM1->MatchReg_1[3] = 800;  //pwm3
-	PWM1->MatchReg_2[0] = 800;  //pwm4
+	PWM1->MatchReg_1[2] = 0;  //pwm2. duty cycle of 80%
+	PWM1->MatchReg_1[3] = 0;  //pwm3
+	PWM1->MatchReg_2[0] = 0;  //pwm4
 
 
 	//latch and PWM enable
 	PWM1->LatchEn.MatchLatchEn |= LER_EN0 | LER_EN2| LER_EN3 | LER_EN4;
 	PWM1->PWMCtrl.PWM_En |= PWM_EN2 | PWM_EN3 | PWM_EN4;
 
-	PWM1->TimerCtrl.CounterRst = 1;
+	PWM1->TimerCtrl.CounterRst = 0;
 	PWM1->TimerCtrl.CounterEn = 1;
 	PWM1->TimerCtrl.PWMEn = 1;
 }
 
+
+/**
+	\fn  PWM_setDutyCicle
+	\brief cambia el duty cicle del canal del pwm
+ 	\author R2002 - Grupo2
+ 	\param [in] PWM_n, es el canal al cual se le quiere cambiar el duty cycle
+ 	\param [in] val, nuevo valor de duty cycle (entre 0 y 999).
+ 	\date oct 27, 2020
+*/
 void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val){
-	if(!PWM_n || (val > 1000) || (PWM_n > 6)) return; //el MR0 no se cambia
+	if(val >= 1000) val = 1000;
+
 	if(PWM_n > 3)
 		PWM1->MatchReg_2[PWM_n%4] = val; //camiar duty cycles del pwm 4 al 6
 	else{
 		PWM1->MatchReg_1[PWM_n] = val;
 	}
 	PWM1->LatchEn.MatchLatchEn |= (1 << (PWM_n));
-}
-
-void PWM_run(){
-	if ( match_counter != 0 )
-	{
-	  match_counter = 0;
-	  PWM_setDutyCicle(2, 800);
-	  PWM_setDutyCicle(3, 800);
-	  PWM_setDutyCicle(4, 800);
-	}
-}
-
-void PWM1_IRQHandler (void)
-{
-  uint32_t regVal;
-
-  regVal = PWM1->Interrupts.PWMMR_flags1 &= (1 << 0);
-  if ( regVal ){
-	  match_counter++;
-	  PWM1->Interrupts.PWMMR_flags1 &= ~(1 << 0);
-  }
-  return;
 }

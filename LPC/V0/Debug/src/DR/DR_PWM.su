@@ -1,4 +1,2 @@
 DR_PWM.c:150:6:InicializarPWM	4	static
 DR_PWM.c:179:6:PWM_setDutyCicle	16	static
-DR_PWM.c:189:6:PWM_run	8	static
-DR_PWM.c:199:6:PWM1_IRQHandler	16	static

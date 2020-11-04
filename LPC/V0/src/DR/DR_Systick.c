@@ -69,7 +69,7 @@ static uint32_t systickCounter = 0;
  	\author R2002 - Grupo2
  	\date Sep 19, 2020
 */
-void inicializarSystick(void){
+void InicializarSystick(void){
 	SYSTICK->STRELOAD = SYSTICK->STCALIB/4 -1; //tick cada 2.5ms
 	SYSTICK->STCTRL.ClkSource = 1; //clock interno
 	SYSTICK->STCURR = 0;
@@ -84,17 +84,7 @@ void inicializarSystick(void){
  	\date Sep 19, 2020
 */
 void SysTick_Handler(void){
-	static uint32_t adc_counter = 0;
-
-	//timer counter function
-	TimerDiscount();
-
-	//adc interations counter
-	adc_counter++;	adc_counter %= 10;
-
-	if(!adc_counter){
-		ADC_startConvertion();
-	}
+	systickCounter++;
 }
 
 
@@ -119,4 +109,25 @@ uint32_t get_ticks(void){
 */
 void reset_ticks(void){
 	systickCounter = 0;
+}
+
+
+/**
+	\fn  scheduler_run
+	\brief scheduler del programa
+ 	\author R2002 - Grupo2
+ 	\date Nov 04, 2020
+*/
+void scheduler_run(void){
+	//counters
+	static uint32_t adc_counter = 0;
+
+	//adc interations counter
+	adc_counter++;	adc_counter %= 10;
+
+	if(!adc_counter) ADC_startConvertion();
+
+
+	//timer counter function
+	TimerDiscount();
 }

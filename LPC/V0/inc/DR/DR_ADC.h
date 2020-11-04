@@ -40,7 +40,7 @@ extern uint8_t ADC_inUse;
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void inicializarADC(void);
+void InicializarADC(void);
 uint32_t ADC_getVal(void);
 void ADC_startConvertion(void);
 

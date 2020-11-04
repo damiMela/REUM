@@ -124,7 +124,7 @@ static volatile uint32_t ADC_promedio = 0;
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void inicializarADC()
+void InicializarADC()
 {
 
 	POWER_ADC_ON; //macro para encender ADC
@@ -138,7 +138,6 @@ void inicializarADC()
 
 	ADC->ADCR.adcSel = (1 << 5);
 	ADC->ADINTEN.intEn = (1 << 5);
-	ADC->ADINTEN.globlalIntEnable = 0;
 
 	//activo interrupción global
 	ISER0 |= (1 << 22);

@@ -35,33 +35,33 @@ void func(void){
 int main(void) {
 	uint32_t prueba = 0;
 
-	//apagar el maldito RGB
+/*	//apagar el maldito RGB
 	setPinmode_OP(RGB_R, MODE_OP_NLOW);
 	setPinmode_OP(RGB_G, MODE_OP_NLOW);
 	setPinmode_OP(RGB_B, MODE_OP_NLOW);
-
+*/
 	setPinsel(ADC0, FUNCION_3);
 	setPinsel(RGB_R, FUNCION_1);
 	setPinsel(RGB_G, FUNCION_1);
 	setPinsel(RGB_B, FUNCION_1);
-
+/*
 	setDir(RELAY0, OUTPUT);
 	setDir(RELAY1, OUTPUT);
 	setDir(RELAY3, OUTPUT);
 	setDir(IN0, INPUT);
 	setDir(SW2, INPUT);
 	setDir(SW3, INPUT);
-
-
+*/
+/*
 	setPinmode(IN0, MODE_PULLUP);
 	setPinmode(SW2, MODE_PULLUP);
 	setPinmode(SW3, MODE_PULLUP);
-
+*/
 
 	//para usar ADC flata en pinsel
-	inicializarSystick();
+	InicializarSystick();
 	InicializarPLL();
-	inicializarADC();
+	InicializarADC();
 	InicializarPWM();
 
 	setPin(RELAY0, state);
@@ -71,7 +71,6 @@ int main(void) {
 	TimerStart(0, 5, func, SEG);
 
     while(1) {
-    	PWM_run();
     	debounceRead();
     	TimerLunchEvent();
 
@@ -83,7 +82,10 @@ int main(void) {
     		setPin(RELAY1, ON);
     	else setPin(RELAY1, OFF);
 
-    	//PWM_setDutyCicle(2, 100);
-    	//PWM_setDutyCicle(3, 100);
+		PWM_setDutyCicle(2, 50);
+		PWM_setDutyCicle(3, 600);
+		PWM_setDutyCicle(4, 150);
+
     }
+
 }
