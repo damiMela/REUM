@@ -1,2 +1,3 @@
-PR_Botones.c:58:6:ReadInputs	16	static
-PR_Botones.c:94:9:getBtn	16	static
+PR_Botones.c:58:6:InicializarBotones	8	static
+PR_Botones.c:78:6:ReadInputs	16	static
+PR_Botones.c:114:9:getBtn	16	static

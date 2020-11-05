@@ -1,8 +1,8 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_Botones.c
+ * @file		PR_Motor.c
  * @brief		Descripcion del modulo
- * @date		Oct 27, 2020
+ * @date		Nov 5, 2020
  * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
@@ -10,13 +10,23 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
+#include <DR/DR_PWM.h>
 #include <DR/DR_GPIO.h>
-#include <PR_Botones.h>
+#include <PR/PR_Motores.h>
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define CANT_ENTRADAS 5  //MAX:8. Sino cambiar el tipo de variable de buffer y lectura
-#define CANT_ACEPT_CYCLES 3
+#define MOTOR1_A		PORT0, 0 //escribir puertos correspondientes
+#define MOTOR1_B		PORT0, 1
+#define MOTOR1_VEL_PIN	RGB_R
+#define MOTOR1_VEL_CHN	2
+
+#define MOTOR2_A		PORT0, 2
+#define MOTOR2_B		PORT0, 3
+#define MOTOR2_VEL_PIN	RGB_G
+#define MOTOR2_VEL_CHN	3
+
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -36,8 +46,7 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static uint8_t cycleCounter[CANT_ENTRADAS];
-static uint8_t InputBuff = 0;
+
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -50,67 +59,73 @@ static uint8_t InputBuff = 0;
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  ReadInputs
-	\brief lectura y debounce de entradas digitales. Debe estar en el loop
+	\fn  Nombre de la Funcion
+	\brief Descripcion
  	\author R2002 - Grupo2
- 	\date Oct 27, 2020
+ 	\date Nov 5, 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarBotones(void){
-	setDir(SW1_P, INPUT);
-	setDir(SW2_P, INPUT);
-	setDir(SW3_P, INPUT);
-	setDir(SW4_P, INPUT);
-	setDir(SW5_P, INPUT);
+void InicializarMotores(void){
+	setPinsel(MOTOR1_VEL_PIN, FUNCION_1); //PWM chnl 2
+	setPinsel(MOTOR2_VEL_PIN, FUNCION_1); //PWM chnl 3
+	InicializarPWM_DR();
 
+	setDir(MOTOR1_A, OUTPUT);
+	setDir(MOTOR1_B, OUTPUT);
+	setDir(MOTOR2_A, OUTPUT);
+	setDir(MOTOR2_B, OUTPUT);
 
-	setPinmode(SW1_P, MODE_PULLUP);
-	setPinmode(SW2_P, MODE_PULLUP);
-	setPinmode(SW3_P, MODE_PULLUP);
-	setPinmode(SW4_P, MODE_PULLUP);
-	setPinmode(SW5_P, MODE_PULLUP);
-}
-/**
-	\fn  ReadInputs
-	\brief lectura y debounce de entradas digitales. Debe estar en el loop
- 	\author R2002 - Grupo2
- 	\date Oct 27, 2020
-*/
-void ReadInputs(void){
-	uint8_t lectura = 0, input_n, cambios;
-
-	if(getPin(SW1_P, ON_LOW)) lectura = (1 << SW1);
-	if(getPin(SW2_P, ON_LOW)) lectura |= (1 << SW2);
-	if(getPin(SW3_P, ON_LOW)) lectura |= (1 << SW3);
-	if(getPin(SW4_P, ON_LOW)) lectura |= (1 << SW4);
-	if(getPin(SW5_P, ON_LOW)) lectura |= (1 << SW5);
-
-	cambios = (InputBuff ^ lectura);
-
-	if(cambios){
-		for(input_n = 0; input_n < CANT_ENTRADAS; input_n++){
-			if(cambios & (1 << input_n)){
-				cycleCounter[input_n]++;	cycleCounter[input_n] %= CANT_ACEPT_CYCLES;
-
-				if(!cycleCounter[input_n])
-					InputBuff ^= (1 << input_n);
-			}
-			else cycleCounter[input_n] = 0;
-		}
-	}
-	else{
-		for(input_n=0; input_n < CANT_ENTRADAS; input_n++)
-			cycleCounter[input_n] = 0;
-	}
+	PWM_setDutyCicle(MOTOR1_VEL_CHN, 0);
+	PWM_setDutyCicle(MOTOR2_VEL_CHN, 0);
 }
 
-/**
-	\fn  getBtn
-	\brief devuelve el estado de uno de los botones (SWx)
- 	\author R2002 - Grupo2
- 	\date Oct 27, 2020
- 	\param [in] número de botón (BTNx)
-	\return 1 o 0 según si el botón estaba presionado
-*/
-uint8_t getBtn(uint8_t n){
-	return (InputBuff & (1 << n));
+void setMotoresDir(uint8_t dir){
+	switch(dir){
+		case ADELANTE:
+			setPin(MOTOR1_A, ON);
+			setPin(MOTOR1_B, OFF);
+
+			setPin(MOTOR2_A, ON);
+			setPin(MOTOR2_B, OFF);
+			break;
+
+		case ATRAS:
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, ON);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, ON);
+			break;
+
+		case IZQUIERDA:
+			setPin(MOTOR1_A, ON);
+			setPin(MOTOR1_B, OFF);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, ON);
+			break;
+
+		case DERECHA:
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, ON);
+
+			setPin(MOTOR2_A, ON);
+			setPin(MOTOR2_B, OFF);
+			break;
+
+		case FRENO:
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, OFF);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, OFF);
+			break;
+	}
+}
+
+void setMotoresVel(uint16_t vel){
+	PWM_setDutyCicle(MOTOR1_VEL_CHN, vel);
+	PWM_setDutyCicle(MOTOR2_VEL_CHN, vel);
 }

@@ -22,10 +22,10 @@
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
 //!< Salidas Digitales/Relays
-#define		RELAY0			PORT2,0
-#define		RELAY1			PORT0,23
-#define		RELAY2			PORT0,21
-#define		RELAY3			PORT0,27
+#define		RELAY0_P			PORT2,0
+#define		RELAY1_P			PORT0,23
+#define		RELAY2_P			PORT0,21
+#define		RELAY3_P			PORT0,27
 
 //!< LED RGB
 #define 	RGB_R			PORT2, 2 //PWM 1.3
@@ -48,11 +48,11 @@
 #define 	IN2				PORT2,11
 
 //!< Teclado
-#define 	SW1 			PORT2, 10
-#define 	SW2 			PORT0, 18
-#define 	SW3 			PORT0, 11
-#define 	SW4 			PORT2, 13
-#define 	SW5 			PORT1, 26
+#define 	SW1_P 			PORT2, 10
+#define 	SW2_P 			PORT0, 18
+#define 	SW3_P 			PORT0, 11
+#define 	SW4_P 			PORT2, 13
+#define 	SW5_P 			PORT1, 26
 
 //!Expansion
 #define		EXPANSION0		PORT2, 7

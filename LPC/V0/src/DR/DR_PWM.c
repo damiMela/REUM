@@ -143,7 +143,7 @@ static uint32_t match_counter = 0;
  	\author R2002 - Grupo2
  	\date oct 27, 2020
 */
-void InicializarPWM(void){
+void InicializarPWM_DR(void){
 	POWER_PWM_ON;
 
 	PCLKSEL0 &= ~(3 << PCLK_PWM1);
