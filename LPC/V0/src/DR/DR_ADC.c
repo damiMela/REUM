@@ -23,7 +23,6 @@
 #define POWER_ADC_OFF	PCONP &= ~(1 << PCADC)
 
 #define 	ADC			((ADC_t *)(0x40034000UL))
-#define		ISER0		(*(uint32_t *)(0xE000E100UL))
 
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
@@ -140,7 +139,7 @@ void InicializarADC()
 	ADC->ADINTEN.intEn = (1 << 5);
 
 	//activo interrupción global
-	ISER0 |= (1 << 22);
+	ISER0 |= (1 << ISER_ADC);
 }
 
 

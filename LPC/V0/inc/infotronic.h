@@ -85,7 +85,9 @@
 #define		LCD_BF			PORT0,28
 #define		LCD_EN			PORT0,4
 
-
+//USB serial
+#define 	USB_TX			PORT0, 2
+#define 	USB_RX			PORT0, 3
 
 
 

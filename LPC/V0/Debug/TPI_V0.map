@@ -12,6 +12,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/PR/PR_Botones.o
  .data          0x0000000000000000        0x0 ./src/PR/PR_Botones.o
  .bss           0x0000000000000000        0x0 ./src/PR/PR_Botones.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Serial.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Serial.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Serial.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_Serial.o
+ .text          0x0000000000000000        0x0 ./src/PR/PR_Serial.o
+ .data          0x0000000000000000        0x0 ./src/PR/PR_Serial.o
+ .bss           0x0000000000000000        0x0 ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000000000       0x34 ./src/PR/PR_Serial.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Timers.o
@@ -30,7 +40,7 @@ Discarded input sections
  .text.TimerClose
                 0x0000000000000000       0x28 ./src/PR/PR_Timers.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_Timers.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/PR/PR_Timers.o
  .debug_macro   0x0000000000000000       0x34 ./src/PR/PR_Timers.o
  .group         0x0000000000000000        0xc ./src/DR/DR_ADC.o
  .group         0x0000000000000000        0xc ./src/DR/DR_ADC.o
@@ -41,7 +51,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/DR/DR_ADC.o
  .bss           0x0000000000000000        0x0 ./src/DR/DR_ADC.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_ADC.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_ADC.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_ADC.o
  .group         0x0000000000000000        0xc ./src/DR/DR_GPIO.o
  .group         0x0000000000000000        0xc ./src/DR/DR_GPIO.o
@@ -50,15 +60,12 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
  .data          0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
  .bss           0x0000000000000000        0x0 ./src/DR/DR_GPIO.o
- .text.setPinmode
-                0x0000000000000000       0x94 ./src/DR/DR_GPIO.o
  .text.setPinmode_OP
                 0x0000000000000000       0x64 ./src/DR/DR_GPIO.o
- .text.setDir   0x0000000000000000       0x76 ./src/DR/DR_GPIO.o
  .text.getPin_raw
                 0x0000000000000000       0x36 ./src/DR/DR_GPIO.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_GPIO.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_GPIO.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_GPIO.o
  .debug_macro   0x0000000000000000       0x58 ./src/DR/DR_GPIO.o
  .group         0x0000000000000000        0xc ./src/DR/DR_PLL.o
@@ -69,7 +76,7 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/DR/DR_PLL.o
  .bss           0x0000000000000000        0x0 ./src/DR/DR_PLL.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_PLL.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_PLL.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_PLL.o
  .group         0x0000000000000000        0xc ./src/DR/DR_PWM.o
  .group         0x0000000000000000        0xc ./src/DR/DR_PWM.o
@@ -80,9 +87,9 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/DR/DR_PWM.o
  .bss           0x0000000000000000        0x0 ./src/DR/DR_PWM.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_PWM.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_PWM.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_PWM.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_PWM.o
- .debug_macro   0x0000000000000000      0x130 ./src/DR/DR_PWM.o
+ .debug_macro   0x0000000000000000      0x154 ./src/DR/DR_PWM.o
  .debug_macro   0x0000000000000000       0x22 ./src/DR/DR_PWM.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Pinsel.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Pinsel.o
@@ -92,8 +99,23 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/DR/DR_Pinsel.o
  .bss           0x0000000000000000        0x0 ./src/DR/DR_Pinsel.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_Pinsel.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_Pinsel.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Pinsel.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .group         0x0000000000000000        0xc ./src/DR/DR_Serial.o
+ .text          0x0000000000000000        0x0 ./src/DR/DR_Serial.o
+ .data          0x0000000000000000        0x0 ./src/DR/DR_Serial.o
+ .bss           0x0000000000000000        0x0 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000       0x1c ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000      0x154 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000000000       0x22 ./src/DR/DR_Serial.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Systick.o
@@ -105,16 +127,14 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./src/DR/DR_Systick.o
  .bss.ADC_inUse
                 0x0000000000000000        0x1 ./src/DR/DR_Systick.o
- .bss.systickCounter
-                0x0000000000000000        0x4 ./src/DR/DR_Systick.o
  .text.get_ticks
                 0x0000000000000000       0x14 ./src/DR/DR_Systick.o
  .text.reset_ticks
                 0x0000000000000000       0x18 ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/DR/DR_Systick.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Systick.o
- .debug_macro   0x0000000000000000      0x130 ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000      0x154 ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000       0x22 ./src/DR/DR_Systick.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
@@ -128,9 +148,9 @@ Discarded input sections
  .data          0x0000000000000000        0x0 ./src/TPI_V0.o
  .bss           0x0000000000000000        0x0 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/TPI_V0.o
- .debug_macro   0x0000000000000000      0x1a6 ./src/TPI_V0.o
+ .debug_macro   0x0000000000000000      0x1b2 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x34 ./src/TPI_V0.o
- .debug_macro   0x0000000000000000      0x130 ./src/TPI_V0.o
+ .debug_macro   0x0000000000000000      0x154 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x2e ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x22 ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/cr_startup_lpc175x_6x.o
@@ -153,12 +173,14 @@ RamAHB32         0x000000002007c000 0x0000000000008000 xrw
 Linker script and memory map
 
 LOAD ./src/PR/PR_Botones.o
+LOAD ./src/PR/PR_Serial.o
 LOAD ./src/PR/PR_Timers.o
 LOAD ./src/DR/DR_ADC.o
 LOAD ./src/DR/DR_GPIO.o
 LOAD ./src/DR/DR_PLL.o
 LOAD ./src/DR/DR_PWM.o
 LOAD ./src/DR/DR_Pinsel.o
+LOAD ./src/DR/DR_Serial.o
 LOAD ./src/DR/DR_Systick.o
 LOAD ./src/TPI_V0.o
 LOAD ./src/cr_startup_lpc175x_6x.o
@@ -180,7 +202,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000      0xbdc
+.text           0x0000000000000000     0x1028
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -189,16 +211,16 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0xbdc LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x1028 LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000d4        0x4 LONG 0x4 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0xbdc LOADADDR (.data_RAM2)
+                0x00000000000000d8        0x4 LONG 0x1028 LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
                 0x00000000000000e4                __bss_section_table = .
                 0x00000000000000e4        0x4 LONG 0x10000004 ADDR (.bss)
-                0x00000000000000e8        0x4 LONG 0x1ac SIZEOF (.bss)
+                0x00000000000000e8        0x4 LONG 0x244 SIZEOF (.bss)
                 0x00000000000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
                 0x00000000000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
                 0x00000000000000f4                __bss_section_table_end = .
@@ -228,7 +250,6 @@ END GROUP
                 0x000000000000021a                EINT3_IRQHandler
                 0x000000000000021a                CANActivity_IRQHandler
                 0x000000000000021a                TIMER3_IRQHandler
-                0x000000000000021a                UART0_IRQHandler
                 0x000000000000021a                IntDefaultHandler
                 0x000000000000021a                PLL0_IRQHandler
                 0x000000000000021a                CAN_IRQHandler
@@ -256,89 +277,122 @@ END GROUP
  .text.debounceRead
                 0x0000000000000220      0x10c ./src/PR/PR_Botones.o
                 0x0000000000000220                debounceRead
+ .text.InicializarSerial
+                0x000000000000032c        0xc ./src/PR/PR_Serial.o
+                0x000000000000032c                InicializarSerial
+ .text.UART0_popRX
+                0x0000000000000338       0x54 ./src/PR/PR_Serial.o
+                0x0000000000000338                UART0_popRX
+ .text.UART0_pushTX
+                0x000000000000038c       0x5c ./src/PR/PR_Serial.o
+                0x000000000000038c                UART0_pushTX
  .text.TimerStart
-                0x000000000000032c       0x9c ./src/PR/PR_Timers.o
-                0x000000000000032c                TimerStart
+                0x00000000000003e8       0x9c ./src/PR/PR_Timers.o
+                0x00000000000003e8                TimerStart
  .text.TimerDiscount
-                0x00000000000003c8       0x6c ./src/PR/PR_Timers.o
-                0x00000000000003c8                TimerDiscount
+                0x0000000000000484       0x6c ./src/PR/PR_Timers.o
+                0x0000000000000484                TimerDiscount
  .text.TimerLunchEvent
-                0x0000000000000434       0x48 ./src/PR/PR_Timers.o
-                0x0000000000000434                TimerLunchEvent
- .text.inicializarADC
-                0x000000000000047c       0x84 ./src/DR/DR_ADC.o
-                0x000000000000047c                inicializarADC
+                0x00000000000004f0       0x48 ./src/PR/PR_Timers.o
+                0x00000000000004f0                TimerLunchEvent
+ .text.InicializarADC
+                0x0000000000000538       0x78 ./src/DR/DR_ADC.o
+                0x0000000000000538                InicializarADC
  .text.ADC_IRQHandler
-                0x0000000000000500       0x80 ./src/DR/DR_ADC.o
-                0x0000000000000500                ADC_IRQHandler
+                0x00000000000005b0       0x80 ./src/DR/DR_ADC.o
+                0x00000000000005b0                ADC_IRQHandler
  .text.ADC_getVal
-                0x0000000000000580       0x14 ./src/DR/DR_ADC.o
-                0x0000000000000580                ADC_getVal
+                0x0000000000000630       0x14 ./src/DR/DR_ADC.o
+                0x0000000000000630                ADC_getVal
  .text.ADC_startConvertion
-                0x0000000000000594       0x1c ./src/DR/DR_ADC.o
-                0x0000000000000594                ADC_startConvertion
- .text.setPin   0x00000000000005b0       0xe8 ./src/DR/DR_GPIO.o
-                0x00000000000005b0                setPin
- .text.getPin   0x0000000000000698       0x4e ./src/DR/DR_GPIO.o
-                0x0000000000000698                getPin
- *fill*         0x00000000000006e6        0x2 ff
+                0x0000000000000644       0x1c ./src/DR/DR_ADC.o
+                0x0000000000000644                ADC_startConvertion
+ .text.setPinmode
+                0x0000000000000660       0x94 ./src/DR/DR_GPIO.o
+                0x0000000000000660                setPinmode
+ .text.setDir   0x00000000000006f4       0x76 ./src/DR/DR_GPIO.o
+                0x00000000000006f4                setDir
+ *fill*         0x000000000000076a        0x2 ff
+ .text.setPin   0x000000000000076c       0xe8 ./src/DR/DR_GPIO.o
+                0x000000000000076c                setPin
+ .text.getPin   0x0000000000000854       0x4e ./src/DR/DR_GPIO.o
+                0x0000000000000854                getPin
+ *fill*         0x00000000000008a2        0x2 ff
  .text.InicializarPLL
-                0x00000000000006e8      0x140 ./src/DR/DR_PLL.o
-                0x00000000000006e8                InicializarPLL
+                0x00000000000008a4      0x140 ./src/DR/DR_PLL.o
+                0x00000000000008a4                InicializarPLL
  .text.InicializarPWM
-                0x0000000000000828       0xdc ./src/DR/DR_PWM.o
-                0x0000000000000828                InicializarPWM
+                0x00000000000009e4       0xe4 ./src/DR/DR_PWM.o
+                0x00000000000009e4                InicializarPWM
  .text.PWM_setDutyCicle
-                0x0000000000000904       0x84 ./src/DR/DR_PWM.o
-                0x0000000000000904                PWM_setDutyCicle
+                0x0000000000000ac8       0x7c ./src/DR/DR_PWM.o
+                0x0000000000000ac8                PWM_setDutyCicle
  .text.setPinsel
-                0x0000000000000988       0xa4 ./src/DR/DR_Pinsel.o
-                0x0000000000000988                setPinsel
- .text.inicializarSystick
-                0x0000000000000a2c       0x40 ./src/DR/DR_Systick.o
-                0x0000000000000a2c                inicializarSystick
+                0x0000000000000b44       0xa4 ./src/DR/DR_Pinsel.o
+                0x0000000000000b44                setPinsel
+ .text.InicializarUART0
+                0x0000000000000be8       0x90 ./src/DR/DR_Serial.o
+                0x0000000000000be8                InicializarUART0
+ .text.UART0_pushRX
+                0x0000000000000c78       0x3c ./src/DR/DR_Serial.o
+                0x0000000000000c78                UART0_pushRX
+ .text.UART0_popTX
+                0x0000000000000cb4       0x54 ./src/DR/DR_Serial.o
+                0x0000000000000cb4                UART0_popTX
+ .text.UART0_forceTX
+                0x0000000000000d08       0x28 ./src/DR/DR_Serial.o
+                0x0000000000000d08                UART0_forceTX
+ .text.UART0_IRQHandler
+                0x0000000000000d30       0xa0 ./src/DR/DR_Serial.o
+                0x0000000000000d30                UART0_IRQHandler
+ .text.InicializarSystick
+                0x0000000000000dd0       0x40 ./src/DR/DR_Systick.o
+                0x0000000000000dd0                InicializarSystick
  .text.SysTick_Handler
-                0x0000000000000a6c       0x44 ./src/DR/DR_Systick.o
-                0x0000000000000a6c                SysTick_Handler
- .text.func     0x0000000000000ab0       0x40 ./src/TPI_V0.o
-                0x0000000000000ab0                func
- .text.main     0x0000000000000af0       0xe8 ./src/TPI_V0.o
-                0x0000000000000af0                main
+                0x0000000000000e10       0x1c ./src/DR/DR_Systick.o
+                0x0000000000000e10                SysTick_Handler
+ .text.scheduler_run
+                0x0000000000000e2c       0x44 ./src/DR/DR_Systick.o
+                0x0000000000000e2c                scheduler_run
+ .text.func     0x0000000000000e70       0x40 ./src/TPI_V0.o
+                0x0000000000000e70                func
+ .text.main     0x0000000000000eb0      0x174 ./src/TPI_V0.o
+                0x0000000000000eb0                main
  .text.__weak_main
-                0x0000000000000bd8        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x0000000000000bd8                __main
-                0x0000000000000bd8                __weak_main
+                0x0000000000001024        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x0000000000001024                __main
+                0x0000000000001024                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
-                0x0000000000000bdc                . = ALIGN (0x4)
+                0x0000000000001028                . = ALIGN (0x4)
 
-.glue_7         0x0000000000000bdc        0x0
- .glue_7        0x0000000000000bdc        0x0 linker stubs
+.glue_7         0x0000000000001028        0x0
+ .glue_7        0x0000000000001028        0x0 linker stubs
 
-.glue_7t        0x0000000000000bdc        0x0
- .glue_7t       0x0000000000000bdc        0x0 linker stubs
+.glue_7t        0x0000000000001028        0x0
+ .glue_7t       0x0000000000001028        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000bdc        0x0
- .vfp11_veneer  0x0000000000000bdc        0x0 linker stubs
+.vfp11_veneer   0x0000000000001028        0x0
+ .vfp11_veneer  0x0000000000001028        0x0 linker stubs
 
-.v4_bx          0x0000000000000bdc        0x0
- .v4_bx         0x0000000000000bdc        0x0 linker stubs
+.v4_bx          0x0000000000001028        0x0
+ .v4_bx         0x0000000000001028        0x0 linker stubs
 
-.iplt           0x0000000000000bdc        0x0
- .iplt          0x0000000000000bdc        0x0 ./src/PR/PR_Botones.o
+.iplt           0x0000000000001028        0x0
+ .iplt          0x0000000000001028        0x0 ./src/PR/PR_Botones.o
 
-.rel.dyn        0x0000000000000bdc        0x0
- .rel.iplt      0x0000000000000bdc        0x0 ./src/PR/PR_Botones.o
+.rel.dyn        0x0000000000001028        0x0
+ .rel.iplt      0x0000000000001028        0x0 ./src/PR/PR_Botones.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000000000bdc        0x0
-                0x0000000000000bdc                __exidx_start = .
+.ARM.exidx      0x0000000000001028        0x0
+                0x0000000000001028                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000000bdc                __exidx_end = .
-                0x0000000000000bdc                _etext = .
+                0x0000000000001028                __exidx_end = .
+                0x0000000000001028                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000000bdc
+.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001028
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -359,7 +413,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x4 load address 0x0000000000000bdc
+.data           0x0000000010000000        0x4 load address 0x0000000000001028
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -377,7 +431,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000004        0x0 load address 0x0000000000000be0
+.igot.plt       0x0000000010000004        0x0 load address 0x000000000000102c
  .igot.plt      0x0000000010000004        0x0 ./src/PR/PR_Botones.o
 
 .bss_RAM2       0x000000002007c000        0x0
@@ -391,7 +445,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_bss_RAM2 = .)
                 [!provide]                        PROVIDE (__end_bss_RamAHB32 = .)
 
-.bss            0x0000000010000004      0x1ac
+.bss            0x0000000010000004      0x244
                 0x0000000010000004                _bss = .
                 [!provide]                        PROVIDE (__start_bss_RAM = .)
                 [!provide]                        PROVIDE (__start_bss_RamLoc32 = .)
@@ -427,11 +481,35 @@ END GROUP
                 0x00000000100001a4        0x4 ./src/DR/DR_ADC.o
  .bss.match_counter
                 0x00000000100001a8        0x4 ./src/DR/DR_PWM.o
- .bss.adc_counter.3724
-                0x00000000100001ac        0x4 ./src/DR/DR_Systick.o
+ .bss.UART0_rx_buff
+                0x00000000100001ac       0x40 ./src/DR/DR_Serial.o
+                0x00000000100001ac                UART0_rx_buff
+ .bss.UART0_rx_in
+                0x00000000100001ec        0x4 ./src/DR/DR_Serial.o
+                0x00000000100001ec                UART0_rx_in
+ .bss.UART0_rx_out
+                0x00000000100001f0        0x4 ./src/DR/DR_Serial.o
+                0x00000000100001f0                UART0_rx_out
+ .bss.UART0_tx_buff
+                0x00000000100001f4       0x40 ./src/DR/DR_Serial.o
+                0x00000000100001f4                UART0_tx_buff
+ .bss.UART0_tx_in
+                0x0000000010000234        0x4 ./src/DR/DR_Serial.o
+                0x0000000010000234                UART0_tx_in
+ .bss.UART0_tx_out
+                0x0000000010000238        0x4 ./src/DR/DR_Serial.o
+                0x0000000010000238                UART0_tx_out
+ .bss.UART0_tx_flag
+                0x000000001000023c        0x1 ./src/DR/DR_Serial.o
+                0x000000001000023c                UART0_tx_flag
+ *fill*         0x000000001000023d        0x3 
+ .bss.systickCounter
+                0x0000000010000240        0x4 ./src/DR/DR_Systick.o
+ .bss.adc_counter.3734
+                0x0000000010000244        0x4 ./src/DR/DR_Systick.o
  *(COMMON)
-                0x00000000100001b0                . = ALIGN (0x4)
-                0x00000000100001b0                _ebss = .
+                0x0000000010000248                . = ALIGN (0x4)
+                0x0000000010000248                _ebss = .
                 [!provide]                        PROVIDE (__end_bss_RAM = .)
                 [!provide]                        PROVIDE (__end_bss_RamLoc32 = .)
                 [!provide]                        PROVIDE (end = .)
@@ -447,148 +525,169 @@ END GROUP
                 [!provide]                        PROVIDE (__end_noinit_RAM2 = .)
                 [!provide]                        PROVIDE (__end_noinit_RamAHB32 = .)
 
-.noinit         0x00000000100001b0        0x0
-                0x00000000100001b0                _noinit = .
+.noinit         0x0000000010000248        0x0
+                0x0000000010000248                _noinit = .
                 [!provide]                        PROVIDE (__start_noinit_RAM = .)
                 [!provide]                        PROVIDE (__start_noinit_RamLoc32 = .)
  *(.noinit*)
-                0x00000000100001b0                . = ALIGN (0x4)
-                0x00000000100001b0                _end_noinit = .
+                0x0000000010000248                . = ALIGN (0x4)
+                0x0000000010000248                _end_noinit = .
                 [!provide]                        PROVIDE (__end_noinit_RAM = .)
                 [!provide]                        PROVIDE (__end_noinit_RamLoc32 = .)
                 [!provide]                        PROVIDE (_pvHeapStart = DEFINED (__user_heap_base)?__user_heap_base:.)
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xffffffffefff74da                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000000be0                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000000be0                _image_size = (_image_end - _image_start)
+                0x000000000000102c                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x000000000000102c                _image_size = (_image_end - _image_start)
 OUTPUT(TPI_V0.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x17cc
+.debug_info     0x0000000000000000     0x1ea4
  .debug_info    0x0000000000000000       0xdc ./src/PR/PR_Botones.o
- .debug_info    0x00000000000000dc      0x355 ./src/PR/PR_Timers.o
- .debug_info    0x0000000000000431      0x4e9 ./src/DR/DR_ADC.o
- .debug_info    0x000000000000091a      0x27f ./src/DR/DR_GPIO.o
- .debug_info    0x0000000000000b99       0x72 ./src/DR/DR_PLL.o
- .debug_info    0x0000000000000c0b      0x4e0 ./src/DR/DR_PWM.o
- .debug_info    0x00000000000010eb       0xac ./src/DR/DR_Pinsel.o
- .debug_info    0x0000000000001197      0x24d ./src/DR/DR_Systick.o
- .debug_info    0x00000000000013e4      0x176 ./src/TPI_V0.o
- .debug_info    0x000000000000155a      0x272 ./src/cr_startup_lpc175x_6x.o
+ .debug_info    0x00000000000000dc      0x152 ./src/PR/PR_Serial.o
+ .debug_info    0x000000000000022e      0x355 ./src/PR/PR_Timers.o
+ .debug_info    0x0000000000000583      0x4e9 ./src/DR/DR_ADC.o
+ .debug_info    0x0000000000000a6c      0x27f ./src/DR/DR_GPIO.o
+ .debug_info    0x0000000000000ceb       0x72 ./src/DR/DR_PLL.o
+ .debug_info    0x0000000000000d5d      0x4e0 ./src/DR/DR_PWM.o
+ .debug_info    0x000000000000123d       0xac ./src/DR/DR_Pinsel.o
+ .debug_info    0x00000000000012e9      0x54f ./src/DR/DR_Serial.o
+ .debug_info    0x0000000000001838      0x25f ./src/DR/DR_Systick.o
+ .debug_info    0x0000000000001a97      0x19b ./src/TPI_V0.o
+ .debug_info    0x0000000000001c32      0x272 ./src/cr_startup_lpc175x_6x.o
 
-.debug_abbrev   0x0000000000000000      0x932
+.debug_abbrev   0x0000000000000000      0xbd4
  .debug_abbrev  0x0000000000000000       0x9b ./src/PR/PR_Botones.o
- .debug_abbrev  0x000000000000009b      0x15b ./src/PR/PR_Timers.o
- .debug_abbrev  0x00000000000001f6      0x120 ./src/DR/DR_ADC.o
- .debug_abbrev  0x0000000000000316       0xf7 ./src/DR/DR_GPIO.o
- .debug_abbrev  0x000000000000040d       0x56 ./src/DR/DR_PLL.o
- .debug_abbrev  0x0000000000000463      0x118 ./src/DR/DR_PWM.o
- .debug_abbrev  0x000000000000057b       0x78 ./src/DR/DR_Pinsel.o
- .debug_abbrev  0x00000000000005f3      0x13f ./src/DR/DR_Systick.o
- .debug_abbrev  0x0000000000000732       0xe9 ./src/TPI_V0.o
- .debug_abbrev  0x000000000000081b      0x117 ./src/cr_startup_lpc175x_6x.o
+ .debug_abbrev  0x000000000000009b       0xe3 ./src/PR/PR_Serial.o
+ .debug_abbrev  0x000000000000017e      0x15b ./src/PR/PR_Timers.o
+ .debug_abbrev  0x00000000000002d9      0x120 ./src/DR/DR_ADC.o
+ .debug_abbrev  0x00000000000003f9       0xf7 ./src/DR/DR_GPIO.o
+ .debug_abbrev  0x00000000000004f0       0x56 ./src/DR/DR_PLL.o
+ .debug_abbrev  0x0000000000000546      0x118 ./src/DR/DR_PWM.o
+ .debug_abbrev  0x000000000000065e       0x78 ./src/DR/DR_Pinsel.o
+ .debug_abbrev  0x00000000000006d6      0x19c ./src/DR/DR_Serial.o
+ .debug_abbrev  0x0000000000000872      0x159 ./src/DR/DR_Systick.o
+ .debug_abbrev  0x00000000000009cb       0xf2 ./src/TPI_V0.o
+ .debug_abbrev  0x0000000000000abd      0x117 ./src/cr_startup_lpc175x_6x.o
 
-.debug_aranges  0x0000000000000000      0x240
+.debug_aranges  0x0000000000000000      0x2b8
  .debug_aranges
                 0x0000000000000000       0x20 ./src/PR/PR_Botones.o
  .debug_aranges
-                0x0000000000000020       0x58 ./src/PR/PR_Timers.o
+                0x0000000000000020       0x30 ./src/PR/PR_Serial.o
  .debug_aranges
-                0x0000000000000078       0x38 ./src/DR/DR_ADC.o
+                0x0000000000000050       0x58 ./src/PR/PR_Timers.o
  .debug_aranges
-                0x00000000000000b0       0x48 ./src/DR/DR_GPIO.o
+                0x00000000000000a8       0x38 ./src/DR/DR_ADC.o
  .debug_aranges
-                0x00000000000000f8       0x20 ./src/DR/DR_PLL.o
+                0x00000000000000e0       0x48 ./src/DR/DR_GPIO.o
  .debug_aranges
-                0x0000000000000118       0x28 ./src/DR/DR_PWM.o
+                0x0000000000000128       0x20 ./src/DR/DR_PLL.o
  .debug_aranges
-                0x0000000000000140       0x20 ./src/DR/DR_Pinsel.o
+                0x0000000000000148       0x28 ./src/DR/DR_PWM.o
  .debug_aranges
-                0x0000000000000160       0x38 ./src/DR/DR_Systick.o
+                0x0000000000000170       0x20 ./src/DR/DR_Pinsel.o
  .debug_aranges
-                0x0000000000000198       0x28 ./src/TPI_V0.o
+                0x0000000000000190       0x40 ./src/DR/DR_Serial.o
  .debug_aranges
-                0x00000000000001c0       0x80 ./src/cr_startup_lpc175x_6x.o
+                0x00000000000001d0       0x40 ./src/DR/DR_Systick.o
+ .debug_aranges
+                0x0000000000000210       0x28 ./src/TPI_V0.o
+ .debug_aranges
+                0x0000000000000238       0x80 ./src/cr_startup_lpc175x_6x.o
 
-.debug_ranges   0x0000000000000000      0x1a0
+.debug_ranges   0x0000000000000000      0x1f8
  .debug_ranges  0x0000000000000000       0x10 ./src/PR/PR_Botones.o
- .debug_ranges  0x0000000000000010       0x48 ./src/PR/PR_Timers.o
- .debug_ranges  0x0000000000000058       0x28 ./src/DR/DR_ADC.o
- .debug_ranges  0x0000000000000080       0x38 ./src/DR/DR_GPIO.o
- .debug_ranges  0x00000000000000b8       0x10 ./src/DR/DR_PLL.o
- .debug_ranges  0x00000000000000c8       0x18 ./src/DR/DR_PWM.o
- .debug_ranges  0x00000000000000e0       0x10 ./src/DR/DR_Pinsel.o
- .debug_ranges  0x00000000000000f0       0x28 ./src/DR/DR_Systick.o
- .debug_ranges  0x0000000000000118       0x18 ./src/TPI_V0.o
- .debug_ranges  0x0000000000000130       0x70 ./src/cr_startup_lpc175x_6x.o
+ .debug_ranges  0x0000000000000010       0x20 ./src/PR/PR_Serial.o
+ .debug_ranges  0x0000000000000030       0x48 ./src/PR/PR_Timers.o
+ .debug_ranges  0x0000000000000078       0x28 ./src/DR/DR_ADC.o
+ .debug_ranges  0x00000000000000a0       0x38 ./src/DR/DR_GPIO.o
+ .debug_ranges  0x00000000000000d8       0x10 ./src/DR/DR_PLL.o
+ .debug_ranges  0x00000000000000e8       0x18 ./src/DR/DR_PWM.o
+ .debug_ranges  0x0000000000000100       0x10 ./src/DR/DR_Pinsel.o
+ .debug_ranges  0x0000000000000110       0x30 ./src/DR/DR_Serial.o
+ .debug_ranges  0x0000000000000140       0x30 ./src/DR/DR_Systick.o
+ .debug_ranges  0x0000000000000170       0x18 ./src/TPI_V0.o
+ .debug_ranges  0x0000000000000188       0x70 ./src/cr_startup_lpc175x_6x.o
 
-.debug_macro    0x0000000000000000     0x145d
+.debug_macro    0x0000000000000000     0x1589
  .debug_macro   0x0000000000000000       0x58 ./src/PR/PR_Botones.o
  .debug_macro   0x0000000000000058      0xaa8 ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000000b00      0x1a6 ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000000ca6       0x34 ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000000cda       0x58 ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000000d32       0x42 ./src/PR/PR_Timers.o
- .debug_macro   0x0000000000000d74       0x28 ./src/PR/PR_Timers.o
- .debug_macro   0x0000000000000d9c       0x6d ./src/DR/DR_ADC.o
- .debug_macro   0x0000000000000e09      0x130 ./src/DR/DR_ADC.o
- .debug_macro   0x0000000000000f39       0x22 ./src/DR/DR_ADC.o
- .debug_macro   0x0000000000000f5b       0x54 ./src/DR/DR_GPIO.o
- .debug_macro   0x0000000000000faf       0x42 ./src/DR/DR_PLL.o
- .debug_macro   0x0000000000000ff1      0x12a ./src/DR/DR_PLL.o
- .debug_macro   0x000000000000111b       0xbb ./src/DR/DR_PWM.o
- .debug_macro   0x00000000000011d6       0x48 ./src/DR/DR_Pinsel.o
- .debug_macro   0x000000000000121e       0x1c ./src/DR/DR_Pinsel.o
- .debug_macro   0x000000000000123a       0x6c ./src/DR/DR_Systick.o
- .debug_macro   0x00000000000012a6       0x2e ./src/DR/DR_Systick.o
- .debug_macro   0x00000000000012d4       0x8c ./src/TPI_V0.o
- .debug_macro   0x0000000000001360       0x82 ./src/TPI_V0.o
- .debug_macro   0x00000000000013e2       0x5e ./src/TPI_V0.o
- .debug_macro   0x0000000000001440       0x1d ./src/cr_startup_lpc175x_6x.o
+ .debug_macro   0x0000000000000b00      0x1b2 ./src/PR/PR_Botones.o
+ .debug_macro   0x0000000000000cb2       0x34 ./src/PR/PR_Botones.o
+ .debug_macro   0x0000000000000ce6       0x58 ./src/PR/PR_Botones.o
+ .debug_macro   0x0000000000000d3e       0x4c ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000000d8a       0x1c ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000000da6       0x42 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000de8       0x28 ./src/PR/PR_Timers.o
+ .debug_macro   0x0000000000000e10       0x67 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000e77      0x154 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000fcb       0x22 ./src/DR/DR_ADC.o
+ .debug_macro   0x0000000000000fed       0x54 ./src/DR/DR_GPIO.o
+ .debug_macro   0x0000000000001041       0x42 ./src/DR/DR_PLL.o
+ .debug_macro   0x0000000000001083      0x14e ./src/DR/DR_PLL.o
+ .debug_macro   0x00000000000011d1       0xaf ./src/DR/DR_PWM.o
+ .debug_macro   0x0000000000001280       0x48 ./src/DR/DR_Pinsel.o
+ .debug_macro   0x00000000000012c8       0x1c ./src/DR/DR_Pinsel.o
+ .debug_macro   0x00000000000012e4       0x6c ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000001350       0x72 ./src/DR/DR_Systick.o
+ .debug_macro   0x00000000000013c2       0x2e ./src/DR/DR_Systick.o
+ .debug_macro   0x00000000000013f0       0x9c ./src/TPI_V0.o
+ .debug_macro   0x000000000000148c       0x82 ./src/TPI_V0.o
+ .debug_macro   0x000000000000150e       0x5e ./src/TPI_V0.o
+ .debug_macro   0x000000000000156c       0x1d ./src/cr_startup_lpc175x_6x.o
 
-.debug_line     0x0000000000000000     0x11d1
+.debug_line     0x0000000000000000     0x155f
  .debug_line    0x0000000000000000      0x198 ./src/PR/PR_Botones.o
- .debug_line    0x0000000000000198      0x313 ./src/PR/PR_Timers.o
- .debug_line    0x00000000000004ab      0x186 ./src/DR/DR_ADC.o
- .debug_line    0x0000000000000631      0x1f6 ./src/DR/DR_GPIO.o
- .debug_line    0x0000000000000827      0x1e5 ./src/DR/DR_PLL.o
- .debug_line    0x0000000000000a0c      0x17b ./src/DR/DR_PWM.o
- .debug_line    0x0000000000000b87       0xfa ./src/DR/DR_Pinsel.o
- .debug_line    0x0000000000000c81      0x1b2 ./src/DR/DR_Systick.o
- .debug_line    0x0000000000000e33      0x23f ./src/TPI_V0.o
- .debug_line    0x0000000000001072      0x15f ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x0000000000000198      0x176 ./src/PR/PR_Serial.o
+ .debug_line    0x000000000000030e      0x313 ./src/PR/PR_Timers.o
+ .debug_line    0x0000000000000621      0x180 ./src/DR/DR_ADC.o
+ .debug_line    0x00000000000007a1      0x1f6 ./src/DR/DR_GPIO.o
+ .debug_line    0x0000000000000997      0x1e5 ./src/DR/DR_PLL.o
+ .debug_line    0x0000000000000b7c      0x170 ./src/DR/DR_PWM.o
+ .debug_line    0x0000000000000cec       0xfa ./src/DR/DR_Pinsel.o
+ .debug_line    0x0000000000000de6      0x1e8 ./src/DR/DR_Serial.o
+ .debug_line    0x0000000000000fce      0x1d1 ./src/DR/DR_Systick.o
+ .debug_line    0x000000000000119f      0x261 ./src/TPI_V0.o
+ .debug_line    0x0000000000001400      0x15f ./src/cr_startup_lpc175x_6x.o
 
-.debug_str      0x0000000000000000     0x4966
- .debug_str     0x0000000000000000     0x33cc ./src/PR/PR_Botones.o
-                                       0x3416 (size before relaxing)
- .debug_str     0x00000000000033cc      0x135 ./src/PR/PR_Timers.o
-                                       0x3425 (size before relaxing)
- .debug_str     0x0000000000003501      0x859 ./src/DR/DR_ADC.o
-                                       0x3b4b (size before relaxing)
- .debug_str     0x0000000000003d5a      0x103 ./src/DR/DR_GPIO.o
-                                       0x34a5 (size before relaxing)
- .debug_str     0x0000000000003e5d       0x22 ./src/DR/DR_PLL.o
-                                       0x3871 (size before relaxing)
- .debug_str     0x0000000000003e7f      0x377 ./src/DR/DR_PWM.o
-                                       0x3c46 (size before relaxing)
- .debug_str     0x00000000000041f6       0x51 ./src/DR/DR_Pinsel.o
-                                       0x3389 (size before relaxing)
- .debug_str     0x0000000000004247       0xef ./src/DR/DR_Systick.o
-                                       0x3a40 (size before relaxing)
- .debug_str     0x0000000000004336      0x46a ./src/TPI_V0.o
-                                       0x3e9a (size before relaxing)
- .debug_str     0x00000000000047a0      0x1c6 ./src/cr_startup_lpc175x_6x.o
+.debug_str      0x0000000000000000     0x4cbb
+ .debug_str     0x0000000000000000     0x33ec ./src/PR/PR_Botones.o
+                                       0x3436 (size before relaxing)
+ .debug_str     0x00000000000033ec       0xfd ./src/PR/PR_Serial.o
+                                       0x340e (size before relaxing)
+ .debug_str     0x00000000000034e9      0x12c ./src/PR/PR_Timers.o
+                                       0x3445 (size before relaxing)
+ .debug_str     0x0000000000003615      0x8a1 ./src/DR/DR_ADC.o
+                                       0x3bb9 (size before relaxing)
+ .debug_str     0x0000000000003eb6      0x103 ./src/DR/DR_GPIO.o
+                                       0x34c5 (size before relaxing)
+ .debug_str     0x0000000000003fb9       0x22 ./src/DR/DR_PLL.o
+                                       0x3903 (size before relaxing)
+ .debug_str     0x0000000000003fdb      0x365 ./src/DR/DR_PWM.o
+                                       0x3ca2 (size before relaxing)
+ .debug_str     0x0000000000004340       0x51 ./src/DR/DR_Pinsel.o
+                                       0x33a9 (size before relaxing)
+ .debug_str     0x0000000000004391      0x1f4 ./src/DR/DR_Serial.o
+                                       0x3c03 (size before relaxing)
+ .debug_str     0x0000000000004585      0x106 ./src/DR/DR_Systick.o
+                                       0x3ae9 (size before relaxing)
+ .debug_str     0x000000000000468b      0x46a ./src/TPI_V0.o
+                                       0x3f53 (size before relaxing)
+ .debug_str     0x0000000000004af5      0x1c6 ./src/cr_startup_lpc175x_6x.o
                                        0x2fc4 (size before relaxing)
 
 .comment        0x0000000000000000       0x79
  .comment       0x0000000000000000       0x79 ./src/PR/PR_Botones.o
                                          0x7a (size before relaxing)
+ .comment       0x0000000000000079       0x7a ./src/PR/PR_Serial.o
  .comment       0x0000000000000079       0x7a ./src/PR/PR_Timers.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_ADC.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_GPIO.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_PLL.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_PWM.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_Pinsel.o
+ .comment       0x0000000000000079       0x7a ./src/DR/DR_Serial.o
  .comment       0x0000000000000079       0x7a ./src/DR/DR_Systick.o
  .comment       0x0000000000000079       0x7a ./src/TPI_V0.o
  .comment       0x0000000000000079       0x7a ./src/cr_startup_lpc175x_6x.o
@@ -599,37 +698,43 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000000       0x2d ./src/PR/PR_Botones.o
  .ARM.attributes
-                0x000000000000002d       0x2d ./src/PR/PR_Timers.o
+                0x000000000000002d       0x2d ./src/PR/PR_Serial.o
  .ARM.attributes
-                0x000000000000005a       0x2d ./src/DR/DR_ADC.o
+                0x000000000000005a       0x2d ./src/PR/PR_Timers.o
  .ARM.attributes
-                0x0000000000000087       0x2d ./src/DR/DR_GPIO.o
+                0x0000000000000087       0x2d ./src/DR/DR_ADC.o
  .ARM.attributes
-                0x00000000000000b4       0x2d ./src/DR/DR_PLL.o
+                0x00000000000000b4       0x2d ./src/DR/DR_GPIO.o
  .ARM.attributes
-                0x00000000000000e1       0x2d ./src/DR/DR_PWM.o
+                0x00000000000000e1       0x2d ./src/DR/DR_PLL.o
  .ARM.attributes
-                0x000000000000010e       0x2d ./src/DR/DR_Pinsel.o
+                0x000000000000010e       0x2d ./src/DR/DR_PWM.o
  .ARM.attributes
-                0x000000000000013b       0x2d ./src/DR/DR_Systick.o
+                0x000000000000013b       0x2d ./src/DR/DR_Pinsel.o
  .ARM.attributes
-                0x0000000000000168       0x2d ./src/TPI_V0.o
+                0x0000000000000168       0x2d ./src/DR/DR_Serial.o
  .ARM.attributes
-                0x0000000000000195       0x2d ./src/cr_startup_lpc175x_6x.o
+                0x0000000000000195       0x2d ./src/DR/DR_Systick.o
  .ARM.attributes
-                0x00000000000001c2       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x00000000000001c2       0x2d ./src/TPI_V0.o
+ .ARM.attributes
+                0x00000000000001ef       0x2d ./src/cr_startup_lpc175x_6x.o
+ .ARM.attributes
+                0x000000000000021c       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 
-.debug_frame    0x0000000000000000      0x620
+.debug_frame    0x0000000000000000      0x780
  .debug_frame   0x0000000000000000       0x34 ./src/PR/PR_Botones.o
- .debug_frame   0x0000000000000034      0x148 ./src/PR/PR_Timers.o
- .debug_frame   0x000000000000017c       0x98 ./src/DR/DR_ADC.o
- .debug_frame   0x0000000000000214      0x104 ./src/DR/DR_GPIO.o
- .debug_frame   0x0000000000000318       0x30 ./src/DR/DR_PLL.o
- .debug_frame   0x0000000000000348       0x58 ./src/DR/DR_PWM.o
- .debug_frame   0x00000000000003a0       0x38 ./src/DR/DR_Pinsel.o
- .debug_frame   0x00000000000003d8       0x8c ./src/DR/DR_Systick.o
- .debug_frame   0x0000000000000464       0x4c ./src/TPI_V0.o
- .debug_frame   0x00000000000004b0      0x170 ./src/cr_startup_lpc175x_6x.o
+ .debug_frame   0x0000000000000034       0x78 ./src/PR/PR_Serial.o
+ .debug_frame   0x00000000000000ac      0x148 ./src/PR/PR_Timers.o
+ .debug_frame   0x00000000000001f4       0x98 ./src/DR/DR_ADC.o
+ .debug_frame   0x000000000000028c      0x104 ./src/DR/DR_GPIO.o
+ .debug_frame   0x0000000000000390       0x30 ./src/DR/DR_PLL.o
+ .debug_frame   0x00000000000003c0       0x58 ./src/DR/DR_PWM.o
+ .debug_frame   0x0000000000000418       0x38 ./src/DR/DR_Pinsel.o
+ .debug_frame   0x0000000000000450       0xcc ./src/DR/DR_Serial.o
+ .debug_frame   0x000000000000051c       0xa8 ./src/DR/DR_Systick.o
+ .debug_frame   0x00000000000005c4       0x4c ./src/TPI_V0.o
+ .debug_frame   0x0000000000000610      0x170 ./src/cr_startup_lpc175x_6x.o
 
 Cross Reference Table
 
@@ -656,10 +761,18 @@ I2C0_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2C1_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2C2_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2S_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
+InicializarADC                                    ./src/DR/DR_ADC.o
+                                                  ./src/TPI_V0.o
 InicializarPLL                                    ./src/DR/DR_PLL.o
                                                   ./src/TPI_V0.o
 InicializarPWM                                    ./src/DR/DR_PWM.o
                                                   ./src/TPI_V0.o
+InicializarSerial                                 ./src/PR/PR_Serial.o
+                                                  ./src/TPI_V0.o
+InicializarSystick                                ./src/DR/DR_Systick.o
+                                                  ./src/TPI_V0.o
+InicializarUART0                                  ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
 InputBuff                                         ./src/PR/PR_Botones.o
                                                   ./src/TPI_V0.o
 IntDefaultHandler                                 ./src/cr_startup_lpc175x_6x.o
@@ -701,7 +814,28 @@ TmrFlags                                          ./src/PR/PR_Timers.o
 TmrFunciones                                      ./src/PR/PR_Timers.o
 TmrPause                                          ./src/PR/PR_Timers.o
 TmrRun                                            ./src/PR/PR_Timers.o
-UART0_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
+UART0_IRQHandler                                  ./src/DR/DR_Serial.o
+UART0_forceTX                                     ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_popRX                                       ./src/PR/PR_Serial.o
+                                                  ./src/TPI_V0.o
+UART0_popTX                                       ./src/DR/DR_Serial.o
+UART0_pushRX                                      ./src/DR/DR_Serial.o
+UART0_pushTX                                      ./src/PR/PR_Serial.o
+                                                  ./src/TPI_V0.o
+UART0_rx_buff                                     ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_rx_in                                       ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_rx_out                                      ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_tx_buff                                     ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_tx_flag                                     ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_tx_in                                       ./src/DR/DR_Serial.o
+                                                  ./src/PR/PR_Serial.o
+UART0_tx_out                                      ./src/DR/DR_Serial.o
 UART1_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 UART2_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 UART3_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
@@ -727,17 +861,16 @@ getPin                                            ./src/DR/DR_GPIO.o
                                                   ./src/PR/PR_Botones.o
 getPin_raw                                        ./src/DR/DR_GPIO.o
 get_ticks                                         ./src/DR/DR_Systick.o
-inicializarADC                                    ./src/DR/DR_ADC.o
-                                                  ./src/TPI_V0.o
-inicializarSystick                                ./src/DR/DR_Systick.o
-                                                  ./src/TPI_V0.o
 main                                              ./src/TPI_V0.o
                                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 reset_ticks                                       ./src/DR/DR_Systick.o
+scheduler_run                                     ./src/DR/DR_Systick.o
 setDir                                            ./src/DR/DR_GPIO.o
+                                                  ./src/TPI_V0.o
 setPin                                            ./src/DR/DR_GPIO.o
                                                   ./src/TPI_V0.o
 setPinmode                                        ./src/DR/DR_GPIO.o
+                                                  ./src/TPI_V0.o
 setPinmode_OP                                     ./src/DR/DR_GPIO.o
 setPinsel                                         ./src/DR/DR_Pinsel.o
                                                   ./src/TPI_V0.o

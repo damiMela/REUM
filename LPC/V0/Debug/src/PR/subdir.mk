@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/PR/PR_Botones.c \
+../src/PR/PR_Serial.c \
 ../src/PR/PR_Timers.c 
 
 OBJS += \
 ./src/PR/PR_Botones.o \
+./src/PR/PR_Serial.o \
 ./src/PR/PR_Timers.o 
 
 C_DEPS += \
 ./src/PR/PR_Botones.d \
+./src/PR/PR_Serial.d \
 ./src/PR/PR_Timers.d 
 
 

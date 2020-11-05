@@ -9,6 +9,7 @@ C_SRCS += \
 ../src/DR/DR_PLL.c \
 ../src/DR/DR_PWM.c \
 ../src/DR/DR_Pinsel.c \
+../src/DR/DR_Serial.c \
 ../src/DR/DR_Systick.c 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./src/DR/DR_PLL.o \
 ./src/DR/DR_PWM.o \
 ./src/DR/DR_Pinsel.o \
+./src/DR/DR_Serial.o \
 ./src/DR/DR_Systick.o 
 
 C_DEPS += \
@@ -25,6 +27,7 @@ C_DEPS += \
 ./src/DR/DR_PLL.d \
 ./src/DR/DR_PWM.d \
 ./src/DR/DR_Pinsel.d \
+./src/DR/DR_Serial.d \
 ./src/DR/DR_Systick.d 
 
 

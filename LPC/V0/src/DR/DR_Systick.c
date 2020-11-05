@@ -85,6 +85,7 @@ void InicializarSystick(void){
 */
 void SysTick_Handler(void){
 	systickCounter++;
+	scheduler_run();
 }
 
 
@@ -122,12 +123,11 @@ void scheduler_run(void){
 	//counters
 	static uint32_t adc_counter = 0;
 
-	//adc interations counter
+	//timer counter function
+	TimerDiscount();
+
+	//interations counter
 	adc_counter++;	adc_counter %= 10;
 
 	if(!adc_counter) ADC_startConvertion();
-
-
-	//timer counter function
-	TimerDiscount();
 }

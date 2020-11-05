@@ -16,8 +16,6 @@
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
 #define 	PWM1			((PWM_t *)(0x40018000UL))
-#define		ISER0		(*(uint32_t *)(0xE000E100UL))
-#define 	PWM_ISER	(1 << 9)
 
 #define LER_EN0	(1 << 0)
 #define LER_EN1	(1 << 1)

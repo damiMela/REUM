@@ -1,4 +1,4 @@
-DR_ADC.c:127:6:inicializarADC	4	static
-DR_ADC.c:154:6:ADC_IRQHandler	16	static
-DR_ADC.c:179:10:ADC_getVal	4	static
-DR_ADC.c:191:6:ADC_startConvertion	4	static
+DR_ADC.c:126:6:InicializarADC	4	static
+DR_ADC.c:152:6:ADC_IRQHandler	16	static
+DR_ADC.c:177:10:ADC_getVal	4	static
+DR_ADC.c:189:6:ADC_startConvertion	4	static
