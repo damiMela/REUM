@@ -1,1 +1,2 @@
-PR_Botones.c:61:6:debounceRead	16	static
+PR_Botones.c:58:6:ReadInputs	16	static
+PR_Botones.c:94:9:getBtn	16	static

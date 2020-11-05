@@ -55,30 +55,30 @@ int main(void) {
 	setPinsel(RGB_R, FUNCION_1);
 	setPinsel(RGB_G, FUNCION_1);
 	setPinsel(RGB_B, FUNCION_1);
-
-	setPinsel(USB_TX, FUNCION_1);
-	setPinsel(USB_RX, FUNCION_1);
-
 //----------------------------------//
 	setDir(RELAY0, OUTPUT);
 	setDir(RELAY1, OUTPUT);
 	setDir(RELAY3, OUTPUT);
-	setDir(IN0, INPUT);
+
+	setDir(SW1, INPUT);
 	setDir(SW2, INPUT);
 	setDir(SW3, INPUT);
+	setDir(SW4, INPUT);
+	setDir(SW5, INPUT);
 
 
-	setPinmode(IN0, MODE_PULLUP);
+	setPinmode(SW1, MODE_PULLUP);
 	setPinmode(SW2, MODE_PULLUP);
 	setPinmode(SW3, MODE_PULLUP);
+	setPinmode(SW4, MODE_PULLUP);
+	setPinmode(SW5, MODE_PULLUP);
 
 
-	//para usar ADC flata en pinsel
 	InicializarSystick();
 	InicializarPLL();
-	InicializarADC();
+	InicializarADC_DR();
 	InicializarPWM();
-	InicializarSerial();
+	InicializarSerial(0);
 
 	setPin(RELAY0, state);
 	setPin(RELAY1, OFF);
@@ -87,23 +87,29 @@ int main(void) {
 	TimerStart(0, 3, func, SEG);
 
     while(1) {
-    	debounceRead();
+    	//---agregar siempre---//
+    	ReadInputs();
     	TimerLunchEvent();
+    	//---------------------//
 
+    	//**Prueba ADC
     	prueba = ADC_getVal();
     	if(prueba > 1400) setPin(RELAY3, ON);
     	else setPin(RELAY3, OFF);
 
-    	if((InputBuff & (1 << 2)))
+    	//**Prueba entradas digitales
+    	if(getBtn(BTN5))
     		setPin(RELAY1, ON);
     	else setPin(RELAY1, OFF);
 
+    	//**Prueba PWM
 		PWM_setDutyCicle(2, 50);
 		PWM_setDutyCicle(3, 600);
 		PWM_setDutyCicle(4, 750);
 
-		int32_t data = UART0_popRX();
 
+		//**Prueba UART0
+		int32_t data = UART0_popRX();
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
 		}

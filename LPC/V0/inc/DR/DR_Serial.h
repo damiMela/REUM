@@ -21,9 +21,6 @@
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define TX_PIN
-#define RX_PIN
-
 #define 	RX_BUFF_SIZE		64
 #define 	TX_BUFF_SIZE		64
 /***********************************************************************************************************************************
@@ -45,14 +42,25 @@ extern volatile uint32_t UART0_tx_in, UART0_tx_out;
 
 extern volatile uint8_t UART0_tx_flag;
 
+////////////////////////////////////
+extern volatile uint8_t UART3_rx_buff[];
+extern volatile uint32_t UART3_rx_in, UART3_rx_out;
+
+extern volatile uint8_t UART3_tx_buff[];
+extern volatile uint32_t UART3_tx_in, UART3_tx_out;
+
+extern volatile uint8_t UART3_tx_flag;
+
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void InicializarUART0(void);
-
+void InicializarUART0_DR(void);
 void UART0_pushRX(uint8_t dato);
 int32_t UART0_popTX(void);
-
 void UART0_forceTX(uint8_t dato);
 
+void InicializarUART3_DR(void);
+void UART3_pushRX(uint8_t dato);
+int32_t UART3_popTX(void);
+void UART3_forceTX(uint8_t dato);
 #endif /* DR_DR_SERIAL_H_ */

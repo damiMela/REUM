@@ -10,8 +10,10 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
+#include <DR/DR_Pinsel.h>
 #include <DR/DR_Serial.h>
-#include <PR_Serial.h>
+#include <PR/PR_Serial.h>
+
 
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
@@ -49,46 +51,92 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  Nombre de la Funcion
-	\brief Descripcion
+	\fn  InicializarSerial
+	\brief Inicializa la UART elegida
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
- 	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
+ 	\param [in] Número de UART a inicializar
 */
-
-void InicializarSerial(void) {
-	InicializarUART0();
-}
-
-int32_t UART0_popRX(void) {
-	if(UART0_rx_in == UART0_rx_out) {
-		return -1;
-	} else {
-		int32_t ret = UART0_rx_buff[UART0_rx_out];
-
-		UART0_rx_out++;
-
-		if(UART0_rx_out == RX_BUFF_SIZE) {
-			UART0_rx_out = 0;
-		}
-
-		return ret;
+void InicializarSerial(uint8_t serial_n) {
+	if(!serial_n){
+		InicializarUART0_DR();
+		setPinsel(USB_TX, FUNCION_1);
+		setPinsel(USB_RX, FUNCION_1);
+	}
+	else if(serial_n == 3){
+		InicializarUART3_DR();
+		setPinsel(SERIAL_TX, FUNCION_3);
+		setPinsel(SERIAL_RX, FUNCION_3);
 	}
 }
 
+
+/**
+	\fn  UART0_popRX
+	\brief Pop del buffer de recepción
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+	\return valor leído del buffer
+*/
+int32_t UART0_popRX(void) {
+	int32_t ret = -1;
+	if(UART0_rx_in != UART0_rx_out){
+		ret = UART0_rx_buff[UART0_rx_out];
+		UART0_rx_out++; 	UART0_rx_out%=RX_BUFF_SIZE;
+	}
+	return ret;
+}
+
+
+/**
+	\fn  UART0_pushTX
+	\brief push al buffer de transmición para luego ser enviado
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+ 	\param [in] dato para poner el la cola de envío
+*/
 void UART0_pushTX(uint8_t dato) {
 	if(UART0_tx_flag) {
 		UART0_tx_buff[UART0_tx_in] = dato;
-
-		UART0_tx_in++;
-
-		if(UART0_tx_in == TX_BUFF_SIZE) {
-			UART0_tx_in = 0;
-		}
+		UART0_tx_in++;		UART0_tx_in %= TX_BUFF_SIZE;
 	} else {
 		UART0_forceTX(dato);
 		UART0_tx_flag = 1;
+	}
+}
+
+
+/**********************************************************************************************************************************/
+/**
+	\fn  UART3_popRX
+	\brief Pop del buffer de recepción
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+	\return valor leído del buffer
+*/
+int32_t UART3_popRX(void) {
+	uint32_t ret = -1;
+	if(UART3_rx_in != UART3_rx_out){
+		ret = UART3_rx_buff[UART3_rx_out];
+		UART3_rx_out++; 	UART3_rx_out%=RX_BUFF_SIZE;
+	}
+	return ret;
+}
+
+
+/**
+	\fn  UART3_pushTX
+	\brief push al buffer de transmición para luego ser enviado
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+ 	\param [in] dato para poner el la cola de envío
+*/
+void UART3_pushTX(uint8_t dato) {
+	if(UART3_tx_flag) {
+		UART3_tx_buff[UART3_tx_in] = dato;
+		UART3_tx_in++;		UART3_tx_in %= TX_BUFF_SIZE;
+	} else {
+		UART3_forceTX(dato);
+		UART3_tx_flag = 1;
 	}
 }

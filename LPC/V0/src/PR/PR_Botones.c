@@ -15,7 +15,7 @@
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define CANT_ENTRADAS 3  //MAX:8. Sino cambiar el tipo de variable de buffer y lectura
+#define CANT_ENTRADAS 5  //MAX:8. Sino cambiar el tipo de variable de buffer y lectura
 #define CANT_ACEPT_CYCLES 5
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
@@ -50,20 +50,19 @@ static uint8_t cycleCounter[CANT_ENTRADAS];
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  Nombre de la Funcion
-	\brief Descripcion
+	\fn  ReadInputs
+	\brief lectura y debounce de entradas digitales. Debe estar en el loop
  	\author R2002 - Grupo2
  	\date Oct 27, 2020
- 	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
 */
-void debounceRead(void){
+void ReadInputs(void){
 	uint8_t lectura = 0, input_n, cambios;
 
-	if(getPin(SW1, ON_HIGH)) lectura = 0x01;
-	if(getPin(SW2, ON_HIGH)) lectura |= 0x02;
-	if(getPin(SW3, ON_HIGH)) lectura |= 0x04;
+	if(getPin(SW1, ON_HIGH)) lectura = (1 << BTN1);
+	if(getPin(SW2, ON_HIGH)) lectura |= (1 << BTN2);
+	if(getPin(SW3, ON_HIGH)) lectura |= (1 << BTN3);
+	if(getPin(SW4, ON_HIGH)) lectura |= (1 << BTN4);
+	if(getPin(SW5, ON_HIGH)) lectura |= (1 << BTN5);
 
 	cambios = (InputBuff ^ lectura);
 
@@ -79,9 +78,19 @@ void debounceRead(void){
 		}
 	}
 	else{
-		for(input_n=0; input_n < CANT_ENTRADAS; input_n++){
+		for(input_n=0; input_n < CANT_ENTRADAS; input_n++)
 			cycleCounter[input_n] = 0;
-		}
 	}
+}
 
+/**
+	\fn  getBtn
+	\brief devuelve el estado de uno de los botones (SWx)
+ 	\author R2002 - Grupo2
+ 	\date Oct 27, 2020
+ 	\param [in] número de botón (BTNx)
+	\return 1 o 0 según si el botón estaba presionado
+*/
+uint8_t getBtn(uint8_t n){
+	return (InputBuff & (1 << n));
 }

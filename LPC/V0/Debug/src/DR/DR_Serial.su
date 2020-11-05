@@ -1,5 +1,10 @@
-DR_Serial.c:139:6:InicializarUART0	4	static
-DR_Serial.c:167:6:UART0_pushRX	16	static
-DR_Serial.c:172:9:UART0_popTX	16	static
-DR_Serial.c:182:6:UART0_forceTX	16	static
-DR_Serial.c:188:6:UART0_IRQHandler	24	static
+DR_Serial.c:149:6:InicializarUART0_DR	4	static
+DR_Serial.c:184:6:UART0_pushRX	16	static
+DR_Serial.c:197:9:UART0_popTX	16	static
+DR_Serial.c:215:6:UART0_forceTX	16	static
+DR_Serial.c:226:6:UART0_IRQHandler	24	static
+DR_Serial.c:273:6:InicializarUART3_DR	4	static
+DR_Serial.c:308:6:UART3_pushRX	16	static
+DR_Serial.c:321:9:UART3_popTX	16	static
+DR_Serial.c:339:6:UART3_forceTX	16	static
+DR_Serial.c:350:6:UART3_IRQHandler	24	static

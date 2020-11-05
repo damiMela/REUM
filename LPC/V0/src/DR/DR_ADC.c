@@ -27,7 +27,7 @@
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-typedef struct {
+typedef struct _ADC_ctrl_t{
 	uint32_t adcSel:8;
 	uint32_t clkDiv:8;
 	uint32_t burstMode:1;
@@ -39,7 +39,7 @@ typedef struct {
 	uint32_t _RESERVED2:4;
 } ADC_ctrl_t;
 
-typedef struct{
+typedef struct _ADC_GlobalData_t{
 	uint32_t _RESERVED0:4;
 	uint32_t result:12;
 	uint32_t _RESERVED1:8;
@@ -49,13 +49,13 @@ typedef struct{
 	uint32_t done:1;
 }ADC_GlobalData_t;
 
-typedef struct{
+typedef struct _ADC_IntEnable_t{
 	uint32_t intEn:8;
 	uint32_t globlalIntEnable:1;
 	uint32_t _RESERVED0:23;
 }ADC_IntEnable_t;
 
-typedef struct{
+typedef struct _ADC_Data_t{
 	uint32_t _RESERVED0:4;
 	uint32_t result:12;
 	uint32_t _RESERVED1:14;
@@ -63,7 +63,7 @@ typedef struct{
 	uint32_t done:1;
 }ADC_Data_t;
 
-typedef struct{
+typedef struct _ADC_Status_t{
 	uint32_t done0:1;
 	uint32_t done1:1;
 	uint32_t done2:1;
@@ -84,7 +84,7 @@ typedef struct{
 	uint32_t _RESERVED0:15;
 }ADC_Status_t;
 
-typedef struct{
+typedef struct _ADC_t{
 	__RW ADC_ctrl_t ADCR;
 	__RW ADC_GlobalData_t ADGDR;
 	__RW uint32_t RESERVED_0;
@@ -123,7 +123,7 @@ static volatile uint32_t ADC_promedio = 0;
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void InicializarADC()
+void InicializarADC_DR()
 {
 
 	POWER_ADC_ON; //macro para encender ADC
@@ -152,6 +152,7 @@ void InicializarADC()
 void ADC_IRQHandler(void)
 {
 	static uint32_t acummulator = 0;
+	static uint8_t	readNum = 0;
 
 	ADC_Data_t ADC5 = ADC->AD_data[5];
 
@@ -189,4 +190,9 @@ uint32_t ADC_getVal(void)
 void ADC_startConvertion(void)
 {
 	ADC->ADCR.startMode = 1;
+}
+
+void ADC_changeChannel(uint8_t n){
+	ADC->ADCR.adcSel = (1 << n);
+	ADC->ADINTEN.intEn = (1 << n);
 }
