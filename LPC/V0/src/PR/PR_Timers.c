@@ -70,8 +70,7 @@ int8_t TimerStart ( uint8_t event_n , uint32_t t , void (* f_event )(void), uint
 {
 	uint8_t salida = 0;
 
-	switch(base)
-	{
+	switch(base){
 		case DEC: 	TmrRun[event_n] = t * DECIMAS;		break;
 		case SEG: 	TmrRun[event_n] = t * SEGUNDOS;		break;
 		case MIN: 	TmrRun[event_n] = t * MINUTOS;		break;
@@ -119,8 +118,7 @@ int8_t TimerPause ( uint8_t event_n , uint8_t modo )
 int8_t TimerStop ( uint8_t event_n  ){
 	uint8_t salida = -1;
 
-	if(event_n < N_TIMERS)
-	{
+	if(event_n < N_TIMERS){
 		TmrRun[event_n] = 0;
 		TmrFlags[event_n] = 0;
 		TmrBase[event_n] = 0;
@@ -142,16 +140,13 @@ int8_t TimerStop ( uint8_t event_n  ){
  	\param [in] nuevo tiempo
 	\return -1 si el contador especificado no existe o no fue creado con TimerStart()
 */
-int8_t TimerSet ( uint8_t event_n , uint32_t t )
-{
+int8_t TimerSet ( uint8_t event_n , uint32_t t ){
 	uint8_t salida = -1;
 
-	if((event_n < N_TIMERS) && TmrRun[event_n])
-	{
+	if((event_n < N_TIMERS) && TmrRun[event_n]){
 		salida = 0;
 
-		switch(TmrBase[event_n])
-		{
+		switch(TmrBase[event_n]){
 			case DEC: 	TmrRun[event_n] = t * DECIMAS;		break;
 			case SEG: 	TmrRun[event_n] = t * SEGUNDOS;		break;
 			case MIN: 	TmrRun[event_n] = t * MINUTOS;		break;
@@ -163,8 +158,8 @@ int8_t TimerSet ( uint8_t event_n , uint32_t t )
 
 
 /**
-	\fn  TimerSet
-	\brief setea un nuevo tiempo de conteo a un contador ya creado
+	\fn  TimerGet
+	\brief getea el tiempo restante para que termine el contador
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
  	\param [in] número de evento/contador.
@@ -215,12 +210,9 @@ void TimerClose ( void )
 */
 void TimerDiscount ( void )
 {
-	for(uint8_t i = 0; i < N_TIMERS; i ++)
-	{
-		if(TmrRun[i])
-		{
-			if(!TmrPause[i])
-			{
+	for(uint8_t i = 0; i < N_TIMERS; i ++){
+		if(TmrRun[i]){
+			if(!TmrPause[i]){
 				TmrRun[i]--;
 				if(!TmrRun[i])
 					TmrFlags[i] = 1;
@@ -238,10 +230,8 @@ void TimerDiscount ( void )
 void TimerLunchEvent ( void ){
 	uint8_t i;
 
-	for ( i = 0 ; i < N_TIMERS ; i ++)
-	{
-		if (TmrFlags[ i ] == 1)
-		{
+	for ( i = 0 ; i < N_TIMERS ; i ++){
+		if (TmrFlags[ i ] == 1){
 			TmrFlags[ i ] = 0;
 			TmrFunciones[ i ]();
 		}

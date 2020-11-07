@@ -1,40 +1,43 @@
 src/TPI_V0.o src/TPI_V0.d: ../src/TPI_V0.c \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Tipos.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/infotronic.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Systick.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_PLL.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Timers.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_ADC.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_PLL.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Pinsel.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Botones.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_GPIO.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Serial.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Relays.h \
- /home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Motores.h
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Tipos.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/infotronic.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Systick.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc\DR/DR_PLL.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Timers.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_ADC.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_PLL.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Pinsel.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Timer0.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Botones.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_GPIO.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Serial.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Relays.h \
+ D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Motores.h
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Tipos.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Tipos.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/infotronic.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/infotronic.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Systick.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Systick.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_PLL.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc\DR/DR_PLL.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Timers.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Timers.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_ADC.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_ADC.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_PLL.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_PLL.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_Pinsel.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Pinsel.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Botones.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Timer0.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/DR/DR_GPIO.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Botones.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Serial.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_GPIO.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Relays.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Serial.h:
 
-/home/damian/Desktop/Info2/TPI/LPC/V0/inc/PR/PR_Motores.h:
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Relays.h:
+
+D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/PR/PR_Motores.h:

@@ -50,13 +50,10 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  Nombre de la Funcion
-	\brief Descripcion
+	\fn InicializarRelay
+	\brief Inicialización de las salidas de los realys.
  	\author R2002 - Grupo2
  	\date Nov 5, 2020
- 	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
 */
 void InicializarRelays(void){
 	setDir(RELAY0_P, OUTPUT);
@@ -75,10 +72,42 @@ void InicializarRelays(void){
 	setPin(RELAY3_P, !OFF);
 }
 
-void setRelay(uint8_t n, uint8_t state){
-	if(n == RELAY0)			setPin(RELAY0_P, !state);
-	else if(n == RELAY1)	setPin(RELAY1_P, !state);
-	else if(n == RELAY2)	setPin(RELAY2_P, !state);
-	else if(n == RELAY3)	setPin(RELAY3_P, !state);
 
+/**
+	\fn setRelay
+	\brief Setea el relay seleccionado en el estado recivido
+ 	\author R2002 - Grupo2
+ 	\date Nov 5, 2020
+ 	\param [in] Relay al cual se le va a signar un estado
+ 	\param [in] estado a asignar (ON - OFF)
+*/
+void setRelay(uint8_t n, uint8_t state){
+	switch(n){
+		case RELAY0:	setPin(RELAY0_P, !state);	break;
+		case RELAY1:	setPin(RELAY1_P, !state);	break;
+		case RELAY2:	setPin(RELAY2_P, !state);	break;
+		case RELAY3:	setPin(RELAY3_P, !state);	break;
+	}
+}
+
+void invertRelay(uint8_t n){
+	uint8_t state;
+	switch(n){
+			case RELAY0:
+				state = getPin(RELAY0_P, ON_LOW);
+				setPin(RELAY0_P, !state);
+				break;
+			case RELAY1:
+				state = getPin(RELAY1_P, ON_LOW);
+				setPin(RELAY1_P, !state);
+				break;
+			case RELAY2:
+				state = getPin(RELAY2_P, ON_LOW);
+				setPin(RELAY2_P, !state);
+				break;
+			case RELAY3:
+				state = getPin(RELAY3_P, ON_LOW);
+				setPin(RELAY3_P, !state);
+				break;
+		}
 }

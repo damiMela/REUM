@@ -123,9 +123,7 @@ static volatile uint32_t ADC_promedio = 0;
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void InicializarADC_DR()
-{
-
+void InicializarADC_DR(){
 	POWER_ADC_ON; //macro para encender ADC
 	ADC->ADCR.PDN = 1;
 
@@ -149,8 +147,7 @@ void InicializarADC_DR()
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void ADC_IRQHandler(void)
-{
+void ADC_IRQHandler(void){
 	static uint32_t acummulator = 0;
 	static uint8_t	readNum = 0;
 
@@ -175,8 +172,7 @@ void ADC_IRQHandler(void)
  	\date Sep 28, 2020
 	\return uint32_t con el valor leido
 */
-uint32_t ADC_getVal(void)
-{
+uint32_t ADC_getVal(void){
 	return ADC_promedio;
 }
 
@@ -187,12 +183,20 @@ uint32_t ADC_getVal(void)
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void ADC_startConvertion(void)
-{
+void ADC_startConvertion(void){
 	ADC->ADCR.startMode = 1;
 }
 
+/**
+	\fn  ADC_changeChannel
+	\brief cambia el canal de lectura
+ 	\author R2002 - Grupo2
+ 	\date Sep 28, 2020
+*/
 void ADC_changeChannel(uint8_t n){
+	//*******************
+	//esto hay que hacerlo. no duniona.
+	//*******************
 	ADC->ADCR.adcSel = (1 << n);
 	ADC->ADINTEN.intEn = (1 << n);
 }

@@ -10,6 +10,7 @@
 		#define 	PCMCPWM	(17)
 		#define		PUART0	(3)
 		#define		PUART3	(25)
+		#define 	PTIM0	(1)
 
 	//!< ///////////////////   PCLKSEL   //////////////////////////
 	//!< Peripheral Clock Selection registers 0 and 1 (PCLKSEL0 -0x400F C1A8 and PCLKSEL1 - 0x400F C1AC) [pag. 56 user manual]
@@ -20,6 +21,7 @@
 		#define PCLK_ADC	(24)
 		#define PCLK_PWM1	(12)
 		#define PCLK_UART0	(6)
+		#define PCLK_TIM0	(2)
 
 	#define		PCLKSEL1	PCLKSEL[1]
 		#define PCLK_UART3	(18)
@@ -29,6 +31,7 @@
 		#define ISER_UART0	(5)
 		#define ISER_UART3	(8)
 		#define ISER_PWM	(9)
+		#define ISER_TIM0	(1)
 
 //////////////Registros del CLOCK y de sistema/////////////////
 //0x400FC1A0UL: Registro de control de sistema y registro de status:

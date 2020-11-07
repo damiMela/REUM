@@ -106,6 +106,21 @@ void UART0_pushTX(uint8_t dato) {
 }
 
 
+/**
+	\fn  UART0_SendString
+	\brief envio de un String a través de la UART0
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+ 	\param [in] String a enviar
+*/
+void UART0_SendString(char* msj){
+	uint32_t i = 0;
+	while(msj[i]){
+		UART0_pushTX(msj[i]);
+		i++;
+	}
+}
+
 /**********************************************************************************************************************************/
 /**
 	\fn  UART3_popRX
@@ -138,5 +153,20 @@ void UART3_pushTX(uint8_t dato) {
 	} else {
 		UART3_forceTX(dato);
 		UART3_tx_flag = 1;
+	}
+}
+
+/**
+	\fn  UART3_SendString
+	\brief envio de un String a través de la UART3
+ 	\author R2002 - Grupo2
+ 	\date Nov 4, 2020
+ 	\param [in] String a enviar
+*/
+void UART3_SendString(char* msj){
+	uint32_t i = 0;
+	while(msj[i]){
+		UART3_pushTX(msj[i]);
+		i++;
 	}
 }

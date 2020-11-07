@@ -44,7 +44,7 @@ enum {RAISING, FALLING, EVENT};
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-typedef struct{
+typedef struct _PWM1_IR_t{
 	uint32_t PWMMR_flags1: 4;
 	uint32_t PWMCAP_flag: 2;
 	uint32_t RESERVED_0: 2;
@@ -52,7 +52,7 @@ typedef struct{
 	uint32_t RESERVED_1: 21;
 }PWM1_IR_t;
 
-typedef struct{
+typedef struct _PWM_TimerCtrl_t{
 	uint32_t CounterEn: 1;
 	uint32_t CounterRst: 1;
 	uint32_t RESERVED_0: 1;
@@ -60,13 +60,13 @@ typedef struct{
 	uint32_t RESERVED_1: 28;
 }PWM_TimerCtrl_t;
 
-typedef struct{
+typedef struct _PWM_CountCtrl_t{
 	uint32_t CounterMode: 2;
 	uint32_t InSelect: 2;
 	uint32_t RESERVED_0: 28;
 }PWM_CountCtrl_t;
 
-typedef struct{
+typedef struct _PWM_MatchCtrl_t{
 	uint32_t PWMMR0: 3;//	1:PWMR0i	2:PWMR0r	3:PWMR0s
 	uint32_t PWMMR1: 3;
 	uint32_t PWMMR2: 3;
@@ -77,13 +77,13 @@ typedef struct{
 	uint32_t RESERVED_0: 11;
 }PWM_MatchCtrl_t;
 
-typedef struct{
+typedef struct _PWM_CaptureCtrl_t{
 	uint32_t PWM_CAP0: 3; //	1:rising	2:falling	3:event
 	uint32_t PWM_CAP1: 3;
 	uint32_t RESERVED_0: 26;
 }PWM_CaptureCtrl_t;
 
-typedef struct{
+typedef struct _PWM_ctrl_t{
 	uint32_t RESERVED_0: 2;
 	uint32_t PWMSel: 5;// PWMSEL2-PWMSEL6
 	uint32_t RESERVED_1: 2;
@@ -91,12 +91,12 @@ typedef struct{
 	uint32_t RESERVED_2: 17;
 }PWM_ctrl_t;
 
-typedef struct{
+typedef struct _PWM_LatchEn_t{
 	uint32_t MatchLatchEn: 7;
 	uint32_t RESERVED_0: 25;
 }PWM_LatchEn_t;
 
-typedef struct{
+typedef struct _PWM_ts{
 	__RW PWM1_IR_t Interrupts;
 	__RW PWM_TimerCtrl_t TimerCtrl;
 	__RW uint32_t TimerCounter;
@@ -139,7 +139,7 @@ static uint32_t match_counter = 0;
 
 /**
 	\fn  InicializarPWM
-	\brief Inicializa PWM con frecuencia 1ms
+	\brief Inicializa PWM con frecuencia 10khz
  	\author R2002 - Grupo2
  	\date oct 27, 2020
 */
@@ -149,8 +149,9 @@ void InicializarPWM_DR(void){
 	PCLKSEL0 &= ~(3 << PCLK_PWM1);
 	PCLKSEL0 |= (0x00 << PCLK_PWM1);
 
+	//F_pwm = PCLK/PR+1 = 25Mhz/24+01 =
 	PWM1->PWMCtrl.PWMSel = 0; //set every pwm to single controlled edge
-	PWM1->PLLReg= 24;
+	PWM1->PLLReg= 2499;
 
 	PWM1->TimerCtrl.CounterRst = 1;
 	PWM1->MatchCtrl.PWMMR0 |= (1 << PWMM_R); //match compare on reset
@@ -158,7 +159,7 @@ void InicializarPWM_DR(void){
 	match_counter = 0;
 
 	PWM1->MatchReg_1[0] = 1000; //match reset value
-	//PWM1->MatchReg_1[1] = 800;
+	PWM1->MatchReg_1[1] = 0;
 	PWM1->MatchReg_1[2] = 0;  //pwm2. duty cycle of 80%
 	PWM1->MatchReg_1[3] = 0;  //pwm3
 	PWM1->MatchReg_2[0] = 0;  //pwm4
@@ -187,8 +188,8 @@ void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val){
 
 	if(PWM_n > 3)
 		PWM1->MatchReg_2[PWM_n%4] = val; //camiar duty cycles del pwm 4 al 6
-	else{
+	else
 		PWM1->MatchReg_1[PWM_n] = val;
-	}
+
 	PWM1->LatchEn.MatchLatchEn |= (1 << (PWM_n));
 }

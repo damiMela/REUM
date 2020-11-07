@@ -18,6 +18,7 @@
 //timer drivers
 #include <DR/DR_Systick.h>
 #include <DR/DR_PLL.h>
+#include <DR/DR_Timer0.h>
 
 //pin select drivers
 #include <DR/DR_Pinsel.h>
@@ -32,11 +33,10 @@
 #include <PR/PR_Relays.h>
 #include <PR/PR_Motores.h>
 
-int state = HIGH;
+
 
 void func(void){
-	state = !state;
-	setRelay(RELAY0, state);
+	invertRelay(RELAY0);
 	TimerStart(0, 3, func, SEG);
 }
 
@@ -54,8 +54,11 @@ int main(void) {
 	InicializarMotores();
 	InicializarSerial(0);
 
+	InicializarTimer0_DR();
+
 
 	TimerStart(0, 3, func, SEG);
+	TIMER0_EnableCount(1);
 
     while(1) {
     	//---agregar siempre---//
@@ -78,14 +81,19 @@ int main(void) {
 
 
 		//**Prueba UART0
-		int32_t data = UART0_popRX();
+		/*int32_t data = UART0_popRX();
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
-		}
+		}*/
 
 		//**Motores (sin probar)**//
 		//setMotoresDir(ADELANTE);
 		//setMotoresVel(300);
+
+/*    	if(TIMER0_getTime() >= 100){
+    		invertRelay(RELAY2);
+    		TIMER0_rstTime();
+    	}*/
 
     }
 
