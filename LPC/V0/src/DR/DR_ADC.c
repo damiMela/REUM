@@ -149,7 +149,6 @@ void InicializarADC_DR(){
 */
 void ADC_IRQHandler(void){
 	static uint32_t acummulator = 0;
-	static uint8_t	readNum = 0;
 
 	ADC_Data_t ADC5 = ADC->AD_data[5];
 

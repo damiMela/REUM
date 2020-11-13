@@ -1,0 +1,4 @@
+PR_PWM.c:59:6:InicilaizarPWM	8	static
+PR_PWM.c:67:6:setPWMDuty	16	static
+PR_PWM.c:71:6:setPWMOff	24	static
+PR_PWM.c:77:10:getPWMDuty	16	static

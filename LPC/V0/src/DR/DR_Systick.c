@@ -11,16 +11,19 @@
  *** INCLUDES
  **********************************************************************************************************************************/
 #include <DR/DR_Systick.h>
-
+#include <DR/DR_PLL.h>
+#include <PR/PR_Timers.h>
+#include <DR/DR_ADC.h>
+#include <DR/DR_PWM.h>
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define	SYSTICK	((systick_t*) 0xE000E010UL)
-
+#define ADC_T 10 //x2.5 ms
+#define PWM_T 5 //x2.5 ms
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-
+#define	SYSTICK	((systick_t*) 0xE000E010UL)
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -122,12 +125,17 @@ void reset_ticks(void){
 void scheduler_run(void){
 	//counters
 	static uint32_t adc_counter = 0;
+	static uint32_t pwm_counter = 0;
 
 	//timer counter function
 	TimerDiscount();
 
 	//interations counter
-	adc_counter++;	adc_counter %= 10;
+	adc_counter++;	adc_counter %= ADC_T;
+	pwm_counter++; 	pwm_counter %= PWM_T;
 
 	if(!adc_counter) ADC_startConvertion();
+	if(!pwm_counter) PWM_update();
+
+
 }

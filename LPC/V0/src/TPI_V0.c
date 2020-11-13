@@ -25,14 +25,15 @@
 
 //other drivers
 #include <DR/DR_ADC.h>
+#include <DR_ExtInt.h>
 
 //primitivas
 #include <PR/PR_Botones.h>
 #include <PR/PR_Timers.h>
 #include <PR/PR_Serial.h>
 #include <PR/PR_Relays.h>
-#include <PR/PR_Motores.h>
-
+#include <PR/PR_PWM.h>
+#include <PR/PR_Ultrasonido.h>
 
 
 void func(void){
@@ -49,21 +50,24 @@ int main(void) {
 
 	InicializarADC_DR();
 
-	InicializarBotones();
+//	InicializarBotones();
 	InicializarRelays();
-	InicializarMotores();
 	InicializarSerial(0);
+	InicilaizarPWM();
 
 	InicializarTimer0_DR();
+	InicializarUs();
+	EINTInit();
 
 
-	TimerStart(0, 3, func, SEG);
-	TIMER0_EnableCount(1);
+//	TimerStart(0, 3, func, SEG);
+//	TIMER0_EnableCount(1);
 
     while(1) {
     	//---agregar siempre---//
-    	ReadInputs();
+ //   	ReadInputs();
     	TimerLunchEvent();
+    	readUS();
     	//---------------------//
 
 
@@ -75,10 +79,10 @@ int main(void) {
 
 
     	//**Prueba entradas digitales
-    	if(getBtn(SW5))
+/*    	if(getBtn(SW4))
     		setRelay(RELAY1, ON);
     	else setRelay(RELAY1, OFF);
-
+*/
 
 		//**Prueba UART0
 		/*int32_t data = UART0_popRX();
@@ -88,11 +92,15 @@ int main(void) {
 
 		//**Motores (sin probar)**//
 		//setMotoresDir(ADELANTE);
-		//setMotoresVel(300);
+		//setPWMDuty(PWM2, 0);
+		//setPWMDuty(PWM3, 80);
 
 /*    	if(TIMER0_getTime() >= 100){
     		invertRelay(RELAY2);
     		TIMER0_rstTime();
+    	}*/
+    	/*if(US_result > 20){
+    		invertRelay(RELAY2);
     	}*/
 
     }

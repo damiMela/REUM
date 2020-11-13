@@ -1,0 +1,2 @@
+DR_ExtInt.c:83:6:EINTInit	8	static
+DR_ExtInt.c:94:6:EINT2_IRQHandler	4	static

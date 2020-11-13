@@ -5,24 +5,27 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/PR/PR_Botones.c \
-../src/PR/PR_Motores.c \
+../src/PR/PR_PWM.c \
 ../src/PR/PR_Relays.c \
 ../src/PR/PR_Serial.c \
-../src/PR/PR_Timers.c 
+../src/PR/PR_Timers.c \
+../src/PR/PR_Ultrasonido.c 
 
 OBJS += \
 ./src/PR/PR_Botones.o \
-./src/PR/PR_Motores.o \
+./src/PR/PR_PWM.o \
 ./src/PR/PR_Relays.o \
 ./src/PR/PR_Serial.o \
-./src/PR/PR_Timers.o 
+./src/PR/PR_Timers.o \
+./src/PR/PR_Ultrasonido.o 
 
 C_DEPS += \
 ./src/PR/PR_Botones.d \
-./src/PR/PR_Motores.d \
+./src/PR/PR_PWM.d \
 ./src/PR/PR_Relays.d \
 ./src/PR/PR_Serial.d \
-./src/PR/PR_Timers.d 
+./src/PR/PR_Timers.d \
+./src/PR/PR_Ultrasonido.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

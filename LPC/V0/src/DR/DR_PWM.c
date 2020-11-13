@@ -120,11 +120,11 @@ typedef struct _PWM_ts{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-
+uint16_t PWM_buff[CANT_PWM] = {0};
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static uint32_t match_counter = 0;
+
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -156,18 +156,16 @@ void InicializarPWM_DR(void){
 	PWM1->TimerCtrl.CounterRst = 1;
 	PWM1->MatchCtrl.PWMMR0 |= (1 << PWMM_R); //match compare on reset
 
-	match_counter = 0;
 
 	PWM1->MatchReg_1[0] = 1000; //match reset value
-	PWM1->MatchReg_1[1] = 0;
-	PWM1->MatchReg_1[2] = 0;  //pwm2. duty cycle of 80%
+	PWM1->MatchReg_1[1] = 0;  //pwm1
+	PWM1->MatchReg_1[2] = 0;  //pwm2
 	PWM1->MatchReg_1[3] = 0;  //pwm3
-	PWM1->MatchReg_2[0] = 0;  //pwm4
 
 
 	//latch and PWM enable
-	PWM1->LatchEn.MatchLatchEn |= LER_EN0 | LER_EN2| LER_EN3 | LER_EN4;
-	PWM1->PWMCtrl.PWM_En |= PWM_EN2 | PWM_EN3 | PWM_EN4;
+	PWM1->LatchEn.MatchLatchEn |= LER_EN0 | LER_EN2| LER_EN3 ;
+	PWM1->PWMCtrl.PWM_En |= PWM_EN1 | PWM_EN2 | PWM_EN3;
 
 	PWM1->TimerCtrl.CounterRst = 0;
 	PWM1->TimerCtrl.CounterEn = 1;
@@ -184,12 +182,19 @@ void InicializarPWM_DR(void){
  	\date oct 27, 2020
 */
 void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val){
+	//LA funcion solo es valida para PWM de 1 a 3
 	if(val >= 1000) val = 1000;
+	if((PWM_n > CANT_PWM) || (PWM_n == 0)) return;
 
-	if(PWM_n > 3)
-		PWM1->MatchReg_2[PWM_n%4] = val; //camiar duty cycles del pwm 4 al 6
-	else
-		PWM1->MatchReg_1[PWM_n] = val;
-
+	PWM1->MatchReg_1[PWM_n] = val;
 	PWM1->LatchEn.MatchLatchEn |= (1 << (PWM_n));
+}
+
+void PWM_update(void){
+	for(uint8_t i = 0; i < CANT_PWM; i++){
+		uint16_t aux = PWM_buff[i];
+		if(PWM1->MatchReg_1[i+1] != aux){
+			PWM_setDutyCicle(i+1, PWM_buff[i]);
+		}
+	}
 }

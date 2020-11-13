@@ -32,6 +32,12 @@
 		#define ISER_UART3	(8)
 		#define ISER_PWM	(9)
 		#define ISER_TIM0	(1)
+		#define ISER_EINT0  (18)
+		#define ISER_EINT2  (20)
+
+ 	#define		ICER0		(*(uint32_t *)(0xE000E180UL))
+		#define ICER_EINT0	(18)
+		#define ICER_EINT2	(20)
 
 //////////////Registros del CLOCK y de sistema/////////////////
 //0x400FC1A0UL: Registro de control de sistema y registro de status:

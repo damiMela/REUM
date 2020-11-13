@@ -1,36 +1,45 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_Motor.c
+ * @file		DR_ExtInt.c
  * @brief		Descripcion del modulo
- * @date		Nov 5, 2020
- * @author		R2002 - Grupo2
+ * @date		13 nov. 2020
+ * @author		Ing. Marcelo Trujillo
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <DR/DR_PWM.h>
-#include <DR/DR_GPIO.h>
-#include <PR/PR_Motores.h>
+#include <DR/DR_ExtInt.h>
+#include <DR/DR_Timer0.h>
 
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define MOTOR1_A		PORT0, 0 //escribir puertos correspondientes
-#define MOTOR1_B		PORT0, 1
-#define MOTOR1_VEL_PIN	RGB_R
-#define MOTOR1_VEL_CHN	2
+#define EINT0		(1<< 0)
+#define EINT1		(1<< 1)
+#define EINT2		(1<< 2)
+#define EINT3		(1<< 3)
 
-#define MOTOR2_A		PORT0, 2
-#define MOTOR2_B		PORT0, 3
-#define MOTOR2_VEL_PIN	RGB_G
-#define MOTOR2_VEL_CHN	3
+#define EINT0_EDGE	(1<< 0)
+#define EINT1_EDGE	(1<< 1)
+#define EINT2_EDGE	(1<< 2)
+#define EINT3_EDGE	(1<< 3)
+
+#define EINT0_POLAR	(1<< 0)
+#define EINT1_POLAR	(1<< 1)
+#define EINT2_POLAR	(1<< 2)
+#define EINT3_POLAR	(1<< 3)
 
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
+#define	INT_EN_R2		(*(__RW uint32_t *) 0x400280B0UL) //rising interrupt enable
+#define	INT_EN_F2		(*(__RW uint32_t *) 0x400280B4UL) //falling interrupt enable
+#define	INT_STAT_R2		(*(__RW uint32_t *) 0x400280A4UL) //falling interrupt enable
+#define	INT_STAT_F2		(*(__RW uint32_t *) 0x400280A8UL) //falling interrupt enable
 
+#define EXT_INT			((ExtInt_t *) 0x400FC140UL)
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -42,7 +51,7 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-
+uint32_t startTime = 0;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -50,7 +59,12 @@
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-
+typedef struct _EXTINT_t{
+	__RW uint32_t EXTINT;
+	__RW uint32_t RESERVED_0;
+	__RW uint32_t EXTMODE;
+	__RW uint32_t EXTPOLAR;
+} ExtInt_t;
  /***********************************************************************************************************************************
  *** FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -61,71 +75,33 @@
 /**
 	\fn  Nombre de la Funcion
 	\brief Descripcion
- 	\author R2002 - Grupo2
- 	\date Nov 5, 2020
+ 	\author Ing. Marcelo Trujillo
+ 	\date 13 nov. 2020
  	\param [in] parametros de entrada
  	\param [out] parametros de salida
 	\return tipo y descripcion de retorno
 */
-void InicializarMotores(void){
-	setPinsel(MOTOR1_VEL_PIN, FUNCION_1); //PWM chnl 2
-	setPinsel(MOTOR2_VEL_PIN, FUNCION_1); //PWM chnl 3
-	InicializarPWM_DR();
+void EINTInit( void ){
+  setPinsel(EINT2_PIN, FUNCION_1);
 
-	setDir(MOTOR1_A, OUTPUT);
-	setDir(MOTOR1_B, OUTPUT);
-	setDir(MOTOR2_A, OUTPUT);
-	setDir(MOTOR2_B, OUTPUT);
+  INT_EN_R2 |= (1 << 12);	/* Port2.12 is rising & falling edge. */
+  INT_EN_F2 |= (1 << 12);
+  EXT_INT->EXTMODE = EINT2_EDGE;		/* INT2 edge trigger */
+  EXT_INT->EXTPOLAR = 0;				/* INT2 is falling edge by default */
 
-	PWM_setDutyCicle(MOTOR1_VEL_CHN, 0);
-	PWM_setDutyCicle(MOTOR2_VEL_CHN, 0);
+  EINT2_EN;
 }
 
-void setMotoresDir(uint8_t dir){
-	switch(dir){
-		case ADELANTE:
-			setPin(MOTOR1_A, ON);
-			setPin(MOTOR1_B, OFF);
+void EINT2_IRQHandler (void){
+	if(EINT2_FALL_STAT){
 
-			setPin(MOTOR2_A, ON);
-			setPin(MOTOR2_B, OFF);
-			break;
 
-		case ATRAS:
-			setPin(MOTOR1_A, OFF);
-			setPin(MOTOR1_B, ON);
-
-			setPin(MOTOR2_A, OFF);
-			setPin(MOTOR2_B, ON);
-			break;
-
-		case IZQUIERDA:
-			setPin(MOTOR1_A, ON);
-			setPin(MOTOR1_B, OFF);
-
-			setPin(MOTOR2_A, OFF);
-			setPin(MOTOR2_B, ON);
-			break;
-
-		case DERECHA:
-			setPin(MOTOR1_A, OFF);
-			setPin(MOTOR1_B, ON);
-
-			setPin(MOTOR2_A, ON);
-			setPin(MOTOR2_B, OFF);
-			break;
-
-		case FRENO:
-			setPin(MOTOR1_A, OFF);
-			setPin(MOTOR1_B, OFF);
-
-			setPin(MOTOR2_A, OFF);
-			setPin(MOTOR2_B, OFF);
-			break;
+		EXT_INT->EXTPOLAR |= EINT2_POLAR; //la proxima vez va a ser rising
 	}
-}
+	if(EINT2_RISE_STAT){
+		startTime = TIMER0_getTime();
 
-void setMotoresVel(uint16_t vel){
-	PWM_setDutyCicle(MOTOR1_VEL_CHN, vel);
-	PWM_setDutyCicle(MOTOR2_VEL_CHN, vel);
+		EXT_INT->EXTPOLAR &= ~EINT2_POLAR; //la proxima vez va a ser falling
+	}
+	EXT_INT->EXTINT = EINT2;
 }

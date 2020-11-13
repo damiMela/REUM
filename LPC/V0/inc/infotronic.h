@@ -28,8 +28,8 @@
 #define		RELAY3_P			PORT0,27
 
 //!< LED RGB
-#define 	RGB_R			PORT2, 2 //PWM 1.3
-#define 	RGB_G			PORT2, 3 //PWM 1.4
+#define 	RGB_R			PORT2, 3 //PWM 1.4
+#define 	RGB_G			PORT2, 2 //PWM 1.3
 #define 	RGB_B			PORT2, 1 //PWM 1.2
 
 //!<Buzzer
@@ -71,8 +71,8 @@
 #define		EXPANSION13		PORT1, 24
 #define		EXPANSION14		PORT1, 21
 #define		EXPANSION15		PORT1, 18
-#define		EXPANSION16		PORT2, 8
-#define		EXPANSION17		PORT2, 12
+#define		EXPANSION16		PORT2, 8 //US_TRIG
+#define		EXPANSION17		PORT2, 12//US_ECHO, EINT2
 
 //!< LCD
 #define		LCD_D4			PORT0,5
