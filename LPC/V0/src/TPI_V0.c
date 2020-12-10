@@ -24,7 +24,6 @@
 #include <DR/DR_Pinsel.h>
 
 //other drivers
-#include <DR/DR_ADC.h>
 #include <DR_ExtInt.h>
 
 //primitivas
@@ -33,7 +32,10 @@
 #include <PR/PR_Serial.h>
 #include <PR/PR_Relays.h>
 #include <PR/PR_PWM.h>
-#include <PR/PR_Ultrasonido.h>
+#include <PR/PR_ADC.h>
+
+
+#include <AP/AP_Ultrasonido.h>
 
 
 void func(void){
@@ -42,66 +44,76 @@ void func(void){
 }
 
 int main(void) {
+	uint8_t hola [] = "hola\n";
+	uint8_t chau [] = "chau\n";
 //----------------------------------//
 	setPinsel(ADC0, FUNCION_3);
 //----------------------------------//
 	InicializarSystick();
 	InicializarPLL();
 
-	InicializarADC_DR();
+	InicializarADC();
+	InicializarSerial3();
 
 //	InicializarBotones();
 	InicializarRelays();
-	InicializarSerial(0);
 	InicilaizarPWM();
 
-	InicializarTimer0_DR();
-	InicializarUs();
-	EINTInit();
+//	InicializarUS();
+	InicializarEINT_DR();
 
 
 //	TimerStart(0, 3, func, SEG);
 //	TIMER0_EnableCount(1);
 
+	setDir(EXPANSION12, OUTPUT);
+	setDir(EXPANSION13, OUTPUT);
+	setDir(EXPANSION14, OUTPUT);
+	setDir(EXPANSION15, OUTPUT);
+
+	setPinmode_OP(RGB_R, MODE_OP_NLOW);
+	setPinmode_OP(RGB_G, MODE_OP_NLOW);
+	setPinmode_OP(RGB_B, MODE_OP_NLOW);
+
+
     while(1) {
     	//---agregar siempre---//
- //   	ReadInputs();
-    	TimerLunchEvent();
-    	readUS();
+    	Timers_run();
+    	ADC_run();
     	//---------------------//
 
 
-    	//**Prueba ADC
-    	static uint32_t prueba = 0;
-    	prueba = ADC_getVal();
+    	//---------PRUEBA ADC-----------//
+/*    	static uint32_t prueba = 0;
+    	prueba = getADC(ADC_2);
     	if(prueba > 1400) setRelay(RELAY3, ON);
     	else setRelay(RELAY3, OFF);
-
+*/
 
     	//**Prueba entradas digitales
-/*    	if(getBtn(SW4))
-    		setRelay(RELAY1, ON);
+/*    	static uint8_t test_state = 0;
+    	if(getBtn(SW4)){
+    		test_state ^= 1;
+    	}
+    	if(test_state) setRelay(RELAY1, ON);
     	else setRelay(RELAY1, OFF);
 */
 
-		//**Prueba UART0
-		/*int32_t data = UART0_popRX();
+		//---------Prueba UART0 ------------//
+/*		int32_t data = UART0_popRX();
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
-		}*/
+		}
+*/
 
-		//**Motores (sin probar)**//
-		//setMotoresDir(ADELANTE);
-		//setPWMDuty(PWM2, 0);
-		//setPWMDuty(PWM3, 80);
-
-/*    	if(TIMER0_getTime() >= 100){
-    		invertRelay(RELAY2);
-    		TIMER0_rstTime();
-    	}*/
-    	/*if(US_result > 20){
-    		invertRelay(RELAY2);
-    	}*/
+    	//---------PRUEBA MOTORES-----------//
+/*    	setPin(EXPANSION12, ON);
+    	setPin(EXPANSION13, OFF);
+    	setPin(EXPANSION14, ON);
+    	setPin(EXPANSION15, OFF);
+    	setPWMDuty(PWM2, 60);
+    	setPWMDuty(PWM3, 60);
+*/
 
     }
 

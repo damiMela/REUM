@@ -1,49 +1,28 @@
 /*******************************************************************************************************************************//**
  *
- * @file		DR_Systick.h
- * @brief		Funciones para utilización systick timer
- * @date		Sep 19, 2020
- * @author		R2002 - Grupo2
+ * @file		DR_Botones.c
+ * @brief		Descripcion del modulo
+ * @date		10 dic. 2020
+ * @author		R2002 - Melamed Damian
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <DR/DR_Systick.h>
-#include <DR/DR_PLL.h>
-#include <PR/PR_Timers.h>
-#include <DR/DR_ADC.h>
-#include <DR/DR_PWM.h>
 #include <DR/DR_Botones.h>
+#include <DR/DR_GPIO.h>
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define ADC_T 10 //x2.5 ms
-#define PWM_T 5 //x2.5 ms
-#define BTN_T 5 //x2.5 ms
+#define CANTIDAD_REBOTES	5
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-#define	SYSTICK	((systick_t*) 0xE000E010UL)
+
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-typedef struct{
-	uint32_t Enable:1;
-	uint32_t TickInt:1;
-	uint32_t ClkSource:1;
-	uint32_t __a:13;  //RESERVED
-	uint32_t CountFlag:1;
-	uint32_t __b:15;
-}STCTRL_t;
-
-typedef struct{
-	__RW STCTRL_t STCTRL;
-	__RW uint32_t STRELOAD;
-	__RW uint32_t STCURR;
-	__R  uint32_t STCALIB;
-}systick_t;
 
 /***********************************************************************************************************************************
  *** TABLAS PRIVADAS AL MODULO
@@ -52,11 +31,11 @@ typedef struct{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-uint8_t ADC_inUse = 0;
+volatile uint8_t Botones_buff = 0;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static uint32_t systickCounter = 0;
+
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -69,80 +48,52 @@ static uint32_t systickCounter = 0;
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  inicializarSystick
-	\brief Inicializa el systick timer en 10ms
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
+	\fn  Nombre de la Funcion
+	\brief Descripcion
+ 	\author R2002 - Melamed Damian
+ 	\date 10 dic. 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarSystick(void){
-	SYSTICK->STRELOAD = SYSTICK->STCALIB/4 -1; //tick cada 2.5ms
-	SYSTICK->STCTRL.ClkSource = 1; //clock interno
-	SYSTICK->STCURR = 0;
-	SYSTICK->STCTRL.TickInt = 1;
-	SYSTICK->STCTRL.Enable = 1;
+uint8_t TecladoHW(void){
+	if(getPin(SW1_P, ON_LOW)) return SW1_RAW;
+	if(getPin(SW2_P, ON_LOW)) return SW2_RAW;
+	if(getPin(SW3_P, ON_LOW)) return SW3_RAW;
+	if(getPin(SW4_P, ON_LOW)) return SW4_RAW;
+	if(getPin(SW5_P, ON_LOW)) return SW5_RAW;
+	return NO_KEY;
 }
 
-/**
-	\fn  SysTick_Handler
-	\brief handler de la interrupcion. Suma 1 al systickCounter
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
-*/
-void SysTick_Handler(void){
-	systickCounter++;
-	scheduler_run();
-}
+void TecladoSW(void){
+	static uint8_t prev_code = NO_KEY;
+	static uint8_t stableState_n = 0;
+	uint8_t code = TecladoHW();
 
+	if(code == NO_KEY){
+		prev_code = NO_KEY;
+		stableState_n = 0;
+		return;
+	}
 
-/**
-	\fn  get_ticks
-	\brief fucnión para obtener la cantidad de ticks hechos
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
- 	\return valor guardado en systickCounter
-*/
-uint32_t get_ticks(void){
-	return systickCounter;
-}
+	if(stableState_n  == 0){
+		prev_code = code;
+		stableState_n++;
+		return;
+	}
 
+	if(stableState_n == CANTIDAD_REBOTES){
+		Botones_buff |= (1 << (code-1));
+		stableState_n = CANTIDAD_REBOTES+1;
+		return;
+	}
 
-/**
-	\fn  get_ticks
-	\brief función para resetear la cantidad de ticks
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
- 	\return valor guardado en systickCounter
-*/
-void reset_ticks(void){
-	systickCounter = 0;
-}
+	if(stableState_n > CANTIDAD_REBOTES) return;
 
-
-/**
-	\fn  scheduler_run
-	\brief scheduler del programa
- 	\author R2002 - Grupo2
- 	\date Nov 04, 2020
-*/
-void scheduler_run(void){
-	//ADC está configurado en modo burst
-
-	//counters
-	static uint32_t pwm_counter = 0;
-	static uint32_t btn_counter = 0;
-	//static uint32_t adc_counter = 0;
-
-	//timer counter function
-	TimerDiscount();
-
-	//interations counter
-	pwm_counter++; 	pwm_counter %= PWM_T;
-	btn_counter++; 	btn_counter %= BTN_T;
-	//adc_counter++;	adc_counter %= ADC_T;
-
-	if(!pwm_counter) PWM_update();
-	if(!btn_counter) TecladoSW();
-	//if(!adc_counter) ADC_startConvertion();
-
+	if(code == prev_code) stableState_n++;
+	else stableState_n = 0;
+	return;
 
 }
+
+

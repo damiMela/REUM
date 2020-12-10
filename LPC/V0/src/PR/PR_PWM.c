@@ -59,8 +59,8 @@
 void InicilaizarPWM(void){
 	InicializarPWM_DR();
 
-	setPinsel(RGB_B, FUNCION_1); //PWM chnl 2
-	setPinsel(RGB_G, FUNCION_1); //PWM chnl 3
+	setPinsel(EXPANSION11, FUNCION_3); //PWM chnl 2
+	setPinsel(EXPANSION6, FUNCION_3); //PWM chnl 3
 }
 
 

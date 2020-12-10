@@ -57,17 +57,15 @@
  	\date Nov 4, 2020
  	\param [in] Número de UART a inicializar
 */
-void InicializarSerial(uint8_t serial_n) {
-	if(!serial_n){
-		InicializarUART0_DR();
-		setPinsel(USB_TX, FUNCION_1);
-		setPinsel(USB_RX, FUNCION_1);
-	}
-	else if(serial_n == 3){
-		InicializarUART3_DR();
-		setPinsel(SERIAL_TX, FUNCION_3);
-		setPinsel(SERIAL_RX, FUNCION_3);
-	}
+void InicializarSerial0() {
+	InicializarUART0_DR();
+	setPinsel(USB_TX, FUNCION_1);
+	setPinsel(USB_RX, FUNCION_1);
+}
+void InicializarSerial3() {
+	InicializarUART3_DR();
+	setPinsel(SERIAL_TX, FUNCION_3);
+	setPinsel(SERIAL_RX, FUNCION_3);
 }
 
 
@@ -96,12 +94,14 @@ int32_t UART0_popRX(void) {
  	\param [in] dato para poner el la cola de envío
 */
 void UART0_pushTX(uint8_t dato) {
-	if(UART0_tx_flag) {
-		UART0_tx_buff[UART0_tx_in] = dato;
-		UART0_tx_in++;		UART0_tx_in %= TX_BUFF_SIZE;
-	} else {
+	if(!UART0_tx_flag) {
 		UART0_forceTX(dato);
 		UART0_tx_flag = 1;
+	}
+	else {
+		UART0_tx_buff[UART0_tx_in] = dato;
+		UART0_tx_in++;
+		if(UART0_tx_in == TX_BUFF_SIZE)  UART0_tx_in = 0;
 	}
 }
 
@@ -113,10 +113,15 @@ void UART0_pushTX(uint8_t dato) {
  	\date Nov 4, 2020
  	\param [in] String a enviar
 */
-void UART0_SendString(char* msj){
+void UART0_SendString(uint8_t* msj){
 	uint32_t i = 0;
-	while(msj[i]){
-		UART0_pushTX(msj[i]);
+	while(msj[i] > 0){
+		if(i == 0) {
+			UART0_forceTX(msj[i]);
+		}
+		else{
+			UART0_pushTX(msj[i]);
+		}
 		i++;
 	}
 }
@@ -138,7 +143,6 @@ int32_t UART3_popRX(void) {
 	return ret;
 }
 
-
 /**
 	\fn  UART3_pushTX
 	\brief push al buffer de transmición para luego ser enviado
@@ -148,7 +152,7 @@ int32_t UART3_popRX(void) {
 */
 void UART3_pushTX(uint8_t dato) {
 	if(UART3_tx_flag) {
-		UART3_tx_buff[UART3_tx_in] = dato;
+ 		UART3_tx_buff[UART3_tx_in] = dato;
 		UART3_tx_in++;		UART3_tx_in %= TX_BUFF_SIZE;
 	} else {
 		UART3_forceTX(dato);
@@ -163,10 +167,15 @@ void UART3_pushTX(uint8_t dato) {
  	\date Nov 4, 2020
  	\param [in] String a enviar
 */
-void UART3_SendString(char* msj){
+void UART3_SendString(uint8_t* msj){
 	uint32_t i = 0;
-	while(msj[i]){
-		UART3_pushTX(msj[i]);
+	while(msj[i] > 0){
+		if(i == 0) {
+			UART3_forceTX(msj[i]);
+		}
+		else{
+			UART3_pushTX(msj[i]);
+		}
 		i++;
 	}
 }

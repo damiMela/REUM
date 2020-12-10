@@ -1,0 +1,4 @@
+PR_ADC.c:56:6:InicializarADC	8	static
+PR_ADC.c:71:10:getADC	16	static
+PR_ADC.c:75:6:ADC_run	8	static
+PR_ADC.c:82:6:ADC_cleanBuff	4	static

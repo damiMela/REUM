@@ -10,12 +10,14 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include "AP_Ultrasonido.h"
-
+#include <AP/AP_Ultrasonido.h>
+#include <PR/PR_IntTime.h>
+#include <PR/PR_Timers.h>
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-
+#define US_ECHO_P	EXPANSION17 //external interrupt 2
+#define US_TRIG_P	EXPANSION16
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -35,7 +37,7 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-
+uint16_t distancia = 0;
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -57,9 +59,38 @@
 	\return tipo y descripcion de retorno
 */
 void InicializarUS(void){
+	setDir(US_TRIG_P, OUTPUT);
+	setDir(US_ECHO_P, INPUT);
+	InicializarIntTime();
+	TimerStart(5, 2, updateDistance, DEC);
+}
 
+
+void updateDistance(void){
+	static uint16_t distancia_buff[10] = {0};
+	static uint8_t  counter = 0;
+
+	enableIntTime(DISABLE);
+	distancia_buff[counter] = (uint16_t)(getIntTime() * (float)343.0 / 20000.0);
+	counter++; 	counter%=10;
+
+	if(!counter){
+		for(uint8_t i = 0; i < 10; i++){
+			distancia += distancia_buff[i];
+		}
+		distancia /= 10;
+	}
+	enableIntTime(ENABLE);
+
+	setPin(US_TRIG_P, LOW);    // LOW
+	for (uint8_t i = 0; i < 20; ++i);             // for 2µs
+	setPin(US_TRIG_P, HIGH);   // HIGH
+	for (uint8_t j = 0; j < 100; ++j);             // for 10µs
+	setPin(US_TRIG_P, LOW);    // Set LOW again
+
+	TimerStart(5, 2, updateDistance, DEC);
 }
 
 uint16_t getUSDistance(void){
-
+	return distancia;
 }

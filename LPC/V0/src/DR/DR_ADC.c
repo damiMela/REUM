@@ -15,6 +15,7 @@
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
 #define		ADC_BUFF_SIZE	16
+#define		CANT_CANALES	3  //SOlO SE USAN CANALES 1 y 2
 
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
@@ -103,9 +104,9 @@ typedef struct _ADC_t{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static volatile uint32_t ADC_buffer[ADC_BUFF_SIZE];
-static volatile uint32_t ADC_buffer_cycle = 0;
-static volatile uint32_t ADC_promedio = 0;
+static volatile uint32_t ADC_read_buffer[CANT_CANALES][ADC_BUFF_SIZE];
+volatile uint32_t ADC_buffer[CANT_CANALES] = {0};
+volatile uint8_t ADC_ready = 0;
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -127,14 +128,22 @@ void InicializarADC_DR(){
 	POWER_ADC_ON; //macro para encender ADC
 	ADC->ADCR.PDN = 1;
 
-	// set ADC time. (max. 200kHz) f_ADC = (f_CPU / div_PCLKSEL) / ((div_ADC + 1) * 65) = 192KHz
+	// set ADC time. (max. 200kHz) f_ADC = (f_CPU / div_PCLKSEL) / ((div_ADC + 1) * 65)
 	PCLKSEL0 &= ~(3 <<  PCLK_ADC);
-	ADC->ADCR.clkDiv = 1;
 
-	ADC->ADCR.startMode = 0;
+	//ADC->ADCR.clkDiv = 1; //adc f = 192kHz
+	ADC->ADCR.clkDiv = 37; //adc f = 10kHz
 
-	ADC->ADCR.adcSel = (1 << 5);
-	ADC->ADINTEN.intEn = (1 << 5);
+	ADC->ADCR.adcSel = 0;
+	ADC->ADCR.adcSel |= (1 << 1);
+	ADC->ADCR.adcSel |= (1 << 2);
+
+	ADC-> ADINTEN.intEn = 0;
+	ADC->ADINTEN.intEn |= (1 << 1);
+	ADC->ADINTEN.intEn |= (1 << 2);
+
+	ADC->ADCR.startMode = 0; //start must be 0 when burst is 1
+	ADC->ADCR.burstMode = 1;
 
 	//activo interrupción global
 	ISER0 |= (1 << ISER_ADC);
@@ -148,31 +157,37 @@ void InicializarADC_DR(){
  	\date Sep 28, 2020
 */
 void ADC_IRQHandler(void){
-	static uint32_t acummulator = 0;
+	static uint32_t count_n = 0;
 
-	ADC_Data_t ADC5 = ADC->AD_data[5];
+	if(count_n == ADC_BUFF_SIZE){
+		count_n = 0;
+		uint32_t sum0 = 0, sum1 = 0, sum2 = 0;
 
-	ADC_buffer[ADC_buffer_cycle] = ADC5.result;
-	acummulator += ADC_buffer[ADC_buffer_cycle];
+		for(uint8_t i = 0; i < ADC_BUFF_SIZE; i++){
+			sum0 += ADC_read_buffer[0][i];
+			sum1 += ADC_read_buffer[1][i];
+			sum2 += ADC_read_buffer[2][i];
+		}
 
-	ADC_buffer_cycle++;		ADC_buffer_cycle %= ADC_BUFF_SIZE;
+		sum0 /= ADC_BUFF_SIZE;
+		sum1 /= ADC_BUFF_SIZE;
+		sum2 /= ADC_BUFF_SIZE;
+		ADC_buffer[0] = sum0;
+		ADC_buffer[1] = sum1;
+		ADC_buffer[2] = sum2;
 
-	if(!ADC_buffer_cycle){
-		ADC_promedio = acummulator / ADC_BUFF_SIZE;
-		acummulator = 0;
+		ADC->ADCR.startMode = 0;
+		ADC->ADCR.burstMode = 0;//terminate burst
+		ADC_ready = 1;
 	}
-}
 
-
-/**
-	\fn  ADC_getVal
-	\brief Devuelve el valor promedio de 32 lecturas de ADC
- 	\author R2002 - Grupo2
- 	\date Sep 28, 2020
-	\return uint32_t con el valor leido
-*/
-uint32_t ADC_getVal(void){
-	return ADC_promedio;
+	if(ADC->ADSTAT.done1){
+		ADC_read_buffer[1][count_n] = ADC->AD_data[1].result;
+	}
+	else if(ADC->ADSTAT.done2){
+		ADC_read_buffer[2][count_n] = ADC->AD_data[2].result;
+		count_n++; //incremento acá porque es la {ultima interrupción del cilo
+	}
 }
 
 
@@ -183,19 +198,6 @@ uint32_t ADC_getVal(void){
  	\date Sep 28, 2020
 */
 void ADC_startConvertion(void){
-	ADC->ADCR.startMode = 1;
-}
-
-/**
-	\fn  ADC_changeChannel
-	\brief cambia el canal de lectura
- 	\author R2002 - Grupo2
- 	\date Sep 28, 2020
-*/
-void ADC_changeChannel(uint8_t n){
-	//*******************
-	//esto hay que hacerlo. no duniona.
-	//*******************
-	ADC->ADCR.adcSel = (1 << n);
-	ADC->ADINTEN.intEn = (1 << n);
+	ADC->ADCR.startMode = 0;
+	ADC->ADCR.burstMode = 1;//reestart burst
 }

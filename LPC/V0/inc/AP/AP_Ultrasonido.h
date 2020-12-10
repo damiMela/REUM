@@ -41,5 +41,6 @@
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
 void InicializarUS(void);
+void updateDistance(void);
 uint16_t getUSDistance(void);
 #endif /* AP_AP_ULTRASONIDO_H_ */

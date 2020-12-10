@@ -227,7 +227,7 @@ void TimerDiscount ( void )
  	\author R2002 - Grupo2
  	\date Sep 28, 2020
 */
-void TimerLunchEvent ( void ){
+void Timers_run ( void ){
 	uint8_t i;
 
 	for ( i = 0 ; i < N_TIMERS ; i ++){

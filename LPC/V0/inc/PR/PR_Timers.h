@@ -54,7 +54,7 @@ extern uint8_t TmrBase[ N_TIMERS ];
  **********************************************************************************************************************************/
 int8_t TimerStart ( uint8_t event_n , uint32_t t , void (* f_event )(void), uint8_t base );
 void TimerDiscount ( void );
-void TimerLunchEvent ( void );
+void Timers_run ( void );
 int8_t TimerPause ( uint8_t event_n , uint8_t modo );
 int8_t TimerGet ( uint8_t event_n , uint32_t *t );
 int8_t TimerSet ( uint8_t event_n , uint32_t t );

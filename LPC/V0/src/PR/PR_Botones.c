@@ -10,13 +10,12 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <DR/DR_GPIO.h>
+#include <DR/DR_Botones.h>
 #include <PR/PR_Botones.h>
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define CANT_ENTRADAS 5  //MAX:8. Sino cambiar el tipo de variable de buffer y lectura
-#define CANT_ACEPT_CYCLES 3
+
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -36,8 +35,7 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static uint8_t cycleCounter[CANT_ENTRADAS];
-static uint8_t InputBuff = 0;
+
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -71,39 +69,6 @@ void InicializarBotones(void){
 }
 
 
-/**
-	\fn  ReadInputs
-	\brief lectura y debounce de entradas digitales. Debe estar en el loop
- 	\author R2002 - Grupo2
- 	\date Oct 27, 2020
-*/
-void ReadInputs(void){
-	uint8_t lectura = 0, input_n, cambios;
-
-	if(getPin(SW1_P, ON_LOW)) lectura = (1 << SW1);
-	if(getPin(SW2_P, ON_LOW)) lectura |= (1 << SW2);
-	if(getPin(SW3_P, ON_LOW)) lectura |= (1 << SW3);
-	if(getPin(SW4_P, ON_LOW)) lectura |= (1 << SW4);
-	if(getPin(SW5_P, ON_LOW)) lectura |= (1 << SW5);
-
-	cambios = (InputBuff ^ lectura);
-
-	if(cambios){
-		for(input_n = 0; input_n < CANT_ENTRADAS; input_n++){
-			if(cambios & (1 << input_n)){
-				cycleCounter[input_n]++;	cycleCounter[input_n] %= CANT_ACEPT_CYCLES;
-
-				if(!cycleCounter[input_n])
-					InputBuff ^= (1 << input_n);
-			}
-			else cycleCounter[input_n] = 0;
-		}
-	}
-	else{
-		for(input_n=0; input_n < CANT_ENTRADAS; input_n++)
-			cycleCounter[input_n] = 0;
-	}
-}
 
 /**
 	\fn  getBtn
@@ -114,5 +79,7 @@ void ReadInputs(void){
 	\return 1 o 0 según si el botón estaba presionado
 */
 uint8_t getBtn(uint8_t n){
-	return (InputBuff & (1 << n));
+	uint8_t temp = Botones_buff & (1 << n);
+	Botones_buff &= ~(1 << n);
+	return (temp);
 }

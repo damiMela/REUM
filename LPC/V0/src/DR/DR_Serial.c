@@ -65,6 +65,17 @@ typedef struct _UART_IER_t{
 	uint32_t RESERVED_1: 22;
 }UART_IER_t;
 
+typedef struct _UART_FCR_t{
+	uint32_t FIFO_En:1;
+	uint32_t Rx_FIFO_Clr:1;
+	uint32_t Tx_FIFO_Clr:1;
+	uint32_t DMA_mode:1;
+	uint32_t RESERVED_0:2;
+	uint32_t RX_trig_level:2;
+	uint32_t RESERVED_1: 24;
+} UART_FCR_t;
+
+
 typedef struct _UART_t{
     union {
     __R  uint8_t  RBR;
@@ -78,7 +89,7 @@ typedef struct _UART_t{
     };
     union {
     __R  UART_IIR IIR;
-    __W  uint8_t  FCR;
+    __W  UART_FCR_t  FCR;
     };
     __RW UART_LCR_t  LCR;
         uint8_t  RESERVED1[7];
@@ -109,7 +120,7 @@ volatile uint32_t UART0_rx_in, UART0_rx_out;
 volatile uint8_t UART0_tx_buff[TX_BUFF_SIZE];
 volatile uint32_t UART0_tx_in, UART0_tx_out;
 
-volatile uint8_t UART0_tx_flag;
+volatile uint8_t UART0_tx_flag = 0;
 
 
 volatile uint8_t UART3_rx_buff[RX_BUFF_SIZE];
@@ -118,7 +129,7 @@ volatile uint32_t UART3_rx_in, UART3_rx_out;
 volatile uint8_t UART3_tx_buff[TX_BUFF_SIZE];
 volatile uint32_t UART3_tx_in, UART3_tx_out;
 
-volatile uint8_t UART3_tx_flag;
+volatile uint8_t UART3_tx_flag = 0;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -273,9 +284,13 @@ void UART0_IRQHandler(void) {
 void InicializarUART3_DR(void){
 	POWER_UART3_ON;
 
-	//25MHz = PCLK_UART0
+	//25MHz = PCLK_UART3
 	PCLKSEL1 &= ~(0x03 << PCLK_UART3);
 	PCLKSEL1 |= (0x00 << PCLK_UART3);
+
+	UART3->FCR.FIFO_En = 1;
+	UART3->FCR.Rx_FIFO_Clr = 1; //se pone solo en 0
+	UART3->FCR.Tx_FIFO_Clr = 1; //se pone solo en 0
 
 	//Registros de la UART
 	UART3->LCR.DLAB = 1; //prender DLAB para configuraciones
@@ -362,7 +377,7 @@ void UART3_IRQHandler(void) {
 			break;
 
 		case 0x02:  // RDA
-			UART0_pushRX(UART3->RBR);
+			UART3_pushRX(UART3->RBR);
 			break;
 
 		case 0x06:  // CTI

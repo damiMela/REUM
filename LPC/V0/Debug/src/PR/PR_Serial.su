@@ -1,7 +1,8 @@
-PR_Serial.c:60:6:InicializarSerial	16	static
-PR_Serial.c:81:9:UART0_popRX	16	static
-PR_Serial.c:98:6:UART0_pushTX	16	static
+PR_Serial.c:60:6:InicializarSerial0	8	static
+PR_Serial.c:65:6:InicializarSerial3	8	static
+PR_Serial.c:79:9:UART0_popRX	16	static
+PR_Serial.c:96:6:UART0_pushTX	16	static
 PR_Serial.c:116:6:UART0_SendString	24	static
-PR_Serial.c:132:9:UART3_popRX	16	static
-PR_Serial.c:149:6:UART3_pushTX	16	static
-PR_Serial.c:166:6:UART3_SendString	24	static
+PR_Serial.c:137:9:UART3_popRX	16	static
+PR_Serial.c:153:6:UART3_pushTX	16	static
+PR_Serial.c:170:6:UART3_SendString	24	static
