@@ -44,27 +44,23 @@ void func(void){
 }
 
 int main(void) {
-	uint8_t hola [] = "hola\n";
-	uint8_t chau [] = "chau\n";
-//----------------------------------//
-	setPinsel(ADC0, FUNCION_3);
-//----------------------------------//
 	InicializarSystick();
 	InicializarPLL();
 
 	InicializarADC();
-	InicializarSerial3();
+//	InicializarSerial0();
+	InicializarSerial1();
 
-//	InicializarBotones();
+	InicializarBotones();
 	InicializarRelays();
 	InicilaizarPWM();
 
 //	InicializarUS();
 	InicializarEINT_DR();
 
+	//-------------PRUEBA TIMERS------------//FUNCIONANDO
+	TimerStart(0, 3, func, SEG);
 
-//	TimerStart(0, 3, func, SEG);
-//	TIMER0_EnableCount(1);
 
 	setDir(EXPANSION12, OUTPUT);
 	setDir(EXPANSION13, OUTPUT);
@@ -75,6 +71,8 @@ int main(void) {
 	setPinmode_OP(RGB_G, MODE_OP_NLOW);
 	setPinmode_OP(RGB_B, MODE_OP_NLOW);
 
+	//	TIMER0_EnableCount(1);
+
 
     while(1) {
     	//---agregar siempre---//
@@ -83,14 +81,14 @@ int main(void) {
     	//---------------------//
 
 
-    	//---------PRUEBA ADC-----------//
-/*    	static uint32_t prueba = 0;
+    	//---------PRUEBA ADC-----------//FUNCIONANDO
+    	static uint32_t prueba = 0;
     	prueba = getADC(ADC_2);
     	if(prueba > 1400) setRelay(RELAY3, ON);
     	else setRelay(RELAY3, OFF);
-*/
 
-    	//**Prueba entradas digitales
+
+    	//----------PRUEBA BOTONES-----------//FUNCIONANDO
 /*    	static uint8_t test_state = 0;
     	if(getBtn(SW4)){
     		test_state ^= 1;
@@ -99,14 +97,34 @@ int main(void) {
     	else setRelay(RELAY1, OFF);
 */
 
-		//---------Prueba UART0 ------------//
-/*		int32_t data = UART0_popRX();
+		//---------Prueba UART0 ------------//FUNCIONANDO
+/*    	uint8_t hola [] = "hola\n";
+    	uint8_t chau [] = "chau\n";
+    	int32_t data = UART0_popRX();
 		if(data != -1) {
-			UART0_pushTX((uint8_t) (data));
+			//UART0_pushTX((uint8_t) (data));
+			if(data == 'h') UART0_SendString(hola);
+			if(data == 'c') UART0_SendString(chau);
 		}
 */
 
-    	//---------PRUEBA MOTORES-----------//
+
+    	//--------PRUEBA UART1--------------//!!!
+    	uint8_t hola [] = "hola\n";
+		uint8_t chau [] = "chau\n";
+		int32_t data = UART1_popRX();
+		if(data != -1) {
+			//UART0_pushTX((uint8_t) (data));
+			if(data == 'h') UART1_SendString(hola);
+			if(data == 'c') UART1_SendString(chau);
+		}
+
+
+    	//--------PRUEBA ULTRADSONIDO--------------//!!!
+
+
+
+    	//---------PRUEBA MOTORES-----------//FUNCIONANDFO
 /*    	setPin(EXPANSION12, ON);
     	setPin(EXPANSION13, OFF);
     	setPin(EXPANSION14, ON);

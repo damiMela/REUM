@@ -57,7 +57,7 @@
 //!Expansion
 #define		EXPANSION0		PORT2, 7
 #define		EXPANSION1		PORT1, 29
-#define		EXPANSION2		PORT4, 28 //TXD3
+#define		EXPANSION2		PORT4, 28
 #define		EXPANSION3		PORT1, 23
 #define		EXPANSION4		PORT1, 20
 #define		EXPANSION5		PORT0, 19 //SDA1
@@ -71,8 +71,13 @@
 #define		EXPANSION13		PORT1, 24 //Motor1_A
 #define		EXPANSION14		PORT1, 21 //Motor2_B
 #define		EXPANSION15		PORT1, 18 //Motor2_B
-#define		EXPANSION16		PORT2, 8 //US_TRIG
-#define		EXPANSION17		PORT2, 12//US_ECHO, EINT2
+#define		EXPANSION16		PORT2, 8  //US_TRIG
+#define		EXPANSION17		PORT2, 12 //US_ECHO, EINT2
+
+#define 	EXPANSION18		PORT0, 16 //RX
+#define 	EXPANSION19		PORT0, 15 //TX
+#define 	EXPANSION20		PORT0, 22 //RTS
+#define 	EXPANSION21		PORT0, 27 //CTS
 
 //!ADC inputs
 #define 	ADC_IN_1	PORT1, 31 //CANAL 5, FUNCION "11"
@@ -92,10 +97,8 @@
 #define 	USB_TX			PORT0, 2
 #define 	USB_RX			PORT0, 3
 
-#define 	SERIAL_TX		EXPANSION2
-#define 	SERIAL_RX		IN1
-
-
+#define 	SERIAL_TX		EXPANSION19
+#define 	SERIAL_RX		EXPANSION18
 
 
 

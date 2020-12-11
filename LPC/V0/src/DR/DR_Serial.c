@@ -21,7 +21,7 @@
 /*se puede usar la misma estructura de datos porque la parte de modem no
  * es usada y los bits y registros asociados al modem estan
  * como "reservados" */
-#define     UART3       ((UART_t *) 0x4001C000UL )
+#define     UART1       ((UART_t *) 0x40010000UL )
 
 /***********************************************************************************
  *** MACROS PRIVADAS AL MODULO
@@ -29,8 +29,8 @@
 #define	POWER_UART0_ON		PCONP |= (1 << PUART0);
 #define	POWER_UART0_OFF		PCONP &= ~(1 << PUART0);
 
-#define	POWER_UART3_ON		PCONP |= (1 << PUART3);
-#define	POWER_UART3_OFF		PCONP &= ~(1 << PUART3);
+#define	POWER_UART1_ON		PCONP |= (1 << PUART1);
+#define	POWER_UART1_OFF		PCONP &= ~(1 << PUART1);
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -89,7 +89,7 @@ typedef struct _UART_t{
     };
     union {
     __R  UART_IIR IIR;
-    __W  UART_FCR_t  FCR;
+    __W  uint8_t  FCR;
     };
     __RW UART_LCR_t  LCR;
         uint8_t  RESERVED1[7];
@@ -103,8 +103,7 @@ typedef struct _UART_t{
     __RW uint8_t  FDR;
         uint8_t  RESERVED5[7];
     __RW uint8_t  TER;
-        uint8_t  RESERVED6[39];
-    __RW uint32_t FIFOLVL;
+
 } UART_t;
 
 /***********************************************************************************************************************************
@@ -123,13 +122,13 @@ volatile uint32_t UART0_tx_in, UART0_tx_out;
 volatile uint8_t UART0_tx_flag = 0;
 
 
-volatile uint8_t UART3_rx_buff[RX_BUFF_SIZE];
-volatile uint32_t UART3_rx_in, UART3_rx_out;
+volatile uint8_t UART1_rx_buff[RX_BUFF_SIZE];
+volatile uint32_t UART1_rx_in, UART1_rx_out;
 
-volatile uint8_t UART3_tx_buff[TX_BUFF_SIZE];
-volatile uint32_t UART3_tx_in, UART3_tx_out;
+volatile uint8_t UART1_tx_buff[TX_BUFF_SIZE];
+volatile uint32_t UART1_tx_in, UART1_tx_out;
 
-volatile uint8_t UART3_tx_flag = 0;
+volatile uint8_t UART1_tx_flag = 0;
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -194,7 +193,11 @@ void InicializarUART0_DR(void){
 */
 void UART0_pushRX(uint8_t dato){
 	UART0_rx_buff[UART0_rx_in] = dato;
-	UART0_rx_in++; 		UART0_rx_in %= RX_BUFF_SIZE;
+	UART0_rx_in++;
+
+	if(UART0_rx_in == RX_BUFF_SIZE) {
+		UART0_rx_in = 0;
+	}
 }
 
 
@@ -209,8 +212,12 @@ int32_t UART0_popTX(void){
 	if(UART0_tx_in == UART0_tx_out) return -1;
 	else {
 		int32_t result = UART0_tx_buff[UART0_tx_out];
+		UART0_tx_buff[UART0_tx_out] = 0;
+		UART0_tx_out++;
 
-		UART0_tx_out++;		UART0_tx_out %= TX_BUFF_SIZE;
+		if(UART0_tx_out == TX_BUFF_SIZE) {
+			UART0_tx_out = 0;
+		}
 		return result;
 	}
 }
@@ -270,105 +277,114 @@ void UART0_IRQHandler(void) {
 	} while(int_pending);
 }
 
-//UART3
+//UART1
 /**********************************************************************************************************************************/
 /**
-	\fn  InicializarUART3_DR
-	\brief Inicializa comunicación serial en UART3 a 9600 baudios. 8 bits + 1 bit de stop. sin paridad.
+	\fn  InicializarUART1_DR
+	\brief Inicializa comunicación serial en UART1 a 9600 baudios. 8 bits + 1 bit de stop. sin paridad.
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\param [in] parametros de entrada
  	\param [out] parametros de salida
 	\return tipo y descripcion de retorno
 */
-void InicializarUART3_DR(void){
-	POWER_UART3_ON;
+void InicializarUART1_DR(void){
+	POWER_UART1_ON;
 
-	//25MHz = PCLK_UART3
-	PCLKSEL1 &= ~(0x03 << PCLK_UART3);
-	PCLKSEL1 |= (0x00 << PCLK_UART3);
+	//25MHz = PCLK_UART1
+	PCLKSEL0 &= ~(0x03 << PCLK_UART1);
+	PCLKSEL0 |= (0x00 << PCLK_UART1);
 
-	UART3->FCR.FIFO_En = 1;
-	UART3->FCR.Rx_FIFO_Clr = 1; //se pone solo en 0
-	UART3->FCR.Tx_FIFO_Clr = 1; //se pone solo en 0
+//	UART1->FCR.FIFO_En = 1;
+//	UART1->FCR.Rx_FIFO_Clr = 1; //se pone solo en 0
+//	UART1->FCR.Tx_FIFO_Clr = 1; //se pone solo en 0
 
 	//Registros de la UART
-	UART3->LCR.DLAB = 1; //prender DLAB para configuraciones
+	UART1->LCR.DLAB = 1; //prender DLAB para configuraciones
 
-	// baudrate = PCLK_UART3 / (16 * DIV)
-	UART3->DLM = 0;//baudrate divider MSB
-	UART3->DLL = 162; //baudrate divider LSB
+	// baudrate = PCLK_UART1 / (16 * DIV)
+	UART1->DLM = 0;//baudrate divider MSB
+	UART1->DLL = 162; //baudrate divider LSB
 
-	UART3->LCR.wordLength = 0x03; // Largo de 8 bits:
-	UART3->LCR.stopBit = 0; // Bits de stop (1):
-	UART3->LCR.parityEn = 0; // Sin paridad
+	UART1->LCR.wordLength = 0x03; // Largo de 8 bits:
+	UART1->LCR.stopBit = 0; // Bits de stop (1):
+	UART1->LCR.parityEn = 0; // Sin paridad
 
 	//Seleccion de funcion de pines se hace en el main
 
-	UART3->LCR.DLAB = 0;
+	UART1->LCR.DLAB = 0;
 
 	//Habilitacion de interrupciones
-	UART3->IER.RBR_intEn = 1;
-	ISER0 |= (1 << ISER_UART3);
+	UART1->IER.RBR_intEn = 1;
+	ISER0 |= (1 << ISER_UART1);
 }
 
 
 /**
-	\fn  UART3_pushRX
+	\fn  UART1_pushRX
 	\brief pushea dato recivido al buffer de recepción
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\param [in] dato a cargar en buffer de recepción
 */
-void UART3_pushRX(uint8_t dato){
-	UART3_rx_buff[UART3_rx_in] = dato;
-	UART3_rx_in++; 		UART3_rx_in %= RX_BUFF_SIZE;
+void UART1_pushRX(uint8_t dato){
+	UART1_rx_buff[UART1_rx_in] = dato;
+	UART1_rx_in++;
+
+	if(UART1_rx_in == RX_BUFF_SIZE) {
+		UART1_rx_in = 0;
+	}
 }
 
 
 /**
-	\fn  UART3_popTX
+	\fn  UART1_popTX
 	\brief pop del dato del buffer de recepción
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\return dato a transmitir
 */
-int32_t UART3_popTX(void){
-	if(UART3_tx_in == UART3_tx_out) return -1;
+int32_t UART1_popTX(void){
+	if(UART1_tx_in == UART1_tx_out) return -1;
 	else {
-		int32_t result = UART3_tx_buff[UART3_tx_out];
+		int32_t result = UART1_tx_buff[UART1_tx_out];
+		UART1_tx_buff[UART1_tx_out] = 0;
 
-		UART3_tx_out++;		UART3_tx_out %= TX_BUFF_SIZE;
+		UART1_tx_out++;
+
+		if(UART1_tx_out == TX_BUFF_SIZE) {
+			UART1_tx_out = 0;
+		}
 		return result;
 	}
 }
 
 
 /**
-	\fn  UART3_forceTX
+	\fn  UART1_forceTX
 	\brief Fuerza la emisión de un dato sin necesidad de las interrupciones. Se usa para comenzar una transmición
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\param [in] dato a enviar
 */
-void UART3_forceTX(uint8_t dato){
-	UART3->IER.THRE_intEn = 1;
-	UART3->THR = dato;
+void UART1_forceTX(uint8_t dato){
+	UART1->IER.THRE_intEn = 1;
+	UART1->THR = dato;
 }
 
 /**
-	\fn  UART3_IRQHandler
-	\brief Handler de interrupciones de UART3. Analiza el ipo de interrupción y actua en consecuencia
+	\fn  UART1_IRQHandler
+	\brief Handler de interrupciones de UART1. Analiza el ipo de interrupción y actua en consecuencia
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
 */
-void UART3_IRQHandler(void) {
+void UART1_IRQHandler(void) {
 	uint32_t int_pending;
 	int32_t dato;
 
 	do {
-		uint32_t interrupt_cause = UART3->IIR.intId;
-		int_pending = !(UART3->IIR.intStatus);
+		uint32_t interrupt_cause = UART1->IIR.intId;
+		int_pending = !(UART1->IIR.intStatus);
 
 		/* Analizar interrupciones y accionar en consecuencia */
 		switch(interrupt_cause) {
@@ -377,7 +393,7 @@ void UART3_IRQHandler(void) {
 			break;
 
 		case 0x02:  // RDA
-			UART3_pushRX(UART3->RBR);
+			UART1_pushRX(UART1->RBR);
 			break;
 
 		case 0x06:  // CTI
@@ -385,13 +401,13 @@ void UART3_IRQHandler(void) {
 			break;
 
 		case 0x01: // THRE
-			dato = UART3_popTX();
+			dato = UART1_popTX();
 
 			if(dato != -1)
-				UART3_forceTX(dato);
+				UART1_forceTX(dato);
 			else {
-				UART3_tx_flag = 0;
-				UART3->IER.THRE_intEn = 0;
+				UART1_tx_flag = 0;
+				UART1->IER.THRE_intEn = 0;
 			}
 			break;
 		}

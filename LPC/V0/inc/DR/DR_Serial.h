@@ -43,13 +43,13 @@ extern volatile uint32_t UART0_tx_in, UART0_tx_out;
 extern volatile uint8_t UART0_tx_flag;
 
 ////////////////////////////////////
-extern volatile uint8_t UART3_rx_buff[];
-extern volatile uint32_t UART3_rx_in, UART3_rx_out;
+extern volatile uint8_t UART1_rx_buff[];
+extern volatile uint32_t UART1_rx_in, UART1_rx_out;
 
-extern volatile uint8_t UART3_tx_buff[];
-extern volatile uint32_t UART3_tx_in, UART3_tx_out;
+extern volatile uint8_t UART1_tx_buff[];
+extern volatile uint32_t UART1_tx_in, UART1_tx_out;
 
-extern volatile uint8_t UART3_tx_flag;
+extern volatile uint8_t UART1_tx_flag;
 
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
@@ -59,8 +59,8 @@ void UART0_pushRX(uint8_t dato);
 int32_t UART0_popTX(void);
 void UART0_forceTX(uint8_t dato);
 
-void InicializarUART3_DR(void);
-void UART3_pushRX(uint8_t dato);
-int32_t UART3_popTX(void);
-void UART3_forceTX(uint8_t dato);
+void InicializarUART1_DR(void);
+void UART1_pushRX(uint8_t dato);
+int32_t UART1_popTX(void);
+void UART1_forceTX(uint8_t dato);
 #endif /* DR_DR_SERIAL_H_ */

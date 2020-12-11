@@ -62,10 +62,10 @@ void InicializarSerial0() {
 	setPinsel(USB_TX, FUNCION_1);
 	setPinsel(USB_RX, FUNCION_1);
 }
-void InicializarSerial3() {
-	InicializarUART3_DR();
-	setPinsel(SERIAL_TX, FUNCION_3);
-	setPinsel(SERIAL_RX, FUNCION_3);
+void InicializarSerial1() {
+	InicializarUART1_DR();
+	setPinsel(SERIAL_TX, FUNCION_1);
+	setPinsel(SERIAL_RX, FUNCION_1);
 }
 
 
@@ -116,65 +116,60 @@ void UART0_pushTX(uint8_t dato) {
 void UART0_SendString(uint8_t* msj){
 	uint32_t i = 0;
 	while(msj[i] > 0){
-		if(i == 0) {
-			UART0_forceTX(msj[i]);
-		}
-		else{
-			UART0_pushTX(msj[i]);
-		}
+		UART0_pushTX(msj[i]);
 		i++;
 	}
 }
 
 /**********************************************************************************************************************************/
 /**
-	\fn  UART3_popRX
+	\fn  UART1_popRX
 	\brief Pop del buffer de recepción
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
 	\return valor leído del buffer
 */
-int32_t UART3_popRX(void) {
+int32_t UART1_popRX(void) {
 	uint32_t ret = -1;
-	if(UART3_rx_in != UART3_rx_out){
-		ret = UART3_rx_buff[UART3_rx_out];
-		UART3_rx_out++; 	UART3_rx_out%=RX_BUFF_SIZE;
+	if(UART1_rx_in != UART1_rx_out){
+		ret = UART1_rx_buff[UART1_rx_out];
+		UART1_rx_out++; 	UART1_rx_out%=RX_BUFF_SIZE;
 	}
 	return ret;
 }
 
 /**
-	\fn  UART3_pushTX
+	\fn  UART1_pushTX
 	\brief push al buffer de transmición para luego ser enviado
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\param [in] dato para poner el la cola de envío
 */
-void UART3_pushTX(uint8_t dato) {
-	if(UART3_tx_flag) {
- 		UART3_tx_buff[UART3_tx_in] = dato;
-		UART3_tx_in++;		UART3_tx_in %= TX_BUFF_SIZE;
+void UART1_pushTX(uint8_t dato) {
+	if(UART1_tx_flag) {
+ 		UART1_tx_buff[UART1_tx_in] = dato;
+		UART1_tx_in++;		UART1_tx_in %= TX_BUFF_SIZE;
 	} else {
-		UART3_forceTX(dato);
-		UART3_tx_flag = 1;
+		UART1_forceTX(dato);
+		UART1_tx_flag = 1;
 	}
 }
 
 /**
-	\fn  UART3_SendString
-	\brief envio de un String a través de la UART3
+	\fn  UART1_SendString
+	\brief envio de un String a través de la UART1
  	\author R2002 - Grupo2
  	\date Nov 4, 2020
  	\param [in] String a enviar
 */
-void UART3_SendString(uint8_t* msj){
+void UART1_SendString(uint8_t* msj){
 	uint32_t i = 0;
 	while(msj[i] > 0){
 		if(i == 0) {
-			UART3_forceTX(msj[i]);
+			UART1_forceTX(msj[i]);
 		}
 		else{
-			UART3_pushTX(msj[i]);
+			UART1_pushTX(msj[i]);
 		}
 		i++;
 	}

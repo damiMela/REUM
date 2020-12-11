@@ -1,6 +1,6 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_ADC.c
+ * @file		DR_I2C.c
  * @brief		Descripcion del modulo
  * @date		10 dic. 2020
  * @author		R2002 - Melamed Damian
@@ -10,8 +10,8 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <PR/PR_ADC.h>
-#include <DR/DR_ADC.h>
+#include <DR/DR_I2C.h>
+#include <DR/DR_PLL.h>
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -19,11 +19,55 @@
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
+#define POWER_I2C1_ON (PCONP |= (1 << PI2C1))
+#define POWER_I2C1_OFF (PCONP &= ~(1 << PI2C1))
 
+#define 	I2C1	((I2C_t *)(0x4005C000UL))
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
+typedef struct _I2C_CONSET_t{
+	uint32_t RESERVED_0:2;
+	uint32_t AssertAck_flag:1;
+	uint32_t SI_flag:1;
+	uint32_t STOP_falg:1;
+	uint32_t START_flag:1;
+	uint32_t I2C_En:1;
+	uint32_t RESERVED_1:25;
+} I2C_CONSET_t;
 
+typedef struct _I2C_CONCLR_t{
+	uint32_t RESERVED_0: 2;
+	uint32_t AssertAck_clr:1;
+	uint32_t I2C_Int_clr:1;
+	uint32_t RESERVED_1:1;
+	uint32_t START_flag_clr:1;
+	uint32_t I2C_Disable:1;
+	uint32_t RESERVED_2:25;
+}I2C_CONCLR_t;
+
+typedef struct _I2C_MMCTRL_t{
+	uint32_t MonitorMode_en:1;
+	uint32_t SCL_out_en:1;
+	uint32_t Match_Int_en:1;
+	uint32_t RESERVED_0:29;
+}I2C_MMCTRL_t;
+
+typedef struct _I2C_t{
+	I2C_CONSET_t CONSET;
+	uint32_t STAT;
+	uint32_t DAT;
+	uint32_t ADR0;
+	uint32_t SCLH;
+	uint32_t SCLL;
+	I2C_CONCLR_t CONCLR;
+	uint32_t MMCTRL;
+	uint32_t ADR1;
+	uint32_t ADR2;
+	uint32_t ADR3;
+	uint32_t DATA_BUFF;
+	uint32_t MASK[4];
+}I2C_t;
 /***********************************************************************************************************************************
  *** TABLAS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -48,39 +92,29 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  InicializarADC
-	\brief Configuara el ADC e inicializa los pines
+	\fn  Nombre de la Funcion
+	\brief Descripcion
  	\author R2002 - Melamed Damian
  	\date 10 dic. 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarADC(void){
-	InicializarADC_DR();
-	setPinsel(ADC_IN_1, FUNCION_3);
-	setPinsel(ADC_IN_3, FUNCION_1);
-	//EL PIN ADC_3 SE USA PARA UART3
-}
+void InicializarI2C_DR(void){
+	POWER_I2C1_ON;
+	PCLKSEL1 &= ~(3 << PCLK_I2C1);
 
+	//hacer en PR PINSEL. PINMODE modo 0x02. PINMODE_OD en 0x01
 
-/**
-	\fn  getADC
-	\brief Devuelve el valor cargado en el buffer del canal de adc correspondiente
- 	\author R2002 - Melamed Damian
- 	\date 10 dic. 2020
- 	\param [in] canal de ADC
-	\return uint32_t con el promedio del valor en el canal de ADC
-*/
-uint32_t getADC(uint8_t chn_n){
-	return ADC_buffer[chn_n-1];
-}
+	I2C1->CONCLR.AssertAck_clr = 1;
+	I2C1->CONCLR.I2C_Int_clr = 1;
+	I2C1->CONCLR.START_flag_clr = 1;
+	I2C1->CONCLR.I2C_Disable = 1;
 
-void ADC_run(void){
-	if(ADC_ready){
-		ADC_startConvertion();
-		ADC_ready = 0;
-	}
-}
+	//Fi2c = (F_CLK/PCLK)/(SCLH+SCLL) = 100kHz
+	I2C1->SCLH=125;
+	I2C1->SCLL=125;
 
-void ADC_cleanBuff(void){
-	ADC_buffer[0] = 0;
-	ADC_buffer[1] = 0;
+	ISER0 |= (1 << ISER_I2C1);
+	I2C1->CONSET.I2C_En = 1;
 }

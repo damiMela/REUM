@@ -9,8 +9,9 @@
 		#define 	PCPWM1	(6)
 		#define 	PCMCPWM	(17)
 		#define		PUART0	(3)
-		#define		PUART3	(25)
+		#define		PUART1	(4)
 		#define 	PTIM0	(1)
+		#define 	PI2C1	(19)
 
 	//!< ///////////////////   PCLKSEL   //////////////////////////
 	//!< Peripheral Clock Selection registers 0 and 1 (PCLKSEL0 -0x400F C1A8 and PCLKSEL1 - 0x400F C1AC) [pag. 56 user manual]
@@ -21,19 +22,22 @@
 		#define PCLK_ADC	(24)
 		#define PCLK_PWM1	(12)
 		#define PCLK_UART0	(6)
+		#define PCLK_UART1	(8)
 		#define PCLK_TIM0	(2)
 
 	#define		PCLKSEL1	PCLKSEL[1]
-		#define PCLK_UART3	(18)
+		#define PCLK_I2C1	(6)
+
 
 	#define		ISER0		(*(uint32_t *)(0xE000E100UL))
 		#define ISER_ADC 	(22)
 		#define ISER_UART0	(5)
-		#define ISER_UART3	(8)
+		#define ISER_UART1	(6)
 		#define ISER_PWM	(9)
 		#define ISER_TIM0	(1)
 		#define ISER_EINT0  (18)
 		#define ISER_EINT2  (20)
+		#define ISER_I2C1	(11)
 
  	#define		ICER0		(*(uint32_t *)(0xE000E180UL))
 		#define ICER_EINT0	(18)

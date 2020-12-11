@@ -8,6 +8,7 @@ C_SRCS += \
 ../src/DR/DR_Botones.c \
 ../src/DR/DR_ExtInt.c \
 ../src/DR/DR_GPIO.c \
+../src/DR/DR_I2C.c \
 ../src/DR/DR_PLL.c \
 ../src/DR/DR_PWM.c \
 ../src/DR/DR_Pinsel.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./src/DR/DR_Botones.o \
 ./src/DR/DR_ExtInt.o \
 ./src/DR/DR_GPIO.o \
+./src/DR/DR_I2C.o \
 ./src/DR/DR_PLL.o \
 ./src/DR/DR_PWM.o \
 ./src/DR/DR_Pinsel.o \
@@ -32,6 +34,7 @@ C_DEPS += \
 ./src/DR/DR_Botones.d \
 ./src/DR/DR_ExtInt.d \
 ./src/DR/DR_GPIO.d \
+./src/DR/DR_I2C.d \
 ./src/DR/DR_PLL.d \
 ./src/DR/DR_PWM.d \
 ./src/DR/DR_Pinsel.d \

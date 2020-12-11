@@ -44,10 +44,10 @@ void UART0_pushTX(uint8_t dato);
 uint8_t UART0_popString(void);
 void UART0_SendString(uint8_t* msj);
 
-void InicializarSerial3();
-int32_t UART3_popRX(void);
-void UART3_pushTX(uint8_t dato);
-uint8_t UART3_popString(void) ;
-void UART3_SendString(uint8_t* msj);
+void InicializarSerial1();
+int32_t UART1_popRX(void);
+void UART1_pushTX(uint8_t dato);
+uint8_t UART1_popString(void) ;
+void UART1_SendString(uint8_t* msj);
 
 #endif /* PR_PR_SERIAL_H_ */
