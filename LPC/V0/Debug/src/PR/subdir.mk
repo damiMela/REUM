@@ -6,6 +6,7 @@
 C_SRCS += \
 ../src/PR/PR_ADC.c \
 ../src/PR/PR_Botones.c \
+../src/PR/PR_I2C.c \
 ../src/PR/PR_IntTime.c \
 ../src/PR/PR_PWM.c \
 ../src/PR/PR_Relays.c \
@@ -15,6 +16,7 @@ C_SRCS += \
 OBJS += \
 ./src/PR/PR_ADC.o \
 ./src/PR/PR_Botones.o \
+./src/PR/PR_I2C.o \
 ./src/PR/PR_IntTime.o \
 ./src/PR/PR_PWM.o \
 ./src/PR/PR_Relays.o \
@@ -24,6 +26,7 @@ OBJS += \
 C_DEPS += \
 ./src/PR/PR_ADC.d \
 ./src/PR/PR_Botones.d \
+./src/PR/PR_I2C.d \
 ./src/PR/PR_IntTime.d \
 ./src/PR/PR_PWM.d \
 ./src/PR/PR_Relays.d \

@@ -1,19 +1,19 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_Relays.c
+ * @file		PR_I2C.c
  * @brief		Descripcion del modulo
- * @date		Nov 5, 2020
- * @author		R2002 - Grupo2
+ * @date		11 dic. 2020
+ * @author		R2002 - Melamed Damian
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <PR/PR_Relays.h>
+#include <PR/PR_I2C.h>
+#include <DR/DR_I2C.h>
 #include <DR/DR_Pinsel.h>
 #include <DR/DR_GPIO.h>
-
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -50,64 +50,40 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn InicializarRelay
-	\brief Inicialización de las salidas de los realys.
- 	\author R2002 - Grupo2
- 	\date Nov 5, 2020
+	\fn  Nombre de la Funcion
+	\brief Descripcion
+ 	\author R2002 - Melamed Damian
+ 	\date 11 dic. 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarRelays(void){
-	setDir(RELAY0_P, OUTPUT);
-	setDir(RELAY1_P, OUTPUT);
-	setDir(RELAY2_P, OUTPUT);
-	setDir(RELAY3_P, OUTPUT);
+void InicializarI2C(void){
+	setPinsel(SDA_PIN, FUNCION_3);
+	setPinsel(SCL_PIN, FUNCION_3);
+	setPinmode(SDA_PIN, MODE_NONE);
+	setPinmode(SCL_PIN, MODE_NONE);
+	setPinmode_OD(SDA_PIN, MODE_OD_NLOW);
+	setPinmode_OD(SCL_PIN, MODE_OD_NLOW);
 
-	setPinmode_OD(RELAY0_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY1_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY2_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY3_P, MODE_OD_NHIGH);
-
-	setPin(RELAY0_P, !OFF);
-	setPin(RELAY1_P, !OFF);
-	setPin(RELAY2_P, !OFF);
-	setPin(RELAY3_P, !OFF);
+	InicializarI2C_DR();
 }
 
 
-/**
-	\fn setRelay
-	\brief Setea el relay seleccionado en el estado recivido
- 	\author R2002 - Grupo2
- 	\date Nov 5, 2020
- 	\param [in] Relay al cual se le va a signar un estado
- 	\param [in] estado a asignar (ON - OFF)
-*/
-void setRelay(uint8_t n, uint8_t state){
-	switch(n){
-		case RELAY0:	setPin(RELAY0_P, !state);	break;
-		case RELAY1:	setPin(RELAY1_P, !state);	break;
-		case RELAY2:	setPin(RELAY2_P, !state);	break;
-		case RELAY3:	setPin(RELAY3_P, !state);	break;
-	}
-}
+uint8_t I2C_write(uint8_t address, uint8_t lenght, uint8_t *msg){
+	uint8_t ret = 0;
+	if(msg){
+		I2C1_writeLenght = lenght+2;
+		I2C1_readLenght = 0;
 
-void invertRelay(uint8_t n){
-	uint8_t state;
-	switch(n){
-			case RELAY0:
-				state = getPin(RELAY0_P, ON_LOW);
-				setPin(RELAY0_P, !state);
-				break;
-			case RELAY1:
-				state = getPin(RELAY1_P, ON_LOW);
-				setPin(RELAY1_P, !state);
-				break;
-			case RELAY2:
-				state = getPin(RELAY2_P, ON_LOW);
-				setPin(RELAY2_P, !state);
-				break;
-			case RELAY3:
-				state = getPin(RELAY3_P, ON_LOW);
-				setPin(RELAY3_P, !state);
-				break;
+		I2C1_Master_buff[0] = address; // SLA+W
+		for(uint8_t i = 0; i < lenght; i++){
+			I2C1_Master_buff[i+1] = msg[i];
 		}
+		uint8_t result;
+		result = I2C_engine();
+		if(result == I2C_OK)
+			ret = 1;
+	}
+	return ret;
 }

@@ -1,1 +1,5 @@
-DR_I2C.c:103:6:InicializarI2C_DR	4	static
+DR_I2C.c:109:6:InicializarI2C_DR	4	static
+DR_I2C.c:128:9:I2C_Start	16	static
+DR_I2C.c:145:9:I2C_engine	4	static
+DR_I2C.c:165:6:I2C_Stop	4	static
+DR_I2C.c:174:6:I2C1_IRQHandler	16	static

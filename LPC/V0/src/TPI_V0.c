@@ -67,9 +67,9 @@ int main(void) {
 	setDir(EXPANSION14, OUTPUT);
 	setDir(EXPANSION15, OUTPUT);
 
-	setPinmode_OP(RGB_R, MODE_OP_NLOW);
-	setPinmode_OP(RGB_G, MODE_OP_NLOW);
-	setPinmode_OP(RGB_B, MODE_OP_NLOW);
+	setPinmode_OD(RGB_R, MODE_OD_NLOW);
+	setPinmode_OD(RGB_G, MODE_OD_NLOW);
+	setPinmode_OD(RGB_B, MODE_OD_NLOW);
 
 	//	TIMER0_EnableCount(1);
 

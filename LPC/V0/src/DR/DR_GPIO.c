@@ -20,7 +20,7 @@
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
 #define	PINMODE		((__RW uint32_t *) 0x4002C040UL)
-#define PINMODE_OP	((__RW uint32_t *) 0x4002C068UL)
+#define PINMODE_OD	((__RW uint32_t *) 0x4002C068UL)
 #define  GPIO (( gpio_t* ) 0x2009C000UL)
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
@@ -83,9 +83,9 @@ void setPinmode(uint8_t port, uint8_t pin, uint8_t mode){
  	\param [in] Número de pin.
   	\param [in] modo de lectura. USAR DEFINES "MODO_OP_nombre"
 */
-void setPinmode_OP(uint8_t port, uint8_t pin, uint8_t mode){
-	PINMODE_OP[port] &= ~(1 << pin);
-	PINMODE_OP[port] |= (mode << pin);
+void setPinmode_OD(uint8_t port, uint8_t pin, uint8_t mode){
+	PINMODE_OD[port] &= ~(1 << pin);
+	PINMODE_OD[port] |= (mode << pin);
 }
 
 
@@ -116,7 +116,7 @@ void setDir(uint8_t port, uint8_t pin, uint8_t mode){
   	\param [in] estado. USAR DEFINES "HIGH"/"LOW"
 */
 void setPin(uint8_t port, uint8_t pin, uint8_t state){
-	if((PINMODE_OP[port] >> pin) == MODE_OP_NLOW){
+	if((PINMODE_OD[port] >> pin) == MODE_OD_NLOW){
 		//active HIGH
 		if(state == HIGH)
 			GPIO[port].FIOSET |= (1 << pin);
