@@ -143,7 +143,7 @@ uint8_t I2C_Start(void){
 }
 
 uint8_t I2C_engine(void){
-	I2C1->CONSET.START_flag = 1; //¡hay que desactivar el conset.i2c_en?
+	I2C1->CONSET.START_flag = 1;
 	I2C1_state = I2C_BUSY;
 
 	while(I2C1_state == I2C_BUSY){
@@ -151,6 +151,7 @@ uint8_t I2C_engine(void){
 
 		if(timeout >= MAX_TIMEOUT){
 			I2C1_state = I2C_TIMEOUT;
+			timeout = 0;
 			break;
 		}
 
@@ -172,30 +173,31 @@ void I2C_Stop(void){
 
 
 void I2C1_IRQHandler(void){
-	uint8_t statValue = I2C1->STAT;
+	uint8_t statValue;
 	timeout = 0;
 
+	statValue = I2C1->STAT;
 	switch(statValue){
 		case 0x08:{ 	//Se emitió una condición de inicio
 			I2C1_write_idx = 0;
-			I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx];
+			I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx++];
 
 			I2C1->CONCLR.I2C_Int_clr = 1;
 			I2C1->CONCLR.START_flag_clr = 1;
 
-			I2C1_write_idx++;
+			//I2C1_write_idx++;
 			break;
 		}
 
 		case 0x10:{		//se emitió condicion de inicio repetidas veces
 			I2C1_read_idx = 0;
 
-			I2C1->DAT = I2C1_Master_buff[I2C1_write_idx];
+			I2C1->DAT = I2C1_Master_buff[I2C1_write_idx++];
 
 			I2C1->CONCLR.I2C_Int_clr = 1;
 			I2C1->CONCLR.START_flag_clr = 1;
 
-			I2C1_write_idx++;
+			//I2C1_write_idx++;
 			break;
 		}
 
@@ -205,8 +207,8 @@ void I2C1_IRQHandler(void){
 				I2C1_state = I2C_NO_DATA;
 			}
 			else{
-				I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx ];
-				I2C1_write_idx++;
+				I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx++ ];
+				//I2C1_write_idx++;
 			}
 
 			I2C1->CONCLR.I2C_Int_clr = 1;
@@ -215,8 +217,8 @@ void I2C1_IRQHandler(void){
 
 		case 0x28:{		//Los datos en DAT han sido enviados. se recibio Acknowledge
 			if(I2C1_write_idx < I2C1_writeLenght){
-				I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx ];
-				I2C1_write_idx++;
+				I2C1->DAT = I2C1_Master_buff[ I2C1_write_idx ++];
+				//I2C1_write_idx++;
 			}
 			else{
 				if(I2C1_readLenght != 0)
@@ -251,8 +253,8 @@ void I2C1_IRQHandler(void){
 		}
 
 		case 0x50:{		//Se recibió 1 byte de datos. Se envió Acknowledge
-			I2C1_Slave_buff[ I2C1_read_idx ] = I2C1->DAT;
-			I2C1_read_idx++;
+			I2C1_Slave_buff[ I2C1_read_idx ++] = I2C1->DAT;
+			//I2C1_read_idx++;
 
 			if( (I2C1_read_idx +1) < I2C1_readLenght)
 				I2C1->CONSET.AssertAck_set = 1;
@@ -264,8 +266,9 @@ void I2C1_IRQHandler(void){
 		}
 
 		case 0x58:{		//se recibió 1 byte de datis. se envió NOT Acknowledge
-			I2C1_Slave_buff[ I2C1_read_idx ] = I2C1->DAT;
-			I2C1_read_idx++;
+			I2C1_Slave_buff[ I2C1_read_idx++ ] = I2C1->DAT;
+			//I2C1_read_idx++;
+			I2C1_state = I2C_OK;
 			I2C1->CONSET.STOP_falg = 1;
 			I2C1->CONCLR.I2C_Int_clr = 1;
 			break;
@@ -282,8 +285,10 @@ void I2C1_IRQHandler(void){
 		default:
 			I2C1_state = I2C_ARBITRATION_LOST;
 			I2C1->CONCLR.I2C_Int_clr = 1;
+			break;
 
 	}
+	return;
 
 }
 

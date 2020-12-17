@@ -39,4 +39,5 @@
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
 void InicializarI2C(void);
+uint8_t I2C_write(uint8_t address, uint8_t lenght, uint8_t *msg);
 #endif /* PR_PR_I2C_H_ */

@@ -56,7 +56,7 @@
  	\param [out] parametros de salida
 	\return tipo y descripcion de retorno
 */
-void InicilaizarPWM(void){
+void InicializarPWM(void){
 	InicializarPWM_DR();
 
 	setPinsel(EXPANSION11, FUNCION_3); //PWM chnl 2

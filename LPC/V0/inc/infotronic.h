@@ -103,11 +103,6 @@
 
 
 
-
-
-
-
-
 //!< Display siete segmentos
 #define    dg0       		PORT0,19    // exp 5
 #define    dg1       		PORT1,20   	// exp 4

@@ -38,7 +38,7 @@ enum {PWM1, PWM2, PWM3};
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void InicilaizarPWM(void);
+void InicializarPWM(void);
 void setPWMDuty(uint8_t n, uint16_t val);
 void setPWMOff(uint8_t n);
 uint16_t getPWMDuty(uint8_t n);

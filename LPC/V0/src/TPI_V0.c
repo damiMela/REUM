@@ -33,6 +33,7 @@
 #include <PR/PR_Relays.h>
 #include <PR/PR_PWM.h>
 #include <PR/PR_ADC.h>
+#include <PR/PR_I2C.h>
 
 
 #include <AP/AP_Ultrasonido.h>
@@ -47,19 +48,20 @@ int main(void) {
 	InicializarSystick();
 	InicializarPLL();
 
-	InicializarADC();
-//	InicializarSerial0();
+//	InicializarADC();
+	InicializarSerial0();
 	InicializarSerial1();
+	InicializarI2C();
 
 	InicializarBotones();
 	InicializarRelays();
-	InicilaizarPWM();
+	InicializarPWM();
 
 //	InicializarUS();
 	InicializarEINT_DR();
 
 	//-------------PRUEBA TIMERS------------//FUNCIONANDO
-	TimerStart(0, 3, func, SEG);
+//	TimerStart(0, 3, func, SEG);
 
 
 	setDir(EXPANSION12, OUTPUT);
@@ -73,6 +75,7 @@ int main(void) {
 
 	//	TIMER0_EnableCount(1);
 
+	setRelay(RELAY1, OFF);
 
     while(1) {
     	//---agregar siempre---//
@@ -82,11 +85,11 @@ int main(void) {
 
 
     	//---------PRUEBA ADC-----------//FUNCIONANDO
-    	static uint32_t prueba = 0;
+/*    	static uint32_t prueba = 0;
     	prueba = getADC(ADC_2);
     	if(prueba > 1400) setRelay(RELAY3, ON);
     	else setRelay(RELAY3, OFF);
-
+*/
 
     	//----------PRUEBA BOTONES-----------//FUNCIONANDO
 /*    	static uint8_t test_state = 0;
@@ -110,15 +113,14 @@ int main(void) {
 
 
     	//--------PRUEBA UART1--------------//!!!
-    	uint8_t hola [] = "hola\n";
-		uint8_t chau [] = "chau\n";
-		int32_t data = UART1_popRX();
+/*		int32_t data = UART1_popRX();
 		if(data != -1) {
-			//UART0_pushTX((uint8_t) (data));
-			if(data == 'h') UART1_SendString(hola);
-			if(data == 'c') UART1_SendString(chau);
+			UART0_pushTX((uint8_t) (data));
+			if(data == 'h') invertRelay(RELAY1);
+			if(data == 'c') setRelay(RELAY1, ON);
+			if(data == 's') UART1_pushTX('o');
 		}
-
+*/
 
     	//--------PRUEBA ULTRADSONIDO--------------//!!!
 
@@ -132,6 +134,10 @@ int main(void) {
     	setPWMDuty(PWM2, 60);
     	setPWMDuty(PWM3, 60);
 */
+
+    	//--------PRUEBA I2C-----------------//
+    	uint8_t send[1] = {0x58};
+    	I2C_write(0x58, 1, send);
 
     }
 
