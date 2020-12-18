@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WEBENGINEWIDGETS_LIB -DQT_WEBENGINECORE_LIB -DQT_QUICK_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBCHANNEL_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WEBENGINEWIDGETS_LIB -DQT_WEBENGINECORE_LIB -DQT_QUICK_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBCHANNEL_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../GUI_V0_1 -I. -I../../../../Qt5.12.9/5.12.9/gcc_64/include -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineWidgets -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineCore -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtQuick -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtPrintSupport -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebChannel -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtQml -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtPositioning -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.9/5.12.9/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../GUI_V0_1 -I. -I../../../../Qt5.12.9/5.12.9/gcc_64/include -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineWidgets -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineCore -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtQuick -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtPrintSupport -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWebChannel -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtQml -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtPositioning -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql -I../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.9/5.12.9/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/damian/Qt5.12.9/5.12.9/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = GUI_V0_11.0.0
 DISTDIR = /home/damian/git/TPI/QT/build-GUI_V0_1-Desktop_Qt_5_12_9_GCC_64bit-Debug/.tmp/GUI_V0_11.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/damian/Qt5.12.9/5.12.9/gcc_64/lib -Wl,-rpath-link,/home/damian/Qt5.12.9/5.12.9/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebEngineWidgets.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebEngineCore.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Quick.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5PrintSupport.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Widgets.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Gui.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebChannel.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Qml.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Network.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Positioning.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebEngineWidgets.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebEngineCore.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Quick.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5PrintSupport.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Widgets.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Gui.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5WebChannel.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Qml.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Network.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Positioning.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Sql.so /home/damian/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -869,13 +869,43 @@ moc_mainwindow.cpp: ../GUI_V0_1/mainwindow.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qpagesize.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDebug \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/QKeyEvent \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QTimer \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qtimer.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qbasictimer.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpServer \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qtcpserver.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsqlglobal.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsql-config.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlquery.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QTableWidgetItem \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDateTime \
 		moc_predefs.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/bin/moc
-	/home/damian/Qt5.12.9/5.12.9/gcc_64/bin/moc $(DEFINES) --include /home/damian/git/TPI/QT/build-GUI_V0_1-Desktop_Qt_5_12_9_GCC_64bit-Debug/moc_predefs.h -I/home/damian/Qt5.12.9/5.12.9/gcc_64/mkspecs/linux-g++ -I/home/damian/git/TPI/QT/GUI_V0_1 -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineWidgets -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineCore -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtQuick -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtPrintSupport -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWidgets -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtGui -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebChannel -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtQml -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtNetwork -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtPositioning -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUI_V0_1/mainwindow.h -o moc_mainwindow.cpp
+	/home/damian/Qt5.12.9/5.12.9/gcc_64/bin/moc $(DEFINES) --include /home/damian/git/TPI/QT/build-GUI_V0_1-Desktop_Qt_5_12_9_GCC_64bit-Debug/moc_predefs.h -I/home/damian/Qt5.12.9/5.12.9/gcc_64/mkspecs/linux-g++ -I/home/damian/git/TPI/QT/GUI_V0_1 -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineWidgets -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebEngineCore -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtQuick -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtPrintSupport -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWidgets -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtGui -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtWebChannel -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtQml -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtNetwork -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtPositioning -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtSql -I/home/damian/Qt5.12.9/5.12.9/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUI_V0_1/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1186,10 +1216,40 @@ main.o: ../GUI_V0_1/main.cpp ../GUI_V0_1/mainwindow.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qpagesize.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDebug \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/QKeyEvent \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QTimer \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qtimer.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qbasictimer.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpServer \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qtcpserver.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsqlglobal.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsql-config.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlquery.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QTableWidgetItem \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDateTime \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1347,32 +1407,27 @@ mainwindow.o: ../GUI_V0_1/mainwindow.cpp ../GUI_V0_1/mainwindow.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qpagesize.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDebug \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/QKeyEvent \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QTimer \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qtimer.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qbasictimer.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpSocket \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/QTcpServer \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qtcpserver.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtNetwork/qhostaddress.h \
-		ui_mainwindow.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QApplication \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qapplication.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qeventloop.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qguiapplication.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qinputmethod.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QFrame \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qframe.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QGridLayout \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QGroupBox \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QHeaderView \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsqlglobal.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qtsql-config.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlquery.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/QSqlError \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QTableWidgetItem \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtableview.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qframe.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1385,6 +1440,26 @@ mainwindow.o: ../GUI_V0_1/mainwindow.cpp ../GUI_V0_1/mainwindow.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstyle.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDateTime \
+		ui_mainwindow.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QFrame \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QGridLayout \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QGroupBox \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QHeaderView \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QLineEdit \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qlineedit.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtGui/qtextcursor.h \
@@ -1402,10 +1477,13 @@ mainwindow.o: ../GUI_V0_1/mainwindow.cpp ../GUI_V0_1/mainwindow.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QStatusBar \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QTableWidget \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtablewidget.h \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qtableview.h \
 		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QWidget
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QWidget \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/QFileDialog \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qfiledialog.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qdir.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtCore/qfileinfo.h \
+		../../../../Qt5.12.9/5.12.9/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../GUI_V0_1/mainwindow.cpp
 
 qrc_images.o: qrc_images.cpp 

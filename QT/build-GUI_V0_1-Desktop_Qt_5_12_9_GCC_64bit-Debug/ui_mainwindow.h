@@ -16,6 +16,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -55,6 +56,10 @@ public:
     QGroupBox *dataGroup;
     QHBoxLayout *horizontalLayout;
     QTableWidget *datTable;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_2;
+    QPushButton *SaveDbBtn;
+    QLabel *DbLbl;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -227,6 +232,41 @@ public:
 
         horizontalLayout->addWidget(datTable);
 
+        frame = new QFrame(dataGroup);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
+        frame->setSizePolicy(sizePolicy3);
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(frame);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        SaveDbBtn = new QPushButton(frame);
+        SaveDbBtn->setObjectName(QString::fromUtf8("SaveDbBtn"));
+
+        verticalLayout_2->addWidget(SaveDbBtn);
+
+        DbLbl = new QLabel(frame);
+        DbLbl->setObjectName(QString::fromUtf8("DbLbl"));
+        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Maximum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(DbLbl->sizePolicy().hasHeightForWidth());
+        DbLbl->setSizePolicy(sizePolicy4);
+        DbLbl->setMinimumSize(QSize(0, 0));
+        DbLbl->setMaximumSize(QSize(100, 80));
+        DbLbl->setAutoFillBackground(false);
+        DbLbl->setFrameShape(QFrame::NoFrame);
+        DbLbl->setTextFormat(Qt::PlainText);
+        DbLbl->setWordWrap(true);
+
+        verticalLayout_2->addWidget(DbLbl, 0, Qt::AlignTop);
+
+
+        horizontalLayout->addWidget(frame);
+
 
         verticalLayout->addWidget(dataGroup);
 
@@ -275,6 +315,8 @@ public:
         ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "Pa", nullptr));
         datTable->setSortingEnabled(__sortingEnabled);
 
+        SaveDbBtn->setText(QApplication::translate("MainWindow", "Grabar Datos", nullptr));
+        DbLbl->setText(QString());
     } // retranslateUi
 
 };

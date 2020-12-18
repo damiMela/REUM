@@ -114,16 +114,28 @@ int main(void) {
 
     	//--------PRUEBA UART1--------------//!!!
 		int32_t data = UART1_popRX();
-		uint8_t hola [] = "hola\n";
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
-			if(data == 'h') invertRelay(RELAY1);
-			if(data == 'c') setRelay(RELAY1, ON);
-			if(data == 's') UART1_pushTX('o');
+			if(data == 'c') setPin(RGB_G, ON);
+			if(data == 's') {
+				setRelay(RELAY0, OFF);
+				setRelay(RELAY1, OFF);
+				setRelay(RELAY2, OFF);
+				setRelay(RELAY3, OFF);
+			}
+			if(data == 'f') setRelay(RELAY0, ON);
+			if(data == 'b') setRelay(RELAY1, ON);
+			if(data == 'l') setRelay(RELAY2, ON);
+			if(data == 'r') setRelay(RELAY3, ON);
 		}
-		if(getBtn(SW4)){
-			UART1_SendString(hola);
-		}
+
+		uint8_t temp1 [] = "#t#25";
+		uint8_t temp2 [] = "#t#12";
+		uint8_t humed [] = "#h#42";
+		if(getBtn(SW4)) UART1_SendString(temp1);
+		if(getBtn(SW3)) UART1_SendString(temp2);
+		if(getBtn(SW2)) UART1_SendString(humed);
+
 
 
     	//--------PRUEBA ULTRADSONIDO--------------//!!!
