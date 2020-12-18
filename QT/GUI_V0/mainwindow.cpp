@@ -9,23 +9,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    server = new QTcpServer(this);
-
-    if(server->listen(QHostAddress::LocalHost, 26000) == false)
-    {
-        // Informar error
-        close();
-    }
-
-    //connect(server, SIGNAL(newConnection()), this, SLOT(nuevaConexion()));
-    connect(server, &QTcpServer::newConnection, this, &MainWindow::nuevaConexion);
-
     //<<<<<<<<<<<<<-Web View->>>>>>>>>>>>>>//
-    ui->camView->setUrl(QUrl("http://192.168.0.17:4747/video"));
-    ui->camView->show();
+
+
+    //<<<<<<<<<<<<<-TCP client setup->>>>>>>>>>>>>>//
+    socket = new QTcpSocket(this);
+    socket->connectToHost(QHostAddress("192.168.0.28"), 80);
+    connect(socket, &QTcpSocket::connected, this, &MainWindow::connected_slot);
+    connect(socket, &QTcpSocket::readyRead, this, &MainWindow::newTCPData_slot);
 
     //<<<<<<<<<<<<<-button icons->>>>>>>>>>>>>>//
-    ui->UpBtn->setIcon(QIcon("../GUI_V0/images/up.png"));
+    ui->UpBtn->setIcon(QIcon("../GUI_V0/arrows/images/up.png"));
     ui->UpBtn->setIconSize(ui->UpBtn->size());
 
     ui->DownBtn->setIcon(QIcon("../GUI_V0/images/down.png"));
@@ -47,19 +41,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::nuevaConexion()
+
+void MainWindow::connected_slot()
 {
-    // Tenemos un cliente nuevo
-    cliente = server->nextPendingConnection();
 
-    connect(cliente, &QTcpSocket::readyRead, this, &MainWindow::nuevosDatos);
-
-    contador = 0;
 }
 
-void MainWindow::nuevosDatos()
+void MainWindow::newTCPData_slot()
 {
-    QByteArray datos = cliente->readLine();
+    QByteArray datos = socket->readLine();
+    socket->write(datos);
+}
 
-    cliente->write(datos);
+void MainWindow::on_UpBtn_clicked()
+{
+    socket->write(QByteArray("h\n\r"));
+}
+
+void MainWindow::on_camConnBtn_clicked()
+{
+    QString url_string = "http://";
+    url_string.append(ui->IpCam_txb->toPlainText());
+    url_string.append(":4747/video");
+    qDebug()<< url_string << "\n";
+    ui->camView->setUrl(QUrl(url_string));
+    ui->camView->show();
 }

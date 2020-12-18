@@ -1,10 +1,10 @@
 src/DR/DR_Pinsel.o src/DR/DR_Pinsel.d: ../src/DR/DR_Pinsel.c \
- D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Pinsel.h \
- D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Tipos.h \
- D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/infotronic.h
+ /home/damian/git/TPI/LPC/V0/inc/DR/DR_Pinsel.h \
+ /home/damian/git/TPI/LPC/V0/inc/DR/DR_Tipos.h \
+ /home/damian/git/TPI/LPC/V0/inc/infotronic.h
 
-D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Pinsel.h:
+/home/damian/git/TPI/LPC/V0/inc/DR/DR_Pinsel.h:
 
-D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/DR/DR_Tipos.h:
+/home/damian/git/TPI/LPC/V0/inc/DR/DR_Tipos.h:
 
-D:\Damian\Archivos\UTN\info\ II\REUM\LPC\V0\inc/infotronic.h:
+/home/damian/git/TPI/LPC/V0/inc/infotronic.h:

@@ -23,15 +23,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void nuevaConexion();
-    void nuevosDatos();
+    void connected_slot();
+    void newTCPData_slot();
+
+    void on_UpBtn_clicked();
+    void on_camConnBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     QTcpServer *server;
-    QTcpSocket *cliente;
-
-    double contador;
+    QTcpSocket *socket;
+    int cant_conexiones;
 };
 #endif // MAINWINDOW_H

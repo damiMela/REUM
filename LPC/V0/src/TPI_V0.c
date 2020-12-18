@@ -24,7 +24,7 @@
 #include <DR/DR_Pinsel.h>
 
 //other drivers
-#include <DR_ExtInt.h>
+#include <DR/DR_ExtInt.h>
 
 //primitivas
 #include <PR/PR_Botones.h>
@@ -113,14 +113,18 @@ int main(void) {
 
 
     	//--------PRUEBA UART1--------------//!!!
-/*		int32_t data = UART1_popRX();
+		int32_t data = UART1_popRX();
+		uint8_t hola [] = "hola\n";
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
 			if(data == 'h') invertRelay(RELAY1);
 			if(data == 'c') setRelay(RELAY1, ON);
 			if(data == 's') UART1_pushTX('o');
 		}
-*/
+		if(getBtn(SW4)){
+			UART1_SendString(hola);
+		}
+
 
     	//--------PRUEBA ULTRADSONIDO--------------//!!!
 
@@ -136,8 +140,8 @@ int main(void) {
 */
 
     	//--------PRUEBA I2C-----------------//
-    	uint8_t send[1] = {0x58};
-    	I2C_write(0x58, 1, send);
+//    	uint8_t send[1] = {0x58};
+//    	I2C_write(0x58, 1, send);
 
     }
 
