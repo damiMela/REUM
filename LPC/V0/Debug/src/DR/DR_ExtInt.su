@@ -1,3 +1,0 @@
-DR_ExtInt.c:98:6:InicializarEINT_DR	4	static
-DR_ExtInt.c:107:6:EINT2_IRQHandler	16	static
-DR_ExtInt.c:122:6:EINT_Enable	16	static

@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<proyecto>
+    <general>
+        <nombre>ComunicacionServidor</nombre>
+        <autores>JuanAgustinOtero</autores>
+        <creacion>19-12-2020 18:53:57</creacion>
+        <modificacion>19-12-2020 19:03:18</modificacion>
+        <carpeta>/home/agustin/Desktop/Proyecto (copy)/REUM/Additions</carpeta>
+    </general>
+    <configuracion>
+        <hardware/>
+        <target/>
+    </configuracion>
+    <recursos>
+        <archivosC/>
+        <archivosH/>
+    </recursos>
+    <maquinas>
+        <maquina0>
+            <nombre>Conexion</nombre>
+            <estadoInicial>
+                <pos_x>-962</pos_x>
+                <pos_y>-697.5</pos_y>
+                <idAcciones>LedRojo = TRUE</idAcciones>
+                <idProxEstado>estado0</idProxEstado>
+                <midPos>-935.4,-677.2</midPos>
+                <textPos>0,-42</textPos>
+            </estadoInicial>
+            <estado0>
+                <diagrama>
+                    <nombre>SIN_conexion</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-867</pos_x>
+                    <pos_y>-625</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>MensajeDeConexionRed == C</idEvento>
+                        <idAcciones>ParpadeoLedV(),LedRojo = FALSE</idAcciones>
+                        <idProxEstado>estado1</idProxEstado>
+                        <midPos>-850.2,-548.8</midPos>
+                        <textPos>9,-29</textPos>
+                    </tr0>
+                </transiciones>
+            </estado0>
+            <estado1>
+                <diagrama>
+                    <nombre>Modulo_en_red</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-864</pos_x>
+                    <pos_y>-472</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>MensajeDeConexionCliente == TRUE</idEvento>
+                        <idAcciones>LedVerde = TRUE,f_conexionExitosa = TRUE</idAcciones>
+                        <idProxEstado>estado2</idProxEstado>
+                        <midPos>-844.8,-389</midPos>
+                        <textPos>10,-28</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>MensajeDeConexionRed == FALSE</idEvento>
+                        <idAcciones>LedRojo = TRUE</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-880.8,-548.2</midPos>
+                        <textPos>-260.188,-14</textPos>
+                    </tr1>
+                </transiciones>
+            </estado1>
+            <estado2>
+                <diagrama>
+                    <nombre>Conectado</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-859</pos_x>
+                    <pos_y>-305</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>MensajeDeConexionCliente == FALSE</idEvento>
+                        <idAcciones>f_conexionExitosa = FALSE,ParpadeoLedV(),LedVerde = FALSE</idAcciones>
+                        <idProxEstado>estado1</idProxEstado>
+                        <midPos>-878.2,-388</midPos>
+                        <textPos>-290.438,-32</textPos>
+                    </tr0>
+                </transiciones>
+            </estado2>
+        </maquina0>
+        <maquina1>
+            <nombre>Lectura</nombre>
+            <estadoInicial>
+                <pos_x>-931</pos_x>
+                <pos_y>-715.5</pos_y>
+                <idAcciones>SinMovimiento(),buffervelocidad1 = 0,buffervelocidad2 = 0,bufferMovimiento = S</idAcciones>
+                <idProxEstado>estado0</idProxEstado>
+                <midPos>-904.4,-695.2</midPos>
+                <textPos>17,-83</textPos>
+            </estadoInicial>
+            <estado0>
+                <diagrama>
+                    <nombre>espera_inicio</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-836</pos_x>
+                    <pos_y>-643</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>dato_rx == START_CHAR</idEvento>
+                        <idAcciones></idAcciones>
+                        <idProxEstado>estado1</idProxEstado>
+                        <midPos>-660,-592</midPos>
+                        <textPos>2,-25</textPos>
+                    </tr0>
+                </transiciones>
+            </estado0>
+            <estado1>
+                <diagrama>
+                    <nombre>espera_mensaje_movimiento</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-455</pos_x>
+                    <pos_y>-466.25</pos_y>
+                    <ancho>224</ancho>
+                    <alto>82</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>chequeodata == FALSE</idEvento>
+                        <idAcciones>SinMovimiento(),f_movimiento = FALSE</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-764,-495</midPos>
+                        <textPos>-23.875,-63</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>dato_rx == MOV_CHAR</idEvento>
+                        <idAcciones>bufferMovimiento = dato_rx</idAcciones>
+                        <idProxEstado>estado3</idProxEstado>
+                        <midPos>-439.45,-401.5</midPos>
+                        <textPos>7,-18</textPos>
+                    </tr1>
+                </transiciones>
+            </estado1>
+            <estado2>
+                <diagrama>
+                    <nombre>espera_fin</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-829</pos_x>
+                    <pos_y>-217</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>dato_rx == END_CHAR</idEvento>
+                        <idAcciones>f_movimiento = TRUE</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-1040,-478</midPos>
+                        <textPos>-172.063,0</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>dato_rx != END_CHAR</idEvento>
+                        <idAcciones>SinMovimiento(),f_movimiento = FALSE</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-830,-480</midPos>
+                        <textPos>-173.063,-14</textPos>
+                    </tr1>
+                </transiciones>
+            </estado2>
+            <estado3>
+                <diagrama>
+                    <nombre>esperar_mensaje_velocidad_1</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-450</pos_x>
+                    <pos_y>-335.75</pos_y>
+                    <ancho>230</ancho>
+                    <alto>63</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>dato_rx >= 0 &amp;&amp; dato_rx &lt;= 9</idEvento>
+                        <idAcciones>buffervelocidad1 = dato_rx</idAcciones>
+                        <idProxEstado>estado4</idProxEstado>
+                        <midPos>-439.05,-275.8</midPos>
+                        <textPos>13,-20</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>dato_rx &lt; 0 || dato_rx > 9</idEvento>
+                        <idAcciones>SinMovimiento(),f_movimiento = 0,buffervelocidad1 = 0,buffervelocidad2 = 0,bufferMovimiento = S</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-758,-415</midPos>
+                        <textPos>-39.75,-35</textPos>
+                    </tr1>
+                </transiciones>
+            </estado3>
+            <estado4>
+                <diagrama>
+                    <nombre>esperar_mensaje_velocidad_2</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-452</pos_x>
+                    <pos_y>-216.25</pos_y>
+                    <ancho>230</ancho>
+                    <alto>58</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>dato_rx >= 0 &amp;&amp; dato_rx &lt;= 9</idEvento>
+                        <idAcciones>buffervelocidad2 = dato_rx</idAcciones>
+                        <idProxEstado>estado2</idProxEstado>
+                        <midPos>-637,-216</midPos>
+                        <textPos>-147.375,34</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>dato_rx > 9 || dato_rx &lt; 0</idEvento>
+                        <idAcciones>SinMovimiento(),bufferMovimiento = S,buffervelocidad1 = 0,buffervelocidad2 = 0</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-749,-287</midPos>
+                        <textPos>-53.75,-35</textPos>
+                    </tr1>
+                </transiciones>
+            </estado4>
+        </maquina1>
+        <maquina2>
+            <nombre>Movimiento</nombre>
+            <estadoInicial>
+                <pos_x>-937.667</pos_x>
+                <pos_y>-675.167</pos_y>
+                <idAcciones>SinMovimiento()</idAcciones>
+                <idProxEstado>estado0</idProxEstado>
+                <midPos>-906.667,-649.333</midPos>
+                <textPos>6.66667,-38</textPos>
+            </estadoInicial>
+            <estado0>
+                <diagrama>
+                    <nombre>sin_movimiento</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-648</pos_x>
+                    <pos_y>-488</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>f_movimiento == TRUE &amp;&amp; bufferMovimiento == F</idEvento>
+                        <idAcciones>MovimientoFrontalOn()</idAcciones>
+                        <idProxEstado>estado1</idProxEstado>
+                        <midPos>-674.667,-581.333</midPos>
+                        <textPos>-383.187,-44</textPos>
+                    </tr0>
+                    <tr1>
+                        <idEvento>f_movimiento == ture &amp;&amp; bufferMovimiento == R</idEvento>
+                        <idAcciones>giroDerecha()</idAcciones>
+                        <idProxEstado>estado3</idProxEstado>
+                        <midPos>-364,-528</midPos>
+                        <textPos>-163.667,-40</textPos>
+                    </tr1>
+                    <tr2>
+                        <idEvento>f_movimiento == TRUE &amp;&amp; bufferMovimiento == L</idEvento>
+                        <idAcciones>giroIzquierda()</idAcciones>
+                        <idProxEstado>estado4</idProxEstado>
+                        <midPos>-901.333,-446.667</midPos>
+                        <textPos>-163.854,12.6667</textPos>
+                    </tr2>
+                    <tr3>
+                        <idEvento>f_movimiento == TRUE &amp;&amp; bufferMovimiento == B</idEvento>
+                        <idAcciones>Reversa()</idAcciones>
+                        <idProxEstado>estado2</idProxEstado>
+                        <midPos>-616.467,-367.6</midPos>
+                        <textPos>5.33333,-3.33333</textPos>
+                    </tr3>
+                </transiciones>
+            </estado0>
+            <estado1>
+                <diagrama>
+                    <nombre>adelante</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-638.667</pos_x>
+                    <pos_y>-673.667</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>(f_movimiento == TRUE &amp;&amp; bufferMovimiento != F) || f_movimiento == FALSE</idEvento>
+                        <idAcciones>SinMovimiento()</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-593.333,-577.333</midPos>
+                        <textPos>11,-44</textPos>
+                    </tr0>
+                </transiciones>
+            </estado1>
+            <estado2>
+                <diagrama>
+                    <nombre>atras</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-633.667</pos_x>
+                    <pos_y>-244.333</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>f_movimiento == FALSE || (f_movimiento == TRUE &amp;&amp; bufferMovimiento != B)</idEvento>
+                        <idAcciones>SinMovimiento()</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-665.2,-364.733</midPos>
+                        <textPos>-582.125,-9.33333</textPos>
+                    </tr0>
+                </transiciones>
+            </estado2>
+            <estado3>
+                <diagrama>
+                    <nombre>derecha</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-89</pos_x>
+                    <pos_y>-489</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>f_movimiento == FALSE || (f_movimiento == TRUE &amp;&amp; bufferMovimiento != R)</idEvento>
+                        <idAcciones>SinMovimiento()</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-368.4,-432.6</midPos>
+                        <textPos>-226.667,0</textPos>
+                    </tr0>
+                </transiciones>
+            </estado3>
+            <estado4>
+                <diagrama>
+                    <nombre>izqueirda</nombre>
+                    <color>#e0ffff</color>
+                    <pos_x>-1148</pos_x>
+                    <pos_y>-489</pos_y>
+                    <ancho>110</ancho>
+                    <alto>65</alto>
+                </diagrama>
+                <transiciones>
+                    <tr0>
+                        <idEvento>f_movimiento == FALSE || (f_movimiento == TRUE &amp;&amp; bufferMovimiento != L)</idEvento>
+                        <idAcciones>SinMovimiento()</idAcciones>
+                        <idProxEstado>estado0</idProxEstado>
+                        <midPos>-897.333,-521.333</midPos>
+                        <textPos>-365.333,-40.6667</textPos>
+                    </tr0>
+                </transiciones>
+            </estado4>
+        </maquina2>
+    </maquinas>
+    <eventos/>
+    <acciones>
+        <acc0>ParpadeoLedV()</acc0>
+        <acc1>MovimientoFrontalOn()</acc1>
+        <acc2>SinMovimiento()</acc2>
+        <acc3>Reversa()</acc3>
+        <acc4>giroDerecha()</acc4>
+        <acc5>giroIzquierda()</acc5>
+        <acc6>RegularVelocidad()</acc6>
+        <acc7>func_error()</acc7>
+        <acc8>chequeoData()</acc8>
+    </acciones>
+    <variables>
+        <var0>MensajeDeConexionRed</var0>
+        <var1>LedRojo</var1>
+        <var2>LedVerde</var2>
+        <var3>LedVerde_P</var3>
+        <var4>MensajeDeConexionCliente</var4>
+        <var5>CaracterDeInicio</var5>
+        <var6>MensajeDeDireccion</var6>
+        <var7>f_conexionExitosa</var7>
+        <var8>dato_rx</var8>
+        <var9>f_movimiento</var9>
+        <var10>chequeodata</var10>
+        <var11>bufferMovimiento</var11>
+        <var12>buffervelocidad1</var12>
+        <var13>buffervelocidad2</var13>
+    </variables>
+    <constantes>
+        <cons0>TRUE</cons0>
+        <cons1>FALSE</cons1>
+    </constantes>
+</proyecto>

@@ -1,8 +1,0 @@
-PR_Serial.c:60:6:InicializarSerial0	8	static
-PR_Serial.c:65:6:InicializarSerial1	8	static
-PR_Serial.c:79:9:UART0_popRX	16	static
-PR_Serial.c:96:6:UART0_pushTX	16	static
-PR_Serial.c:116:6:UART0_SendString	24	static
-PR_Serial.c:132:9:UART1_popRX	16	static
-PR_Serial.c:148:6:UART1_pushTX	16	static
-PR_Serial.c:165:6:UART1_SendString	24	static

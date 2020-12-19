@@ -1,5 +1,0 @@
-DR_Systick.c:77:6:InicializarSystick	4	static
-DR_Systick.c:91:6:SysTick_Handler	8	static
-DR_Systick.c:104:10:get_ticks	4	static
-DR_Systick.c:116:6:reset_ticks	4	static
-DR_Systick.c:127:6:scheduler_run	8	static

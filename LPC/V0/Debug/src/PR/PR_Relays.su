@@ -1,3 +1,0 @@
-PR_Relays.c:58:6:InicializarRelays	8	static
-PR_Relays.c:84:6:setRelay	16	static
-PR_Relays.c:93:6:invertRelay	24	static
