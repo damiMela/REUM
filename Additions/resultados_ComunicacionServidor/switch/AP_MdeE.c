@@ -255,7 +255,7 @@ void maquina_Movimiento()
 		{
 			case SIN_MOVIMIENTO:
 			
-				if( f_movimiento == TRUE && bufferMovimiento == F( ) )
+				if( f_movimiento == TRUE && bufferMovimiento == F )
 				{
 					#ifdef DEPURAR
 						Log( 2 , 0 , 0 );
@@ -263,6 +263,33 @@ void maquina_Movimiento()
 
 					MovimientoFrontalOn();
 					estado = ADELANTE;	
+				}
+				else if( f_movimiento == TRUE && bufferMovimiento == B )
+				{
+					#ifdef DEPURAR
+						Log( 2 , 0 , 0 );
+					#endif
+
+					Reversa();
+					estado = ATRAS;	
+				}
+				else if( f_movimiento == TRUE && bufferMovimiento == R )
+				{
+					#ifdef DEPURAR
+						Log( 2 , 0 , 0 );
+					#endif
+
+					GiroDerecha();
+					estado = DERECHA;	
+				}
+				else if( f_movimiento == TRUE && bufferMovimiento == L )
+				{
+					#ifdef DEPURAR
+						Log( 2 , 0 , 0 );
+					#endif
+
+					GiroIzquierda();
+					estado = IZQUIERDA;	
 				}
  
 
@@ -277,20 +304,8 @@ void maquina_Movimiento()
 					#endif
 
 					SinMovimiento();
-					estado = ATRAS;	
-				}
- 
-				if( -1( ) )
-				{
-					#ifdef DEPURAR
-						Log( 2 , 1 , 1 );
-					#endif
-
-					-1;
 					estado = SIN_MOVIMIENTO;	
 				}
- 
-
 				break;
 			
 			case ATRAS:
@@ -302,18 +317,40 @@ void maquina_Movimiento()
 					#endif
 
 					SinMovimiento();
-					estado = ADELANTE;	
+					estado = SIN_MOVIMIENTO;	
 				}
  
 
 				break;
 			
 			case DERECHA:
+
+				if(f_movimiento == FALSE || (f_movimiento == TRUE && bufferMovimiento != R))
+				{
+					#ifdef DEPURAR
+						Log( 2 , 2 , 0 );
+					#endif
+
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+ 
 			
 
 				break;
 			
 			case IZQUEIRDA:
+
+				if(f_movimiento == FALSE || (f_movimiento == TRUE && bufferMovimiento != L))
+				{
+					#ifdef DEPURAR
+						Log( 2 , 2 , 0 );
+					#endif
+
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+ 
 			
 
 				break;

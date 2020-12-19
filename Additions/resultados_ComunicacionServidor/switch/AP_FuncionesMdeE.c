@@ -161,45 +161,4 @@ void giroIzquierda( void )
 	return ;
 }
 
-/**
-*	\fn void RegularVelocidad(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void RegularVelocidad( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void func_error(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void func_error( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void chequeoData(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void chequeoData( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
 

@@ -70,8 +70,4 @@ void SinMovimiento( void );
 void Reversa( void );
 void giroDerecha( void );
 void giroIzquierda( void );
-void RegularVelocidad( void );
-void func_error( void );
-void chequeoData( void );
-
 #endif /* INC_AP_FUNCIONESMDEE_H_ */
