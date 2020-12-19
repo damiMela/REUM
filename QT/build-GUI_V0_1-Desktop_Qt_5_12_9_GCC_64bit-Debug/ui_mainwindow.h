@@ -11,6 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -24,7 +26,10 @@
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "qwebengineview.h"
@@ -36,6 +41,9 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QVBoxLayout *verticalLayout_4;
     QGroupBox *ctrlGroup;
     QHBoxLayout *horizontalLayout_2;
     QFrame *webcamFrame;
@@ -60,6 +68,32 @@ public:
     QVBoxLayout *verticalLayout_2;
     QPushButton *SaveDbBtn;
     QLabel *DbLbl;
+    QPushButton *stopSaveBtn;
+    QWidget *tab_2;
+    QVBoxLayout *verticalLayout_5;
+    QFrame *frame_2;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *loadDbBtn;
+    QLabel *DbDirLoadLbl;
+    QSpacerItem *horizontalSpacer_3;
+    QTableView *DbTableView;
+    QGroupBox *groupBox;
+    QVBoxLayout *verticalLayout_6;
+    QFrame *frame_3;
+    QHBoxLayout *horizontalLayout_6;
+    QComboBox *tiposComboBox;
+    QCheckBox *timeCheck;
+    QCheckBox *dateCheck;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *tipoFiltroBtn;
+    QFrame *frame_4;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label;
+    QTimeEdit *timeEditFrom;
+    QLabel *label_2;
+    QTimeEdit *timeEditTo;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *rangoFilrtoBtn;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -67,7 +101,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(681, 664);
+        MainWindow->resize(811, 723);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -78,7 +112,13 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        ctrlGroup = new QGroupBox(centralwidget);
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        verticalLayout_4 = new QVBoxLayout(tab);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        ctrlGroup = new QGroupBox(tab);
         ctrlGroup->setObjectName(QString::fromUtf8("ctrlGroup"));
         horizontalLayout_2 = new QHBoxLayout(ctrlGroup);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -198,9 +238,9 @@ public:
         horizontalLayout_2->addWidget(velocitySlide);
 
 
-        verticalLayout->addWidget(ctrlGroup);
+        verticalLayout_4->addWidget(ctrlGroup);
 
-        dataGroup = new QGroupBox(centralwidget);
+        dataGroup = new QGroupBox(tab);
         dataGroup->setObjectName(QString::fromUtf8("dataGroup"));
         horizontalLayout = new QHBoxLayout(dataGroup);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -245,6 +285,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         SaveDbBtn = new QPushButton(frame);
         SaveDbBtn->setObjectName(QString::fromUtf8("SaveDbBtn"));
+        SaveDbBtn->setEnabled(false);
 
         verticalLayout_2->addWidget(SaveDbBtn);
 
@@ -264,22 +305,157 @@ public:
 
         verticalLayout_2->addWidget(DbLbl, 0, Qt::AlignTop);
 
+        stopSaveBtn = new QPushButton(frame);
+        stopSaveBtn->setObjectName(QString::fromUtf8("stopSaveBtn"));
+        stopSaveBtn->setEnabled(false);
+
+        verticalLayout_2->addWidget(stopSaveBtn);
+
 
         horizontalLayout->addWidget(frame);
 
 
-        verticalLayout->addWidget(dataGroup);
+        verticalLayout_4->addWidget(dataGroup);
+
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        verticalLayout_5 = new QVBoxLayout(tab_2);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        frame_2 = new QFrame(tab_2);
+        frame_2->setObjectName(QString::fromUtf8("frame_2"));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        horizontalLayout_4 = new QHBoxLayout(frame_2);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        loadDbBtn = new QPushButton(frame_2);
+        loadDbBtn->setObjectName(QString::fromUtf8("loadDbBtn"));
+        sizePolicy1.setHeightForWidth(loadDbBtn->sizePolicy().hasHeightForWidth());
+        loadDbBtn->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_4->addWidget(loadDbBtn);
+
+        DbDirLoadLbl = new QLabel(frame_2);
+        DbDirLoadLbl->setObjectName(QString::fromUtf8("DbDirLoadLbl"));
+
+        horizontalLayout_4->addWidget(DbDirLoadLbl);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+
+        verticalLayout_5->addWidget(frame_2);
+
+        DbTableView = new QTableView(tab_2);
+        DbTableView->setObjectName(QString::fromUtf8("DbTableView"));
+
+        verticalLayout_5->addWidget(DbTableView);
+
+        groupBox = new QGroupBox(tab_2);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        verticalLayout_6 = new QVBoxLayout(groupBox);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        frame_3 = new QFrame(groupBox);
+        frame_3->setObjectName(QString::fromUtf8("frame_3"));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        horizontalLayout_6 = new QHBoxLayout(frame_3);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        tiposComboBox = new QComboBox(frame_3);
+        tiposComboBox->addItem(QString());
+        tiposComboBox->addItem(QString());
+        tiposComboBox->addItem(QString());
+        tiposComboBox->addItem(QString());
+        tiposComboBox->setObjectName(QString::fromUtf8("tiposComboBox"));
+        tiposComboBox->setMinimumSize(QSize(180, 0));
+
+        horizontalLayout_6->addWidget(tiposComboBox);
+
+        timeCheck = new QCheckBox(frame_3);
+        timeCheck->setObjectName(QString::fromUtf8("timeCheck"));
+        timeCheck->setChecked(true);
+
+        horizontalLayout_6->addWidget(timeCheck);
+
+        dateCheck = new QCheckBox(frame_3);
+        dateCheck->setObjectName(QString::fromUtf8("dateCheck"));
+        dateCheck->setChecked(true);
+
+        horizontalLayout_6->addWidget(dateCheck);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_2);
+
+        tipoFiltroBtn = new QPushButton(frame_3);
+        tipoFiltroBtn->setObjectName(QString::fromUtf8("tipoFiltroBtn"));
+
+        horizontalLayout_6->addWidget(tipoFiltroBtn);
+
+
+        verticalLayout_6->addWidget(frame_3);
+
+        frame_4 = new QFrame(groupBox);
+        frame_4->setObjectName(QString::fromUtf8("frame_4"));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        horizontalLayout_5 = new QHBoxLayout(frame_4);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label = new QLabel(frame_4);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout_5->addWidget(label);
+
+        timeEditFrom = new QTimeEdit(frame_4);
+        timeEditFrom->setObjectName(QString::fromUtf8("timeEditFrom"));
+        timeEditFrom->setCurrentSection(QDateTimeEdit::HourSection);
+        timeEditFrom->setCalendarPopup(false);
+
+        horizontalLayout_5->addWidget(timeEditFrom);
+
+        label_2 = new QLabel(frame_4);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_5->addWidget(label_2);
+
+        timeEditTo = new QTimeEdit(frame_4);
+        timeEditTo->setObjectName(QString::fromUtf8("timeEditTo"));
+
+        horizontalLayout_5->addWidget(timeEditTo);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_4);
+
+        rangoFilrtoBtn = new QPushButton(frame_4);
+        rangoFilrtoBtn->setObjectName(QString::fromUtf8("rangoFilrtoBtn"));
+
+        horizontalLayout_5->addWidget(rangoFilrtoBtn);
+
+
+        verticalLayout_6->addWidget(frame_4);
+
+
+        verticalLayout_5->addWidget(groupBox);
+
+        tabWidget->addTab(tab_2, QString());
+
+        verticalLayout->addWidget(tabWidget);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 681, 22));
+        menubar->setGeometry(QRect(0, 0, 811, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -317,6 +493,25 @@ public:
 
         SaveDbBtn->setText(QApplication::translate("MainWindow", "Grabar Datos", nullptr));
         DbLbl->setText(QString());
+        stopSaveBtn->setText(QApplication::translate("MainWindow", "Parar Grabaci\303\263n", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Control", nullptr));
+        loadDbBtn->setText(QApplication::translate("MainWindow", "Cargar archivo", nullptr));
+        DbDirLoadLbl->setText(QString());
+        groupBox->setTitle(QApplication::translate("MainWindow", "Filtros", nullptr));
+        tiposComboBox->setItemText(0, QApplication::translate("MainWindow", "Todo", nullptr));
+        tiposComboBox->setItemText(1, QApplication::translate("MainWindow", "Temperatura", nullptr));
+        tiposComboBox->setItemText(2, QApplication::translate("MainWindow", "Humedad", nullptr));
+        tiposComboBox->setItemText(3, QApplication::translate("MainWindow", "Presi\303\263n", nullptr));
+
+        timeCheck->setText(QApplication::translate("MainWindow", "Timestamp", nullptr));
+        dateCheck->setText(QApplication::translate("MainWindow", "Date", nullptr));
+        tipoFiltroBtn->setText(QApplication::translate("MainWindow", "Filtrar tipo", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Desde", nullptr));
+        timeEditFrom->setDisplayFormat(QApplication::translate("MainWindow", "HH:mm:ss", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Hasta", nullptr));
+        timeEditTo->setDisplayFormat(QApplication::translate("MainWindow", "HH:mm:ss", nullptr));
+        rangoFilrtoBtn->setText(QApplication::translate("MainWindow", "Filtrar rango", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "log reader", nullptr));
     } // retranslateUi
 
 };

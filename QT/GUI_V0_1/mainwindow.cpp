@@ -3,8 +3,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#define UPDATE_DATA_TIME 2000
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -33,9 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->RightBtn->setIcon(QIcon("../GUI_V0/images/right.png"));
     ui->RightBtn->setIconSize(ui->RightBtn->size());
 
-    //<<<<<<<<<<<<<-Table strech->>>>>>>>>>>>>>//
+    //<<<<<<<<<<<<<-Others->>>>>>>>>>>>>>//
     ui->datTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
 }
 
 MainWindow::~MainWindow()
@@ -50,6 +47,7 @@ void MainWindow::connected_slot()
     ui->datTable->setEnabled(true);
     ui->btnFrame->setEnabled(true);
     ui->velocitySlide->setEnabled(true);
+    ui->SaveDbBtn->setEnabled(true);
 
     //<<<<<<<<<<<<<<-QTimer->>>>>>>>>>>>>>>>//
     QTimer *update_dir_timer = new QTimer(this);
@@ -59,24 +57,18 @@ void MainWindow::connected_slot()
 
 void MainWindow::newTCPData_slot()
 {
-    static bool firstTime = false;
     QByteArray datos = socket->readLine();
     QString str_input = QString::fromStdString(datos.toStdString());
     QStringList input_list = str_input.split("#");
 
     if(input_list.count()> 1){
-        if(!firstTime){
-            ui->SaveDbBtn->setEnabled(true);
-            firstTime = true;
-        }
-
         input_list.pop_front();
-        qDebug() << input_list[0] << "-----" << input_list[1] <<"\n";
-
         for(int i = 0; i < 1; i++){
             QByteArray d = input_list[i].toUtf8();
             updateTable(d[0], input_list[i+1]);
         }
+
+        if(db.isOpen())updateSQLdb();
     }
 
 }
@@ -113,7 +105,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyevent)
 void MainWindow::updateRobotDir(){
     QString s = QString(dir);
     s.append(QString::number(ui->velocitySlide->value()));
-    qDebug() << s << "\n";
     sendTCPmsg(s);
 }
 
@@ -135,7 +126,48 @@ void MainWindow::updateTable(char itemChar, QString val)
         QTableWidgetItem *itemVal = new QTableWidgetItem(val);
         ui->datTable->setItem(itemIndex, 0, itemVal);
     }
+}
 
+void MainWindow::updateSQLdb(void){
+    QString consulta;
+    QString time, date;
+
+    QString temp_s = "";
+    QString humd_s = "";
+    QString pres_S = "";
+
+    //-------timestamp
+    date = QDate::currentDate().toString();
+    time = QTime::currentTime().toString();
+
+    //-------tableData
+    for (int i = 0; i < ui->datTable->rowCount(); ++i) {
+        QTableWidgetItem *d_item = ui->datTable->item(i, 0);
+        QString type = ui->datTable->verticalHeaderItem(i)->text();
+        if(d_item){
+            if(QString::compare(type, "Temperatura"))
+                temp_s = d_item->text();
+            if(QString::compare(type, "Humedad"))
+                humd_s = d_item->text();
+            if(QString::compare(type, "Presion"))
+                pres_S = d_item->text();
+        }
+    }
+    consulta.append("INSERT INTO reumData(time, date, temp, humd, pres)"
+                    "VALUES ('"+time+
+                    "', '"+date+
+                    "', '"+temp_s+
+                    "', '"+humd_s+
+                    "', '"+pres_S+
+                    "' );");
+
+    QSqlQuery insert_data(db);
+    insert_data.prepare(consulta);
+    if(!insert_data.exec()){
+        QMessageBox::critical(NULL, "Alumnos", "Error mientras se guardaban los datos.");
+    }
+    qDebug() << "Query insert:" << consulta.toLocal8Bit().constData() << endl;
+    consulta = "";
 }
 //------------------------------------------BUTTON SLOTS-----------------------------------------//
 void MainWindow::on_pushButton_clicked()
@@ -165,25 +197,26 @@ void MainWindow::on_SaveDbBtn_clicked()
     QString rutaBase = QFileDialog::getSaveFileName(this,
                                         tr("Save Address Book"),
                                         "", tr("sqlite data base(*.sqlite);;All Files (*)"));
-    rutaBase += ".sqlite";
+    rutaBase.append(".sqlite");
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(rutaBase);
 
     if(!db.open())
-    {  QMessageBox::critical(NULL, "Alumnos", "Error en la apertura de la base de datos de alumnos!");
+    {  QMessageBox::critical(NULL, "data log", "Error en la apertura de la base de datos!");
        exit(1);
     }
 
     QString ConsultaREUM_data("CREATE TABLE IF NOT EXISTS reumData("
                                 "time VARCHAR(20) PRIMARY KEY,"
-                                "type VARCHAR (10),"
-                                "val VARCHAR (10),"
-                                "unit VARCHAR(5)"
+                                "date VARCHAR(20), "
+                                "temp VARCHAR(5),"
+                                "humd VARCHAR (5),"
+                                "pres VARCHAR(5)"
                                 ");");
 
     QSqlQuery tabla(db);
-    qDebug() << "Query Alumnos:" << ConsultaREUM_data.toLocal8Bit().constData() << endl;
+    qDebug() << "Query create:" << ConsultaREUM_data.toLocal8Bit().constData() << endl;
     if(!tabla.prepare(ConsultaREUM_data))
         QMessageBox::critical(NULL, "Base de Datos", "No se pudo preparar la consulta");
     if (!tabla.exec())
@@ -191,4 +224,98 @@ void MainWindow::on_SaveDbBtn_clicked()
 
     ui->DbLbl->setText(rutaBase);
     ui->SaveDbBtn->setEnabled(false);
+    ui->stopSaveBtn->setEnabled(true);
+}
+
+void MainWindow::on_stopSaveBtn_clicked()
+{
+    db.close();
+    db.setDatabaseName("");
+    ui->stopSaveBtn->setEnabled(false);
+    ui->SaveDbBtn->setEnabled(true);
+}
+
+
+void MainWindow::on_loadDbBtn_clicked()
+{   QString rutaBase = QFileDialog::getOpenFileName(this,
+            tr("Abrir base de datos"), "",
+            tr("qlite data base(*.sqlite);;All Files (*)"));
+
+    if(!QString::compare(rutaBase, db.databaseName())){
+        QMessageBox::critical(NULL, "data log - read", "la base de datos esta siendo utilizada");
+        return;
+    }
+
+    dbRead = QSqlDatabase::addDatabase("QSQLITE");
+    dbRead.setDatabaseName(rutaBase);
+   if(!dbRead.open()){
+        QMessageBox::critical(NULL, "data log - read", "Error en la apertura de la base de datos");
+        return;
+    }
+
+    QString consultaDB_read("SELECT * FROM reumData");
+
+    QSqlQuery sqlQuery(dbRead);
+    qDebug() << "Query create:" << consultaDB_read.toLocal8Bit().constData() << endl;
+    if(!sqlQuery.prepare(consultaDB_read))
+        QMessageBox::critical(NULL, "Base de Datos", "No se pudo preparar la consulta");
+    if (!sqlQuery.exec())
+        exit(1);
+
+    QSqlQueryModel *sqlModel = new QSqlQueryModel;
+    sqlModel->setQuery(sqlQuery);
+    ui->DbTableView->setModel(sqlModel);
+    ui->DbDirLoadLbl->setText(rutaBase);
+}
+
+void MainWindow::on_tipoFiltroBtn_clicked()
+{   QString select_db_s = "";
+
+    if(dbRead.isOpen()){
+        QString selected = ui->tiposComboBox->currentText();
+        if(ui->timeCheck->isChecked()) select_db_s.append("time, ");
+        if(ui->dateCheck->isChecked()) select_db_s.append("date, ");
+
+        if(!selected.compare("Todo"))
+               select_db_s = "*";
+        else if(!selected.compare("Temperatura"))
+                select_db_s.append("temp");
+        else if(!selected.compare("Humedad"))
+                select_db_s.append("humd");
+        else if(!selected.compare("Presión"))
+                select_db_s.append("pres");
+
+        QSqlQuery sqlQuery(dbRead);
+        QString consultaDB_read("SELECT "+select_db_s+" FROM reumData");
+        qDebug() << "Query select:" << consultaDB_read.toLocal8Bit().constData() << endl;
+        if(!sqlQuery.prepare(consultaDB_read))
+            QMessageBox::critical(NULL, "Base de Datos", "No se pudo preparar la consulta");
+        if (!sqlQuery.exec())
+            exit(1);
+
+        QSqlQueryModel *sqlModel = new QSqlQueryModel;
+        sqlModel->setQuery(sqlQuery);
+        ui->DbTableView->setModel(sqlModel);
+    }
+}
+
+void MainWindow::on_rangoFilrtoBtn_clicked()
+{
+   if(dbRead.isOpen()){
+       QString from = ui->timeEditFrom->time().toString();
+       QString to = ui->timeEditTo->time().toString();
+
+       QSqlQuery sqlQuery(dbRead);
+       QString consultaDB_read("SELECT * FROM reumData WHERE time BETWEEN '"+from+"' AND '"+to+"'");
+       qDebug() << "Query select:" << consultaDB_read.toLocal8Bit().constData() << endl;
+
+       if(!sqlQuery.prepare(consultaDB_read))
+           QMessageBox::critical(NULL, "Base de Datos", "No se pudo preparar la consulta");
+       if (!sqlQuery.exec())
+           exit(1);
+
+       QSqlQueryModel *sqlModel = new QSqlQueryModel;
+       sqlModel->setQuery(sqlQuery);
+       ui->DbTableView->setModel(sqlModel);
+   }
 }

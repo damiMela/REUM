@@ -588,7 +588,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000     0x1aa8
+.text           0x0000000000000000     0x1b0c
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -597,10 +597,10 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0x1aa8 LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x1b0c LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000d4        0x4 LONG 0x0 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0x1aa8 LOADADDR (.data_RAM2)
+                0x00000000000000d8        0x4 LONG 0x1b0c LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
@@ -802,46 +802,46 @@ END GROUP
  .text.TIMER0_IRQHandler
                 0x00000000000018e0       0x28 ./src/DR/DR_Timer0.o
                 0x00000000000018e0                TIMER0_IRQHandler
- .text.main     0x0000000000001908      0x184 ./src/TPI_V0.o
+ .text.main     0x0000000000001908      0x1d8 ./src/TPI_V0.o
                 0x0000000000001908                main
  .text.__weak_main
-                0x0000000000001a8c        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x0000000000001a8c                __main
-                0x0000000000001a8c                __weak_main
+                0x0000000000001ae0        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x0000000000001ae0                __main
+                0x0000000000001ae0                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata.main.str1.4
-                0x0000000000001a90       0x16 ./src/TPI_V0.o
-                0x0000000000001aa8                . = ALIGN (0x4)
- *fill*         0x0000000000001aa6        0x2 ff
+                0x0000000000001ae4       0x26 ./src/TPI_V0.o
+                0x0000000000001b0c                . = ALIGN (0x4)
+ *fill*         0x0000000000001b0a        0x2 ff
 
-.glue_7         0x0000000000001aa8        0x0
- .glue_7        0x0000000000001aa8        0x0 linker stubs
+.glue_7         0x0000000000001b0c        0x0
+ .glue_7        0x0000000000001b0c        0x0 linker stubs
 
-.glue_7t        0x0000000000001aa8        0x0
- .glue_7t       0x0000000000001aa8        0x0 linker stubs
+.glue_7t        0x0000000000001b0c        0x0
+ .glue_7t       0x0000000000001b0c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000001aa8        0x0
- .vfp11_veneer  0x0000000000001aa8        0x0 linker stubs
+.vfp11_veneer   0x0000000000001b0c        0x0
+ .vfp11_veneer  0x0000000000001b0c        0x0 linker stubs
 
-.v4_bx          0x0000000000001aa8        0x0
- .v4_bx         0x0000000000001aa8        0x0 linker stubs
+.v4_bx          0x0000000000001b0c        0x0
+ .v4_bx         0x0000000000001b0c        0x0 linker stubs
 
-.iplt           0x0000000000001aa8        0x0
- .iplt          0x0000000000001aa8        0x0 ./src/PR/PR_ADC.o
+.iplt           0x0000000000001b0c        0x0
+ .iplt          0x0000000000001b0c        0x0 ./src/PR/PR_ADC.o
 
-.rel.dyn        0x0000000000001aa8        0x0
- .rel.iplt      0x0000000000001aa8        0x0 ./src/PR/PR_ADC.o
+.rel.dyn        0x0000000000001b0c        0x0
+ .rel.iplt      0x0000000000001b0c        0x0 ./src/PR/PR_ADC.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000000001aa8        0x0
-                0x0000000000001aa8                __exidx_start = .
+.ARM.exidx      0x0000000000001b0c        0x0
+                0x0000000000001b0c                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000001aa8                __exidx_end = .
-                0x0000000000001aa8                _etext = .
+                0x0000000000001b0c                __exidx_end = .
+                0x0000000000001b0c                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001aa8
+.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001b0c
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -862,7 +862,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x0 load address 0x0000000000001aa8
+.data           0x0000000010000000        0x0 load address 0x0000000000001b0c
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -878,7 +878,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000000        0x0 load address 0x0000000000001aa8
+.igot.plt       0x0000000010000000        0x0 load address 0x0000000000001b0c
  .igot.plt      0x0000000010000000        0x0 ./src/PR/PR_ADC.o
 
 .bss_RAM2       0x000000002007c000        0x0
@@ -1037,11 +1037,11 @@ END GROUP
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xffffffffefff74da                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000001aa8                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000001aa8                _image_size = (_image_end - _image_start)
+                0x0000000000001b0c                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000001b0c                _image_size = (_image_end - _image_start)
 OUTPUT(TPI_V0.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x335f
+.debug_info     0x0000000000000000     0x337d
  .debug_info    0x0000000000000000       0xfe ./src/PR/PR_ADC.o
  .debug_info    0x00000000000000fe       0xba ./src/PR/PR_Botones.o
  .debug_info    0x00000000000001b8      0x1bb ./src/PR/PR_I2C.o
@@ -1060,8 +1060,8 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_info    0x0000000000002011      0x6d6 ./src/DR/DR_Serial.o
  .debug_info    0x00000000000026e7      0x2c5 ./src/DR/DR_Systick.o
  .debug_info    0x00000000000029ac      0x51b ./src/DR/DR_Timer0.o
- .debug_info    0x0000000000002ec7      0x226 ./src/TPI_V0.o
- .debug_info    0x00000000000030ed      0x272 ./src/cr_startup_lpc175x_6x.o
+ .debug_info    0x0000000000002ec7      0x244 ./src/TPI_V0.o
+ .debug_info    0x000000000000310b      0x272 ./src/cr_startup_lpc175x_6x.o
 
 .debug_abbrev   0x0000000000000000     0x1532
  .debug_abbrev  0x0000000000000000       0xc7 ./src/PR/PR_ADC.o
@@ -1189,7 +1189,7 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_macro   0x000000000000249a       0x82 ./src/TPI_V0.o
  .debug_macro   0x000000000000251c       0x1d ./src/cr_startup_lpc175x_6x.o
 
-.debug_line     0x0000000000000000     0x24bc
+.debug_line     0x0000000000000000     0x24d8
  .debug_line    0x0000000000000000      0x158 ./src/PR/PR_ADC.o
  .debug_line    0x0000000000000158      0x12f ./src/PR/PR_Botones.o
  .debug_line    0x0000000000000287      0x16b ./src/PR/PR_I2C.o
@@ -1208,10 +1208,10 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_line    0x00000000000019ec      0x307 ./src/DR/DR_Serial.o
  .debug_line    0x0000000000001cf3      0x1e4 ./src/DR/DR_Systick.o
  .debug_line    0x0000000000001ed7      0x18b ./src/DR/DR_Timer0.o
- .debug_line    0x0000000000002062      0x2fb ./src/TPI_V0.o
- .debug_line    0x000000000000235d      0x15f ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x0000000000002062      0x317 ./src/TPI_V0.o
+ .debug_line    0x0000000000002379      0x15f ./src/cr_startup_lpc175x_6x.o
 
-.debug_str      0x0000000000000000     0x5a60
+.debug_str      0x0000000000000000     0x5a6c
  .debug_str     0x0000000000000000     0x3b03 ./src/PR/PR_ADC.o
                                        0x3b40 (size before relaxing)
  .debug_str     0x0000000000003b03       0xfe ./src/PR/PR_Botones.o
@@ -1248,9 +1248,9 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
                                        0x3d04 (size before relaxing)
  .debug_str     0x0000000000005246      0x1c9 ./src/DR/DR_Timer0.o
                                        0x3d11 (size before relaxing)
- .debug_str     0x000000000000540f      0x48b ./src/TPI_V0.o
-                                       0x41cb (size before relaxing)
- .debug_str     0x000000000000589a      0x1c6 ./src/cr_startup_lpc175x_6x.o
+ .debug_str     0x000000000000540f      0x497 ./src/TPI_V0.o
+                                       0x41d7 (size before relaxing)
+ .debug_str     0x00000000000058a6      0x1c6 ./src/cr_startup_lpc175x_6x.o
                                        0x2fba (size before relaxing)
 
 .comment        0x0000000000000000       0x79

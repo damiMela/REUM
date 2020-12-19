@@ -132,9 +132,14 @@ int main(void) {
 		uint8_t temp1 [] = "#t#25";
 		uint8_t temp2 [] = "#t#12";
 		uint8_t humed [] = "#h#42";
-		if(getBtn(SW4)) UART1_SendString(temp1);
-		if(getBtn(SW3)) UART1_SendString(temp2);
-		if(getBtn(SW2)) UART1_SendString(humed);
+		uint8_t pres1 [] = "#p#20";
+		uint8_t pres2 [] = "#p#60";
+
+		if(getBtn(SW5)) UART1_SendString(temp1);
+		if(getBtn(SW4)) UART1_SendString(temp2);
+		if(getBtn(SW3)) UART1_SendString(humed);
+		if(getBtn(SW2)) UART1_SendString(pres1);
+		if(getBtn(SW1)) UART1_SendString(pres2);
 
 
 

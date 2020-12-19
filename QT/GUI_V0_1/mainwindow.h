@@ -15,8 +15,11 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
+#include <QtSql/QSqlQueryModel>
 #include <QTableWidgetItem>
 #include <QDateTime>
+
+#define UPDATE_DATA_TIME 2000
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -48,6 +51,14 @@ private slots:
 
     void on_SaveDbBtn_clicked();
 
+    void on_loadDbBtn_clicked();
+
+    void on_stopSaveBtn_clicked();
+
+    void on_tipoFiltroBtn_clicked();
+
+    void on_rangoFilrtoBtn_clicked();
+
 protected:
     void keyPressEvent(QKeyEvent *keyevent);
     void keyReleaseEvent(QKeyEvent *event);
@@ -58,10 +69,14 @@ private:
     char dir;
 
     QSqlDatabase db;
+    QSqlDatabase dbRead;
 
     void sendTCPmsg(QString msg);
     void updateRobotDir(void);
     void updateTable(char itemIndex, QString val);
+    void updateSQLdb(void);
+
+    void configureDbTable(void);
 
 };
 #endif // MAINWINDOW_H
