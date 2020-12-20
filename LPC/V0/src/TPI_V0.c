@@ -15,7 +15,7 @@
 #include <cr_section_macros.h>
 #include <DR/DR_Tipos.h>
 
-//timer drivers
+//systick and timer drivers
 #include <DR/DR_Systick.h>
 #include <DR/DR_PLL.h>
 #include <DR/DR_Timer0.h>
@@ -37,6 +37,7 @@
 
 
 #include <AP/AP_Ultrasonido.h>
+#include <PR/PR_BMP280.h>
 
 
 void func(void){
@@ -51,7 +52,7 @@ int main(void) {
 //	InicializarADC();
 	InicializarSerial0();
 	InicializarSerial1();
-	InicializarI2C();
+//	InicializarI2C();
 
 	InicializarBotones();
 	InicializarRelays();
@@ -157,8 +158,11 @@ int main(void) {
 */
 
     	//--------PRUEBA I2C-----------------//
-//    	uint8_t send[1] = {0x58};
-//    	I2C_write(0x58, 1, send);
+		BMP280_getValues();
+
+		uint32_t temp =  get_temp();
+		uint32_t pres =  get_pres();
+
 
     }
 

@@ -1,0 +1,2 @@
+PR_Ultrasonido.c:66:6:InicializarUs	8	static
+PR_Ultrasonido.c:73:6:readUS	16	static

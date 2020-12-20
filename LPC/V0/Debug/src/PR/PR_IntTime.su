@@ -1,0 +1,3 @@
+PR_IntTime.c:62:6:InicializarIntTime	8	static
+PR_IntTime.c:73:6:enableIntTime	16	static
+PR_IntTime.c:84:10:getIntTime	4	static

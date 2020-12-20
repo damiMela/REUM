@@ -1,2 +1,4 @@
 PR_I2C.c:61:6:InicializarI2C	8	static
-PR_I2C.c:73:9:I2C_write	24	static
+PR_I2C.c:75:9:I2C_write	24	static
+PR_I2C.c:92:9:I2C_readWrite	24	static
+PR_I2C.c:112:9:I2C_read	24	static
