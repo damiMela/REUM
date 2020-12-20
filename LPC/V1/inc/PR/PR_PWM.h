@@ -40,7 +40,7 @@ enum {PWM1, PWM2, PWM3};
  **********************************************************************************************************************************/
 void InicializarPWM(void);
 void setPWMDuty(uint8_t n, uint16_t val);
-void setPWMOff(uint8_t n);
-uint16_t getPWMDuty(uint8_t n);
+void setPWMOff(void);
+uint8_t getPWMDuty(uint8_t n);
 
 #endif /* PR_PR_PWM_H_ */

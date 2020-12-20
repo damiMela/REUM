@@ -90,6 +90,14 @@ void setRelay(uint8_t n, uint8_t state){
 	}
 }
 
+
+/**
+	\fn invertRelay
+	\brief Invierte el estado del relay seleccionado
+ 	\author R2002 - Grupo2
+ 	\date Nov 5, 2020
+ 	\param [in] Relay a invertir estado
+*/
 void invertRelay(uint8_t n){
 	uint8_t state;
 	switch(n){

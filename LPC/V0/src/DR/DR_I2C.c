@@ -2,7 +2,7 @@
  *
  * @file		I2C.c
  * @brief		Contiene las definiciones de las funciones del modulo
- * @date		3 oct. 2020
+ * @date		Dec 18. 2020
  * @author		Nicolás Taurozzi
  *
  **********************************************************************************************************************************/
@@ -11,8 +11,7 @@
  *** INCLUDES
  **********************************************************************************************************************************/
 #include <DR/DR_I2C.h>
-#include <DR/DR_Pinsel.h>
-#include <DR/DR_GPIO.h>
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -29,7 +28,11 @@
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
+#define POWER_I2C1_ON (PCONP |= (1 << PI2C1))
+#define POWER_I2C1_OFF (PCONP &= ~(1 << PI2C1))
+
 #define I2C1 ((I2C_t*)0x4005C000UL)
+
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -86,51 +89,40 @@ volatile uint32_t I2C1_WrIdx = 0;
 /**
 	\fn      void Init_I2C1(void)
 	\brief   Inicializacion del i2C1
- 	\author  Nicolas Taurozzi
- 	\date 	 3 oct. 2020
+ 	\author  R2002 - Grupo2
+ 	\date 	 Dec 18. 2020
 	\return  No hay retorno
 */
 void InicializarI2C_DR(void)
 {
-	PCONP |= (1 << 19); //Energizo el I2C
+	POWER_I2C1_ON;
+	PCLKSEL1 &= ~(3 << PCLK_I2C1);
 
-	PCLKSEL1 &= ~(0x03 << 6); //Activo el clock
+	//Configuracion de los pines en primitiva//
 
-	//Configuro los pins
-	setPinsel(SDA1,FUNCION_3); //SDA
-	setPinsel(SCL1,FUNCION_3);  //SCL
-
-	setPinmode(SDA1, MODE_NONE);
-	setPinmode(SCL1, MODE_NONE); //Seteo el Open-drain mode
-
-	setPinmode_OD(SDA1, MODE_OD_NLOW);
-	setPinmode_OD(SCL1, MODE_OD_NLOW); //Seteo el Open-drain mode
-
-	//Limpio los flags
 	I2C1->CONCLR = I2CONCLR_AAC | I2CONCLR_SIC | I2CONCLR_STAC | I2CONCLR_I2ENC;
 
-	I2C1->SCLH = 60;
-	I2C1->SCLL = 60;
+	//f_I2C = PCLK_I2C / (SCLH + SCLL) = 25MHz / 250 = 100Khz
+	I2C1->SCLH = 125;
+	I2C1->SCLL = 125;
 
-	ISER0 |= (1 << 11); //Habilito interrupciones
-
+	ISER0 |= (1 << ISER_I2C1);
 	I2C1->CONSET = I2CONSET_I2EN; //Habilito el I2C
 }
 
 /**
 	\fn      void I2C1_IRQHandler(void)
-	\brief   Handler de las interrupciones
- 	\author  Nicolas Taurozzi
- 	\date 	 3 oct. 2020
-	\return  No hay retorno
+	\brief   Handler de las interrupciones de I2C
+ 	\author  R2002 - Grupo2
+ 	\date 	 Dec 18. 2020
 */
 void I2C1_IRQHandler(void)
 {
   uint8_t StatValue;
   I2C1_timeout = 0;
   /* this handler deals with master read and master write only */
-  StatValue = I2C1->STAT;
 
+  StatValue = I2C1->STAT;
   switch ( StatValue )
   {
 	case 0x08:			/* A Start condition is issued. */
@@ -237,11 +229,9 @@ void I2C1_IRQHandler(void)
 
 /**
 	\fn      uint8_t I2CStop( uint32_t portNum )
-	\brief   Setea las condiciones de stop del I2C y termina solo cuando se detuvo
- 	\author  Nicolas Taurozzi
- 	\date 	 3 oct. 2020
- 	\param 	 [in] uint32_t portNum: Numero de canal del I2C del micro
-	\return  TRUE
+	\brief   Setea las condiciones de stop del I2C
+ 	\author  R2002 - Grupo2
+ 	\date 	 Dec 18. 2020
 */
 
 void I2C1_Stop(void)
@@ -254,34 +244,27 @@ void I2C1_Stop(void)
 }
 
 /**
-	\fn      uint8_t I2CStop( uint32_t portNum )
-	\brief   Rutina para completar una comunicacion I2C de inicio a fin.
-			 Los estados intermedios son resueltos por el handler y antes
-			 de que sea llamada se deben setear la cantidad de veces que
-			 se va a leer y escribir
- 	\author  Nicolas Taurozzi
- 	\date 	 3 oct. 2020
- 	\param 	 [in] uint32_t portNum: Numero de canal del I2C del micro
-	\return  Estado del master al terminar
+	\fn      uint8_t I2C1_Engine
+	\brief   Utiliza la información de masterBuffer, readLen y writeLen para eraliar una caomunicación por I2C
+ 	\author  R2002 - Grupo2
+ 	\date 	 Dec 18. 2020
+	\return  Estado del i2c (Usar los estados declarados en el enum)
 */
-uint8_t I2C1_Engine()
-{
+uint8_t I2C1_Engine(){
   /*--- Issue a start condition ---*/
   I2C1->CONSET = I2CONSET_STA;	/* Set Start flag */
 
   I2C1_State = I2C_BUSY;
 
-  while ( I2C1_State == I2C_BUSY )
-  {
-	if ( I2C1_timeout >= MAX_TIMEOUT )
-	{
+  while ( I2C1_State == I2C_BUSY ){
+	if ( I2C1_timeout >= MAX_TIMEOUT ){
 	  I2C1_State = I2C_TIMEOUT;
 	  break;
 	}
 	I2C1_timeout++;
   }
-  I2C1->CONCLR = I2CONCLR_STAC;
 
+  I2C1->CONCLR = I2CONCLR_STAC;
   I2C1_Stop();
 
   return ( I2C1_State );

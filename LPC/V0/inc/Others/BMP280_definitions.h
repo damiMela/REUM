@@ -37,11 +37,6 @@
 */#ifndef __BMP280_DEFS_H__
 #define __BMP280_DEFS_H__
 
-/*! CPP guard */
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /****************************************************************/
 /*! @name       Header includes             */
 /****************************************************************/
@@ -49,7 +44,7 @@ extern "C" {
 #include <linux/types.h>
 #include <linux/kernel.h>
 #else
-#include <stdint_local.h>
+#include <Others/stdint_local.h>
 #include <stddef.h>
 #endif
 
@@ -370,13 +365,6 @@ struct bmp280_config
     uint8_t spi3w_en;
 };
 
-/*! @name Sensor status structure */
-struct bmp280_status
-{
-    uint8_t measuring;
-    uint8_t im_update;
-};
-
 /*! @name Uncompensated data structure */
 struct bmp280_uncomp_data
 {
@@ -396,9 +384,5 @@ struct bmp280_dev
     struct bmp280_calib_param calib_param;
     struct bmp280_config conf;
 };
-
-#ifdef __cplusplus
-}
-#endif /* End of CPP guard */
 
 #endif /* __BMP280_DEFS_H__ */

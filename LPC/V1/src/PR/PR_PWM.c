@@ -48,13 +48,10 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  Nombre de la Funcion
-	\brief Descripcion
- 	\author Ing. Marcelo Trujillo
+	\fn  InicializarPWM
+	\brief Inicializa el driver y configura los pines "EXPANSION11" y "EXPANSION6" para PWM
+ 	\author R2002 - Grupo2
  	\date 13 nov. 2020
- 	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
 */
 void InicializarPWM(void){
 	InicializarPWM_DR();
@@ -64,16 +61,38 @@ void InicializarPWM(void){
 }
 
 
+/**
+	\fn  setPWMDuty
+	\brief setea el duty del canal de pwm seleccioado
+ 	\author R2002 - Grupo2
+ 	\date 13 nov. 2020
+ 	\param [in] canal de pwm
+ 	\param [in] porcentaje de duty (0-100)
+*/
 void setPWMDuty(uint8_t n, uint16_t val){
 	PWM_buff[n] = val*10;
 }
 
-void setPWMOff(uint8_t n){
+/**
+	\fn  setPWMOff
+	\brief setea todos los canales de PWM a 0
+ 	\author R2002 - Grupo2
+ 	\date 13 nov. 2020
+*/
+void setPWMOff(void){
 	for(uint8_t i = 0; i < CANT_PWM; i++){
 		PWM_buff[i] = 0;
 	}
 }
 
-uint16_t getPWMDuty(uint8_t n){
+/**
+	\fn  getPWMDuty
+	\brief devuelve el porcentaje de duty actual del canal elegido
+ 	\author R2002 - Grupo2
+ 	\date 13 nov. 2020
+ 	\param [in] canal a saber porcentaje de duty
+	\return (uint8_t) porcentaje de duty
+*/
+uint8_t getPWMDuty(uint8_t n){
 	return PWM_buff[n]/10;
 }

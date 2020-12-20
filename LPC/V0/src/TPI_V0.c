@@ -82,6 +82,7 @@ int main(void) {
     	//---agregar siempre---//
     	Timers_run();
     	ADC_run();
+    	BMP280_run();
     	//---------------------//
 
 
@@ -157,12 +158,13 @@ int main(void) {
     	setPWMDuty(PWM3, 60);
 */
 
-    	//--------PRUEBA I2C-----------------//
-		BMP280_getValues();
+    	//--------PRUEBA I2C-----------------//FUNCIONANDO - descomentar BMP280_run()
+/*		uint32_t temp = 0, pres = 0;
+		temp =  getBMP280_temp();
+		pres =  getBMP280_pres();
 
-		uint32_t temp =  get_temp();
-		uint32_t pres =  get_pres();
-
+		if(temp >= 2820) setRelay(RELAY2, ON);
+*/
 
     }
 

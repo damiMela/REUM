@@ -1,20 +1,31 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_ADC.c
+ * @file		PR_Motor.c
  * @brief		Descripcion del modulo
- * @date		10 dic. 2020
- * @author		R2002 - Melamed Damian
+ * @date		Nov 5, 2020
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <PR/PR_ADC.h>
-#include <DR/DR_ADC.h>
+#include <PR/PR_Motores.h>
+#include <DR/DR_PWM.h>
+#include <DR/DR_GPIO.h>
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
+#define MOTOR1_A		EXPANSION12 //escribir puertos correspondientes
+#define MOTOR1_B		EXPANSION13
+#define MOTOR1_VEL_PIN	EXPANSION6
+#define MOTOR1_VEL_CHN	3
+
+#define MOTOR2_A		EXPANSION14
+#define MOTOR2_B		EXPANSION15
+#define MOTOR2_VEL_PIN	EXPANSION11
+#define MOTOR2_VEL_CHN	2
 
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
@@ -48,51 +59,96 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  InicializarADC
-	\brief Configuara el ADC e inicializa los pines
+	\fn  InicializarMotores
+	\brief Inicializa los pines y el pwm
  	\author R2002 - Grupo2
- 	\date 10 dic. 2020
+ 	\date Nov 5, 2020
 */
-void InicializarADC(void){
-	InicializarADC_DR();
-	setPinsel(ADC_IN_1, FUNCION_3);
-	setPinsel(ADC_IN_3, FUNCION_1);
+void InicializarMotores(void){
+	InicializarPWM();
+
+	setDir(MOTOR1_A, OUTPUT);
+	setDir(MOTOR1_B, OUTPUT);
+	setDir(MOTOR2_A, OUTPUT);
+	setDir(MOTOR2_B, OUTPUT);
+
+	PWM_setDutyCicle(MOTOR1_VEL_CHN, 0);
+	PWM_setDutyCicle(MOTOR2_VEL_CHN, 0);
 }
 
-
 /**
-	\fn  getADC
-	\brief Devuelve el valor cargado en el buffer del canal de adc correspondiente
+	\fn  setMotoresDir
+	\brief setea los piens de los motores para que el robot se mueva de acuerdo a la direccione ingresada
  	\author R2002 - Grupo2
- 	\date 10 dic. 2020
- 	\param [in] canal de ADC
-	\return uint32_t con el promedio del valor en el canal de ADC
-*/
-uint32_t getADC(uint8_t chn_n){
-	return ADC_buffer[chn_n-1];
-}
+ 	\date Nov 5, 2020
+ 	\param [in] dirección a mover el robot
+ */
+void setMotoresDir(uint8_t dir){
+	switch(dir){
+		case 'f':
+		case ADELANTE:{
+			setPin(MOTOR1_A, ON);
+			setPin(MOTOR1_B, OFF);
 
+			setPin(MOTOR2_A, ON);
+			setPin(MOTOR2_B, OFF);
+			break;
+		}
 
-/**
-	\fn  ADC_run
-	\brief Ejecuta una coversion nueva cada vez que el ADC terminó de leer
- 	\author R2002 - Melamed Damian
- 	\date 10 dic. 2020
-*/
-void ADC_run(void){
-	if(ADC_ready){
-		ADC_startConvertion();
-		ADC_ready = 0;
+		case 'b':
+		case ATRAS:{
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, ON);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, ON);
+			break;
+		}
+
+		case 'l':
+		case IZQUIERDA:{
+			setPin(MOTOR1_A, ON);
+			setPin(MOTOR1_B, OFF);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, ON);
+			break;
+		}
+
+		case 'r':
+		case DERECHA:{
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, ON);
+
+			setPin(MOTOR2_A, ON);
+			setPin(MOTOR2_B, OFF);
+			break;
+		}
+
+		case 's':
+		case FRENO:{
+			setPin(MOTOR1_A, OFF);
+			setPin(MOTOR1_B, OFF);
+
+			setPin(MOTOR2_A, OFF);
+			setPin(MOTOR2_B, OFF);
+			break;
+		}
+
+		default:
+			dir = FRENO;
 	}
 }
 
+
 /**
-	\fn  ADC_cleanBuff
-	\brief Vacia el buffer con los valores de lectura del adc
+	\fn  setMotoresVel
+	\brief setea la velocidad (0 al 100)
  	\author R2002 - Grupo2
- 	\date 10 dic. 2020
-*/
-void ADC_cleanBuff(void){
-	ADC_buffer[0] = 0;
-	ADC_buffer[1] = 0;
+ 	\date Nov 5, 2020
+ 	\param [in] velocidad
+ */
+void setMotoresVel(uint8_t vel){
+	PWM_setDutyCicle(MOTOR1_VEL_CHN, vel);
+	PWM_setDutyCicle(MOTOR2_VEL_CHN, vel);
 }

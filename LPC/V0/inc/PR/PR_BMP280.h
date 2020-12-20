@@ -18,7 +18,7 @@
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
 #include <DR/DR_Tipos.h>
-#include <BMP280_definitions.h>
+#include <Others/BMP280_definitions.h>
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
@@ -39,16 +39,16 @@
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-uint8_t BMP280_init();
-void BMP280_getValues(void);
+uint8_t InicializarBMP280();
+void BMP280_run(void);
 
-int32_t get_temp();
-uint32_t get_pres();
+int32_t getBMP280_temp();
+uint32_t getBMP280_pres();
 
 //--bosch provided functions--//
 void set_calib_param(void);
 void bmp280_get_uncomp_data(uint8_t * data);
-void get_comp_temp(int32_t *comp_temp, int32_t uncomp_temp);
-void get_comp_pres(uint32_t *comp_pres, uint32_t uncomp_pres);
+int32_t  get_comp_temp(int32_t uncomp_temp);
+uint32_t get_comp_pres(uint32_t uncomp_pres);
 
 #endif /* PR_PR_BMP280_H_ */

@@ -1,7 +1,7 @@
 /*******************************************************************************************************************************//**
  *
  * @file		DR_ADC.h
- * @brief		Breve descripción del objetivo del Módulo
+ * @brief		Driver de conversor analógico-digital
  * @date		Sep 28, 2020
  * @author		R2002 - Grupo2
  *

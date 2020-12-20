@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************//**
  *
  * @file		DR_ExtInt.h
- * @brief		Breve descripción del objetivo del Módulo
- * @date		Sep 19, 2020
- * @author		Ing. Marcelo Trujillo
+ * @brief		Driver de interrupciones externas activadas por cambios de estado en un pin
+ * @date		nov 16, 2020
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 

@@ -190,6 +190,13 @@ void PWM_setDutyCicle(uint8_t PWM_n, uint16_t val){
 	PWM1->LatchEn.MatchLatchEn |= (1 << (PWM_n));
 }
 
+
+/**
+	\fn  PWM_update
+	\brief Actuaklizacion de los duty cicles de todos los canales de PWM. se realiza en el Scheduler
+ 	\author R2002 - Grupo2
+ 	\date oct 27, 2020
+*/
 void PWM_update(void){
 	for(uint8_t i = 0; i < CANT_PWM; i++){
 		uint16_t aux = PWM_buff[i];

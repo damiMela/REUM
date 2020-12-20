@@ -68,8 +68,8 @@
 #define		EXPANSION10		PORT0, 20 //SCL1
 #define		EXPANSION11		PORT3, 25 //PWM 1.2
 #define		EXPANSION12		PORT1, 27 //Motor1_A
-#define		EXPANSION13		PORT1, 24 //Motor1_A
-#define		EXPANSION14		PORT1, 21 //Motor2_B
+#define		EXPANSION13		PORT1, 24 //Motor1_B
+#define		EXPANSION14		PORT1, 21 //Motor2_A
 #define		EXPANSION15		PORT1, 18 //Motor2_B
 #define		EXPANSION16		PORT2, 8  //US_TRIG
 #define		EXPANSION17		PORT2, 12 //US_ECHO, EINT2

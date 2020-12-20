@@ -3,7 +3,7 @@
  * @file		DR_GPIO.h
  * @brief		Breve descripción del objetivo del Módulo
  * @date		Sep 19, 2020
- * @author		Ing. Marcelo Trujillo
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 

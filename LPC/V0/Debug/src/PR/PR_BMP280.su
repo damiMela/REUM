@@ -1,8 +1,8 @@
-PR_BMP280.c:145:9:BMP280_init	24	static
-PR_BMP280.c:164:6:BMP280_getValues	8	static
-PR_BMP280.c:176:9:get_temp	8	static
-PR_BMP280.c:183:10:get_pres	8	static
-PR_BMP280.c:194:6:set_calib_param	4	static
-PR_BMP280.c:225:6:bmp280_get_uncomp_data	16	static
-PR_BMP280.c:237:6:get_comp_temp	24	static
-PR_BMP280.c:256:6:get_comp_pres	24	static
+PR_BMP280.c:133:9:InicializarBMP280	24	static
+PR_BMP280.c:152:6:BMP280_run	8	static
+PR_BMP280.c:163:9:getBMP280_temp	8	static
+PR_BMP280.c:168:10:getBMP280_pres	8	static
+PR_BMP280.c:186:6:bmp280_get_uncomp_data	16	static
+PR_BMP280.c:199:9:get_comp_temp	32	static
+PR_BMP280.c:219:10:get_comp_pres	32	static
+PR_BMP280.c:257:6:set_calib_param	4	static
