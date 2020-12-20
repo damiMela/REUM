@@ -25,127 +25,68 @@
 **************************************************************************************************************************************/
 
 /**
-*	\file AP_FuncionesMde.c
-*	\brief Implementacion switch-case
+*	\file AP_MdeE.h
+*	\brief Resumen del archivo
 *	\details Descripcion detallada del archivo
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-
 /*********************************************************************************************************************************
- *** INCLUDES
+*** MODULO
 **********************************************************************************************************************************/
-#include "AP_FuncionesMdeE.h" 
-#include "AP_Depuracion.h" 
+#ifndef INC_MDEE_H_
+#define INC_MDEE_H_
 
 /*********************************************************************************************************************************
- *** DEFINES PRIVADOS AL MODULO
-**********************************************************************************************************************************/
-
-/*********************************************************************************************************************************
- *** MACROS PRIVADAS AL MODULO
+*** INCLUDES GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** TIPOS DE DATOS PRIVADOS AL MODULO
+*** DEFINES GLOBALES
+**********************************************************************************************************************************/
+#define	TRUE			1
+#define	FALSE			0
+
+//!< Definicion de Estados
+#define	SIN_CONEXION	            	0
+#define	ESPERA_MENSAJE_RED	        	1
+#define	ESPERA_MENSAJE_FIN_RED	    	2
+#define	ESPERA_MENSAJE_INICIO_CLIENTE	3
+#define	ESPERA_MENSAJE_CLIENTE		    4
+#define	ESPERA_MENSAJE_FIN_CLIENTE		5
+#define	CONEXION_EXITOSA		        6
+#define	ESPERA_INICIO		            7
+#define	ESPERA_MENSAJE_MOVIMIENTO		8
+#define	ESPERA_FIN		                9
+#define	ESPERAR_MENSAJE_VELOCIDAD_1		10
+#define	ESPERAR_MENSAJE_VELOCIDAD_2		11
+#define	SIN_MOVIMIENTO		            12
+#define	ADELANTE		                13
+#define	ATRAS		                    14
+#define	DERECHA		                    15
+#define	IZQUIERDA		                16
+
+/*********************************************************************************************************************************
+*** MACROS GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** TABLAS PRIVADAS AL MODULO
+*** TIPO DE DATOS GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** VARIABLES GLOBALES PUBLICAS
-**********************************************************************************************************************************/
-/*********************************************************************************************************************************
- *** VARIABLES GLOBALES PRIVADAS AL MODULO
+*** VARIABLES GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
+*** PROTOTIPOS DE FUNCIONES GLOBALES
 **********************************************************************************************************************************/
+//!< Declaracion de la Maquina de Estados
+void maquina_Conexion(void);
 
-/*********************************************************************************************************************************
- *** FUNCIONES PRIVADAS AL MODULO
-**********************************************************************************************************************************/
+void maquina_Lectura(void);
 
-/*********************************************************************************************************************************
- *** FUNCIONES GLOBALES AL MODULO
-**********************************************************************************************************************************/
-
-//!< Funciones asociadas a los eventos
-
-//!< Funciones asociadas a las acciones
+void maquina_Movimiento(void);
 
 
-/**
-*	\fn void MovimientoFrontalOn(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void MovimientoFrontalOn( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void SinMovimiento(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void SinMovimiento( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void Reversa(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void Reversa( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void giroDerecha(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroDerecha( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void giroIzquierda(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroIzquierda( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-
+#endif /* INC_MDEE_H_ */

@@ -36,8 +36,8 @@
  *** INCLUDES
 **********************************************************************************************************************************/
 #include "AP_FuncionesMdeE.h" 
-#include "AP_Depuracion.h" 
-
+#include "PR_Motores.h"
+#include "PR_Timers.h"
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -56,7 +56,8 @@
 
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
-**********************************************************************************************************************************/
+**********************************************************************************************************************************/ 
+
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -80,72 +81,107 @@
 
 /**
 *	\fn void MovimientoFrontalOn(void)
-*	\brief Resumen
+*	\brief activa los motores para el desplazamiento frontal
 *	\details Detalles
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
 void MovimientoFrontalOn( void )
 {
-	//!< Codigo propio de la funcion
-
-	return ;
+	setMotoresDir(ADELANTE);
+	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
+	return 0;
 }
 
 /**
 *	\fn void SinMovimiento(void)
-*	\brief Resumen
+*	\brief desactiva los motores
 *	\details Detalles
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
 void SinMovimiento( void )
 {
-	//!< Codigo propio de la funcion
+	setMotoresDir(FRENO);
+	return 0;
 
 	return ;
 }
 
 /**
 *	\fn void Reversa(void)
-*	\brief Resumen
+*	\brief activa los motores para el desplazamiento en reversa
 *	\details Detalles
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
 void Reversa( void )
 {
-	//!< Codigo propio de la funcion
+	setMotoresDir(ATRAS);
+	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
+	return 0;
 
 	return ;
 }
 
 /**
 *	\fn void giroDerecha(void)
-*	\brief Resumen
+*	\brief activa los motores para girar hacia la derecha
 *	\details Detalles
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
 void giroDerecha( void )
 {
-	//!< Codigo propio de la funcion
+	setMotoresDir(DERECHA);
+	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
+	return 0;
 
 	return ;
 }
 
 /**
 *	\fn void giroIzquierda(void)
-*	\brief Resumen
+*	\brief activa los motores para girar hacia la izquierda
 *	\details Detalles
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
 void giroIzquierda( void )
 {
-	//!< Codigo propio de la funcion
+	setMotoresDir(IZQUIERDA);
+	setMotoresVel();
+	return 0;
 
 	return ;
 }
 
+void MOV_CHAR(char dato)
+{
+	int exit = 0;
+	if(dato == 'F' || dato == 'R' || dato == 'L' || dato == 'B' || dato == 'S')
+		exit = 1;
+	return exit;
+}
 
+void START_CHAR(char dato)
+{
+	int exit = 0;
+	if(dato == '#')
+		exit = 1;
+	return exit;
+}
+
+void END_CHAR(char dato)
+{
+	int exit = 0;
+	if(dato == '$')
+		exit = 1;
+	return exit;
+}
+
+void LedBlink (void)
+{
+	TimerStart ( 0 , LedV_Blink , LedBlink, CENTECIMAS);
+
+}

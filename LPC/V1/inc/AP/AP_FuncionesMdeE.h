@@ -25,127 +25,50 @@
 **************************************************************************************************************************************/
 
 /**
-*	\file AP_FuncionesMde.c
-*	\brief Implementacion switch-case
+*	\file AP_FuncionesMdeE.h
+*	\brief Resumen del archivo
 *	\details Descripcion detallada del archivo
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-
 /*********************************************************************************************************************************
- *** INCLUDES
+*** MODULO
 **********************************************************************************************************************************/
-#include "AP_FuncionesMdeE.h" 
-#include "AP_Depuracion.h" 
+#ifndef INC_AP_FUNCIONESMDEE_H_
+#define INC_AP_FUNCIONESMDEE_H_
 
 /*********************************************************************************************************************************
- *** DEFINES PRIVADOS AL MODULO
-**********************************************************************************************************************************/
-
-/*********************************************************************************************************************************
- *** MACROS PRIVADAS AL MODULO
+*** INCLUDES GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** TIPOS DE DATOS PRIVADOS AL MODULO
+*** DEFINES GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** TABLAS PRIVADAS AL MODULO
+*** MACROS GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** VARIABLES GLOBALES PUBLICAS
-**********************************************************************************************************************************/
-/*********************************************************************************************************************************
- *** VARIABLES GLOBALES PRIVADAS AL MODULO
+*** TIPO DE DATOS GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
+*** VARIABLES GLOBALES
 **********************************************************************************************************************************/
 
 /*********************************************************************************************************************************
- *** FUNCIONES PRIVADAS AL MODULO
+*** PROTOTIPOS DE FUNCIONES GLOBALES
 **********************************************************************************************************************************/
 
-/*********************************************************************************************************************************
- *** FUNCIONES GLOBALES AL MODULO
-**********************************************************************************************************************************/
+//!< Prototipos de los Eventos
 
-//!< Funciones asociadas a los eventos
-
-//!< Funciones asociadas a las acciones
-
-
-/**
-*	\fn void MovimientoFrontalOn(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void MovimientoFrontalOn( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void SinMovimiento(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void SinMovimiento( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void Reversa(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void Reversa( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void giroDerecha(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroDerecha( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void giroIzquierda(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroIzquierda( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-
+//!< Prototipos de las Acciones
+void ParpadeoLedV( void );
+void MovimientoFrontalOn( void );
+void SinMovimiento( void );
+void Reversa( void );
+void giroDerecha( void );
+void giroIzquierda( void );
+void LedBlink (void);
+#endif /* INC_AP_FUNCIONESMDEE_H_ */

@@ -25,7 +25,7 @@
 **************************************************************************************************************************************/
 
 /**
-*	\file AP_FuncionesMde.c
+*	\file AP_MdeE.c
 *	\brief Implementacion switch-case
 *	\details Descripcion detallada del archivo
 *	\author JuanAgustinOtero
@@ -35,9 +35,12 @@
 /*********************************************************************************************************************************
  *** INCLUDES
 **********************************************************************************************************************************/
+#include "AP_MdeE.h" 
 #include "AP_FuncionesMdeE.h" 
-#include "AP_Depuracion.h" 
-
+#include "PR_RGB.h"
+#include "DR_GPIO.h"
+#include "PR_Serial.h"
+#include "PR_Timers.h"
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -60,7 +63,7 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
-
+int f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad[2] = {0};
 /*********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -72,80 +75,302 @@
 /*********************************************************************************************************************************
  *** FUNCIONES GLOBALES AL MODULO
 **********************************************************************************************************************************/
-
-//!< Funciones asociadas a los eventos
-
-//!< Funciones asociadas a las acciones
-
-
 /**
-*	\fn void MovimientoFrontalOn(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
+*	\fn void maquina_conexion()
+*	\brief Implementacion switch-case
+*	\details 
+*	\author Grupo2-2020
+*	\date 20-12-2020 14:33:08
 */
-void MovimientoFrontalOn( void )
+void maquina_conexion()
 {
-	//!< Codigo propio de la funcion
+		static int estado = SIN_CONEXION;
+		uint8_t aux = 0;
+		switch(estado)
+		{
+			aux = UART0_popRX();
+			case SIN_CONEXION:
+				setRGB_r(ON);
+				if( START_CHAR(aux) )
+				{
+					estado = ESPERA_MENSAJE_RED;
+				}
+				break;
+			case ESPERA_MENSAJE_RED:
+			
+				if( aux != 'M' )
+				{
+					estado = SIN_CONEXION;	
+				}
+ 
+				if( aux == 'M' )
+				{
+					estado = ESPERA_MENSAJE_FIN_RED;	
+				}
+ 
 
-	return ;
+				break;
+			
+			case ESPERA_MENSAJE_FIN_RED:
+			
+				if( END_CHAR(aux) )
+				{
+					estado = SIN_CONEXION;	
+				}
+ 
+				if( END_CHAR(aux) )
+				{
+					LedV_Blink = 25;
+					TimerStart ( 0 , LedV_Blink , LedBlink, CENTECIMAS);
+					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
+				}
+ 
+
+				break;
+			
+			case ESPERA_MENSAJE_INICIO_CLIENTE:
+			
+				if( START_CHAR(aux) )
+				{
+					estado = ESPERA_MENSAJE_CLIENTE;	
+				}
+ 
+
+				break;
+			
+			case ESPERA_MENSAJE_CLIENTE:
+			
+				if( aux != 'C' )
+				{
+					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
+				}
+ 
+				if( aux == 'C' )
+				{
+					estado = ESPERA_MENSAJE_FIN_CLIENTE;	
+				}
+ 
+
+				break;
+			
+			case ESPERA_MENSAJE_FIN_CLIENTE:
+			
+				if( END_CHAR(aux) )
+				{
+					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
+				}
+ 
+				if( END_CHAR(aux) )
+				{
+					LedV_Blink = 2000;
+					f_conexion_exitosa = TRUE;
+
+					estado = CONEXION_EXITOSA;	
+				}
+ 
+
+				break;
+			
+			case CONEXION_EXITOSA:
+			
+				if( f_conexion_exitosa == FALSE )
+				{
+					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
+				}
+ 
+
+				break;
+			
+			default: estado = SIN_CONEXION;
+		}
+
+
 }
 
 /**
-*	\fn void SinMovimiento(void)
-*	\brief Resumen
-*	\details Detalles
+*	\fn void maquina_Lectura()
+*	\brief Implementacion switch-case
+*	\details 
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-void SinMovimiento( void )
+void maquina_Lectura()
 {
-	//!< Codigo propio de la funcion
+		uint8_t aux = 0;
+		static int estado = ESPERA_INICIO;
 
-	return ;
+		switch(estado)
+		{
+			aux = UART0_popRX();
+			case ESPERA_INICIO:
+			
+				
+				if( START_CHAR( aux ) )
+				{
+					estado = ESPERA_MENSAJE_MOVIMIENTO;	
+				}
+ 
+
+				break;
+			
+			case ESPERA_MENSAJE_MOVIMIENTO:
+			
+				if( MOV_CHAR(aux) )
+				{
+					SinMovimiento( );
+					f_movimiento = FALSE;
+
+					estado = ESPERAR_MENSAJE_VELOCIDAD_1;	
+				}
+ 
+				if( !MOV_CHAR(aux) )
+				{
+					indicador_movimiento = aux;
+				
+					estado = ESPERA_INICIO;	
+				}
+ 
+
+				break;
+			
+			case ESPERAR_MENSAJE_VELOCIDAD_1:
+				if( aux >= '0' && aux <= '9' )
+				{
+					
+					f_movimiento = FALSE;
+
+					estado = ESPERAR_MENSAJE_VELOCIDAD_2;	
+				}
+				if( aux < '0' || aux > '9' )
+				{
+					SinMovimiento( );
+					indicador_movimiento = aux;
+				
+					estado = ESPERA_INICIO;	
+				}
+
+				break;
+			
+			case ESPERAR_MENSAJE_VELOCIDAD_2:
+				if( aux >= '0' && aux <= '9' )
+				{
+					SinMovimiento( );
+					f_movimiento = FALSE;
+
+					estado = ESPERA_FIN;	
+				}
+				if( aux < '0' || aux > '9' )
+				{
+
+					indicador_movimiento = aux;
+				
+					estado = ESPERA_INICIO;	
+				}
+
+				break;
+
+				case ESPERA_FIN:
+			
+				if( END_CHAR(aux) )
+				{
+					f_movimiento = TRUE;
+					estado = ESPERA_MENSAJE_MOVIMIENTO;	
+				}
+ 
+				break;
+			
+			default: estado = ESPERA_INICIO;
+		}
+
+
 }
 
 /**
-*	\fn void Reversa(void)
-*	\brief Resumen
-*	\details Detalles
+*	\fn void maquina_Movimiento()
+*	\brief Implementacion switch-case
+*	\details 
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-void Reversa( void )
+void maquina_Movimiento()
 {
-	//!< Codigo propio de la funcion
+		static int estado = SIN_MOVIMIENTO;
 
-	return ;
+		switch(estado)
+		{
+			case SIN_MOVIMIENTO:
+			
+				if( f_movimiento == TRUE && indicador_movimiento == 'F' )
+				{
+					MovimientoFrontalOn();
+					estado = ADELANTE;	
+				}
+				else if( f_movimiento == TRUE && indicador_movimiento == 'B' )
+				{
+					Reversa();
+					estado = ATRAS;	
+				}
+				else if( f_movimiento == TRUE && indicador_movimiento == 'R' )
+				{
+					GiroDerecha();
+					estado = DERECHA;	
+				}
+				else if( f_movimiento == TRUE && indicador_movimiento == 'L' )
+				{
+					GiroIzquierda();
+					estado = IZQUIERDA;	
+				}
+ 
+
+				break;
+			
+			case ADELANTE:
+			
+				if((f_movimiento == TRUE && indicador_movimiento != 'F') || f_movimiento == FALSE)
+				{
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+				break;
+			
+			case ATRAS:
+			
+				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'B'))
+				{
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+ 
+
+				break;
+			
+			case DERECHA:
+
+				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'R'))
+				{
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+ 
+			
+
+				break;
+			
+			case IZQUIERDA:
+
+				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'L'))
+				{
+					SinMovimiento();
+					estado = SIN_MOVIMIENTO;	
+				}
+ 
+			
+
+				break;
+			
+			default: estado = SIN_MOVIMIENTO;
+		}
+
+
 }
-
-/**
-*	\fn void giroDerecha(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroDerecha( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
-/**
-*	\fn void giroIzquierda(void)
-*	\brief Resumen
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroIzquierda( void )
-{
-	//!< Codigo propio de la funcion
-
-	return ;
-}
-
 
