@@ -61,15 +61,15 @@ void InicializarRelays(void){
 	setDir(RELAY2_P, OUTPUT);
 	setDir(RELAY3_P, OUTPUT);
 
-	setPinmode_OD(RELAY0_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY1_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY2_P, MODE_OD_NHIGH);
-	setPinmode_OD(RELAY3_P, MODE_OD_NHIGH);
+	setPinmode_OD(RELAY0_P, MODE_OD_NLOW);
+	setPinmode_OD(RELAY1_P, MODE_OD_NLOW);
+	setPinmode_OD(RELAY2_P, MODE_OD_NLOW);
+	setPinmode_OD(RELAY3_P, MODE_OD_NLOW);
 
-	setPin(RELAY0_P, !OFF);
-	setPin(RELAY1_P, !OFF);
-	setPin(RELAY2_P, !OFF);
-	setPin(RELAY3_P, !OFF);
+	setPin(RELAY0_P, OFF);
+	setPin(RELAY1_P, OFF);
+	setPin(RELAY2_P, OFF);
+	setPin(RELAY3_P, OFF);
 }
 
 
@@ -83,10 +83,10 @@ void InicializarRelays(void){
 */
 void setRelay(uint8_t n, uint8_t state){
 	switch(n){
-		case RELAY0:	setPin(RELAY0_P, !state);	break;
-		case RELAY1:	setPin(RELAY1_P, !state);	break;
-		case RELAY2:	setPin(RELAY2_P, !state);	break;
-		case RELAY3:	setPin(RELAY3_P, !state);	break;
+		case RELAY0:	setPin(RELAY0_P, state);	break;
+		case RELAY1:	setPin(RELAY1_P, state);	break;
+		case RELAY2:	setPin(RELAY2_P, state);	break;
+		case RELAY3:	setPin(RELAY3_P, state);	break;
 	}
 }
 
@@ -98,24 +98,20 @@ void setRelay(uint8_t n, uint8_t state){
  	\date Nov 5, 2020
  	\param [in] Relay a invertir estado
 */
-void invertRelay(uint8_t n){
+void toggleRelay(uint8_t n){
 	uint8_t state;
 	switch(n){
 			case RELAY0:
-				state = getPin(RELAY0_P, ON_LOW);
-				setPin(RELAY0_P, !state);
+				setPin(RELAY0_P, !getPin_raw(RELAY0_P));
 				break;
 			case RELAY1:
-				state = getPin(RELAY1_P, ON_LOW);
-				setPin(RELAY1_P, !state);
+				setPin(RELAY1_P, !getPin_raw(RELAY1_P));
 				break;
 			case RELAY2:
-				state = getPin(RELAY2_P, ON_LOW);
-				setPin(RELAY2_P, !state);
+				setPin(RELAY2_P, !getPin_raw(RELAY2_P));
 				break;
 			case RELAY3:
-				state = getPin(RELAY3_P, ON_LOW);
-				setPin(RELAY3_P, !state);
+				setPin(RELAY3_P, !getPin_raw(RELAY3_P));
 				break;
 		}
 }

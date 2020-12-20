@@ -40,8 +40,8 @@
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
 uint8_t InicializarBMP280();
-void BMP280_run(void);
 
+uint8_t BMP280_getData(void);
 int32_t getBMP280_temp();
 uint32_t getBMP280_pres();
 

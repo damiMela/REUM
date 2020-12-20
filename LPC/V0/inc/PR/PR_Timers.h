@@ -22,11 +22,12 @@
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define		DECIMAS				40
+#define		CENTECIMAS			4
+#define		DECIMAS				10 * CENTECIMAS
 #define		SEGUNDOS			10 * DECIMAS
-#define		MINUTOS				60 * DECIMAS * SEGUNDOS
+#define		MINUTOS				60 * SEGUNDOS
 
-enum {DEC, SEG, MIN};
+enum {CENT, DEC, SEG, MIN};
 
 #define		N_TIMERS		30 //cantidad de temporizadores (largo del vector
 

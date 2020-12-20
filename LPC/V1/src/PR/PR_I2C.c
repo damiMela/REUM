@@ -65,67 +65,35 @@ void InicializarI2C(void){
 	setPinmode(SDA1, MODE_NONE);
 	setPinmode(SCL1, MODE_NONE); //Seteo el Open-drain mode
 
-	setPinmode_OD(SDA1, MODE_OD_NLOW);
-	setPinmode_OD(SCL1, MODE_OD_NLOW); //Seteo el Open-drain mode
+	setPinmode_OD(SDA1, MODE_OD_NHIGH);
+	setPinmode_OD(SCL1, MODE_OD_NHIGH); //Seteo el Open-drain mode
 
 	InicializarI2C_DR();
 }
 
-
-uint8_t I2C_write(uint8_t address, uint8_t len, uint8_t *msg){
-	uint8_t ret = 0;
-	if(msg){
-		I2C1_WriteLen = len;
-		I2C1_ReadLen = 0;
-
-		I2C1_MasterBuff[0] = address * 2; // SLA+W --> address & 0
-
-		for(uint8_t i = 0; i < len; i++){
-			I2C1_MasterBuff[i+1] = msg[i];
-		}
-
-		if(I2C1_Engine() == I2C_OK) ret = 1;
-	}
-	return ret;
+void I2C_beginTransmition(uint8_t address){
+	I2C1_MasterBuff[0] = address * 2; // SLA+W --> address & 0
+	I2C1_WriteLen = 0;
+	I2C1_ReadLen = 0;
 }
 
-uint8_t I2C_readWrite(uint8_t address, uint8_t wr_len, uint8_t *msg, uint8_t rd_len, uint8_t *data){
-	uint8_t ret = 0;
-	if(msg){
-		I2C1_WriteLen = wr_len+1; //msg + RD bit
-		I2C1_ReadLen = rd_len;
-
-		I2C1_MasterBuff[0] = address * 2; // SLA+W --> address & 0
-		for(uint8_t i = 0; i < wr_len; i++) I2C1_MasterBuff[i+1] = msg[i];
-		I2C1_MasterBuff[wr_len + 1] = (address * 2) + 1; //address & 1
-
-		if(I2C1_Engine() == I2C_OK) ret = 1;
-
-		for(uint8_t j = 0; j < rd_len; j++){
-			data[j] = I2C1_SlaveBuff[j];
-			I2C1_SlaveBuff[j] = 0;
-		}
-	}
-	return ret;
+void I2C_put(uint8_t msg){
+	I2C1_WriteLen++;
+	I2C1_MasterBuff[I2C1_WriteLen] = msg;
 }
 
-uint8_t I2C_read(uint8_t address, uint8_t reg,  uint8_t len, uint8_t *data){
-	uint8_t res = 0;
-	if(data){
-		I2C1_WriteLen = 2; //msg + RD bit
-		I2C1_ReadLen = len;
+void I2C_get(uint8_t len){
+	I2C1_ReadLen = len;
+}
 
-		I2C1_MasterBuff[0] = address * 2;
-		I2C1_MasterBuff[1] = reg;
-		I2C1_MasterBuff[2] = (address * 2) + 1;
+uint8_t I2C_endTransmition(){
+	if(I2C1_Engine() == I2C_OK) return 1;
+	return 0;
+}
 
-		I2C1_Engine();
-
-		for(uint8_t i = 0; i < len; i++){
-			data[i] = I2C1_SlaveBuff[i];
-			I2C1_SlaveBuff[i] = 0;
-		}
-		res = 1;
+void I2C_getData(uint8_t len, uint8_t *data){
+	for(uint8_t j = 0; j < len; j++){
+		data[j] = I2C1_SlaveBuff[j];
+		I2C1_SlaveBuff[j] = 0;
 	}
-	return res;
 }

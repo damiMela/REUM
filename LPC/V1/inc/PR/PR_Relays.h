@@ -40,5 +40,5 @@ enum{RELAY0, RELAY1, RELAY2, RELAY3};
  **********************************************************************************************************************************/
 void InicializarRelays(void);
 void setRelay(uint8_t n, uint8_t state);
-void invertRelay(uint8_t n);
+void toggleRelay(uint8_t n);
 #endif /* PR_PR_RELAYS_H_ */
