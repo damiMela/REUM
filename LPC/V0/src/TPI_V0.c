@@ -33,15 +33,15 @@
 #include <PR/PR_Relays.h>
 #include <PR/PR_PWM.h>
 #include <PR/PR_ADC.h>
-#include <PR/PR_I2C.h>
-
+#include <PR/PR_RGB.h>
+#include <PR/PR_BMP280.h>
 
 #include <AP/AP_Ultrasonido.h>
-#include <PR/PR_BMP280.h>
+
 
 
 void func(void){
-	invertRelay(RELAY0);
+	toggleRGB_r();
 	TimerStart(0, 3, func, SEG);
 }
 
@@ -61,8 +61,12 @@ int main(void) {
 //	InicializarUS();
 	InicializarEINT_DR();
 
+	InicializarRGB();
+
 	//-------------PRUEBA TIMERS------------//FUNCIONANDO
-//	TimerStart(0, 3, func, SEG);
+	TimerStart(0, 3, func, SEG);
+
+	//setRGB(0, 0, 0);
 
 
 	setDir(EXPANSION12, OUTPUT);
@@ -70,13 +74,7 @@ int main(void) {
 	setDir(EXPANSION14, OUTPUT);
 	setDir(EXPANSION15, OUTPUT);
 
-	setPinmode_OD(RGB_R, MODE_OD_NLOW);
-	setPinmode_OD(RGB_G, MODE_OD_NLOW);
-	setPinmode_OD(RGB_B, MODE_OD_NLOW);
-
 	//	TIMER0_EnableCount(1);
-
-	setRelay(RELAY1, OFF);
 
     while(1) {
     	//---agregar siempre---//
@@ -115,7 +113,7 @@ int main(void) {
 
 
     	//--------PRUEBA UART1--------------//!!!
-		int32_t data = UART1_popRX();
+/*		int32_t data = UART1_popRX();
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
 			if(data == 'c') setPin(RGB_G, ON);
@@ -130,7 +128,7 @@ int main(void) {
 			if(data == 'l') setRelay(RELAY2, ON);
 			if(data == 'r') setRelay(RELAY3, ON);
 		}
-
+*/
 		uint8_t temp1 [] = "#t#25";
 		uint8_t temp2 [] = "#t#12";
 		uint8_t humed [] = "#h#42";

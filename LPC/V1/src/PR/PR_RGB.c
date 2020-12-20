@@ -1,19 +1,18 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_I2C.c
- * @brief		Descripcion del modulo
- * @date		11 dic. 2020
- * @author		R2002 - Melamed Damian
+ * @file		PR_RGB.c
+ * @brief		Primitiva para controlar led rgb (sin pwm)
+ * @date		Dec 19, 2020
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <PR/PR_I2C.h>
-#include <DR/DR_I2C.h>
-#include <DR/DR_Pinsel.h>
+#include <PR/PR_RGB.h>
 #include <DR/DR_GPIO.h>
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -52,80 +51,111 @@
 /**
 	\fn  Nombre de la Funcion
 	\brief Descripcion
- 	\author R2002 - Melamed Damian
- 	\date 11 dic. 2020
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
  	\param [in] parametros de entrada
- 	\param [out] parametros de salida
-	\return tipo y descripcion de retorno
 */
-void InicializarI2C(void){
-	setPinsel(SDA1,FUNCION_3); //SDA
-	setPinsel(SCL1,FUNCION_3);  //SCL
+void InicializarRGB(void){
+	setPinmode_OD(PORT2, 3, MODE_OD_NLOW);
+	setPinmode_OD(PORT2, 2, MODE_OD_NLOW);
+	setPinmode_OD(PORT2, 1, MODE_OD_NLOW);
 
-	setPinmode(SDA1, MODE_NONE);
-	setPinmode(SCL1, MODE_NONE); //Seteo el Open-drain mode
+	setDir(RGB_R, OUTPUT);
+	setDir(RGB_G, OUTPUT);
+	setDir(RGB_B, OUTPUT);
 
-	setPinmode_OD(SDA1, MODE_OD_NHIGH);
-	setPinmode_OD(SCL1, MODE_OD_NHIGH); //Seteo el Open-drain mode
+	setPin(RGB_R, LOW); //rojo
+	setPin(RGB_G, LOW);
+	setPin(RGB_B, LOW); //azul
+}
 
-	InicializarI2C_DR();
+/**
+	\fn  setRGB
+	\brief prende o apaga los leds del RGB
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+ 	\param [in] estado del led rojo
+	\param [in] estado del led verde
+	\param [in] estado del led azul
+*/
+void setRGB(uint8_t r, uint8_t g, uint8_t b){
+	if(r > 1) r = 1;
+	if(g > 1) g = 1;
+	if(b > 1) b = 1;
+
+	setPin(RGB_R, r);
+	setPin(RGB_G, g);
+	setPin(RGB_B, b);
 }
 
 
-uint8_t I2C_write(uint8_t address, uint8_t len, uint8_t *msg){
-	uint8_t ret = 0;
-	if(msg){
-		I2C1_WriteLen = len;
-		I2C1_ReadLen = 0;
-
-		I2C1_MasterBuff[0] = address * 2; // SLA+W --> address & 0
-
-		for(uint8_t i = 0; i < len; i++){
-			I2C1_MasterBuff[i+1] = msg[i];
-		}
-
-		if(I2C1_Engine() == I2C_OK) ret = 1;
-	}
-	return ret;
+/**
+	\fn  setRGB_r
+	\brief setea el led rojo en ON/OFF
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+ 	\param [in] estado de led rojo
+*/
+void setRGB_r(uint8_t state){
+	if(state > 1) state = 1;
+	setPin(RGB_R, state);
 }
 
-uint8_t I2C_readWrite(uint8_t address, uint8_t wr_len, uint8_t *msg, uint8_t rd_len, uint8_t *data){
-	uint8_t ret = 0;
-	if(msg){
-		I2C1_WriteLen = wr_len+1; //msg + RD bit
-		I2C1_ReadLen = rd_len;
 
-		I2C1_MasterBuff[0] = address * 2; // SLA+W --> address & 0
-		for(uint8_t i = 0; i < wr_len; i++) I2C1_MasterBuff[i+1] = msg[i];
-		I2C1_MasterBuff[wr_len + 1] = (address * 2) + 1; //address & 1
-
-		if(I2C1_Engine() == I2C_OK) ret = 1;
-
-		for(uint8_t j = 0; j < rd_len; j++){
-			data[j] = I2C1_SlaveBuff[j];
-			I2C1_SlaveBuff[j] = 0;
-		}
-	}
-	return ret;
+/**
+	\fn  setRGB_g
+	\brief setea el led verde en ON/OFF
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+ 	\param [in] estado de led verde
+*/
+void setRGB_g(uint8_t state){
+	if(state > 1) state = 1;
+	setPin(RGB_R, state);
 }
 
-uint8_t I2C_read(uint8_t address, uint8_t reg,  uint8_t len, uint8_t *data){
-	uint8_t res = 0;
-	if(data){
-		I2C1_WriteLen = 2; //msg + RD bit
-		I2C1_ReadLen = len;
 
-		I2C1_MasterBuff[0] = address * 2;
-		I2C1_MasterBuff[1] = reg;
-		I2C1_MasterBuff[2] = (address * 2) + 1;
+/**
+	\fn  setRGB_b
+	\brief setea el led azul en ON/OFF
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+ 	\param [in] estado de led azul
+*/
+void setRGB_b(uint8_t state){
+	if(state > 1) state = 1;
+	setPin(RGB_R, state);
+}
 
-		I2C1_Engine();
 
-		for(uint8_t i = 0; i < len; i++){
-			data[i] = I2C1_SlaveBuff[i];
-			I2C1_SlaveBuff[i] = 0;
-		}
-		res = 1;
-	}
-	return res;
+/**
+	\fn  toggleRGB_r
+	\brief invierte el estado del led rojo
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+*/
+void toggleRGB_r(){
+	setPin(RGB_R, !getPin_raw(RGB_R));
+}
+
+
+/**
+	\fn  toggleRGB_g
+	\brief invierte el estado del led verde
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+*/
+void toggleRGB_g(){
+	setPin(RGB_G, !getPin_raw(RGB_G));
+}
+
+
+/**
+	\fn  toggleRGB_b
+	\brief invierte el estado del led azul
+ 	\author R2002 - Grupo2
+ 	\date Dec 19, 2020
+*/
+void toggleRGB_b(){
+	setPin(RGB_B, !getPin_raw(RGB_B));
 }

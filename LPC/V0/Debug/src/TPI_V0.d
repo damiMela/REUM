@@ -14,11 +14,11 @@ src/TPI_V0.o src/TPI_V0.d: ../src/TPI_V0.c \
  /home/damian/git/TPI/LPC/V0/inc/PR/PR_PWM.h \
  /home/damian/git/TPI/LPC/V0/inc/DR/DR_PWM.h \
  /home/damian/git/TPI/LPC/V0/inc/PR/PR_ADC.h \
- /home/damian/git/TPI/LPC/V0/inc/PR/PR_I2C.h \
- /home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h \
+ /home/damian/git/TPI/LPC/V0/inc/PR/PR_RGB.h \
  /home/damian/git/TPI/LPC/V0/inc/PR/PR_BMP280.h \
  /home/damian/git/TPI/LPC/V0/inc/Others/BMP280_definitions.h \
- /home/damian/git/TPI/LPC/V0/inc/Others/stdint_local.h
+ /home/damian/git/TPI/LPC/V0/inc/Others/stdint_local.h \
+ /home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h
 
 /home/damian/git/TPI/LPC/V0/inc/DR/DR_Tipos.h:
 
@@ -50,12 +50,12 @@ src/TPI_V0.o src/TPI_V0.d: ../src/TPI_V0.c \
 
 /home/damian/git/TPI/LPC/V0/inc/PR/PR_ADC.h:
 
-/home/damian/git/TPI/LPC/V0/inc/PR/PR_I2C.h:
-
-/home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h:
+/home/damian/git/TPI/LPC/V0/inc/PR/PR_RGB.h:
 
 /home/damian/git/TPI/LPC/V0/inc/PR/PR_BMP280.h:
 
 /home/damian/git/TPI/LPC/V0/inc/Others/BMP280_definitions.h:
 
 /home/damian/git/TPI/LPC/V0/inc/Others/stdint_local.h:
+
+/home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h:

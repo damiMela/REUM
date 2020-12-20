@@ -26,8 +26,8 @@
 #define	MODE_NONE		2
 #define	MODE_PULLDOWN	3
 
-#define	MODE_OD_NHIGH	0 //Normal HIGH. Prendido con 0v
-#define	MODE_OD_NLOW	1 //Normal LOW.  Prendido con vcc
+#define	MODE_OD_NHIGH	1 //Normal HIGH. Prendido con 0v
+#define	MODE_OD_NLOW	0 //Normal LOW.  Prendido con vcc
 
 //para lectura.
 #define ON_LOW 	0 //ON cuando hay un 0.

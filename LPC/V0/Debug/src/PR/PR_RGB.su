@@ -1,0 +1,6 @@
+PR_RGB.c:58:6:InicializarRGB	8	static
+PR_RGB.c:81:6:setRGB	16	static
+PR_RGB.c:99:6:setRGB_r	16	static
+PR_RGB.c:112:6:setRGB_g	16	static
+PR_RGB.c:125:6:setRGB_b	16	static
+PR_RGB.c:131:6:toggleRGB_r	8	static
