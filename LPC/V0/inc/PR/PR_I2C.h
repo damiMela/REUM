@@ -39,6 +39,12 @@
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
 void InicializarI2C(void);
+void I2C_beginTransmition(uint8_t address);
+void I2C_put(uint8_t msg);
+void I2C_get(uint8_t len);
+void I2C_getData(uint8_t len, uint8_t *data);
+uint8_t I2C_endTransmition();
+
 uint8_t I2C_write(uint8_t address, uint8_t lenght, uint8_t *msg);
 uint8_t I2C_readWrite(uint8_t address, uint8_t wr_len, uint8_t *msg, uint8_t rd_len, uint8_t *data);
 uint8_t I2C_read(uint8_t address, uint8_t reg, uint8_t length, uint8_t *data);

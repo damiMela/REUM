@@ -130,15 +130,19 @@ static uint8_t calib_data[CANT_CALIB_PARAMS] = {0};
 */
 uint8_t InicializarBMP280(void){
 	InicializarI2C();
-	uint8_t config_msg[5] = {
-		BMP280_REG_CONTROL,
-		(SAMPLING_X2 << 5) | (SAMPLING_X16<< 2) | (BMP_MODE_NORMAL), //temp oversampling, pressure oversampling, power mode
-		BMP280_REG_CONFIG,
-		(STANDBY_MS_500 << 5) | (FILTER_X16 << 1) | (SPI3E_OFF << 0),//inactive duration, IIR filter, SPI interface enable
-		BMP280_REG_DIG_T1
-	};
 
-	uint8_t ret = I2C_readWrite(BMP280_ADDRESS, 5, config_msg, CANT_CALIB_PARAMS, calib_data);
+	I2C_beginTransmition(BMP280_ADDRESS);
+	I2C_put(BMP280_REG_CONTROL);
+	I2C_put((SAMPLING_X2 << 5) | (SAMPLING_X16<< 2) | (BMP_MODE_NORMAL));
+	I2C_put(BMP280_REG_CONFIG);
+	I2C_put((STANDBY_MS_500 << 5) | (FILTER_X16 << 2) | (SPI3E_OFF << 0));
+	I2C_put(BMP280_REG_DIG_T1);
+	I2C_put(BMP280_READ);
+	I2C_get(CANT_CALIB_PARAMS);
+	uint8_t ret = I2C_endTransmition();
+
+	I2C_getData(CANT_CALIB_PARAMS, calib_data);
+
 	if(ret){
 		set_calib_param();
 		return 1;
@@ -147,20 +151,28 @@ uint8_t InicializarBMP280(void){
 }
 
 /**
-	\fn  BMP280_run
+	\fn  BMP280_getData
 	\brief Obtiene datos de temperatura y presion del sensor
  	\author R2002 - Grupo2
  	\date Dec 19, 2020
 */
-void BMP280_run(void){
+uint8_t BMP280_getData(void){
 	static uint8_t init_falg = 0;
+	uint8_t ret = 0;
 	if(!init_falg){
 		init_falg =  InicializarBMP280();
 	}
 	else{
-		I2C_read(BMP280_ADDRESS, BMP280_REG_PRESSUREDATA, CANT_DATA_REGS, sensor_data);
+		I2C_beginTransmition(BMP280_ADDRESS);
+		I2C_put(BMP280_REG_PRESSUREDATA);
+		I2C_put(BMP280_READ);
+		I2C_get(CANT_DATA_REGS);
+		ret = I2C_endTransmition();
+
+		I2C_getData(CANT_DATA_REGS, sensor_data);
 		bmp280_get_uncomp_data(sensor_data);
 	}
+	return ret;
 }
 
 /**
@@ -171,12 +183,11 @@ void BMP280_run(void){
  	\return (int32_t) temperatura en grados celcius *10 (25.3 C° --> 2530)
 */
 int32_t getBMP280_temp(){
-
 	return get_comp_temp(bmp280_temperature_data);;
 }
 
 /**
-	\fn  BMP280_run
+	\fn  BMP280_getData
 	\brief convierte datos del sensor en presion en Pascales
  	\author R2002 - Grupo2
  	\date Dec 19, 2020

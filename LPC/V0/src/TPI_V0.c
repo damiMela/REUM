@@ -80,7 +80,6 @@ int main(void) {
     	//---agregar siempre---//
     	Timers_run();
     	ADC_run();
-    	BMP280_run();
     	//---------------------//
 
 
@@ -157,12 +156,15 @@ int main(void) {
 */
 
     	//--------PRUEBA I2C-----------------//FUNCIONANDO - descomentar BMP280_run()
-/*		uint32_t temp = 0, pres = 0;
+		uint32_t temp = 0, pres = 0;
+		BMP280_getData();
 		temp =  getBMP280_temp();
 		pres =  getBMP280_pres();
 
 		if(temp >= 2820) setRelay(RELAY2, ON);
-*/
+		else setRelay(RELAY2, OFF);
+
+
 
     }
 
