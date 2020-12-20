@@ -57,7 +57,7 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
 **********************************************************************************************************************************/ 
-
+uint8_t f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad = {0};
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -77,84 +77,6 @@
 //!< Funciones asociadas a los eventos
 
 //!< Funciones asociadas a las acciones
-
-
-/**
-*	\fn void MovimientoFrontalOn(void)
-*	\brief activa los motores para el desplazamiento frontal
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void MovimientoFrontalOn( void )
-{
-	setMotoresDir(ADELANTE);
-	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
-	return 0;
-}
-
-/**
-*	\fn void SinMovimiento(void)
-*	\brief desactiva los motores
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void SinMovimiento( void )
-{
-	setMotoresDir(FRENO);
-	return 0;
-
-	return ;
-}
-
-/**
-*	\fn void Reversa(void)
-*	\brief activa los motores para el desplazamiento en reversa
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void Reversa( void )
-{
-	setMotoresDir(ATRAS);
-	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
-	return 0;
-
-	return ;
-}
-
-/**
-*	\fn void giroDerecha(void)
-*	\brief activa los motores para girar hacia la derecha
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroDerecha( void )
-{
-	setMotoresDir(DERECHA);
-	setMotoresVel(/*buffer[1]*10+buffer[2]*/);
-	return 0;
-
-	return ;
-}
-
-/**
-*	\fn void giroIzquierda(void)
-*	\brief activa los motores para girar hacia la izquierda
-*	\details Detalles
-*	\author JuanAgustinOtero
-*	\date 19-12-2020 19:03:18
-*/
-void giroIzquierda( void )
-{
-	setMotoresDir(IZQUIERDA);
-	setMotoresVel();
-	return 0;
-
-	return ;
-}
 
 void MOV_CHAR(char dato)
 {
@@ -184,4 +106,14 @@ void LedBlink (void)
 {
 	TimerStart ( 0 , LedV_Blink , LedBlink, CENTECIMAS);
 
+}
+
+
+int f_error(void)
+{
+	SinMovimiento( );
+	f_movimiento = 0;
+	indicador_movimiento = 'S';
+	indicador_velocidad = 0;
+	return -1;
 }

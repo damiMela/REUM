@@ -41,6 +41,7 @@
 #include "DR_GPIO.h"
 #include "PR_Serial.h"
 #include "PR_Timers.h"
+#include "PR_Motores.h"
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -63,7 +64,7 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
-int f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad[2] = {0};
+
 /*********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -215,15 +216,13 @@ void maquina_Lectura()
 			
 			case ESPERA_MENSAJE_MOVIMIENTO:
 			
-				if( MOV_CHAR(aux) )
+				if( !MOV_CHAR(aux) )
 				{
-					SinMovimiento( );
-					f_movimiento = FALSE;
-
+					f_error();
 					estado = ESPERAR_MENSAJE_VELOCIDAD_1;	
 				}
  
-				if( !MOV_CHAR(aux) )
+				if( MOV_CHAR(aux) )
 				{
 					indicador_movimiento = aux;
 				
@@ -236,16 +235,12 @@ void maquina_Lectura()
 			case ESPERAR_MENSAJE_VELOCIDAD_1:
 				if( aux >= '0' && aux <= '9' )
 				{
-					
-					f_movimiento = FALSE;
-
+					indicador_velocidad = (aux-48)*10;
 					estado = ESPERAR_MENSAJE_VELOCIDAD_2;	
 				}
 				if( aux < '0' || aux > '9' )
 				{
-					SinMovimiento( );
-					indicador_movimiento = aux;
-				
+					f_error();
 					estado = ESPERA_INICIO;	
 				}
 
@@ -254,16 +249,12 @@ void maquina_Lectura()
 			case ESPERAR_MENSAJE_VELOCIDAD_2:
 				if( aux >= '0' && aux <= '9' )
 				{
-					SinMovimiento( );
-					f_movimiento = FALSE;
-
+					indicador_velocidad += (aux-48);
 					estado = ESPERA_FIN;	
 				}
 				if( aux < '0' || aux > '9' )
 				{
-
-					indicador_movimiento = aux;
-				
+					f_error();
 					estado = ESPERA_INICIO;	
 				}
 
@@ -275,6 +266,11 @@ void maquina_Lectura()
 				{
 					f_movimiento = TRUE;
 					estado = ESPERA_MENSAJE_MOVIMIENTO;	
+				}
+				if(END_CHAR(aux))
+				{
+					f_error();
+					estado = ESPERA_INICIO;
 				}
  
 				break;
@@ -302,23 +298,26 @@ void maquina_Movimiento()
 			
 				if( f_movimiento == TRUE && indicador_movimiento == 'F' )
 				{
-					MovimientoFrontalOn();
+					setMotoresDir(DIR_ADELANTE);
+					setMotoresVel(indicador_velocidad);
 					estado = ADELANTE;	
 				}
 				else if( f_movimiento == TRUE && indicador_movimiento == 'B' )
 				{
-					Reversa();
+					setMotoresDir(DIR_ATRAS);
+					setMotoresVel(indicador_velocidad);
 					estado = ATRAS;	
 				}
 				else if( f_movimiento == TRUE && indicador_movimiento == 'R' )
 				{
-					GiroDerecha();
+					setMotoresDir(DIR_DERECHA);
+					setMotoresVel(indicador_velocidad);
 					estado = DERECHA;	
 				}
 				else if( f_movimiento == TRUE && indicador_movimiento == 'L' )
 				{
-					GiroIzquierda();
-					estado = IZQUIERDA;	
+					setMotoresDir(DIR_IZQUIERDA);
+					setMotoresVel(indicador_velocidad);
 				}
  
 
@@ -328,7 +327,8 @@ void maquina_Movimiento()
 			
 				if((f_movimiento == TRUE && indicador_movimiento != 'F') || f_movimiento == FALSE)
 				{
-					SinMovimiento();
+					setMotoresDir(FRENO);
+					setMotoresVel(0);
 					estado = SIN_MOVIMIENTO;	
 				}
 				break;
@@ -337,7 +337,8 @@ void maquina_Movimiento()
 			
 				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'B'))
 				{
-					SinMovimiento();
+					setMotoresDir(FRENO);
+					setMotoresVel(0);
 					estado = SIN_MOVIMIENTO;	
 				}
  
@@ -348,7 +349,8 @@ void maquina_Movimiento()
 
 				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'R'))
 				{
-					SinMovimiento();
+					setMotoresDir(FRENO);
+					setMotoresVel(0);
 					estado = SIN_MOVIMIENTO;	
 				}
  
@@ -360,12 +362,11 @@ void maquina_Movimiento()
 
 				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'L'))
 				{
-					SinMovimiento();
+					setMotoresDir(FRENO);
+					setMotoresVel(0);
 					estado = SIN_MOVIMIENTO;	
 				}
  
-			
-
 				break;
 			
 			default: estado = SIN_MOVIMIENTO;

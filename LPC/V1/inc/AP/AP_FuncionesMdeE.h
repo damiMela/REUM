@@ -56,7 +56,7 @@
 /*********************************************************************************************************************************
 *** VARIABLES GLOBALES
 **********************************************************************************************************************************/
-
+extern int f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad = {0};
 /*********************************************************************************************************************************
 *** PROTOTIPOS DE FUNCIONES GLOBALES
 **********************************************************************************************************************************/
@@ -64,11 +64,6 @@
 //!< Prototipos de los Eventos
 
 //!< Prototipos de las Acciones
-void ParpadeoLedV( void );
-void MovimientoFrontalOn( void );
-void SinMovimiento( void );
-void Reversa( void );
-void giroDerecha( void );
-void giroIzquierda( void );
 void LedBlink (void);
+void f_error(void)
 #endif /* INC_AP_FUNCIONESMDEE_H_ */

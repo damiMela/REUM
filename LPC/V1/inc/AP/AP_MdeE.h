@@ -60,11 +60,11 @@
 #define	ESPERA_FIN		                9
 #define	ESPERAR_MENSAJE_VELOCIDAD_1		10
 #define	ESPERAR_MENSAJE_VELOCIDAD_2		11
-#define	SIN_MOVIMIENTO		            12
-#define	ADELANTE		                13
-#define	ATRAS		                    14
-#define	DERECHA		                    15
-#define	IZQUIERDA		                16
+#define	SIN_MOVIMIENTO		            5
+#define	ADELANTE		                0
+#define	ATRAS		                    1
+#define	DERECHA		                    2
+#define	IZQUIERDA		                3
 
 /*********************************************************************************************************************************
 *** MACROS GLOBALES

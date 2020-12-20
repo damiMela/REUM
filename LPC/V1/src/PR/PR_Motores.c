@@ -86,7 +86,7 @@ void InicializarMotores(void){
 void setMotoresDir(uint8_t dir){
 	switch(dir){
 		case 'f':
-		case ADELANTE:{
+		case DIR_ADELANTE:{
 			setPin(MOTOR1_A, ON);
 			setPin(MOTOR1_B, OFF);
 
@@ -96,7 +96,7 @@ void setMotoresDir(uint8_t dir){
 		}
 
 		case 'b':
-		case ATRAS:{
+		case DIR_ATRAS:{
 			setPin(MOTOR1_A, OFF);
 			setPin(MOTOR1_B, ON);
 
@@ -106,7 +106,7 @@ void setMotoresDir(uint8_t dir){
 		}
 
 		case 'l':
-		case IZQUIERDA:{
+		case DIR_IZQUIERDA:{
 			setPin(MOTOR1_A, ON);
 			setPin(MOTOR1_B, OFF);
 
@@ -116,7 +116,7 @@ void setMotoresDir(uint8_t dir){
 		}
 
 		case 'r':
-		case DERECHA:{
+		case DIR_DERECHA:{
 			setPin(MOTOR1_A, OFF);
 			setPin(MOTOR1_B, ON);
 
