@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/PR/PR_ADC.c \
+../src/PR/PR_AM2320.c \
 ../src/PR/PR_BMP280.c \
 ../src/PR/PR_Botones.c \
 ../src/PR/PR_I2C.c \
@@ -18,6 +19,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/PR/PR_ADC.o \
+./src/PR/PR_AM2320.o \
 ./src/PR/PR_BMP280.o \
 ./src/PR/PR_Botones.o \
 ./src/PR/PR_I2C.o \
@@ -31,6 +33,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/PR/PR_ADC.d \
+./src/PR/PR_AM2320.d \
 ./src/PR/PR_BMP280.d \
 ./src/PR/PR_Botones.d \
 ./src/PR/PR_I2C.d \

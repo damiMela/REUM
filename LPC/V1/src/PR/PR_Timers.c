@@ -178,7 +178,7 @@ int8_t TimerGet ( uint8_t event_n , uint32_t *t )
 
 		switch(TmrBase[event_n])
 		{
-			case CENT: 	*t = TmrRun[event_n] = t * CENTECIMAS;	break;
+			case CENT: 	*t = TmrRun[event_n] * CENTECIMAS;	break;
 			case DEC: 	*t = TmrRun[event_n] * DECIMAS;		break;
 			case SEG: 	*t = TmrRun[event_n] * SEGUNDOS;	break;
 			case MIN: 	*t = TmrRun[event_n] * MINUTOS;		break;

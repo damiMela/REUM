@@ -22,6 +22,16 @@ Discarded input sections
  .text.getADC   0x0000000000000000       0x24 ./src/PR/PR_ADC.o
  .text.ADC_cleanBuff
                 0x0000000000000000       0x1c ./src/PR/PR_ADC.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_AM2320.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_AM2320.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_AM2320.o
+ .group         0x0000000000000000        0xc ./src/PR/PR_AM2320.o
+ .text          0x0000000000000000        0x0 ./src/PR/PR_AM2320.o
+ .data          0x0000000000000000        0x0 ./src/PR/PR_AM2320.o
+ .bss           0x0000000000000000        0x0 ./src/PR/PR_AM2320.o
+ .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_AM2320.o
+ .debug_macro   0x0000000000000000      0x1ea ./src/PR/PR_AM2320.o
+ .debug_macro   0x0000000000000000       0x34 ./src/PR/PR_AM2320.o
  .group         0x0000000000000000        0xc ./src/PR/PR_BMP280.o
  .group         0x0000000000000000        0xc ./src/PR/PR_BMP280.o
  .group         0x0000000000000000        0xc ./src/PR/PR_BMP280.o
@@ -33,9 +43,53 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/PR/PR_BMP280.o
  .data          0x0000000000000000        0x0 ./src/PR/PR_BMP280.o
  .bss           0x0000000000000000        0x0 ./src/PR/PR_BMP280.o
+ .bss.dev       0x0000000000000000       0x34 ./src/PR/PR_BMP280.o
+ .bss.bmp280_temperature_data
+                0x0000000000000000        0x4 ./src/PR/PR_BMP280.o
+ .bss.bmp280_pressure_data
+                0x0000000000000000        0x4 ./src/PR/PR_BMP280.o
+ .bss.sensor_data
+                0x0000000000000000        0x6 ./src/PR/PR_BMP280.o
+ .bss.calib_data
+                0x0000000000000000       0x19 ./src/PR/PR_BMP280.o
+ .text.InicializarBMP280
+                0x0000000000000000       0x68 ./src/PR/PR_BMP280.o
+ .text.BMP280_getData
+                0x0000000000000000       0x60 ./src/PR/PR_BMP280.o
+ .text.getBMP280_temp
+                0x0000000000000000       0x18 ./src/PR/PR_BMP280.o
+ .text.getBMP280_pres
+                0x0000000000000000       0x18 ./src/PR/PR_BMP280.o
+ .text.bmp280_get_uncomp_data
+                0x0000000000000000       0x60 ./src/PR/PR_BMP280.o
+ .text.get_comp_temp
+                0x0000000000000000       0xb4 ./src/PR/PR_BMP280.o
+ .text.get_comp_pres
+                0x0000000000000000      0x1d8 ./src/PR/PR_BMP280.o
+ .text.set_calib_param
+                0x0000000000000000      0x120 ./src/PR/PR_BMP280.o
+ .bss.init_falg.3950
+                0x0000000000000000        0x1 ./src/PR/PR_BMP280.o
+ .debug_info    0x0000000000000000      0x5b5 ./src/PR/PR_BMP280.o
+ .debug_abbrev  0x0000000000000000      0x1f9 ./src/PR/PR_BMP280.o
+ .debug_aranges
+                0x0000000000000000       0x58 ./src/PR/PR_BMP280.o
+ .debug_ranges  0x0000000000000000       0x48 ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000      0x14e ./src/PR/PR_BMP280.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_BMP280.o
  .debug_macro   0x0000000000000000      0x1ea ./src/PR/PR_BMP280.o
  .debug_macro   0x0000000000000000       0x34 ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000       0x10 ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000      0x12e ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000      0x5b1 ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000       0x16 ./src/PR/PR_BMP280.o
+ .debug_macro   0x0000000000000000      0x4a0 ./src/PR/PR_BMP280.o
+ .debug_line    0x0000000000000000      0x571 ./src/PR/PR_BMP280.o
+ .debug_str     0x0000000000000000     0x6a51 ./src/PR/PR_BMP280.o
+ .comment       0x0000000000000000       0x7a ./src/PR/PR_BMP280.o
+ .debug_frame   0x0000000000000000      0x128 ./src/PR/PR_BMP280.o
+ .ARM.attributes
+                0x0000000000000000       0x2d ./src/PR/PR_BMP280.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Botones.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Botones.o
  .group         0x0000000000000000        0xc ./src/PR/PR_Botones.o
@@ -179,6 +233,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/PR/PR_Relays.o
  .data          0x0000000000000000        0x0 ./src/PR/PR_Relays.o
  .bss           0x0000000000000000        0x0 ./src/PR/PR_Relays.o
+ .text.setRelay
+                0x0000000000000000       0x6c ./src/PR/PR_Relays.o
  .text.toggleRelay
                 0x0000000000000000       0xb0 ./src/PR/PR_Relays.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_Relays.o
@@ -217,9 +273,9 @@ Discarded input sections
  .text.TimerStop
                 0x0000000000000000       0x64 ./src/PR/PR_Timers.o
  .text.TimerSet
-                0x0000000000000000       0x9c ./src/PR/PR_Timers.o
+                0x0000000000000000       0xb0 ./src/PR/PR_Timers.o
  .text.TimerGet
-                0x0000000000000000       0xa0 ./src/PR/PR_Timers.o
+                0x0000000000000000       0xb8 ./src/PR/PR_Timers.o
  .text.TimerClose
                 0x0000000000000000       0x28 ./src/PR/PR_Timers.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_Timers.o
@@ -365,6 +421,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x1ea ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000      0x1a8 ./src/DR/DR_Systick.o
+ .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Systick.o
  .debug_macro   0x0000000000000000       0x22 ./src/DR/DR_Systick.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Timer0.o
  .group         0x0000000000000000        0xc ./src/DR/DR_Timer0.o
@@ -402,11 +459,11 @@ Discarded input sections
                 0x0000000000000000      0x138 ./src/AP/AP_Ultrasonido.o
  .text.getUSDistance
                 0x0000000000000000       0x14 ./src/AP/AP_Ultrasonido.o
- .bss.counter.3745
+ .bss.counter.3746
                 0x0000000000000000        0x1 ./src/AP/AP_Ultrasonido.o
- .bss.distancia_buff.3744
+ .bss.distancia_buff.3745
                 0x0000000000000000       0x14 ./src/AP/AP_Ultrasonido.o
- .debug_info    0x0000000000000000      0x215 ./src/AP/AP_Ultrasonido.o
+ .debug_info    0x0000000000000000      0x21b ./src/AP/AP_Ultrasonido.o
  .debug_abbrev  0x0000000000000000      0x131 ./src/AP/AP_Ultrasonido.o
  .debug_aranges
                 0x0000000000000000       0x30 ./src/AP/AP_Ultrasonido.o
@@ -419,9 +476,9 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x22 ./src/AP/AP_Ultrasonido.o
  .debug_macro   0x0000000000000000       0x5e ./src/AP/AP_Ultrasonido.o
  .debug_macro   0x0000000000000000       0x1c ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x2e ./src/AP/AP_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x34 ./src/AP/AP_Ultrasonido.o
  .debug_line    0x0000000000000000      0x217 ./src/AP/AP_Ultrasonido.o
- .debug_str     0x0000000000000000     0x3d4f ./src/AP/AP_Ultrasonido.o
+ .debug_str     0x0000000000000000     0x3d64 ./src/AP/AP_Ultrasonido.o
  .comment       0x0000000000000000       0x7a ./src/AP/AP_Ultrasonido.o
  .debug_frame   0x0000000000000000       0x74 ./src/AP/AP_Ultrasonido.o
  .ARM.attributes
@@ -451,7 +508,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x22 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x5e ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x1c ./src/TPI_V0.o
- .debug_macro   0x0000000000000000       0x2e ./src/TPI_V0.o
+ .debug_macro   0x0000000000000000       0x34 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x10 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x10 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000      0x12e ./src/TPI_V0.o
@@ -589,6 +646,7 @@ RamAHB32         0x000000002007c000 0x0000000000008000 xrw
 Linker script and memory map
 
 LOAD ./src/PR/PR_ADC.o
+LOAD ./src/PR/PR_AM2320.o
 LOAD ./src/PR/PR_BMP280.o
 LOAD ./src/PR/PR_Botones.o
 LOAD ./src/PR/PR_I2C.o
@@ -631,7 +689,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000     0x2120
+.text           0x0000000000000000     0x1c70
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -640,16 +698,16 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0x2120 LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x1c70 LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000d4        0x4 LONG 0x0 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0x2120 LOADADDR (.data_RAM2)
+                0x00000000000000d8        0x4 LONG 0x1c70 LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
                 0x00000000000000e4                __bss_section_table = .
                 0x00000000000000e4        0x4 LONG 0x10000000 ADDR (.bss)
-                0x00000000000000e8        0x4 LONG 0x460 SIZEOF (.bss)
+                0x00000000000000e8        0x4 LONG 0x404 SIZEOF (.bss)
                 0x00000000000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
                 0x00000000000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
                 0x00000000000000f4                __bss_section_table_end = .
@@ -701,240 +759,225 @@ END GROUP
  *(.text*)
  .text.ADC_run  0x0000000000000220       0x20 ./src/PR/PR_ADC.o
                 0x0000000000000220                ADC_run
- .text.InicializarBMP280
-                0x0000000000000240       0x68 ./src/PR/PR_BMP280.o
-                0x0000000000000240                InicializarBMP280
- .text.BMP280_getData
-                0x00000000000002a8       0x60 ./src/PR/PR_BMP280.o
-                0x00000000000002a8                BMP280_getData
- .text.getBMP280_temp
-                0x0000000000000308       0x18 ./src/PR/PR_BMP280.o
-                0x0000000000000308                getBMP280_temp
- .text.getBMP280_pres
-                0x0000000000000320       0x18 ./src/PR/PR_BMP280.o
-                0x0000000000000320                getBMP280_pres
- .text.bmp280_get_uncomp_data
-                0x0000000000000338       0x60 ./src/PR/PR_BMP280.o
-                0x0000000000000338                bmp280_get_uncomp_data
- .text.get_comp_temp
-                0x0000000000000398       0xb4 ./src/PR/PR_BMP280.o
-                0x0000000000000398                get_comp_temp
- .text.get_comp_pres
-                0x000000000000044c      0x1d8 ./src/PR/PR_BMP280.o
-                0x000000000000044c                get_comp_pres
- .text.set_calib_param
-                0x0000000000000624      0x120 ./src/PR/PR_BMP280.o
-                0x0000000000000624                set_calib_param
+ .text.timer10ms
+                0x0000000000000240       0x18 ./src/PR/PR_AM2320.o
+                0x0000000000000240                timer10ms
+ .text.InicializarAM2320
+                0x0000000000000258        0xc ./src/PR/PR_AM2320.o
+                0x0000000000000258                InicializarAM2320
+ .text.AM2320_getData
+                0x0000000000000264       0x7c ./src/PR/PR_AM2320.o
+                0x0000000000000264                AM2320_getData
+ .text.AM2320_wake
+                0x00000000000002e0       0x38 ./src/PR/PR_AM2320.o
+                0x00000000000002e0                AM2320_wake
  .text.InicializarBotones
-                0x0000000000000744       0x6c ./src/PR/PR_Botones.o
-                0x0000000000000744                InicializarBotones
- .text.getBtn   0x00000000000007b0       0x54 ./src/PR/PR_Botones.o
-                0x00000000000007b0                getBtn
+                0x0000000000000318       0x6c ./src/PR/PR_Botones.o
+                0x0000000000000318                InicializarBotones
+ .text.getBtn   0x0000000000000384       0x54 ./src/PR/PR_Botones.o
+                0x0000000000000384                getBtn
  .text.InicializarI2C
-                0x0000000000000804       0x48 ./src/PR/PR_I2C.o
-                0x0000000000000804                InicializarI2C
+                0x00000000000003d8       0x48 ./src/PR/PR_I2C.o
+                0x00000000000003d8                InicializarI2C
  .text.I2C_beginTransmition
-                0x000000000000084c       0x38 ./src/PR/PR_I2C.o
-                0x000000000000084c                I2C_beginTransmition
- .text.I2C_put  0x0000000000000884       0x30 ./src/PR/PR_I2C.o
-                0x0000000000000884                I2C_put
- .text.I2C_get  0x00000000000008b4       0x20 ./src/PR/PR_I2C.o
-                0x00000000000008b4                I2C_get
+                0x0000000000000420       0x38 ./src/PR/PR_I2C.o
+                0x0000000000000420                I2C_beginTransmition
+ .text.I2C_put  0x0000000000000458       0x30 ./src/PR/PR_I2C.o
+                0x0000000000000458                I2C_put
+ .text.I2C_get  0x0000000000000488       0x20 ./src/PR/PR_I2C.o
+                0x0000000000000488                I2C_get
  .text.I2C_endTransmition
-                0x00000000000008d4       0x18 ./src/PR/PR_I2C.o
-                0x00000000000008d4                I2C_endTransmition
+                0x00000000000004a8       0x18 ./src/PR/PR_I2C.o
+                0x00000000000004a8                I2C_endTransmition
  .text.I2C_getData
-                0x00000000000008ec       0x48 ./src/PR/PR_I2C.o
-                0x00000000000008ec                I2C_getData
+                0x00000000000004c0       0x48 ./src/PR/PR_I2C.o
+                0x00000000000004c0                I2C_getData
  .text.InicializarPWM
-                0x0000000000000934       0x20 ./src/PR/PR_PWM.o
-                0x0000000000000934                InicializarPWM
+                0x0000000000000508       0x20 ./src/PR/PR_PWM.o
+                0x0000000000000508                InicializarPWM
  .text.InicializarRGB
-                0x0000000000000954       0x62 ./src/PR/PR_RGB.o
-                0x0000000000000954                InicializarRGB
+                0x0000000000000528       0x62 ./src/PR/PR_RGB.o
+                0x0000000000000528                InicializarRGB
  .text.toggleRGB_r
-                0x00000000000009b6       0x26 ./src/PR/PR_RGB.o
-                0x00000000000009b6                toggleRGB_r
+                0x000000000000058a       0x26 ./src/PR/PR_RGB.o
+                0x000000000000058a                toggleRGB_r
  .text.InicializarRelays
-                0x00000000000009dc       0x80 ./src/PR/PR_Relays.o
-                0x00000000000009dc                InicializarRelays
- .text.setRelay
-                0x0000000000000a5c       0x6c ./src/PR/PR_Relays.o
-                0x0000000000000a5c                setRelay
+                0x00000000000005b0       0x80 ./src/PR/PR_Relays.o
+                0x00000000000005b0                InicializarRelays
  .text.InicializarSerial0
-                0x0000000000000ac8       0x20 ./src/PR/PR_Serial.o
-                0x0000000000000ac8                InicializarSerial0
+                0x0000000000000630       0x20 ./src/PR/PR_Serial.o
+                0x0000000000000630                InicializarSerial0
  .text.InicializarSerial1
-                0x0000000000000ae8       0x20 ./src/PR/PR_Serial.o
-                0x0000000000000ae8                InicializarSerial1
+                0x0000000000000650       0x20 ./src/PR/PR_Serial.o
+                0x0000000000000650                InicializarSerial1
  .text.UART1_pushTX
-                0x0000000000000b08       0x58 ./src/PR/PR_Serial.o
-                0x0000000000000b08                UART1_pushTX
+                0x0000000000000670       0x58 ./src/PR/PR_Serial.o
+                0x0000000000000670                UART1_pushTX
  .text.UART1_SendString
-                0x0000000000000b60       0x4e ./src/PR/PR_Serial.o
-                0x0000000000000b60                UART1_SendString
- *fill*         0x0000000000000bae        0x2 ff
+                0x00000000000006c8       0x4e ./src/PR/PR_Serial.o
+                0x00000000000006c8                UART1_SendString
+ *fill*         0x0000000000000716        0x2 ff
  .text.TimerStart
-                0x0000000000000bb0       0x9c ./src/PR/PR_Timers.o
-                0x0000000000000bb0                TimerStart
+                0x0000000000000718       0xb0 ./src/PR/PR_Timers.o
+                0x0000000000000718                TimerStart
  .text.TimerDiscount
-                0x0000000000000c4c       0x6c ./src/PR/PR_Timers.o
-                0x0000000000000c4c                TimerDiscount
+                0x00000000000007c8       0x6c ./src/PR/PR_Timers.o
+                0x00000000000007c8                TimerDiscount
  .text.Timers_run
-                0x0000000000000cb8       0x48 ./src/PR/PR_Timers.o
-                0x0000000000000cb8                Timers_run
+                0x0000000000000834       0x48 ./src/PR/PR_Timers.o
+                0x0000000000000834                Timers_run
  .text.ADC_IRQHandler
-                0x0000000000000d00      0x114 ./src/DR/DR_ADC.o
-                0x0000000000000d00                ADC_IRQHandler
+                0x000000000000087c      0x114 ./src/DR/DR_ADC.o
+                0x000000000000087c                ADC_IRQHandler
  .text.ADC_startConvertion
-                0x0000000000000e14       0x24 ./src/DR/DR_ADC.o
-                0x0000000000000e14                ADC_startConvertion
+                0x0000000000000990       0x24 ./src/DR/DR_ADC.o
+                0x0000000000000990                ADC_startConvertion
  .text.TecladoHW
-                0x0000000000000e38       0x6e ./src/DR/DR_Botones.o
-                0x0000000000000e38                TecladoHW
- *fill*         0x0000000000000ea6        0x2 ff
+                0x00000000000009b4       0x6e ./src/DR/DR_Botones.o
+                0x00000000000009b4                TecladoHW
+ *fill*         0x0000000000000a22        0x2 ff
  .text.TecladoSW
-                0x0000000000000ea8       0xa8 ./src/DR/DR_Botones.o
-                0x0000000000000ea8                TecladoSW
+                0x0000000000000a24       0xa8 ./src/DR/DR_Botones.o
+                0x0000000000000a24                TecladoSW
  .text.InicializarEINT_DR
-                0x0000000000000f50       0x4c ./src/DR/DR_ExtInt.o
-                0x0000000000000f50                InicializarEINT_DR
+                0x0000000000000acc       0x4c ./src/DR/DR_ExtInt.o
+                0x0000000000000acc                InicializarEINT_DR
  .text.EINT2_IRQHandler
-                0x0000000000000f9c       0x70 ./src/DR/DR_ExtInt.o
-                0x0000000000000f9c                EINT2_IRQHandler
+                0x0000000000000b18       0x70 ./src/DR/DR_ExtInt.o
+                0x0000000000000b18                EINT2_IRQHandler
  .text.setPinmode
-                0x000000000000100c       0x94 ./src/DR/DR_GPIO.o
-                0x000000000000100c                setPinmode
+                0x0000000000000b88       0x94 ./src/DR/DR_GPIO.o
+                0x0000000000000b88                setPinmode
  .text.setPinmode_OD
-                0x00000000000010a0       0x64 ./src/DR/DR_GPIO.o
-                0x00000000000010a0                setPinmode_OD
- .text.setDir   0x0000000000001104       0x76 ./src/DR/DR_GPIO.o
-                0x0000000000001104                setDir
- *fill*         0x000000000000117a        0x2 ff
- .text.setPin   0x000000000000117c       0xe8 ./src/DR/DR_GPIO.o
-                0x000000000000117c                setPin
- .text.getPin   0x0000000000001264       0x4e ./src/DR/DR_GPIO.o
-                0x0000000000001264                getPin
+                0x0000000000000c1c       0x64 ./src/DR/DR_GPIO.o
+                0x0000000000000c1c                setPinmode_OD
+ .text.setDir   0x0000000000000c80       0x76 ./src/DR/DR_GPIO.o
+                0x0000000000000c80                setDir
+ *fill*         0x0000000000000cf6        0x2 ff
+ .text.setPin   0x0000000000000cf8       0xe8 ./src/DR/DR_GPIO.o
+                0x0000000000000cf8                setPin
+ .text.getPin   0x0000000000000de0       0x4e ./src/DR/DR_GPIO.o
+                0x0000000000000de0                getPin
  .text.getPin_raw
-                0x00000000000012b2       0x36 ./src/DR/DR_GPIO.o
-                0x00000000000012b2                getPin_raw
+                0x0000000000000e2e       0x36 ./src/DR/DR_GPIO.o
+                0x0000000000000e2e                getPin_raw
  .text.InicializarI2C_DR
-                0x00000000000012e8       0x58 ./src/DR/DR_I2C.o
-                0x00000000000012e8                InicializarI2C_DR
+                0x0000000000000e64       0x58 ./src/DR/DR_I2C.o
+                0x0000000000000e64                InicializarI2C_DR
  .text.I2C1_IRQHandler
-                0x0000000000001340      0x304 ./src/DR/DR_I2C.o
-                0x0000000000001340                I2C1_IRQHandler
+                0x0000000000000ebc      0x304 ./src/DR/DR_I2C.o
+                0x0000000000000ebc                I2C1_IRQHandler
  .text.I2C1_Stop
-                0x0000000000001644       0x2c ./src/DR/DR_I2C.o
-                0x0000000000001644                I2C1_Stop
+                0x00000000000011c0       0x2c ./src/DR/DR_I2C.o
+                0x00000000000011c0                I2C1_Stop
  .text.I2C1_Engine
-                0x0000000000001670       0x58 ./src/DR/DR_I2C.o
-                0x0000000000001670                I2C1_Engine
+                0x00000000000011ec       0x58 ./src/DR/DR_I2C.o
+                0x00000000000011ec                I2C1_Engine
  .text.InicializarPLL
-                0x00000000000016c8      0x140 ./src/DR/DR_PLL.o
-                0x00000000000016c8                InicializarPLL
+                0x0000000000001244      0x140 ./src/DR/DR_PLL.o
+                0x0000000000001244                InicializarPLL
  .text.InicializarPWM_DR
-                0x0000000000001808       0xdc ./src/DR/DR_PWM.o
-                0x0000000000001808                InicializarPWM_DR
+                0x0000000000001384       0xdc ./src/DR/DR_PWM.o
+                0x0000000000001384                InicializarPWM_DR
  .text.PWM_setDutyCicle
-                0x00000000000018e4       0x70 ./src/DR/DR_PWM.o
-                0x00000000000018e4                PWM_setDutyCicle
+                0x0000000000001460       0x70 ./src/DR/DR_PWM.o
+                0x0000000000001460                PWM_setDutyCicle
  .text.PWM_update
-                0x0000000000001954       0x5c ./src/DR/DR_PWM.o
-                0x0000000000001954                PWM_update
+                0x00000000000014d0       0x5c ./src/DR/DR_PWM.o
+                0x00000000000014d0                PWM_update
  .text.setPinsel
-                0x00000000000019b0       0xa4 ./src/DR/DR_Pinsel.o
-                0x00000000000019b0                setPinsel
+                0x000000000000152c       0xa4 ./src/DR/DR_Pinsel.o
+                0x000000000000152c                setPinsel
  .text.InicializarUART0_DR
-                0x0000000000001a54       0x90 ./src/DR/DR_Serial.o
-                0x0000000000001a54                InicializarUART0_DR
+                0x00000000000015d0       0x90 ./src/DR/DR_Serial.o
+                0x00000000000015d0                InicializarUART0_DR
  .text.UART0_pushRX
-                0x0000000000001ae4       0x40 ./src/DR/DR_Serial.o
-                0x0000000000001ae4                UART0_pushRX
+                0x0000000000001660       0x40 ./src/DR/DR_Serial.o
+                0x0000000000001660                UART0_pushRX
  .text.UART0_popTX
-                0x0000000000001b24       0x60 ./src/DR/DR_Serial.o
-                0x0000000000001b24                UART0_popTX
+                0x00000000000016a0       0x60 ./src/DR/DR_Serial.o
+                0x00000000000016a0                UART0_popTX
  .text.UART0_forceTX
-                0x0000000000001b84       0x28 ./src/DR/DR_Serial.o
-                0x0000000000001b84                UART0_forceTX
+                0x0000000000001700       0x28 ./src/DR/DR_Serial.o
+                0x0000000000001700                UART0_forceTX
  .text.UART0_IRQHandler
-                0x0000000000001bac       0xa0 ./src/DR/DR_Serial.o
-                0x0000000000001bac                UART0_IRQHandler
+                0x0000000000001728       0xa0 ./src/DR/DR_Serial.o
+                0x0000000000001728                UART0_IRQHandler
  .text.InicializarUART1_DR
-                0x0000000000001c4c       0x90 ./src/DR/DR_Serial.o
-                0x0000000000001c4c                InicializarUART1_DR
+                0x00000000000017c8       0x90 ./src/DR/DR_Serial.o
+                0x00000000000017c8                InicializarUART1_DR
  .text.UART1_pushRX
-                0x0000000000001cdc       0x40 ./src/DR/DR_Serial.o
-                0x0000000000001cdc                UART1_pushRX
+                0x0000000000001858       0x40 ./src/DR/DR_Serial.o
+                0x0000000000001858                UART1_pushRX
  .text.UART1_popTX
-                0x0000000000001d1c       0x60 ./src/DR/DR_Serial.o
-                0x0000000000001d1c                UART1_popTX
+                0x0000000000001898       0x60 ./src/DR/DR_Serial.o
+                0x0000000000001898                UART1_popTX
  .text.UART1_forceTX
-                0x0000000000001d7c       0x28 ./src/DR/DR_Serial.o
-                0x0000000000001d7c                UART1_forceTX
+                0x00000000000018f8       0x28 ./src/DR/DR_Serial.o
+                0x00000000000018f8                UART1_forceTX
  .text.UART1_IRQHandler
-                0x0000000000001da4       0xa0 ./src/DR/DR_Serial.o
-                0x0000000000001da4                UART1_IRQHandler
+                0x0000000000001920       0xa0 ./src/DR/DR_Serial.o
+                0x0000000000001920                UART1_IRQHandler
  .text.InicializarSystick
-                0x0000000000001e44       0x40 ./src/DR/DR_Systick.o
-                0x0000000000001e44                InicializarSystick
+                0x00000000000019c0       0x40 ./src/DR/DR_Systick.o
+                0x00000000000019c0                InicializarSystick
  .text.SysTick_Handler
-                0x0000000000001e84       0x1c ./src/DR/DR_Systick.o
-                0x0000000000001e84                SysTick_Handler
+                0x0000000000001a00       0x1c ./src/DR/DR_Systick.o
+                0x0000000000001a00                SysTick_Handler
  .text.scheduler_run
-                0x0000000000001ea0       0x74 ./src/DR/DR_Systick.o
-                0x0000000000001ea0                scheduler_run
+                0x0000000000001a1c       0x74 ./src/DR/DR_Systick.o
+                0x0000000000001a1c                scheduler_run
  .text.TIMER0_getTime
-                0x0000000000001f14       0x14 ./src/DR/DR_Timer0.o
-                0x0000000000001f14                TIMER0_getTime
+                0x0000000000001a90       0x14 ./src/DR/DR_Timer0.o
+                0x0000000000001a90                TIMER0_getTime
  .text.TIMER0_rstTime
-                0x0000000000001f28       0x18 ./src/DR/DR_Timer0.o
-                0x0000000000001f28                TIMER0_rstTime
+                0x0000000000001aa4       0x18 ./src/DR/DR_Timer0.o
+                0x0000000000001aa4                TIMER0_rstTime
  .text.TIMER0_IRQHandler
-                0x0000000000001f40       0x28 ./src/DR/DR_Timer0.o
-                0x0000000000001f40                TIMER0_IRQHandler
- .text.func     0x0000000000001f68       0x1c ./src/TPI_V0.o
-                0x0000000000001f68                func
- .text.main     0x0000000000001f84      0x170 ./src/TPI_V0.o
-                0x0000000000001f84                main
+                0x0000000000001abc       0x28 ./src/DR/DR_Timer0.o
+                0x0000000000001abc                TIMER0_IRQHandler
+ .text.func     0x0000000000001ae4       0x1c ./src/TPI_V0.o
+                0x0000000000001ae4                func
+ .text.main     0x0000000000001b00      0x144 ./src/TPI_V0.o
+                0x0000000000001b00                main
  .text.__weak_main
-                0x00000000000020f4        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x00000000000020f4                __main
-                0x00000000000020f4                __weak_main
+                0x0000000000001c44        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x0000000000001c44                __main
+                0x0000000000001c44                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata.main.str1.4
-                0x00000000000020f8       0x26 ./src/TPI_V0.o
-                0x0000000000002120                . = ALIGN (0x4)
- *fill*         0x000000000000211e        0x2 ff
+                0x0000000000001c48       0x26 ./src/TPI_V0.o
+                0x0000000000001c70                . = ALIGN (0x4)
+ *fill*         0x0000000000001c6e        0x2 ff
 
-.glue_7         0x0000000000002120        0x0
- .glue_7        0x0000000000002120        0x0 linker stubs
+.glue_7         0x0000000000001c70        0x0
+ .glue_7        0x0000000000001c70        0x0 linker stubs
 
-.glue_7t        0x0000000000002120        0x0
- .glue_7t       0x0000000000002120        0x0 linker stubs
+.glue_7t        0x0000000000001c70        0x0
+ .glue_7t       0x0000000000001c70        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000002120        0x0
- .vfp11_veneer  0x0000000000002120        0x0 linker stubs
+.vfp11_veneer   0x0000000000001c70        0x0
+ .vfp11_veneer  0x0000000000001c70        0x0 linker stubs
 
-.v4_bx          0x0000000000002120        0x0
- .v4_bx         0x0000000000002120        0x0 linker stubs
+.v4_bx          0x0000000000001c70        0x0
+ .v4_bx         0x0000000000001c70        0x0 linker stubs
 
-.iplt           0x0000000000002120        0x0
- .iplt          0x0000000000002120        0x0 ./src/PR/PR_ADC.o
+.iplt           0x0000000000001c70        0x0
+ .iplt          0x0000000000001c70        0x0 ./src/PR/PR_ADC.o
 
-.rel.dyn        0x0000000000002120        0x0
- .rel.iplt      0x0000000000002120        0x0 ./src/PR/PR_ADC.o
+.rel.dyn        0x0000000000001c70        0x0
+ .rel.iplt      0x0000000000001c70        0x0 ./src/PR/PR_ADC.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000000002120        0x0
-                0x0000000000002120                __exidx_start = .
+.ARM.exidx      0x0000000000001c70        0x0
+                0x0000000000001c70                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000002120                __exidx_end = .
-                0x0000000000002120                _etext = .
+                0x0000000000001c70                __exidx_end = .
+                0x0000000000001c70                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000002120
+.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001c70
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -955,7 +998,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x0 load address 0x0000000000002120
+.data           0x0000000010000000        0x0 load address 0x0000000000001c70
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -971,7 +1014,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000000        0x0 load address 0x0000000000002120
+.igot.plt       0x0000000010000000        0x0 load address 0x0000000000001c70
  .igot.plt      0x0000000010000000        0x0 ./src/PR/PR_ADC.o
 
 .bss_RAM2       0x000000002007c000        0x0
@@ -985,139 +1028,128 @@ END GROUP
                 [!provide]                        PROVIDE (__end_bss_RAM2 = .)
                 [!provide]                        PROVIDE (__end_bss_RamAHB32 = .)
 
-.bss            0x0000000010000000      0x460
+.bss            0x0000000010000000      0x404
                 0x0000000010000000                _bss = .
                 [!provide]                        PROVIDE (__start_bss_RAM = .)
                 [!provide]                        PROVIDE (__start_bss_RamLoc32 = .)
  *(.bss*)
- .bss.dev       0x0000000010000000       0x34 ./src/PR/PR_BMP280.o
-                0x0000000010000000                dev
- .bss.bmp280_temperature_data
-                0x0000000010000034        0x4 ./src/PR/PR_BMP280.o
- .bss.bmp280_pressure_data
-                0x0000000010000038        0x4 ./src/PR/PR_BMP280.o
- .bss.sensor_data
-                0x000000001000003c        0x6 ./src/PR/PR_BMP280.o
- *fill*         0x0000000010000042        0x2 
- .bss.calib_data
-                0x0000000010000044       0x19 ./src/PR/PR_BMP280.o
- .bss.init_falg.3950
-                0x000000001000005d        0x1 ./src/PR/PR_BMP280.o
- *fill*         0x000000001000005e        0x2 
- .bss.TmrRun    0x0000000010000060       0x78 ./src/PR/PR_Timers.o
-                0x0000000010000060                TmrRun
+ .bss.ready_read
+                0x0000000010000000        0x1 ./src/PR/PR_AM2320.o
+ *fill*         0x0000000010000001        0x3 
+ .bss.TmrRun    0x0000000010000004       0x78 ./src/PR/PR_Timers.o
+                0x0000000010000004                TmrRun
  .bss.TmrFunciones
-                0x00000000100000d8       0x78 ./src/PR/PR_Timers.o
-                0x00000000100000d8                TmrFunciones
- .bss.TmrFlags  0x0000000010000150       0x1f ./src/PR/PR_Timers.o
-                0x0000000010000150                TmrFlags
- *fill*         0x000000001000016f        0x1 
- .bss.TmrPause  0x0000000010000170       0x1e ./src/PR/PR_Timers.o
-                0x0000000010000170                TmrPause
- *fill*         0x000000001000018e        0x2 
- .bss.TmrBase   0x0000000010000190       0x1e ./src/PR/PR_Timers.o
-                0x0000000010000190                TmrBase
- *fill*         0x00000000100001ae        0x2 
+                0x000000001000007c       0x78 ./src/PR/PR_Timers.o
+                0x000000001000007c                TmrFunciones
+ .bss.TmrFlags  0x00000000100000f4       0x1f ./src/PR/PR_Timers.o
+                0x00000000100000f4                TmrFlags
+ *fill*         0x0000000010000113        0x1 
+ .bss.TmrPause  0x0000000010000114       0x1e ./src/PR/PR_Timers.o
+                0x0000000010000114                TmrPause
+ *fill*         0x0000000010000132        0x2 
+ .bss.TmrBase   0x0000000010000134       0x1e ./src/PR/PR_Timers.o
+                0x0000000010000134                TmrBase
+ *fill*         0x0000000010000152        0x2 
  .bss.ADC_read_buffer
-                0x00000000100001b0       0xc0 ./src/DR/DR_ADC.o
+                0x0000000010000154       0xc0 ./src/DR/DR_ADC.o
  .bss.ADC_buffer
-                0x0000000010000270        0xc ./src/DR/DR_ADC.o
-                0x0000000010000270                ADC_buffer
+                0x0000000010000214        0xc ./src/DR/DR_ADC.o
+                0x0000000010000214                ADC_buffer
  .bss.ADC_ready
-                0x000000001000027c        0x1 ./src/DR/DR_ADC.o
-                0x000000001000027c                ADC_ready
- *fill*         0x000000001000027d        0x3 
+                0x0000000010000220        0x1 ./src/DR/DR_ADC.o
+                0x0000000010000220                ADC_ready
+ *fill*         0x0000000010000221        0x3 
  .bss.count_n.3736
-                0x0000000010000280        0x4 ./src/DR/DR_ADC.o
+                0x0000000010000224        0x4 ./src/DR/DR_ADC.o
  .bss.Botones_buff
-                0x0000000010000284        0x1 ./src/DR/DR_Botones.o
-                0x0000000010000284                Botones_buff
+                0x0000000010000228        0x1 ./src/DR/DR_Botones.o
+                0x0000000010000228                Botones_buff
  .bss.prev_code.3691
-                0x0000000010000285        0x1 ./src/DR/DR_Botones.o
+                0x0000000010000229        0x1 ./src/DR/DR_Botones.o
  .bss.stableState_n.3692
-                0x0000000010000286        0x1 ./src/DR/DR_Botones.o
- *fill*         0x0000000010000287        0x1 
+                0x000000001000022a        0x1 ./src/DR/DR_Botones.o
+ *fill*         0x000000001000022b        0x1 
  .bss.startTime
-                0x0000000010000288        0x4 ./src/DR/DR_ExtInt.o
- .bss.intTime   0x000000001000028c        0x4 ./src/DR/DR_ExtInt.o
-                0x000000001000028c                intTime
+                0x000000001000022c        0x4 ./src/DR/DR_ExtInt.o
+ .bss.intTime   0x0000000010000230        0x4 ./src/DR/DR_ExtInt.o
+                0x0000000010000230                intTime
  .bss.I2C1_State
-                0x0000000010000290        0x4 ./src/DR/DR_I2C.o
-                0x0000000010000290                I2C1_State
+                0x0000000010000234        0x4 ./src/DR/DR_I2C.o
+                0x0000000010000234                I2C1_State
  .bss.I2C1_timeout
-                0x0000000010000294        0x4 ./src/DR/DR_I2C.o
-                0x0000000010000294                I2C1_timeout
+                0x0000000010000238        0x4 ./src/DR/DR_I2C.o
+                0x0000000010000238                I2C1_timeout
  .bss.I2C1_MasterBuff
-                0x0000000010000298       0x40 ./src/DR/DR_I2C.o
-                0x0000000010000298                I2C1_MasterBuff
+                0x000000001000023c       0x40 ./src/DR/DR_I2C.o
+                0x000000001000023c                I2C1_MasterBuff
  .bss.I2C1_SlaveBuff
-                0x00000000100002d8       0x40 ./src/DR/DR_I2C.o
-                0x00000000100002d8                I2C1_SlaveBuff
+                0x000000001000027c       0x40 ./src/DR/DR_I2C.o
+                0x000000001000027c                I2C1_SlaveBuff
  .bss.I2C1_ReadLen
-                0x0000000010000318        0x4 ./src/DR/DR_I2C.o
-                0x0000000010000318                I2C1_ReadLen
+                0x00000000100002bc        0x4 ./src/DR/DR_I2C.o
+                0x00000000100002bc                I2C1_ReadLen
  .bss.I2C1_WriteLen
-                0x000000001000031c        0x4 ./src/DR/DR_I2C.o
-                0x000000001000031c                I2C1_WriteLen
+                0x00000000100002c0        0x4 ./src/DR/DR_I2C.o
+                0x00000000100002c0                I2C1_WriteLen
  .bss.I2C1_RdIdx
-                0x0000000010000320        0x4 ./src/DR/DR_I2C.o
-                0x0000000010000320                I2C1_RdIdx
+                0x00000000100002c4        0x4 ./src/DR/DR_I2C.o
+                0x00000000100002c4                I2C1_RdIdx
  .bss.I2C1_WrIdx
-                0x0000000010000324        0x4 ./src/DR/DR_I2C.o
-                0x0000000010000324                I2C1_WrIdx
- .bss.PWM_buff  0x0000000010000328        0x6 ./src/DR/DR_PWM.o
-                0x0000000010000328                PWM_buff
- *fill*         0x000000001000032e        0x2 
+                0x00000000100002c8        0x4 ./src/DR/DR_I2C.o
+                0x00000000100002c8                I2C1_WrIdx
+ .bss.PWM_buff  0x00000000100002cc        0x6 ./src/DR/DR_PWM.o
+                0x00000000100002cc                PWM_buff
+ *fill*         0x00000000100002d2        0x2 
  .bss.UART0_rx_buff
-                0x0000000010000330       0x40 ./src/DR/DR_Serial.o
-                0x0000000010000330                UART0_rx_buff
+                0x00000000100002d4       0x40 ./src/DR/DR_Serial.o
+                0x00000000100002d4                UART0_rx_buff
  .bss.UART0_rx_in
-                0x0000000010000370        0x4 ./src/DR/DR_Serial.o
-                0x0000000010000370                UART0_rx_in
+                0x0000000010000314        0x4 ./src/DR/DR_Serial.o
+                0x0000000010000314                UART0_rx_in
  .bss.UART0_tx_buff
-                0x0000000010000374       0x40 ./src/DR/DR_Serial.o
-                0x0000000010000374                UART0_tx_buff
+                0x0000000010000318       0x40 ./src/DR/DR_Serial.o
+                0x0000000010000318                UART0_tx_buff
  .bss.UART0_tx_in
-                0x00000000100003b4        0x4 ./src/DR/DR_Serial.o
-                0x00000000100003b4                UART0_tx_in
+                0x0000000010000358        0x4 ./src/DR/DR_Serial.o
+                0x0000000010000358                UART0_tx_in
  .bss.UART0_tx_out
-                0x00000000100003b8        0x4 ./src/DR/DR_Serial.o
-                0x00000000100003b8                UART0_tx_out
+                0x000000001000035c        0x4 ./src/DR/DR_Serial.o
+                0x000000001000035c                UART0_tx_out
  .bss.UART0_tx_flag
-                0x00000000100003bc        0x1 ./src/DR/DR_Serial.o
-                0x00000000100003bc                UART0_tx_flag
- *fill*         0x00000000100003bd        0x3 
+                0x0000000010000360        0x1 ./src/DR/DR_Serial.o
+                0x0000000010000360                UART0_tx_flag
+ *fill*         0x0000000010000361        0x3 
  .bss.UART1_rx_buff
-                0x00000000100003c0       0x40 ./src/DR/DR_Serial.o
-                0x00000000100003c0                UART1_rx_buff
+                0x0000000010000364       0x40 ./src/DR/DR_Serial.o
+                0x0000000010000364                UART1_rx_buff
  .bss.UART1_rx_in
-                0x0000000010000400        0x4 ./src/DR/DR_Serial.o
-                0x0000000010000400                UART1_rx_in
+                0x00000000100003a4        0x4 ./src/DR/DR_Serial.o
+                0x00000000100003a4                UART1_rx_in
  .bss.UART1_tx_buff
-                0x0000000010000404       0x40 ./src/DR/DR_Serial.o
-                0x0000000010000404                UART1_tx_buff
+                0x00000000100003a8       0x40 ./src/DR/DR_Serial.o
+                0x00000000100003a8                UART1_tx_buff
  .bss.UART1_tx_in
-                0x0000000010000444        0x4 ./src/DR/DR_Serial.o
-                0x0000000010000444                UART1_tx_in
+                0x00000000100003e8        0x4 ./src/DR/DR_Serial.o
+                0x00000000100003e8                UART1_tx_in
  .bss.UART1_tx_out
-                0x0000000010000448        0x4 ./src/DR/DR_Serial.o
-                0x0000000010000448                UART1_tx_out
+                0x00000000100003ec        0x4 ./src/DR/DR_Serial.o
+                0x00000000100003ec                UART1_tx_out
  .bss.UART1_tx_flag
-                0x000000001000044c        0x1 ./src/DR/DR_Serial.o
-                0x000000001000044c                UART1_tx_flag
- *fill*         0x000000001000044d        0x3 
+                0x00000000100003f0        0x1 ./src/DR/DR_Serial.o
+                0x00000000100003f0                UART1_tx_flag
+ *fill*         0x00000000100003f1        0x3 
  .bss.systickCounter
-                0x0000000010000450        0x4 ./src/DR/DR_Systick.o
- .bss.pwm_counter.3756
-                0x0000000010000454        0x4 ./src/DR/DR_Systick.o
- .bss.btn_counter.3757
-                0x0000000010000458        0x4 ./src/DR/DR_Systick.o
+                0x00000000100003f4        0x4 ./src/DR/DR_Systick.o
+ .bss.pwm_counter.3757
+                0x00000000100003f8        0x4 ./src/DR/DR_Systick.o
+ .bss.btn_counter.3758
+                0x00000000100003fc        0x4 ./src/DR/DR_Systick.o
  .bss.TIM0_count
-                0x000000001000045c        0x4 ./src/DR/DR_Timer0.o
-                0x000000001000045c                TIM0_count
+                0x0000000010000400        0x4 ./src/DR/DR_Timer0.o
+                0x0000000010000400                TIM0_count
  *(COMMON)
-                0x0000000010000460                . = ALIGN (0x4)
-                0x0000000010000460                _ebss = .
+                0x0000000010000404                . = ALIGN (0x4)
+                0x0000000010000404                _ebss = .
                 [!provide]                        PROVIDE (__end_bss_RAM = .)
                 [!provide]                        PROVIDE (__end_bss_RamLoc32 = .)
                 [!provide]                        PROVIDE (end = .)
@@ -1133,261 +1165,256 @@ END GROUP
                 [!provide]                        PROVIDE (__end_noinit_RAM2 = .)
                 [!provide]                        PROVIDE (__end_noinit_RamAHB32 = .)
 
-.noinit         0x0000000010000460        0x0
-                0x0000000010000460                _noinit = .
+.noinit         0x0000000010000404        0x0
+                0x0000000010000404                _noinit = .
                 [!provide]                        PROVIDE (__start_noinit_RAM = .)
                 [!provide]                        PROVIDE (__start_noinit_RamLoc32 = .)
  *(.noinit*)
-                0x0000000010000460                . = ALIGN (0x4)
-                0x0000000010000460                _end_noinit = .
+                0x0000000010000404                . = ALIGN (0x4)
+                0x0000000010000404                _end_noinit = .
                 [!provide]                        PROVIDE (__end_noinit_RAM = .)
                 [!provide]                        PROVIDE (__end_noinit_RamLoc32 = .)
                 [!provide]                        PROVIDE (_pvHeapStart = DEFINED (__user_heap_base)?__user_heap_base:.)
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xffffffffefff74da                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000002120                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000002120                _image_size = (_image_end - _image_start)
+                0x0000000000001c70                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000001c70                _image_size = (_image_end - _image_start)
 OUTPUT(TPI_V0.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x39d2
+.debug_info     0x0000000000000000     0x3594
  .debug_info    0x0000000000000000       0xfe ./src/PR/PR_ADC.o
- .debug_info    0x00000000000000fe      0x5b5 ./src/PR/PR_BMP280.o
- .debug_info    0x00000000000006b3       0xba ./src/PR/PR_Botones.o
- .debug_info    0x000000000000076d      0x208 ./src/PR/PR_I2C.o
- .debug_info    0x0000000000000975      0x11e ./src/PR/PR_PWM.o
- .debug_info    0x0000000000000a93      0x158 ./src/PR/PR_RGB.o
- .debug_info    0x0000000000000beb       0xfc ./src/PR/PR_Relays.o
- .debug_info    0x0000000000000ce7      0x26a ./src/PR/PR_Serial.o
- .debug_info    0x0000000000000f51      0x355 ./src/PR/PR_Timers.o
- .debug_info    0x00000000000012a6      0x549 ./src/DR/DR_ADC.o
- .debug_info    0x00000000000017ef      0x112 ./src/DR/DR_Botones.o
- .debug_info    0x0000000000001901      0x142 ./src/DR/DR_ExtInt.o
- .debug_info    0x0000000000001a43      0x27f ./src/DR/DR_GPIO.o
- .debug_info    0x0000000000001cc2      0x2d5 ./src/DR/DR_I2C.o
- .debug_info    0x0000000000001f97       0x72 ./src/DR/DR_PLL.o
- .debug_info    0x0000000000002009      0x55a ./src/DR/DR_PWM.o
- .debug_info    0x0000000000002563       0xac ./src/DR/DR_Pinsel.o
- .debug_info    0x000000000000260f      0x6d6 ./src/DR/DR_Serial.o
- .debug_info    0x0000000000002ce5      0x2c5 ./src/DR/DR_Systick.o
- .debug_info    0x0000000000002faa      0x51b ./src/DR/DR_Timer0.o
- .debug_info    0x00000000000034c5      0x29b ./src/TPI_V0.o
- .debug_info    0x0000000000003760      0x272 ./src/cr_startup_lpc175x_6x.o
+ .debug_info    0x00000000000000fe      0x1b0 ./src/PR/PR_AM2320.o
+ .debug_info    0x00000000000002ae       0xba ./src/PR/PR_Botones.o
+ .debug_info    0x0000000000000368      0x208 ./src/PR/PR_I2C.o
+ .debug_info    0x0000000000000570      0x11e ./src/PR/PR_PWM.o
+ .debug_info    0x000000000000068e      0x158 ./src/PR/PR_RGB.o
+ .debug_info    0x00000000000007e6       0xfc ./src/PR/PR_Relays.o
+ .debug_info    0x00000000000008e2      0x26a ./src/PR/PR_Serial.o
+ .debug_info    0x0000000000000b4c      0x35b ./src/PR/PR_Timers.o
+ .debug_info    0x0000000000000ea7      0x549 ./src/DR/DR_ADC.o
+ .debug_info    0x00000000000013f0      0x112 ./src/DR/DR_Botones.o
+ .debug_info    0x0000000000001502      0x142 ./src/DR/DR_ExtInt.o
+ .debug_info    0x0000000000001644      0x27f ./src/DR/DR_GPIO.o
+ .debug_info    0x00000000000018c3      0x2d5 ./src/DR/DR_I2C.o
+ .debug_info    0x0000000000001b98       0x72 ./src/DR/DR_PLL.o
+ .debug_info    0x0000000000001c0a      0x55a ./src/DR/DR_PWM.o
+ .debug_info    0x0000000000002164       0xac ./src/DR/DR_Pinsel.o
+ .debug_info    0x0000000000002210      0x6d6 ./src/DR/DR_Serial.o
+ .debug_info    0x00000000000028e6      0x2c5 ./src/DR/DR_Systick.o
+ .debug_info    0x0000000000002bab      0x51b ./src/DR/DR_Timer0.o
+ .debug_info    0x00000000000030c6      0x25c ./src/TPI_V0.o
+ .debug_info    0x0000000000003322      0x272 ./src/cr_startup_lpc175x_6x.o
 
-.debug_abbrev   0x0000000000000000     0x17b8
+.debug_abbrev   0x0000000000000000     0x16f3
  .debug_abbrev  0x0000000000000000       0xc7 ./src/PR/PR_ADC.o
- .debug_abbrev  0x00000000000000c7      0x1f9 ./src/PR/PR_BMP280.o
- .debug_abbrev  0x00000000000002c0       0xb0 ./src/PR/PR_Botones.o
- .debug_abbrev  0x0000000000000370      0x11b ./src/PR/PR_I2C.o
- .debug_abbrev  0x000000000000048b       0xdc ./src/PR/PR_PWM.o
- .debug_abbrev  0x0000000000000567       0xac ./src/PR/PR_RGB.o
- .debug_abbrev  0x0000000000000613       0xbf ./src/PR/PR_Relays.o
- .debug_abbrev  0x00000000000006d2       0xf2 ./src/PR/PR_Serial.o
- .debug_abbrev  0x00000000000007c4      0x15b ./src/PR/PR_Timers.o
- .debug_abbrev  0x000000000000091f      0x134 ./src/DR/DR_ADC.o
- .debug_abbrev  0x0000000000000a53       0xca ./src/DR/DR_Botones.o
- .debug_abbrev  0x0000000000000b1d      0x10a ./src/DR/DR_ExtInt.o
- .debug_abbrev  0x0000000000000c27       0xf7 ./src/DR/DR_GPIO.o
- .debug_abbrev  0x0000000000000d1e      0x143 ./src/DR/DR_I2C.o
- .debug_abbrev  0x0000000000000e61       0x56 ./src/DR/DR_PLL.o
- .debug_abbrev  0x0000000000000eb7      0x166 ./src/DR/DR_PWM.o
- .debug_abbrev  0x000000000000101d       0x78 ./src/DR/DR_Pinsel.o
- .debug_abbrev  0x0000000000001095      0x230 ./src/DR/DR_Serial.o
- .debug_abbrev  0x00000000000012c5      0x162 ./src/DR/DR_Systick.o
- .debug_abbrev  0x0000000000001427      0x165 ./src/DR/DR_Timer0.o
- .debug_abbrev  0x000000000000158c      0x115 ./src/TPI_V0.o
- .debug_abbrev  0x00000000000016a1      0x117 ./src/cr_startup_lpc175x_6x.o
+ .debug_abbrev  0x00000000000000c7      0x12b ./src/PR/PR_AM2320.o
+ .debug_abbrev  0x00000000000001f2       0xb0 ./src/PR/PR_Botones.o
+ .debug_abbrev  0x00000000000002a2      0x11b ./src/PR/PR_I2C.o
+ .debug_abbrev  0x00000000000003bd       0xdc ./src/PR/PR_PWM.o
+ .debug_abbrev  0x0000000000000499       0xac ./src/PR/PR_RGB.o
+ .debug_abbrev  0x0000000000000545       0xbf ./src/PR/PR_Relays.o
+ .debug_abbrev  0x0000000000000604       0xf2 ./src/PR/PR_Serial.o
+ .debug_abbrev  0x00000000000006f6      0x164 ./src/PR/PR_Timers.o
+ .debug_abbrev  0x000000000000085a      0x134 ./src/DR/DR_ADC.o
+ .debug_abbrev  0x000000000000098e       0xca ./src/DR/DR_Botones.o
+ .debug_abbrev  0x0000000000000a58      0x10a ./src/DR/DR_ExtInt.o
+ .debug_abbrev  0x0000000000000b62       0xf7 ./src/DR/DR_GPIO.o
+ .debug_abbrev  0x0000000000000c59      0x143 ./src/DR/DR_I2C.o
+ .debug_abbrev  0x0000000000000d9c       0x56 ./src/DR/DR_PLL.o
+ .debug_abbrev  0x0000000000000df2      0x166 ./src/DR/DR_PWM.o
+ .debug_abbrev  0x0000000000000f58       0x78 ./src/DR/DR_Pinsel.o
+ .debug_abbrev  0x0000000000000fd0      0x230 ./src/DR/DR_Serial.o
+ .debug_abbrev  0x0000000000001200      0x162 ./src/DR/DR_Systick.o
+ .debug_abbrev  0x0000000000001362      0x165 ./src/DR/DR_Timer0.o
+ .debug_abbrev  0x00000000000014c7      0x115 ./src/TPI_V0.o
+ .debug_abbrev  0x00000000000015dc      0x117 ./src/cr_startup_lpc175x_6x.o
 
-.debug_aranges  0x0000000000000000      0x578
+.debug_aranges  0x0000000000000000      0x558
  .debug_aranges
                 0x0000000000000000       0x38 ./src/PR/PR_ADC.o
  .debug_aranges
-                0x0000000000000038       0x58 ./src/PR/PR_BMP280.o
+                0x0000000000000038       0x38 ./src/PR/PR_AM2320.o
  .debug_aranges
-                0x0000000000000090       0x28 ./src/PR/PR_Botones.o
+                0x0000000000000070       0x28 ./src/PR/PR_Botones.o
  .debug_aranges
-                0x00000000000000b8       0x48 ./src/PR/PR_I2C.o
+                0x0000000000000098       0x48 ./src/PR/PR_I2C.o
  .debug_aranges
-                0x0000000000000100       0x38 ./src/PR/PR_PWM.o
+                0x00000000000000e0       0x38 ./src/PR/PR_PWM.o
  .debug_aranges
-                0x0000000000000138       0x58 ./src/PR/PR_RGB.o
+                0x0000000000000118       0x58 ./src/PR/PR_RGB.o
  .debug_aranges
-                0x0000000000000190       0x30 ./src/PR/PR_Relays.o
+                0x0000000000000170       0x30 ./src/PR/PR_Relays.o
  .debug_aranges
-                0x00000000000001c0       0x58 ./src/PR/PR_Serial.o
+                0x00000000000001a0       0x58 ./src/PR/PR_Serial.o
  .debug_aranges
-                0x0000000000000218       0x58 ./src/PR/PR_Timers.o
+                0x00000000000001f8       0x58 ./src/PR/PR_Timers.o
  .debug_aranges
-                0x0000000000000270       0x30 ./src/DR/DR_ADC.o
+                0x0000000000000250       0x30 ./src/DR/DR_ADC.o
  .debug_aranges
-                0x00000000000002a0       0x28 ./src/DR/DR_Botones.o
+                0x0000000000000280       0x28 ./src/DR/DR_Botones.o
  .debug_aranges
-                0x00000000000002c8       0x30 ./src/DR/DR_ExtInt.o
+                0x00000000000002a8       0x30 ./src/DR/DR_ExtInt.o
  .debug_aranges
-                0x00000000000002f8       0x48 ./src/DR/DR_GPIO.o
+                0x00000000000002d8       0x48 ./src/DR/DR_GPIO.o
  .debug_aranges
-                0x0000000000000340       0x38 ./src/DR/DR_I2C.o
+                0x0000000000000320       0x38 ./src/DR/DR_I2C.o
  .debug_aranges
-                0x0000000000000378       0x20 ./src/DR/DR_PLL.o
+                0x0000000000000358       0x20 ./src/DR/DR_PLL.o
  .debug_aranges
-                0x0000000000000398       0x30 ./src/DR/DR_PWM.o
+                0x0000000000000378       0x30 ./src/DR/DR_PWM.o
  .debug_aranges
-                0x00000000000003c8       0x20 ./src/DR/DR_Pinsel.o
+                0x00000000000003a8       0x20 ./src/DR/DR_Pinsel.o
  .debug_aranges
-                0x00000000000003e8       0x68 ./src/DR/DR_Serial.o
+                0x00000000000003c8       0x68 ./src/DR/DR_Serial.o
  .debug_aranges
-                0x0000000000000450       0x40 ./src/DR/DR_Systick.o
+                0x0000000000000430       0x40 ./src/DR/DR_Systick.o
  .debug_aranges
-                0x0000000000000490       0x40 ./src/DR/DR_Timer0.o
+                0x0000000000000470       0x40 ./src/DR/DR_Timer0.o
  .debug_aranges
-                0x00000000000004d0       0x28 ./src/TPI_V0.o
+                0x00000000000004b0       0x28 ./src/TPI_V0.o
  .debug_aranges
-                0x00000000000004f8       0x80 ./src/cr_startup_lpc175x_6x.o
+                0x00000000000004d8       0x80 ./src/cr_startup_lpc175x_6x.o
 
-.debug_ranges   0x0000000000000000      0x418
+.debug_ranges   0x0000000000000000      0x3f8
  .debug_ranges  0x0000000000000000       0x28 ./src/PR/PR_ADC.o
- .debug_ranges  0x0000000000000028       0x48 ./src/PR/PR_BMP280.o
- .debug_ranges  0x0000000000000070       0x18 ./src/PR/PR_Botones.o
- .debug_ranges  0x0000000000000088       0x38 ./src/PR/PR_I2C.o
- .debug_ranges  0x00000000000000c0       0x28 ./src/PR/PR_PWM.o
- .debug_ranges  0x00000000000000e8       0x48 ./src/PR/PR_RGB.o
- .debug_ranges  0x0000000000000130       0x20 ./src/PR/PR_Relays.o
- .debug_ranges  0x0000000000000150       0x48 ./src/PR/PR_Serial.o
- .debug_ranges  0x0000000000000198       0x48 ./src/PR/PR_Timers.o
- .debug_ranges  0x00000000000001e0       0x20 ./src/DR/DR_ADC.o
- .debug_ranges  0x0000000000000200       0x18 ./src/DR/DR_Botones.o
- .debug_ranges  0x0000000000000218       0x20 ./src/DR/DR_ExtInt.o
- .debug_ranges  0x0000000000000238       0x38 ./src/DR/DR_GPIO.o
- .debug_ranges  0x0000000000000270       0x28 ./src/DR/DR_I2C.o
- .debug_ranges  0x0000000000000298       0x10 ./src/DR/DR_PLL.o
- .debug_ranges  0x00000000000002a8       0x20 ./src/DR/DR_PWM.o
- .debug_ranges  0x00000000000002c8       0x10 ./src/DR/DR_Pinsel.o
- .debug_ranges  0x00000000000002d8       0x58 ./src/DR/DR_Serial.o
- .debug_ranges  0x0000000000000330       0x30 ./src/DR/DR_Systick.o
- .debug_ranges  0x0000000000000360       0x30 ./src/DR/DR_Timer0.o
- .debug_ranges  0x0000000000000390       0x18 ./src/TPI_V0.o
- .debug_ranges  0x00000000000003a8       0x70 ./src/cr_startup_lpc175x_6x.o
+ .debug_ranges  0x0000000000000028       0x28 ./src/PR/PR_AM2320.o
+ .debug_ranges  0x0000000000000050       0x18 ./src/PR/PR_Botones.o
+ .debug_ranges  0x0000000000000068       0x38 ./src/PR/PR_I2C.o
+ .debug_ranges  0x00000000000000a0       0x28 ./src/PR/PR_PWM.o
+ .debug_ranges  0x00000000000000c8       0x48 ./src/PR/PR_RGB.o
+ .debug_ranges  0x0000000000000110       0x20 ./src/PR/PR_Relays.o
+ .debug_ranges  0x0000000000000130       0x48 ./src/PR/PR_Serial.o
+ .debug_ranges  0x0000000000000178       0x48 ./src/PR/PR_Timers.o
+ .debug_ranges  0x00000000000001c0       0x20 ./src/DR/DR_ADC.o
+ .debug_ranges  0x00000000000001e0       0x18 ./src/DR/DR_Botones.o
+ .debug_ranges  0x00000000000001f8       0x20 ./src/DR/DR_ExtInt.o
+ .debug_ranges  0x0000000000000218       0x38 ./src/DR/DR_GPIO.o
+ .debug_ranges  0x0000000000000250       0x28 ./src/DR/DR_I2C.o
+ .debug_ranges  0x0000000000000278       0x10 ./src/DR/DR_PLL.o
+ .debug_ranges  0x0000000000000288       0x20 ./src/DR/DR_PWM.o
+ .debug_ranges  0x00000000000002a8       0x10 ./src/DR/DR_Pinsel.o
+ .debug_ranges  0x00000000000002b8       0x58 ./src/DR/DR_Serial.o
+ .debug_ranges  0x0000000000000310       0x30 ./src/DR/DR_Systick.o
+ .debug_ranges  0x0000000000000340       0x30 ./src/DR/DR_Timer0.o
+ .debug_ranges  0x0000000000000370       0x18 ./src/TPI_V0.o
+ .debug_ranges  0x0000000000000388       0x70 ./src/cr_startup_lpc175x_6x.o
 
-.debug_macro    0x0000000000000000     0x32f8
+.debug_macro    0x0000000000000000     0x268f
  .debug_macro   0x0000000000000000       0x59 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000059      0xaa8 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000b01      0x1ea ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000ceb       0x34 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000d1f      0x1a8 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000ec7       0x22 ./src/PR/PR_ADC.o
- .debug_macro   0x0000000000000ee9      0x14e ./src/PR/PR_BMP280.o
- .debug_macro   0x0000000000001037       0x10 ./src/PR/PR_BMP280.o
- .debug_macro   0x0000000000001047      0x12e ./src/PR/PR_BMP280.o
- .debug_macro   0x0000000000001175      0x5b1 ./src/PR/PR_BMP280.o
- .debug_macro   0x0000000000001726       0x16 ./src/PR/PR_BMP280.o
- .debug_macro   0x000000000000173c      0x4a0 ./src/PR/PR_BMP280.o
- .debug_macro   0x0000000000001bdc       0x50 ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000001c2c       0x5e ./src/PR/PR_Botones.o
- .debug_macro   0x0000000000001c8a       0x67 ./src/PR/PR_I2C.o
- .debug_macro   0x0000000000001cf1       0x1c ./src/PR/PR_I2C.o
- .debug_macro   0x0000000000001d0d       0x5f ./src/PR/PR_PWM.o
- .debug_macro   0x0000000000001d6c       0x46 ./src/PR/PR_RGB.o
- .debug_macro   0x0000000000001db2       0x4f ./src/PR/PR_Relays.o
- .debug_macro   0x0000000000001e01       0x55 ./src/PR/PR_Serial.o
- .debug_macro   0x0000000000001e56       0x1c ./src/PR/PR_Serial.o
- .debug_macro   0x0000000000001e72       0x16 ./src/PR/PR_Serial.o
- .debug_macro   0x0000000000001e88       0x42 ./src/PR/PR_Timers.o
- .debug_macro   0x0000000000001eca       0x28 ./src/PR/PR_Timers.o
- .debug_macro   0x0000000000001ef2       0x6d ./src/DR/DR_ADC.o
- .debug_macro   0x0000000000001f5f       0x4c ./src/DR/DR_Botones.o
- .debug_macro   0x0000000000001fab       0xfd ./src/DR/DR_ExtInt.o
- .debug_macro   0x00000000000020a8       0x54 ./src/DR/DR_GPIO.o
- .debug_macro   0x00000000000020fc       0x58 ./src/DR/DR_GPIO.o
- .debug_macro   0x0000000000002154       0x99 ./src/DR/DR_I2C.o
- .debug_macro   0x00000000000021ed      0x1a2 ./src/DR/DR_I2C.o
- .debug_macro   0x000000000000238f       0x42 ./src/DR/DR_PLL.o
- .debug_macro   0x00000000000023d1       0xb5 ./src/DR/DR_PWM.o
- .debug_macro   0x0000000000002486       0x48 ./src/DR/DR_Pinsel.o
- .debug_macro   0x00000000000024ce       0x78 ./src/DR/DR_Serial.o
- .debug_macro   0x0000000000002546       0x10 ./src/DR/DR_Serial.o
- .debug_macro   0x0000000000002556       0x8d ./src/DR/DR_Systick.o
- .debug_macro   0x00000000000025e3       0x2e ./src/DR/DR_Systick.o
- .debug_macro   0x0000000000002611       0x10 ./src/DR/DR_Systick.o
- .debug_macro   0x0000000000002621       0x61 ./src/DR/DR_Timer0.o
- .debug_macro   0x0000000000002682      0x129 ./src/TPI_V0.o
- .debug_macro   0x00000000000027ab       0x82 ./src/TPI_V0.o
- .debug_macro   0x000000000000282d       0x1d ./src/cr_startup_lpc175x_6x.o
- .debug_macro   0x000000000000284a      0xaae ./src/cr_startup_lpc175x_6x.o
+ .debug_macro   0x0000000000000ee9       0x74 ./src/PR/PR_AM2320.o
+ .debug_macro   0x0000000000000f5d       0x34 ./src/PR/PR_AM2320.o
+ .debug_macro   0x0000000000000f91       0x50 ./src/PR/PR_Botones.o
+ .debug_macro   0x0000000000000fe1       0x5e ./src/PR/PR_Botones.o
+ .debug_macro   0x000000000000103f       0x67 ./src/PR/PR_I2C.o
+ .debug_macro   0x00000000000010a6       0x1c ./src/PR/PR_I2C.o
+ .debug_macro   0x00000000000010c2       0x5f ./src/PR/PR_PWM.o
+ .debug_macro   0x0000000000001121       0x46 ./src/PR/PR_RGB.o
+ .debug_macro   0x0000000000001167       0x4f ./src/PR/PR_Relays.o
+ .debug_macro   0x00000000000011b6       0x55 ./src/PR/PR_Serial.o
+ .debug_macro   0x000000000000120b       0x1c ./src/PR/PR_Serial.o
+ .debug_macro   0x0000000000001227       0x16 ./src/PR/PR_Serial.o
+ .debug_macro   0x000000000000123d       0x42 ./src/PR/PR_Timers.o
+ .debug_macro   0x000000000000127f       0x2e ./src/PR/PR_Timers.o
+ .debug_macro   0x00000000000012ad       0x6d ./src/DR/DR_ADC.o
+ .debug_macro   0x000000000000131a       0x4c ./src/DR/DR_Botones.o
+ .debug_macro   0x0000000000001366       0xfd ./src/DR/DR_ExtInt.o
+ .debug_macro   0x0000000000001463       0x54 ./src/DR/DR_GPIO.o
+ .debug_macro   0x00000000000014b7       0x58 ./src/DR/DR_GPIO.o
+ .debug_macro   0x000000000000150f       0x99 ./src/DR/DR_I2C.o
+ .debug_macro   0x00000000000015a8      0x1a2 ./src/DR/DR_I2C.o
+ .debug_macro   0x000000000000174a       0x42 ./src/DR/DR_PLL.o
+ .debug_macro   0x000000000000178c       0xb5 ./src/DR/DR_PWM.o
+ .debug_macro   0x0000000000001841       0x48 ./src/DR/DR_Pinsel.o
+ .debug_macro   0x0000000000001889       0x78 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000001901       0x10 ./src/DR/DR_Serial.o
+ .debug_macro   0x0000000000001911       0x8d ./src/DR/DR_Systick.o
+ .debug_macro   0x000000000000199e       0x10 ./src/DR/DR_Systick.o
+ .debug_macro   0x00000000000019ae       0x61 ./src/DR/DR_Timer0.o
+ .debug_macro   0x0000000000001a0f      0x133 ./src/TPI_V0.o
+ .debug_macro   0x0000000000001b42       0x82 ./src/TPI_V0.o
+ .debug_macro   0x0000000000001bc4       0x1d ./src/cr_startup_lpc175x_6x.o
+ .debug_macro   0x0000000000001be1      0xaae ./src/cr_startup_lpc175x_6x.o
 
-.debug_line     0x0000000000000000     0x2dae
+.debug_line     0x0000000000000000     0x29d1
  .debug_line    0x0000000000000000      0x158 ./src/PR/PR_ADC.o
- .debug_line    0x0000000000000158      0x571 ./src/PR/PR_BMP280.o
- .debug_line    0x00000000000006c9      0x12f ./src/PR/PR_Botones.o
- .debug_line    0x00000000000007f8      0x1e0 ./src/PR/PR_I2C.o
- .debug_line    0x00000000000009d8      0x170 ./src/PR/PR_PWM.o
- .debug_line    0x0000000000000b48      0x1de ./src/PR/PR_RGB.o
- .debug_line    0x0000000000000d26      0x16b ./src/PR/PR_Relays.o
- .debug_line    0x0000000000000e91      0x23d ./src/PR/PR_Serial.o
- .debug_line    0x00000000000010ce      0x2f3 ./src/PR/PR_Timers.o
- .debug_line    0x00000000000013c1      0x1d8 ./src/DR/DR_ADC.o
- .debug_line    0x0000000000001599      0x178 ./src/DR/DR_Botones.o
- .debug_line    0x0000000000001711      0x179 ./src/DR/DR_ExtInt.o
- .debug_line    0x000000000000188a      0x1e2 ./src/DR/DR_GPIO.o
- .debug_line    0x0000000000001a6c      0x295 ./src/DR/DR_I2C.o
- .debug_line    0x0000000000001d01      0x1d1 ./src/DR/DR_PLL.o
- .debug_line    0x0000000000001ed2      0x19b ./src/DR/DR_PWM.o
- .debug_line    0x000000000000206d       0xe6 ./src/DR/DR_Pinsel.o
- .debug_line    0x0000000000002153      0x307 ./src/DR/DR_Serial.o
- .debug_line    0x000000000000245a      0x1e4 ./src/DR/DR_Systick.o
- .debug_line    0x000000000000263e      0x18b ./src/DR/DR_Timer0.o
- .debug_line    0x00000000000027c9      0x486 ./src/TPI_V0.o
- .debug_line    0x0000000000002c4f      0x15f ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x0000000000000158      0x180 ./src/PR/PR_AM2320.o
+ .debug_line    0x00000000000002d8      0x12f ./src/PR/PR_Botones.o
+ .debug_line    0x0000000000000407      0x1e0 ./src/PR/PR_I2C.o
+ .debug_line    0x00000000000005e7      0x170 ./src/PR/PR_PWM.o
+ .debug_line    0x0000000000000757      0x1de ./src/PR/PR_RGB.o
+ .debug_line    0x0000000000000935      0x16b ./src/PR/PR_Relays.o
+ .debug_line    0x0000000000000aa0      0x23d ./src/PR/PR_Serial.o
+ .debug_line    0x0000000000000cdd      0x313 ./src/PR/PR_Timers.o
+ .debug_line    0x0000000000000ff0      0x1d8 ./src/DR/DR_ADC.o
+ .debug_line    0x00000000000011c8      0x178 ./src/DR/DR_Botones.o
+ .debug_line    0x0000000000001340      0x179 ./src/DR/DR_ExtInt.o
+ .debug_line    0x00000000000014b9      0x1e2 ./src/DR/DR_GPIO.o
+ .debug_line    0x000000000000169b      0x295 ./src/DR/DR_I2C.o
+ .debug_line    0x0000000000001930      0x1d1 ./src/DR/DR_PLL.o
+ .debug_line    0x0000000000001b01      0x19b ./src/DR/DR_PWM.o
+ .debug_line    0x0000000000001c9c       0xe6 ./src/DR/DR_Pinsel.o
+ .debug_line    0x0000000000001d82      0x307 ./src/DR/DR_Serial.o
+ .debug_line    0x0000000000002089      0x1e4 ./src/DR/DR_Systick.o
+ .debug_line    0x000000000000226d      0x18b ./src/DR/DR_Timer0.o
+ .debug_line    0x00000000000023f8      0x47a ./src/TPI_V0.o
+ .debug_line    0x0000000000002872      0x15f ./src/cr_startup_lpc175x_6x.o
 
-.debug_str      0x0000000000000000     0x911a
+.debug_str      0x0000000000000000     0x8bd7
  .debug_str     0x0000000000000000     0x3b03 ./src/PR/PR_ADC.o
                                        0x3b40 (size before relaxing)
- .debug_str     0x0000000000003b03     0x360a ./src/PR/PR_BMP280.o
-                                       0x6a51 (size before relaxing)
- .debug_str     0x000000000000710d       0xf9 ./src/PR/PR_Botones.o
+ .debug_str     0x0000000000003b03      0x19c ./src/PR/PR_AM2320.o
+                                       0x3573 (size before relaxing)
+ .debug_str     0x0000000000003c9f       0xfe ./src/PR/PR_Botones.o
                                        0x34d9 (size before relaxing)
- .debug_str     0x0000000000007206      0x1b0 ./src/PR/PR_I2C.o
+ .debug_str     0x0000000000003d9d      0x1b0 ./src/PR/PR_I2C.o
                                        0x3d31 (size before relaxing)
- .debug_str     0x00000000000073b6       0x72 ./src/PR/PR_PWM.o
+ .debug_str     0x0000000000003f4d       0x7b ./src/PR/PR_PWM.o
                                        0x3b3c (size before relaxing)
- .debug_str     0x0000000000007428       0x7c ./src/PR/PR_RGB.o
+ .debug_str     0x0000000000003fc8       0x7c ./src/PR/PR_RGB.o
                                        0x34ee (size before relaxing)
- .debug_str     0x00000000000074a4       0x6a ./src/PR/PR_Relays.o
+ .debug_str     0x0000000000004044       0x6a ./src/PR/PR_Relays.o
                                        0x3523 (size before relaxing)
- .debug_str     0x000000000000750e      0x18f ./src/PR/PR_Serial.o
+ .debug_str     0x00000000000040ae      0x18f ./src/PR/PR_Serial.o
                                        0x35af (size before relaxing)
- .debug_str     0x000000000000769d      0x127 ./src/PR/PR_Timers.o
-                                       0x3505 (size before relaxing)
- .debug_str     0x00000000000077c4      0x264 ./src/DR/DR_ADC.o
+ .debug_str     0x000000000000423d       0x8d ./src/PR/PR_Timers.o
+                                       0x351a (size before relaxing)
+ .debug_str     0x00000000000042ca      0x26b ./src/DR/DR_ADC.o
                                        0x3da8 (size before relaxing)
- .debug_str     0x0000000000007a28       0x85 ./src/DR/DR_Botones.o
+ .debug_str     0x0000000000004535       0x85 ./src/DR/DR_Botones.o
                                        0x351b (size before relaxing)
- .debug_str     0x0000000000007aad      0x3e1 ./src/DR/DR_ExtInt.o
+ .debug_str     0x00000000000045ba      0x3e1 ./src/DR/DR_ExtInt.o
                                        0x3f60 (size before relaxing)
- .debug_str     0x0000000000007e8e       0xfd ./src/DR/DR_GPIO.o
+ .debug_str     0x000000000000499b       0xfd ./src/DR/DR_GPIO.o
                                        0x358a (size before relaxing)
- .debug_str     0x0000000000007f8b      0x1e8 ./src/DR/DR_I2C.o
+ .debug_str     0x0000000000004a98      0x1e8 ./src/DR/DR_I2C.o
                                        0x3dbd (size before relaxing)
- .debug_str     0x0000000000008173       0x22 ./src/DR/DR_PLL.o
+ .debug_str     0x0000000000004c80       0x22 ./src/DR/DR_PLL.o
                                        0x3aa3 (size before relaxing)
- .debug_str     0x0000000000008195      0x35d ./src/DR/DR_PWM.o
+ .debug_str     0x0000000000004ca2      0x35d ./src/DR/DR_PWM.o
                                        0x3eca (size before relaxing)
- .debug_str     0x00000000000084f2       0x51 ./src/DR/DR_Pinsel.o
+ .debug_str     0x0000000000004fff       0x51 ./src/DR/DR_Pinsel.o
                                        0x346e (size before relaxing)
- .debug_str     0x0000000000008543      0x285 ./src/DR/DR_Serial.o
+ .debug_str     0x0000000000005050      0x285 ./src/DR/DR_Serial.o
                                        0x3ea6 (size before relaxing)
- .debug_str     0x00000000000087c8      0x12c ./src/DR/DR_Systick.o
-                                       0x3d04 (size before relaxing)
- .debug_str     0x00000000000088f4      0x1c9 ./src/DR/DR_Timer0.o
+ .debug_str     0x00000000000052d5      0x12c ./src/DR/DR_Systick.o
+                                       0x3d14 (size before relaxing)
+ .debug_str     0x0000000000005401      0x1c9 ./src/DR/DR_Timer0.o
                                        0x3d11 (size before relaxing)
- .debug_str     0x0000000000008abd      0x497 ./src/TPI_V0.o
+ .debug_str     0x00000000000055ca     0x3447 ./src/TPI_V0.o
                                        0x71c5 (size before relaxing)
- .debug_str     0x0000000000008f54      0x1c6 ./src/cr_startup_lpc175x_6x.o
+ .debug_str     0x0000000000008a11      0x1c6 ./src/cr_startup_lpc175x_6x.o
                                        0x2fba (size before relaxing)
 
 .comment        0x0000000000000000       0x79
  .comment       0x0000000000000000       0x79 ./src/PR/PR_ADC.o
                                          0x7a (size before relaxing)
- .comment       0x0000000000000079       0x7a ./src/PR/PR_BMP280.o
+ .comment       0x0000000000000079       0x7a ./src/PR/PR_AM2320.o
  .comment       0x0000000000000079       0x7a ./src/PR/PR_Botones.o
  .comment       0x0000000000000079       0x7a ./src/PR/PR_I2C.o
  .comment       0x0000000000000079       0x7a ./src/PR/PR_PWM.o
@@ -1415,7 +1442,7 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000000       0x2d ./src/PR/PR_ADC.o
  .ARM.attributes
-                0x000000000000002d       0x2d ./src/PR/PR_BMP280.o
+                0x000000000000002d       0x2d ./src/PR/PR_AM2320.o
  .ARM.attributes
                 0x000000000000005a       0x2d ./src/PR/PR_Botones.o
  .ARM.attributes
@@ -1459,29 +1486,29 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .ARM.attributes
                 0x00000000000003de       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 
-.debug_frame    0x0000000000000000      0xfec
+.debug_frame    0x0000000000000000      0xf58
  .debug_frame   0x0000000000000000       0x90 ./src/PR/PR_ADC.o
- .debug_frame   0x0000000000000090      0x128 ./src/PR/PR_BMP280.o
- .debug_frame   0x00000000000001b8       0x54 ./src/PR/PR_Botones.o
- .debug_frame   0x000000000000020c       0xe8 ./src/PR/PR_I2C.o
- .debug_frame   0x00000000000002f4       0xa4 ./src/PR/PR_PWM.o
- .debug_frame   0x0000000000000398      0x110 ./src/PR/PR_RGB.o
- .debug_frame   0x00000000000004a8       0x74 ./src/PR/PR_Relays.o
- .debug_frame   0x000000000000051c      0x128 ./src/PR/PR_Serial.o
- .debug_frame   0x0000000000000644      0x148 ./src/PR/PR_Timers.o
- .debug_frame   0x000000000000078c       0x78 ./src/DR/DR_ADC.o
- .debug_frame   0x0000000000000804       0x50 ./src/DR/DR_Botones.o
- .debug_frame   0x0000000000000854       0x78 ./src/DR/DR_ExtInt.o
- .debug_frame   0x00000000000008cc      0x104 ./src/DR/DR_GPIO.o
- .debug_frame   0x00000000000009d0       0x94 ./src/DR/DR_I2C.o
- .debug_frame   0x0000000000000a64       0x30 ./src/DR/DR_PLL.o
- .debug_frame   0x0000000000000a94       0x7c ./src/DR/DR_PWM.o
- .debug_frame   0x0000000000000b10       0x38 ./src/DR/DR_Pinsel.o
- .debug_frame   0x0000000000000b48      0x188 ./src/DR/DR_Serial.o
- .debug_frame   0x0000000000000cd0       0xa8 ./src/DR/DR_Systick.o
- .debug_frame   0x0000000000000d78       0xb8 ./src/DR/DR_Timer0.o
- .debug_frame   0x0000000000000e30       0x4c ./src/TPI_V0.o
- .debug_frame   0x0000000000000e7c      0x170 ./src/cr_startup_lpc175x_6x.o
+ .debug_frame   0x0000000000000090       0x94 ./src/PR/PR_AM2320.o
+ .debug_frame   0x0000000000000124       0x54 ./src/PR/PR_Botones.o
+ .debug_frame   0x0000000000000178       0xe8 ./src/PR/PR_I2C.o
+ .debug_frame   0x0000000000000260       0xa4 ./src/PR/PR_PWM.o
+ .debug_frame   0x0000000000000304      0x110 ./src/PR/PR_RGB.o
+ .debug_frame   0x0000000000000414       0x74 ./src/PR/PR_Relays.o
+ .debug_frame   0x0000000000000488      0x128 ./src/PR/PR_Serial.o
+ .debug_frame   0x00000000000005b0      0x148 ./src/PR/PR_Timers.o
+ .debug_frame   0x00000000000006f8       0x78 ./src/DR/DR_ADC.o
+ .debug_frame   0x0000000000000770       0x50 ./src/DR/DR_Botones.o
+ .debug_frame   0x00000000000007c0       0x78 ./src/DR/DR_ExtInt.o
+ .debug_frame   0x0000000000000838      0x104 ./src/DR/DR_GPIO.o
+ .debug_frame   0x000000000000093c       0x94 ./src/DR/DR_I2C.o
+ .debug_frame   0x00000000000009d0       0x30 ./src/DR/DR_PLL.o
+ .debug_frame   0x0000000000000a00       0x7c ./src/DR/DR_PWM.o
+ .debug_frame   0x0000000000000a7c       0x38 ./src/DR/DR_Pinsel.o
+ .debug_frame   0x0000000000000ab4      0x188 ./src/DR/DR_Serial.o
+ .debug_frame   0x0000000000000c3c       0xa8 ./src/DR/DR_Systick.o
+ .debug_frame   0x0000000000000ce4       0xb8 ./src/DR/DR_Timer0.o
+ .debug_frame   0x0000000000000d9c       0x4c ./src/TPI_V0.o
+ .debug_frame   0x0000000000000de8      0x170 ./src/cr_startup_lpc175x_6x.o
 
 Cross Reference Table
 
@@ -1497,8 +1524,10 @@ ADC_run                                           ./src/PR/PR_ADC.o
                                                   ./src/TPI_V0.o
 ADC_startConvertion                               ./src/DR/DR_ADC.o
                                                   ./src/PR/PR_ADC.o
-BMP280_getData                                    ./src/PR/PR_BMP280.o
+AM2320_getData                                    ./src/PR/PR_AM2320.o
                                                   ./src/TPI_V0.o
+AM2320_wake                                       ./src/PR/PR_AM2320.o
+BMP280_getData                                    ./src/PR/PR_BMP280.o
 BOD_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
 Botones_buff                                      ./src/DR/DR_Botones.o
                                                   ./src/PR/PR_Botones.o
@@ -1535,18 +1564,25 @@ I2C1_timeout                                      ./src/DR/DR_I2C.o
 I2C2_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
 I2C_beginTransmition                              ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 I2C_endTransmition                                ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 I2C_get                                           ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 I2C_getData                                       ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 I2C_put                                           ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 I2S_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
 InicializarADC                                    ./src/PR/PR_ADC.o
 InicializarADC_DR                                 ./src/DR/DR_ADC.o
                                                   ./src/PR/PR_ADC.o
+InicializarAM2320                                 ./src/PR/PR_AM2320.o
+                                                  ./src/TPI_V0.o
 InicializarBMP280                                 ./src/PR/PR_BMP280.o
 InicializarBotones                                ./src/PR/PR_Botones.o
                                                   ./src/TPI_V0.o
@@ -1555,6 +1591,7 @@ InicializarEINT_DR                                ./src/DR/DR_ExtInt.o
                                                   ./src/PR/PR_IntTime.o
 InicializarI2C                                    ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_BMP280.o
+                                                  ./src/PR/PR_AM2320.o
 InicializarI2C_DR                                 ./src/DR/DR_I2C.o
                                                   ./src/PR/PR_I2C.o
 InicializarIntTime                                ./src/PR/PR_IntTime.o
@@ -1631,6 +1668,7 @@ TimerSet                                          ./src/PR/PR_Timers.o
 TimerStart                                        ./src/PR/PR_Timers.o
                                                   ./src/TPI_V0.o
                                                   ./src/AP/AP_Ultrasonido.o
+                                                  ./src/PR/PR_AM2320.o
 TimerStop                                         ./src/PR/PR_Timers.o
 Timers_run                                        ./src/PR/PR_Timers.o
                                                   ./src/TPI_V0.o
@@ -1764,9 +1802,7 @@ func                                              ./src/TPI_V0.o
 g_pfnVectors                                      ./src/cr_startup_lpc175x_6x.o
 getADC                                            ./src/PR/PR_ADC.o
 getBMP280_pres                                    ./src/PR/PR_BMP280.o
-                                                  ./src/TPI_V0.o
 getBMP280_temp                                    ./src/PR/PR_BMP280.o
-                                                  ./src/TPI_V0.o
 getBtn                                            ./src/PR/PR_Botones.o
                                                   ./src/TPI_V0.o
 getIntTime                                        ./src/PR/PR_IntTime.o
@@ -1822,8 +1858,8 @@ setRGB_b                                          ./src/PR/PR_RGB.o
 setRGB_g                                          ./src/PR/PR_RGB.o
 setRGB_r                                          ./src/PR/PR_RGB.o
 setRelay                                          ./src/PR/PR_Relays.o
-                                                  ./src/TPI_V0.o
 set_calib_param                                   ./src/PR/PR_BMP280.o
+timer10ms                                         ./src/PR/PR_AM2320.o
 toggleRGB_b                                       ./src/PR/PR_RGB.o
 toggleRGB_g                                       ./src/PR/PR_RGB.o
 toggleRGB_r                                       ./src/PR/PR_RGB.o

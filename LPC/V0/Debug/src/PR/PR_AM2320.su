@@ -1,3 +1,4 @@
-PR_AM2320.c:64:6:InicializarAM2320	8	static
-PR_AM2320.c:68:6:AM2320_wake	16	static
-PR_AM2320.c:73:10:getAM2320_humd	16	static
+PR_AM2320.c:68:6:timer10ms	4	static
+PR_AM2320.c:72:6:InicializarAM2320	8	static
+PR_AM2320.c:76:6:AM2320_getData	16	static
+PR_AM2320.c:103:6:AM2320_wake	16	static

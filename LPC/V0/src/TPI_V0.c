@@ -35,6 +35,7 @@
 #include <PR/PR_ADC.h>
 #include <PR/PR_RGB.h>
 #include <PR/PR_BMP280.h>
+#include <PR/PR_AM2320.h>
 
 #include <AP/AP_Ultrasonido.h>
 
@@ -75,6 +76,7 @@ int main(void) {
 	setDir(EXPANSION15, OUTPUT);
 
 	//	TIMER0_EnableCount(1);
+	InicializarAM2320();
 
     while(1) {
     	//---agregar siempre---//
@@ -156,14 +158,15 @@ int main(void) {
 */
 
     	//--------PRUEBA I2C-----------------//FUNCIONANDO - descomentar BMP280_run()
-		uint32_t temp = 0, pres = 0;
+/*		uint32_t temp = 0, pres = 0;
 		BMP280_getData();
 		temp =  getBMP280_temp();
 		pres =  getBMP280_pres();
 
 		if(temp >= 2820) setRelay(RELAY2, ON);
 		else setRelay(RELAY2, OFF);
-
+*/
+		AM2320_getData();
 
 
     }
