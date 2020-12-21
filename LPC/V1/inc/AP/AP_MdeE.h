@@ -40,7 +40,7 @@
 /*********************************************************************************************************************************
 *** INCLUDES GLOBALES
 **********************************************************************************************************************************/
-
+#include <DR/DR_Tipos.h>
 /*********************************************************************************************************************************
 *** DEFINES GLOBALES
 **********************************************************************************************************************************/
@@ -48,23 +48,32 @@
 #define	FALSE			0
 
 //!< Definicion de Estados
-#define	SIN_CONEXION	            	0
-#define	ESPERA_MENSAJE_RED	        	1
-#define	ESPERA_MENSAJE_FIN_RED	    	2
-#define	ESPERA_MENSAJE_INICIO_CLIENTE	3
-#define	ESPERA_MENSAJE_CLIENTE		    4
-#define	ESPERA_MENSAJE_FIN_CLIENTE		5
-#define	CONEXION_EXITOSA		        6
-#define	ESPERA_INICIO		            7
-#define	ESPERA_MENSAJE_MOVIMIENTO		8
-#define	ESPERA_FIN		                9
-#define	ESPERAR_MENSAJE_VELOCIDAD_1		10
-#define	ESPERAR_MENSAJE_VELOCIDAD_2		11
-#define	SIN_MOVIMIENTO		            5
-#define	ADELANTE		                0
-#define	ATRAS		                    1
-#define	DERECHA		                    2
-#define	IZQUIERDA		                3
+
+enum estados_conexion_en{
+	CONEXION_RESET,
+	SIN_CONEXION,
+	ESP_ONLINE,
+	CLIENTE_CONECTADO,
+	CLIENTE_DESCONECTADO
+};
+
+enum estados_lectura_serial_en{
+	RESET_READ,
+	WAIT_START,
+	WAIT_MSG_TYPE,
+	WAIT_MSG_VEL1,
+	WAIT_MSG_VEL2,
+	WAIT_END
+};
+
+enum estados_movimiento_en{
+	SIN_MOVIMIENTO,
+	ADELANTE,
+	ATRAS,
+	IZQUIERDA,
+	DERECHA
+};
+
 
 /*********************************************************************************************************************************
 *** MACROS GLOBALES
@@ -82,11 +91,11 @@
 *** PROTOTIPOS DE FUNCIONES GLOBALES
 **********************************************************************************************************************************/
 //!< Declaracion de la Maquina de Estados
-void maquina_Conexion(void);
+uint8_t maquina_Conexion(void);
 
-void maquina_Lectura(void);
+uint8_t maquina_Lectura(void);
 
-void maquina_Movimiento(void);
+uint8_t maquina_Movimiento(void);
 
 
 #endif /* INC_MDEE_H_ */

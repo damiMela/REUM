@@ -35,13 +35,14 @@
 /*********************************************************************************************************************************
  *** INCLUDES
 **********************************************************************************************************************************/
-#include "AP_MdeE.h" 
-#include "AP_FuncionesMdeE.h" 
-#include "PR_RGB.h"
-#include "DR_GPIO.h"
-#include "PR_Serial.h"
-#include "PR_Timers.h"
-#include "PR_Motores.h"
+#include  <AP/AP_MdeE.h>
+#include  <AP/AP_FuncionesMdeE.h>
+#include  <PR/PR_RGB.h>
+#include  <DR/DR_GPIO.h>
+#include  <PR/PR_Serial.h>
+#include  <PR/PR_Timers.h>
+#include  <PR/PR_Motores.h>
+#include  <PR/PR_Relays.h>
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -61,10 +62,13 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
 **********************************************************************************************************************************/
+
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
-
+static uint8_t com_confirmed_msg = 0;
+static uint8_t confirmed_dir = 0;
+static int8_t  confirmed_vel = -1;
 /*********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -83,109 +87,70 @@
 *	\author Grupo2-2020
 *	\date 20-12-2020 14:33:08
 */
-void maquina_conexion()
+uint8_t maquina_Conexion()
 {
-		static int estado = SIN_CONEXION;
-		uint8_t aux = 0;
+		static uint8_t estado = CONEXION_RESET;
+
 		switch(estado)
 		{
-			aux = UART0_popRX();
-			case SIN_CONEXION:
-				setRGB_r(ON);
-				if( START_CHAR(aux) )
-				{
-					estado = ESPERA_MENSAJE_RED;
+			case CONEXION_RESET:
+				if(1){
+					setRGB(1, 0, 0);
+					estado = SIN_CONEXION;
 				}
-				break;
-			case ESPERA_MENSAJE_RED:
-			
-				if( aux != 'M' )
-				{
-					estado = SIN_CONEXION;	
-				}
- 
-				if( aux == 'M' )
-				{
-					estado = ESPERA_MENSAJE_FIN_RED;	
-				}
- 
+			case SIN_CONEXION:{
+				if(com_confirmed_msg == 0)
+					break;
+				if(com_confirmed_msg == 'M'){
+					com_confirmed_msg = 0;
+					estado = ESP_ONLINE;
 
+					setRGB(0, 1, 0);
+					ledV_Blink_t = 1;
+					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+				}
+				else estado = CONEXION_RESET;
 				break;
-			
-			case ESPERA_MENSAJE_FIN_RED:
-			
-				if( END_CHAR(aux) )
-				{
-					estado = SIN_CONEXION;	
-				}
- 
-				if( END_CHAR(aux) )
-				{
-					LedV_Blink = 25;
-					TimerStart ( 0 , LedV_Blink , LedBlink, CENTECIMAS);
-					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
-				}
- 
+			}
 
+			case ESP_ONLINE:{
+				if(com_confirmed_msg == 0)
+					break;
+				if(com_confirmed_msg == 'C'){
+					com_confirmed_msg = 0;
+
+					estado = CLIENTE_CONECTADO;
+					ledV_Blink_t = 3;
+					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+				}
+				else estado = CONEXION_RESET;
 				break;
+			}
 			
-			case ESPERA_MENSAJE_INICIO_CLIENTE:
-			
-				if( START_CHAR(aux) )
-				{
-					estado = ESPERA_MENSAJE_CLIENTE;	
-				}
- 
+			case CLIENTE_CONECTADO:{
+				if(com_confirmed_msg == 0)
+					break;
+				if(com_confirmed_msg == 'T'){
+					com_confirmed_msg = 0;
 
+					estado = CLIENTE_DESCONECTADO;
+					//TimerStop(LED_V_BLINK_EV);
+				}
+				else estado = CONEXION_RESET;
 				break;
-			
-			case ESPERA_MENSAJE_CLIENTE:
-			
-				if( aux != 'C' )
-				{
-					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
-				}
- 
-				if( aux == 'C' )
-				{
-					estado = ESPERA_MENSAJE_FIN_CLIENTE;	
-				}
- 
+			}
 
-				break;
-			
-			case ESPERA_MENSAJE_FIN_CLIENTE:
-			
-				if( END_CHAR(aux) )
-				{
-					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
-				}
- 
-				if( END_CHAR(aux) )
-				{
-					LedV_Blink = 2000;
-					f_conexion_exitosa = TRUE;
+			case CLIENTE_DESCONECTADO:{
+					ledV_Blink_t = 1;
+					estado = ESP_ONLINE;
+					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+					break;
+			}
 
-					estado = CONEXION_EXITOSA;	
-				}
- 
-
-				break;
-			
-			case CONEXION_EXITOSA:
-			
-				if( f_conexion_exitosa == FALSE )
-				{
-					estado = ESPERA_MENSAJE_INICIO_CLIENTE;	
-				}
- 
-
-				break;
-			
 			default: estado = SIN_CONEXION;
 		}
 
-
+		return estado;
 }
 
 /**
@@ -195,90 +160,91 @@ void maquina_conexion()
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-void maquina_Lectura()
+uint8_t maquina_Lectura()
 {
-		uint8_t aux = 0;
-		static int estado = ESPERA_INICIO;
+		static uint8_t estado = RESET_READ;
+
+
+		int16_t data = UART1_popRX();
+		static uint8_t com_msg = 0, dir_msg = 0, vel_msg = 0;
 
 		switch(estado)
 		{
-			aux = UART0_popRX();
-			case ESPERA_INICIO:
-			
-				
-				if( START_CHAR( aux ) )
-				{
-					estado = ESPERA_MENSAJE_MOVIMIENTO;	
+			case RESET_READ:{
+				if(1){
+					com_msg = 0;
+					dir_msg = 0;
+					vel_msg = 0;
+					estado = WAIT_START;
 				}
- 
-
 				break;
-			
-			case ESPERA_MENSAJE_MOVIMIENTO:
-			
-				if( !MOV_CHAR(aux) )
-				{
-					f_error();
-					estado = ESPERAR_MENSAJE_VELOCIDAD_1;	
-				}
- 
-				if( MOV_CHAR(aux) )
-				{
-					indicador_movimiento = aux;
-				
-					estado = ESPERA_INICIO;	
-				}
- 
+			}
 
-				break;
-			
-			case ESPERAR_MENSAJE_VELOCIDAD_1:
-				if( aux >= '0' && aux <= '9' )
-				{
-					indicador_velocidad = (aux-48)*10;
-					estado = ESPERAR_MENSAJE_VELOCIDAD_2;	
-				}
-				if( aux < '0' || aux > '9' )
-				{
-					f_error();
-					estado = ESPERA_INICIO;	
-				}
+			case WAIT_START:{
+				if(START_CHAR(data))
+					estado = WAIT_MSG_TYPE;
+ 				break;
+			}
 
+			case WAIT_MSG_TYPE:{
+				if(data == -1)
+					break;
+				else if(COM_CHAR(data)){
+					estado = WAIT_END;
+					com_msg = data;
+				}
+				else if(MOV_CHAR(data)){
+					estado = WAIT_MSG_VEL1;
+					dir_msg = data;
+				}
+				else estado = RESET_READ;
 				break;
-			
-			case ESPERAR_MENSAJE_VELOCIDAD_2:
-				if( aux >= '0' && aux <= '9' )
-				{
-					indicador_velocidad += (aux-48);
-					estado = ESPERA_FIN;	
-				}
-				if( aux < '0' || aux > '9' )
-				{
-					f_error();
-					estado = ESPERA_INICIO;	
-				}
+			}
 
+			case WAIT_MSG_VEL1:{
+				if(data == -1)
+					break;
+				else if(NUM_CHAR(data) && (data == '0')){
+					vel_msg = (data - '0');
+					estado = WAIT_END;
+				}
+				else if(NUM_CHAR(data)){
+					vel_msg = (data - '0') * 10;
+					estado = WAIT_MSG_VEL2;
+				}
+				else estado = RESET_READ;
+				break;
+			}
+
+			case WAIT_MSG_VEL2:{
+				if(data == -1)
+					break;
+				else if(NUM_CHAR(data)){
+					vel_msg += (data - '0');
+					estado = WAIT_END;
+				}
+				else estado = RESET_READ;
+				break;
+			}
+
+			case WAIT_END:
+				if(data == -1)
+					break;
+				if(END_CHAR(data)){
+					if(com_msg)
+						com_confirmed_msg = com_msg;
+					else{
+						confirmed_dir = dir_msg;
+						confirmed_vel = vel_msg;
+					}
+				}
+				else
+					estado = RESET_READ;
 				break;
 
-				case ESPERA_FIN:
-			
-				if( END_CHAR(aux) )
-				{
-					f_movimiento = TRUE;
-					estado = ESPERA_MENSAJE_MOVIMIENTO;	
-				}
-				if(END_CHAR(aux))
-				{
-					f_error();
-					estado = ESPERA_INICIO;
-				}
- 
-				break;
-			
-			default: estado = ESPERA_INICIO;
+			default: estado = RESET_READ;
 		}
-
-
+		return estado;
 }
 
 /**
@@ -288,57 +254,80 @@ void maquina_Lectura()
 *	\author JuanAgustinOtero
 *	\date 19-12-2020 19:03:18
 */
-void maquina_Movimiento()
+uint8_t maquina_Movimiento()
 {
 		static int estado = SIN_MOVIMIENTO;
 
 		switch(estado)
 		{
 			case SIN_MOVIMIENTO:
+				setRelay(RELAY0, OFF);
+				setRelay(RELAY1, OFF);
+				setRelay(RELAY2, OFF);
+				setRelay(RELAY3, OFF);
 			
-				if( f_movimiento == TRUE && indicador_movimiento == 'F' )
+				if( confirmed_dir == 'F' )
 				{
 					setMotoresDir(DIR_ADELANTE);
-					setMotoresVel(indicador_velocidad);
+					setMotoresVel(confirmed_vel);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = ADELANTE;	
+					setRelay(RELAY0, ON);
 				}
-				else if( f_movimiento == TRUE && indicador_movimiento == 'B' )
+				else if( confirmed_dir == 'B' )
 				{
 					setMotoresDir(DIR_ATRAS);
-					setMotoresVel(indicador_velocidad);
+					setMotoresVel(confirmed_vel);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = ATRAS;	
+					setRelay(RELAY1, ON);
 				}
-				else if( f_movimiento == TRUE && indicador_movimiento == 'R' )
+				else if( confirmed_dir == 'R' )
 				{
 					setMotoresDir(DIR_DERECHA);
-					setMotoresVel(indicador_velocidad);
-					estado = DERECHA;	
+					setMotoresVel(confirmed_vel);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
+					estado = DERECHA;
+					setRelay(RELAY2, ON);
 				}
-				else if( f_movimiento == TRUE && indicador_movimiento == 'L' )
+				else if( confirmed_dir == 'L' )
 				{
 					setMotoresDir(DIR_IZQUIERDA);
-					setMotoresVel(indicador_velocidad);
+					setMotoresVel(confirmed_vel);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
+					estado = IZQUIERDA;
+					setRelay(RELAY3, ON);
 				}
  
 
 				break;
 			
 			case ADELANTE:
-			
-				if((f_movimiento == TRUE && indicador_movimiento != 'F') || f_movimiento == FALSE)
+				if(confirmed_dir == 0)
+					break;
+				if(confirmed_dir != 'F')
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = SIN_MOVIMIENTO;	
 				}
 				break;
 			
 			case ATRAS:
-			
-				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'B'))
+				if(confirmed_dir == 0)
+					break;
+				if(confirmed_dir != 'B')
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = SIN_MOVIMIENTO;	
 				}
  
@@ -346,24 +335,28 @@ void maquina_Movimiento()
 				break;
 			
 			case DERECHA:
-
-				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'R'))
+				if(confirmed_dir == 0)
+					break;
+				if(confirmed_dir != 'R')
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = SIN_MOVIMIENTO;	
 				}
  
-			
-
 				break;
 			
 			case IZQUIERDA:
-
-				if(f_movimiento == FALSE || (f_movimiento == TRUE && indicador_movimiento != 'L'))
+				if(confirmed_dir == 0)
+					break;
+				if(confirmed_dir != 'L')
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 					estado = SIN_MOVIMIENTO;	
 				}
  
@@ -372,6 +365,6 @@ void maquina_Movimiento()
 			default: estado = SIN_MOVIMIENTO;
 		}
 
-
+		return estado;
 }
 

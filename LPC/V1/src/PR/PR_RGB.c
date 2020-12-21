@@ -56,9 +56,9 @@
  	\param [in] parametros de entrada
 */
 void InicializarRGB(void){
-	setPinmode_OD(PORT2, 3, MODE_OD_NLOW);
-	setPinmode_OD(PORT2, 2, MODE_OD_NLOW);
-	setPinmode_OD(PORT2, 1, MODE_OD_NLOW);
+	setPinmode_OD(RGB_R, MODE_OD_NLOW);
+	setPinmode_OD(RGB_G, MODE_OD_NLOW);
+	setPinmode_OD(RGB_B, MODE_OD_NLOW);
 
 	setDir(RGB_R, OUTPUT);
 	setDir(RGB_G, OUTPUT);

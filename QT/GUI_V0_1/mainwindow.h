@@ -19,7 +19,7 @@
 #include <QTableWidgetItem>
 #include <QDateTime>
 
-#define UPDATE_DATA_TIME 2000
+#define UPDATE_DATA_TIME 1000
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

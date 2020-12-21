@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     socket->connectToHost(QHostAddress("192.168.0.28"), 80);
     connect(socket, &QTcpSocket::connected, this, &MainWindow::connected_slot);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::newTCPData_slot);
-    dir = 's';
+    dir = 'S';
 
      //<<<<<<<<<<<<<-button icons->>>>>>>>>>>>>>//
     ui->UpBtn->setIcon(QIcon("../GUI_V0/images/up.png"));
@@ -48,6 +48,7 @@ void MainWindow::connected_slot()
     ui->btnFrame->setEnabled(true);
     ui->velocitySlide->setEnabled(true);
     ui->SaveDbBtn->setEnabled(true);
+    sendTCPmsg("C");
 
     //<<<<<<<<<<<<<<-QTimer->>>>>>>>>>>>>>>>//
     QTimer *update_dir_timer = new QTimer(this);
@@ -77,10 +78,12 @@ void MainWindow::sendTCPmsg(QString msg){
     QString send_msg = "#";
     send_msg.append(msg);
     send_msg.append("&");
+    send_msg.append("");
 
     std::string str_msg = send_msg.toStdString();
     const char* char_msg = str_msg.c_str();
     socket->write(char_msg);
+    qDebug() << char_msg;
 }
 
 //---------------------------------------------KEY PRESS----------------------------------------//
@@ -88,24 +91,26 @@ void MainWindow::keyPressEvent(QKeyEvent *keyevent)
 {
     int pressed_key = keyevent->key();
 
-    if(pressed_key == Qt::Key_Up)           dir = 'f';
-    else if(pressed_key == Qt::Key_Down)    dir = 'b';
-    else if(pressed_key == Qt::Key_Left)    dir = 'l';
-    else if(pressed_key == Qt::Key_Right)   dir = 'r';
+    if(pressed_key == Qt::Key_Up)           dir = 'F';
+    else if(pressed_key == Qt::Key_Down)    dir = 'B';
+    else if(pressed_key == Qt::Key_Left)    dir = 'L';
+    else if(pressed_key == Qt::Key_Right)   dir = 'R';
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *keyevent)
 {
     int released_key = keyevent->key();
-    if(released_key) dir = 's';
+    if(released_key) dir = 'S';
 }
 
 
 //-------------------------------------------UPDATE DATA----------------------------------------//
 void MainWindow::updateRobotDir(){
-    QString s = QString(dir);
-    s.append(QString::number(ui->velocitySlide->value()));
-    sendTCPmsg(s);
+    QString dir_s = QString(dir);
+    int v_int = ui->velocitySlide->value();
+
+    dir_s.append(QString::number(v_int));
+    sendTCPmsg(dir_s);
 }
 
 void MainWindow::updateTable(char itemChar, QString val)
@@ -181,15 +186,15 @@ void MainWindow::on_pushButton_clicked()
     ui->camView->show();
 }
 
-void MainWindow::on_UpBtn_pressed(){    dir = 'f';  }
-void MainWindow::on_DownBtn_pressed(){  dir = 'b';  }
-void MainWindow::on_LeftBtn_pressed(){  dir = 'l';  }
-void MainWindow::on_RightBtn_pressed(){ dir = 'r';  }
+void MainWindow::on_UpBtn_pressed(){    dir = 'F';  }
+void MainWindow::on_DownBtn_pressed(){  dir = 'B';  }
+void MainWindow::on_LeftBtn_pressed(){  dir = 'L';  }
+void MainWindow::on_RightBtn_pressed(){ dir = 'R';  }
 
-void MainWindow::on_UpBtn_released(){   dir = 's';  }
-void MainWindow::on_DownBtn_released(){ dir = 's';  }
-void MainWindow::on_LeftBtn_released(){ dir = 's';  }
-void MainWindow::on_RightBtn_released(){dir = 's';  }
+void MainWindow::on_UpBtn_released(){   dir = 'S';  }
+void MainWindow::on_DownBtn_released(){ dir = 'S';  }
+void MainWindow::on_LeftBtn_released(){ dir = 'S';  }
+void MainWindow::on_RightBtn_released(){dir = 'S';  }
 
 
 void MainWindow::on_SaveDbBtn_clicked()

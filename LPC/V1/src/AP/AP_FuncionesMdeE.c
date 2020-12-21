@@ -35,9 +35,10 @@
 /*********************************************************************************************************************************
  *** INCLUDES
 **********************************************************************************************************************************/
-#include "AP_FuncionesMdeE.h" 
-#include "PR_Motores.h"
-#include "PR_Timers.h"
+#include <AP/AP_FuncionesMdeE.h>
+#include <PR/PR_Motores.h>
+#include <PR/PR_Timers.h>
+#include <PR/PR_RGB.h>
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -57,7 +58,8 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
 **********************************************************************************************************************************/ 
-uint8_t f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad = {0};
+uint8_t f_conexion_exitosa = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad = 0;
+uint16_t ledV_Blink_t = 0;
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -78,40 +80,56 @@ uint8_t f_conexion_exitosa = 0, LedV_Blink = 0, f_movimiento = 0, indicador_movi
 
 //!< Funciones asociadas a las acciones
 
-void MOV_CHAR(char dato)
+uint8_t START_CHAR(char dato)
 {
-	int exit = 0;
-	if(dato == 'F' || dato == 'R' || dato == 'L' || dato == 'B' || dato == 'S')
-		exit = 1;
-	return exit;
+	if(dato == '#') return 1;
+	return 0;
 }
 
-void START_CHAR(char dato)
+uint8_t END_CHAR(char dato)
 {
-	int exit = 0;
-	if(dato == '#')
-		exit = 1;
-	return exit;
+	if(dato == '&') return 1;
+	return 0;
 }
 
-void END_CHAR(char dato)
-{
-	int exit = 0;
-	if(dato == '$')
-		exit = 1;
-	return exit;
-}
-
-void LedBlink (void)
-{
-	TimerStart ( 0 , LedV_Blink , LedBlink, CENTECIMAS);
+uint8_t NUM_CHAR(char dato){
+	if((dato >= '0')&& (dato <= '9')) return 1;
+	return 0;
 
 }
+uint8_t MOV_CHAR(char dato){
+	if(dato == 'F'
+			|| dato == 'R'
+			|| dato == 'L'
+			|| dato == 'B'
+			|| dato == 'S')
+	{
+		return 1;
+	}
+	return 0;
+}
 
-
-int f_error(void)
+uint8_t COM_CHAR(char dato)
 {
-	SinMovimiento( );
+	if(dato == 'M'
+			|| dato == 'C'
+			|| dato == 'T')
+	{
+		return 1;
+	}
+	return 0;
+}
+
+void LedV_Blink (void)
+{
+	toggleRGB_g();
+	TimerStart ( LED_V_BLINK_EV , ledV_Blink_t , LedV_Blink, SEG);
+}
+
+
+uint8_t f_error(void)
+{
+	//SinMovimiento( );
 	f_movimiento = 0;
 	indicador_movimiento = 'S';
 	indicador_velocidad = 0;

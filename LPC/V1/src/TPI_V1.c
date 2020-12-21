@@ -31,27 +31,34 @@
 #include <PR/PR_PWM.h>
 #include <PR/PR_ADC.h>
 #include <PR/PR_I2C.h>
+#include <PR/PR_RGB.h>
+
+#include <AP/AP_MdeE.h>
+#include <AP/AP_FuncionesMdeE.h>
 
 int main(void) {
 	InicializarSystick();
 	InicializarPLL();
 
-	InicializarADC();
+	//InicializarADC();
 	InicializarSerial0();
 	InicializarSerial1();
 
 	InicializarBotones();
 	InicializarRelays();
 	InicializarPWM();
-
-    // TODO: insert code here
-	//setDir(EXPANSION12, OUTPUT); -- ejemplo de uso
+	InicializarRGB();
 
     while(1) {
     	//---agregar siempre---//
     	Timers_run();
-    	ADC_run();
+    	//ADC_run();
     	//---------------------//
+    	maquina_Lectura();
+    	if(maquina_Conexion() == CLIENTE_CONECTADO){
+        	maquina_Movimiento();
+    	}
+
     }
 
 }

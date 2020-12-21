@@ -78,6 +78,10 @@ int main(void) {
 	//	TIMER0_EnableCount(1);
 	InicializarAM2320();
 
+	setRelay(RELAY1, OFF);
+	setRelay(RELAY2, OFF);
+	setRelay(RELAY3, OFF);
+
     while(1) {
     	//---agregar siempre---//
     	Timers_run();
@@ -114,7 +118,8 @@ int main(void) {
 
 
     	//--------PRUEBA UART1--------------//!!!
-/*		int32_t data = UART1_popRX();
+		int16_t data = UART1_popRX();
+
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
 			if(data == 'c') setPin(RGB_G, ON);
@@ -128,8 +133,10 @@ int main(void) {
 			if(data == 'b') setRelay(RELAY1, ON);
 			if(data == 'l') setRelay(RELAY2, ON);
 			if(data == 'r') setRelay(RELAY3, ON);
+			if(data == 's') UART1_pushTX('s');
+
 		}
-*/
+
 		uint8_t temp1 [] = "#t#25";
 		uint8_t temp2 [] = "#t#12";
 		uint8_t humed [] = "#h#42";
@@ -166,7 +173,7 @@ int main(void) {
 		if(temp >= 2820) setRelay(RELAY2, ON);
 		else setRelay(RELAY2, OFF);
 */
-		AM2320_getData();
+		//AM2320_getData();
 
 
     }
