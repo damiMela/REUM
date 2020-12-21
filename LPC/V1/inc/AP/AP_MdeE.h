@@ -41,6 +41,8 @@
 *** INCLUDES GLOBALES
 **********************************************************************************************************************************/
 #include <DR/DR_Tipos.h>
+#include <PR/PR_ADC.h>
+#include <PR/PR_Timers.h>
 /*********************************************************************************************************************************
 *** DEFINES GLOBALES
 **********************************************************************************************************************************/
@@ -67,6 +69,7 @@ enum estados_lectura_serial_en{
 };
 
 enum estados_movimiento_en{
+	RESET_MOVIMIENTO,
 	SIN_MOVIMIENTO,
 	ADELANTE,
 	ATRAS,
@@ -92,10 +95,8 @@ enum estados_movimiento_en{
 **********************************************************************************************************************************/
 //!< Declaracion de la Maquina de Estados
 uint8_t maquina_Conexion(void);
-
 uint8_t maquina_Lectura(void);
-
 uint8_t maquina_Movimiento(void);
-
+uint8_t maquina_Envio_data(void);
 
 #endif /* INC_MDEE_H_ */

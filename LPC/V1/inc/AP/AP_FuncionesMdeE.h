@@ -45,6 +45,8 @@
 *** DEFINES GLOBALES
 **********************************************************************************************************************************/
 #define LED_V_BLINK_EV 	(0)
+#define MOTOR_TIMEOUT_EV 	(1)
+#define SEND_DATA_EV 	(2)
 /*********************************************************************************************************************************
 *** MACROS GLOBALES
 **********************************************************************************************************************************/
@@ -56,7 +58,7 @@
 /*********************************************************************************************************************************
 *** VARIABLES GLOBALES
 **********************************************************************************************************************************/
-extern uint8_t f_conexion_exitosa, f_movimiento, indicador_movimiento, indicador_velocidad;
+extern uint8_t dir_timeout_f, send_data_f;
 extern uint16_t ledV_Blink_t;
 /*********************************************************************************************************************************
 *** PROTOTIPOS DE FUNCIONES GLOBALES
@@ -65,8 +67,10 @@ extern uint16_t ledV_Blink_t;
 //!< Prototipos de los Eventos
 
 //!< Prototipos de las Acciones
+void dir_timeout(void);
 void LedV_Blink (void);
-uint8_t f_error(void);
+void send_data_timer(void);
+
 uint8_t MOV_CHAR(char dato);
 uint8_t COM_CHAR(char dato);
 uint8_t START_CHAR(char dato);

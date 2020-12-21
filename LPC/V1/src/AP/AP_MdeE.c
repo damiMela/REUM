@@ -37,12 +37,16 @@
 **********************************************************************************************************************************/
 #include  <AP/AP_MdeE.h>
 #include  <AP/AP_FuncionesMdeE.h>
+
 #include  <PR/PR_RGB.h>
-#include  <DR/DR_GPIO.h>
 #include  <PR/PR_Serial.h>
 #include  <PR/PR_Timers.h>
 #include  <PR/PR_Motores.h>
-#include  <PR/PR_Relays.h>
+#include  <PR/PR_PWM.h>
+#include  <PR/PR_BMP280.h>
+
+
+#include <stdio.h>
 /*********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
 **********************************************************************************************************************************/
@@ -69,6 +73,7 @@
 static uint8_t com_confirmed_msg = 0;
 static uint8_t confirmed_dir = 0;
 static int8_t  confirmed_vel = -1;
+static uint8_t connected_flag = 0;
 /*********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
 **********************************************************************************************************************************/
@@ -95,7 +100,9 @@ uint8_t maquina_Conexion()
 		{
 			case CONEXION_RESET:
 				if(1){
+					InicializarRGB();
 					setRGB(1, 0, 0);
+					connected_flag = 0;
 					estado = SIN_CONEXION;
 				}
 			case SIN_CONEXION:{
@@ -103,11 +110,11 @@ uint8_t maquina_Conexion()
 					break;
 				if(com_confirmed_msg == 'M'){
 					com_confirmed_msg = 0;
-					estado = ESP_ONLINE;
 
 					setRGB(0, 1, 0);
 					ledV_Blink_t = 1;
 					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+					estado = ESP_ONLINE;
 				}
 				else estado = CONEXION_RESET;
 				break;
@@ -118,10 +125,11 @@ uint8_t maquina_Conexion()
 					break;
 				if(com_confirmed_msg == 'C'){
 					com_confirmed_msg = 0;
+					connected_flag = 1;
 
-					estado = CLIENTE_CONECTADO;
 					ledV_Blink_t = 3;
 					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+					estado = CLIENTE_CONECTADO;
 				}
 				else estado = CONEXION_RESET;
 				break;
@@ -132,19 +140,19 @@ uint8_t maquina_Conexion()
 					break;
 				if(com_confirmed_msg == 'T'){
 					com_confirmed_msg = 0;
-
+					TimerStop(LED_V_BLINK_EV);
 					estado = CLIENTE_DESCONECTADO;
-					//TimerStop(LED_V_BLINK_EV);
 				}
 				else estado = CONEXION_RESET;
 				break;
 			}
 
 			case CLIENTE_DESCONECTADO:{
-					ledV_Blink_t = 1;
-					estado = ESP_ONLINE;
-					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
-					break;
+				connected_flag = 0;
+				ledV_Blink_t = 1;
+				TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+				estado = ESP_ONLINE;
+				break;
 			}
 
 			default: estado = SIN_CONEXION;
@@ -164,7 +172,6 @@ uint8_t maquina_Lectura()
 {
 		static uint8_t estado = RESET_READ;
 
-
 		int16_t data = UART1_popRX();
 		static uint8_t com_msg = 0, dir_msg = 0, vel_msg = 0;
 
@@ -172,6 +179,7 @@ uint8_t maquina_Lectura()
 		{
 			case RESET_READ:{
 				if(1){
+					InicializarSerial1();
 					com_msg = 0;
 					dir_msg = 0;
 					vel_msg = 0;
@@ -256,78 +264,131 @@ uint8_t maquina_Lectura()
 */
 uint8_t maquina_Movimiento()
 {
-		static int estado = SIN_MOVIMIENTO;
+		static int estado = RESET_MOVIMIENTO;
+		static uint8_t timeout_start = 0;
 
 		switch(estado)
 		{
+			case RESET_MOVIMIENTO:{
+				InicializarMotores();
+
+				setMotoresDir(FRENO);
+				setMotoresVel(0);
+
+				confirmed_dir = 0;
+				confirmed_vel = -1;
+				timeout_start = 0;
+
+				estado = SIN_MOVIMIENTO;
+				break;
+			}
 			case SIN_MOVIMIENTO:
-				setRelay(RELAY0, OFF);
-				setRelay(RELAY1, OFF);
-				setRelay(RELAY2, OFF);
-				setRelay(RELAY3, OFF);
-			
-				if( confirmed_dir == 'F' )
+				if(!(connected_flag))
+					estado = RESET_MOVIMIENTO;
+				else if((confirmed_dir == 'F') && (connected_flag))
 				{
 					setMotoresDir(DIR_ADELANTE);
 					setMotoresVel(confirmed_vel);
 					confirmed_dir = 0;
 					confirmed_vel = -1;
 					estado = ADELANTE;	
-					setRelay(RELAY0, ON);
 				}
-				else if( confirmed_dir == 'B' )
+				else if((confirmed_dir == 'B') && (connected_flag))
 				{
 					setMotoresDir(DIR_ATRAS);
 					setMotoresVel(confirmed_vel);
 					confirmed_dir = 0;
 					confirmed_vel = -1;
 					estado = ATRAS;	
-					setRelay(RELAY1, ON);
 				}
-				else if( confirmed_dir == 'R' )
+				else if((confirmed_dir == 'R') && (connected_flag))
 				{
 					setMotoresDir(DIR_DERECHA);
 					setMotoresVel(confirmed_vel);
 					confirmed_dir = 0;
 					confirmed_vel = -1;
 					estado = DERECHA;
-					setRelay(RELAY2, ON);
 				}
-				else if( confirmed_dir == 'L' )
+				else if((confirmed_dir == 'L') && (connected_flag))
 				{
 					setMotoresDir(DIR_IZQUIERDA);
 					setMotoresVel(confirmed_vel);
 					confirmed_dir = 0;
 					confirmed_vel = -1;
 					estado = IZQUIERDA;
-					setRelay(RELAY3, ON);
+				}
+				else if((confirmed_dir == 'S') && (connected_flag))
+				{
+					setMotoresDir(FRENO);
+					setMotoresVel(confirmed_vel);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 				}
  
 
 				break;
 			
 			case ADELANTE:
-				if(confirmed_dir == 0)
-					break;
-				if(confirmed_dir != 'F')
+				if(!connected_flag)
+					estado = RESET_MOVIMIENTO;
+
+				else if(!confirmed_dir){
+					if(!timeout_start){
+						timeout_start = 1;
+						dir_timeout_f = 0;
+						TimerStart(MOTOR_TIMEOUT_EV, 8, dir_timeout, SEG);
+					}
+					else break;
+				}
+				else if(dir_timeout_f){
+					dir_timeout_f = 0;
+					timeout_start = 0;
+					estado = RESET_MOVIMIENTO;
+				}
+				else if((confirmed_dir != 'F'))
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					TimerStop(MOTOR_TIMEOUT_EV);
+
 					confirmed_dir = 0;
 					confirmed_vel = -1;
+					timeout_start = 0;
+					dir_timeout_f = 0;
+
 					estado = SIN_MOVIMIENTO;	
 				}
+
 				break;
 			
 			case ATRAS:
-				if(confirmed_dir == 0)
-					break;
-				if(confirmed_dir != 'B')
+				if(!connected_flag)
+					estado = RESET_MOVIMIENTO;
+
+				else if(!confirmed_dir){
+					if(!timeout_start){
+						timeout_start = 1;
+						dir_timeout_f = 0;
+						TimerStart(MOTOR_TIMEOUT_EV, 8, dir_timeout, SEG);
+					}
+					else break;
+				}
+				else if(dir_timeout_f){
+					dir_timeout_f = 0;
+					timeout_start = 0;
+					estado = RESET_MOVIMIENTO;
+				}
+				else if((confirmed_dir != 'B'))
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					TimerStop(MOTOR_TIMEOUT_EV);
+
 					confirmed_dir = 0;
 					confirmed_vel = -1;
+					timeout_start = 0;
+					dir_timeout_f = 0;
+
 					estado = SIN_MOVIMIENTO;	
 				}
  
@@ -335,36 +396,129 @@ uint8_t maquina_Movimiento()
 				break;
 			
 			case DERECHA:
-				if(confirmed_dir == 0)
-					break;
-				if(confirmed_dir != 'R')
+				if(!connected_flag)
+					estado = RESET_MOVIMIENTO;
+
+				else if(!confirmed_dir){
+					if(!timeout_start){
+						timeout_start = 1;
+						dir_timeout_f = 0;
+						TimerStart(MOTOR_TIMEOUT_EV, 8, dir_timeout, SEG);
+					}
+					else break;
+				}
+				else if(dir_timeout_f){
+					dir_timeout_f = 0;
+					timeout_start = 0;
+					estado = RESET_MOVIMIENTO;
+				}
+				else if((confirmed_dir != 'D'))
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					TimerStop(MOTOR_TIMEOUT_EV);
+
 					confirmed_dir = 0;
 					confirmed_vel = -1;
+					timeout_start = 0;
+					dir_timeout_f = 0;
+
 					estado = SIN_MOVIMIENTO;	
 				}
  
 				break;
 			
 			case IZQUIERDA:
-				if(confirmed_dir == 0)
-					break;
-				if(confirmed_dir != 'L')
+				if(!connected_flag)
+					estado = RESET_MOVIMIENTO;
+
+				else if(!confirmed_dir){
+					if(!timeout_start){
+						timeout_start = 1;
+						dir_timeout_f = 0;
+						TimerStart(MOTOR_TIMEOUT_EV, 8, dir_timeout, SEG);
+					}
+					else break;
+				}
+				else if(dir_timeout_f){
+					dir_timeout_f = 0;
+					timeout_start = 0;
+					estado = RESET_MOVIMIENTO;
+				}
+				else if((confirmed_dir != 'L'))
 				{
 					setMotoresDir(FRENO);
 					setMotoresVel(0);
+					TimerStop(MOTOR_TIMEOUT_EV);
+
 					confirmed_dir = 0;
 					confirmed_vel = -1;
+					timeout_start = 0;
+					dir_timeout_f = 0;
+
 					estado = SIN_MOVIMIENTO;	
 				}
  
 				break;
 			
-			default: estado = SIN_MOVIMIENTO;
+			default: estado = RESET_MOVIMIENTO;
 		}
 
 		return estado;
+}
+enum estado_enivo_data_en{
+	RESET_SENDING,
+	WAIT_SENDING,
+	SEND_DATA
+};
+
+uint8_t maquina_Envio_data(void){
+	static uint8_t estado = RESET_SENDING;
+
+	switch(estado){
+		case RESET_SENDING:{
+			InicializarBMP280();
+			InicializarADC();
+			InicializarBMP280();
+			send_data_f = 0;
+			estado = WAIT_SENDING;
+			break;
+		}
+
+		case WAIT_SENDING:{
+			if(connected_flag){
+				TimerStart(SEND_DATA_EV, 3, send_data_timer, SEG);
+				estado = SEND_DATA;
+			}
+			break;
+		}
+
+		case SEND_DATA:{
+			if(send_data_f){
+				send_data_f = 0;
+				estado = WAIT_SENDING;
+
+				#define CANT_PARAMS	3
+				#define CANT_SPACES	4
+				#define ARRAY_LENGHT	CANT_PARAMS * 3 + CANT_PARAMS * CANT_SPACES
+
+
+				BMP280_getData();
+				int16_t temp = getBMP280_temp();
+				uint16_t pres = getBMP280_pres();
+				uint16_t luz = getADC(ADC_2) * 100 /4095;
+
+				char msg[ARRAY_LENGHT] = {0};
+				sprintf(msg, "#t#%d.%d"
+						"#p#%d"
+						"#l#%d",
+						temp/100, temp%100, pres, luz);
+
+				UART1_SendString((uint8_t *)msg);
+			}
+
+		}
+	}
+	return estado;
 }
 

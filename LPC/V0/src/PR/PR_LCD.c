@@ -1,17 +1,17 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_ADC.c
+ * @file		PR_LCD.c
  * @brief		Descripcion del modulo
- * @date		10 dic. 2020
- * @author		R2002 - Melamed Damian
+ * @date		Dec 21, 2020
+ * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
 
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <PR/PR_ADC.h>
-#include <DR/DR_ADC.h>
+#include <PR/PR_LCD.h>
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
@@ -48,51 +48,11 @@
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  InicializarADC
-	\brief Configuara el ADC e inicializa los pines
+	\fn  Nombre de la Funcion
+	\brief Descripcion
  	\author R2002 - Grupo2
- 	\date 10 dic. 2020
+ 	\date Dec 21, 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarADC(void){
-	InicializarADC_DR();
-	setPinsel(ADC_IN_2, FUNCION_1);
-	setPinsel(ADC_IN_3, FUNCION_1);
-}
-
-
-/**
-	\fn  getADC
-	\brief Devuelve el valor cargado en el buffer del canal de adc correspondiente
- 	\author R2002 - Grupo2
- 	\date 10 dic. 2020
- 	\param [in] canal de ADC
-	\return uint32_t con el promedio del valor en el canal de ADC
-*/
-uint32_t getADC(uint8_t chn_n){
-	return ADC_buffer[chn_n-1];
-}
-
-
-/**
-	\fn  ADC_run
-	\brief Ejecuta una coversion nueva cada vez que el ADC terminó de leer
- 	\author R2002 - Melamed Damian
- 	\date 10 dic. 2020
-*/
-void ADC_run(void){
-	if(ADC_ready){
-		ADC_startConvertion();
-		ADC_ready = 0;
-	}
-}
-
-/**
-	\fn  ADC_cleanBuff
-	\brief Vacia el buffer con los valores de lectura del adc
- 	\author R2002 - Grupo2
- 	\date 10 dic. 2020
-*/
-void ADC_cleanBuff(void){
-	ADC_buffer[0] = 0;
-	ADC_buffer[1] = 0;
-}

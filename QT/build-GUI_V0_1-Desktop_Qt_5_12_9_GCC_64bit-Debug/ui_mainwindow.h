@@ -477,7 +477,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem2 = datTable->verticalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Temperatura", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = datTable->verticalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Humedad", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Luz", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = datTable->verticalHeaderItem(2);
         ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Presion", nullptr));
 

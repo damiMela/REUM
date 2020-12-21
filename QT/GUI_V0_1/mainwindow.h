@@ -7,6 +7,7 @@
 #include <QUrl>
 #include <QDebug>
 #include <QKeyEvent>
+#include <QCloseEvent>
 #include <QTimer>
 
 #include <QTcpSocket>
@@ -19,7 +20,7 @@
 #include <QTableWidgetItem>
 #include <QDateTime>
 
-#define UPDATE_DATA_TIME 1000
+#define UPDATE_DATA_TIME 250
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -62,6 +63,7 @@ private slots:
 protected:
     void keyPressEvent(QKeyEvent *keyevent);
     void keyReleaseEvent(QKeyEvent *event);
+    void closeEvent(QCloseEvent *bar);
 
 private:
     Ui::MainWindow *ui;

@@ -50,19 +50,19 @@ int main(void) {
 	InicializarSystick();
 	InicializarPLL();
 
-//	InicializarADC();
 	InicializarSerial0();
-	InicializarSerial1();
-//	InicializarI2C();
-
+	//InicializarSerial1();
 	InicializarBotones();
 	InicializarRelays();
 	InicializarPWM();
+	InicializarI2C();
 
 //	InicializarUS();
 	InicializarEINT_DR();
 
 	InicializarRGB();
+	InicializarAM2320();
+	InicializarBMP280();
 
 	//-------------PRUEBA TIMERS------------//FUNCIONANDO
 	TimerStart(0, 3, func, SEG);
@@ -76,7 +76,7 @@ int main(void) {
 	setDir(EXPANSION15, OUTPUT);
 
 	//	TIMER0_EnableCount(1);
-	InicializarAM2320();
+
 
 	setRelay(RELAY1, OFF);
 	setRelay(RELAY2, OFF);
@@ -118,7 +118,7 @@ int main(void) {
 
 
     	//--------PRUEBA UART1--------------//!!!
-		int16_t data = UART1_popRX();
+/*		int16_t data = UART1_popRX();
 
 		if(data != -1) {
 			UART0_pushTX((uint8_t) (data));
@@ -148,7 +148,7 @@ int main(void) {
 		if(getBtn(SW3)) UART1_SendString(humed);
 		if(getBtn(SW2)) UART1_SendString(pres1);
 		if(getBtn(SW1)) UART1_SendString(pres2);
-
+*/
 
 
     	//--------PRUEBA ULTRADSONIDO--------------//!!!
@@ -160,19 +160,19 @@ int main(void) {
     	setPin(EXPANSION13, OFF);
     	setPin(EXPANSION14, ON);
     	setPin(EXPANSION15, OFF);
-    	setPWMDuty(PWM2, 60);
-    	setPWMDuty(PWM3, 60);
+    	setPWMDuty(PWM2, 0);
+    	setPWMDuty(PWM3, 0);
 */
 
     	//--------PRUEBA I2C-----------------//FUNCIONANDO - descomentar BMP280_run()
-/*		uint32_t temp = 0, pres = 0;
+		uint32_t temp = 0, pres = 0;
 		BMP280_getData();
 		temp =  getBMP280_temp();
 		pres =  getBMP280_pres();
 
 		if(temp >= 2820) setRelay(RELAY2, ON);
 		else setRelay(RELAY2, OFF);
-*/
+
 		//AM2320_getData();
 
 

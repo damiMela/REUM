@@ -58,7 +58,7 @@
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
 **********************************************************************************************************************************/ 
-uint8_t f_conexion_exitosa = 0, f_movimiento = 0, indicador_movimiento = 0, indicador_velocidad = 0;
+uint8_t dir_timeout_f = 0, send_data_f;
 uint16_t ledV_Blink_t = 0;
 /*********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
@@ -126,12 +126,11 @@ void LedV_Blink (void)
 	TimerStart ( LED_V_BLINK_EV , ledV_Blink_t , LedV_Blink, SEG);
 }
 
-
-uint8_t f_error(void)
-{
-	//SinMovimiento( );
-	f_movimiento = 0;
-	indicador_movimiento = 'S';
-	indicador_velocidad = 0;
-	return -1;
+void dir_timeout(){
+	dir_timeout_f = 1;
 }
+
+void send_data_timer(){
+	send_data_f = 1;
+}
+

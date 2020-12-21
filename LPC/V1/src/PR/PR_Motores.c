@@ -11,7 +11,7 @@
  *** INCLUDES
  **********************************************************************************************************************************/
 #include <PR/PR_Motores.h>
-#include <DR/DR_PWM.h>
+#include <PR/PR_PWM.h>
 #include <DR/DR_GPIO.h>
 
 /***********************************************************************************************************************************
@@ -20,12 +20,12 @@
 #define MOTOR1_A		EXPANSION12 //escribir puertos correspondientes
 #define MOTOR1_B		EXPANSION13
 #define MOTOR1_VEL_PIN	EXPANSION6
-#define MOTOR1_VEL_CHN	3
+#define MOTOR1_VEL_CHN	PWM2
 
 #define MOTOR2_A		EXPANSION14
 #define MOTOR2_B		EXPANSION15
 #define MOTOR2_VEL_PIN	EXPANSION11
-#define MOTOR2_VEL_CHN	2
+#define MOTOR2_VEL_CHN	PWM3
 
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
@@ -72,8 +72,8 @@ void InicializarMotores(void){
 	setDir(MOTOR2_A, OUTPUT);
 	setDir(MOTOR2_B, OUTPUT);
 
-	PWM_setDutyCicle(MOTOR1_VEL_CHN, 0);
-	PWM_setDutyCicle(MOTOR2_VEL_CHN, 0);
+	setPWMDuty(MOTOR1_VEL_CHN, 0);
+	setPWMDuty(MOTOR2_VEL_CHN, 0);
 }
 
 /**
@@ -85,47 +85,47 @@ void InicializarMotores(void){
  */
 void setMotoresDir(uint8_t dir){
 	switch(dir){
-		case 'f':
-		case DIR_ADELANTE:{
+		case 'F':
+		case DIR_ADELANTE:
 			setPin(MOTOR1_A, ON);
 			setPin(MOTOR1_B, OFF);
 
 			setPin(MOTOR2_A, ON);
 			setPin(MOTOR2_B, OFF);
 			break;
-		}
 
-		case 'b':
-		case DIR_ATRAS:{
+
+		case 'B':
+		case DIR_ATRAS:
 			setPin(MOTOR1_A, OFF);
 			setPin(MOTOR1_B, ON);
 
 			setPin(MOTOR2_A, OFF);
 			setPin(MOTOR2_B, ON);
 			break;
-		}
 
-		case 'l':
-		case DIR_IZQUIERDA:{
+
+		case 'L':
+		case DIR_IZQUIERDA:
 			setPin(MOTOR1_A, ON);
 			setPin(MOTOR1_B, OFF);
 
 			setPin(MOTOR2_A, OFF);
 			setPin(MOTOR2_B, ON);
 			break;
-		}
 
-		case 'r':
-		case DIR_DERECHA:{
+
+		case 'R':
+		case DIR_DERECHA:
 			setPin(MOTOR1_A, OFF);
 			setPin(MOTOR1_B, ON);
 
 			setPin(MOTOR2_A, ON);
 			setPin(MOTOR2_B, OFF);
 			break;
-		}
 
-		case 's':
+
+		case 'S':
 		case FRENO:{
 			setPin(MOTOR1_A, OFF);
 			setPin(MOTOR1_B, OFF);
@@ -149,6 +149,6 @@ void setMotoresDir(uint8_t dir){
  	\param [in] velocidad
  */
 void setMotoresVel(uint8_t vel){
-	PWM_setDutyCicle(MOTOR1_VEL_CHN, vel);
-	PWM_setDutyCicle(MOTOR2_VEL_CHN, vel);
+	setPWMDuty(MOTOR1_VEL_CHN, vel);
+	setPWMDuty(MOTOR2_VEL_CHN, vel);
 }

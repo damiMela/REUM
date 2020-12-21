@@ -58,15 +58,18 @@ void MainWindow::connected_slot()
 
 void MainWindow::newTCPData_slot()
 {
+    #define CANT_ITEMS_RCV  3
     QByteArray datos = socket->readLine();
     QString str_input = QString::fromStdString(datos.toStdString());
     QStringList input_list = str_input.split("#");
+    input_list.pop_front();
+    for(int i = CANT_ITEMS_RCV*2; i < input_list.length(); i++)
+        input_list.removeAt(i);
 
     if(input_list.count()> 1){
-        input_list.pop_front();
-        for(int i = 0; i < 1; i++){
-            QByteArray d = input_list[i].toUtf8();
-            updateTable(d[0], input_list[i+1]);
+        for(int j = 0; j < CANT_ITEMS_RCV*2; j+=2){
+            QByteArray d = input_list[j].toUtf8();
+            updateTable(d[0], input_list[j+1]);
         }
 
         if(db.isOpen())updateSQLdb();
@@ -104,6 +107,21 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyevent)
 }
 
 
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( this, "APP_NAME",
+                                                                tr("Are you sure?\n"),
+                                                                QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                                QMessageBox::Yes);
+    if (resBtn != QMessageBox::Yes) {
+        event->ignore();
+    } else {
+        sendTCPmsg("T");
+        event->accept();
+
+    }
+}
+
 //-------------------------------------------UPDATE DATA----------------------------------------//
 void MainWindow::updateRobotDir(){
     QString dir_s = QString(dir);
@@ -118,8 +136,9 @@ void MainWindow::updateTable(char itemChar, QString val)
     int itemIndex = 0;
     switch(itemChar){
         case 't':   itemIndex = 0;      break;
-        case 'h':   itemIndex = 1;      break;
+        case 'l':   itemIndex = 1;      break;
         case 'p':   itemIndex = 2;      break;
+        case 'a':   itemIndex = 0;      break;
         default:    itemIndex = 0;      break;
     }
 

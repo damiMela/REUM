@@ -130,7 +130,7 @@ void scheduler_run(void){
 	//counters
 	static uint32_t pwm_counter = 0;
 	static uint32_t btn_counter = 0;
-	//static uint32_t adc_counter = 0;
+	static uint32_t adc_counter = 0;
 
 	//timer counter function
 	TimerDiscount();
@@ -138,11 +138,17 @@ void scheduler_run(void){
 	//interations counter
 	pwm_counter++; 	pwm_counter %= PWM_T;
 	btn_counter++; 	btn_counter %= BTN_T;
-	//adc_counter++;	adc_counter %= ADC_T;
+	adc_counter++;	adc_counter %= ADC_T;
 
 	if(!pwm_counter) PWM_update();
 	if(!btn_counter) TecladoSW();
-	//if(!adc_counter) ADC_startConvertion();
+	if(!adc_counter) {
+		//ADC_startConvertion();
+		if(ADC_ready){
+			ADC_startConvertion();
+			ADC_ready = 0;
+		}
+	}
 
 
 }
