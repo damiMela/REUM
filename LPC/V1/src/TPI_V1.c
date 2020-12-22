@@ -20,8 +20,7 @@
 #include <DR/DR_PLL.h>
 
 //primitivas
-
-#include <PR/PR_Serial.h>
+#include <PR/PR_Timers.h>
 
 #include <AP/AP_MdeE.h>
 #include <AP/AP_FuncionesMdeE.h>

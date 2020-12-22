@@ -50,8 +50,9 @@ public:
     QVBoxLayout *verticalLayout_3;
     QFrame *IpFrame;
     QHBoxLayout *horizontalLayout_3;
+    QLabel *label_3;
     QLineEdit *IpCamTxb;
-    QPushButton *pushButton;
+    QPushButton *camConnectBtn;
     QWebEngineView *camView;
     QFrame *btnFrame;
     QGridLayout *gridLayout;
@@ -101,7 +102,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(811, 723);
+        MainWindow->resize(836, 669);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -139,15 +140,20 @@ public:
         IpFrame->setFrameShadow(QFrame::Raised);
         horizontalLayout_3 = new QHBoxLayout(IpFrame);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        label_3 = new QLabel(IpFrame);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        horizontalLayout_3->addWidget(label_3);
+
         IpCamTxb = new QLineEdit(IpFrame);
         IpCamTxb->setObjectName(QString::fromUtf8("IpCamTxb"));
 
         horizontalLayout_3->addWidget(IpCamTxb);
 
-        pushButton = new QPushButton(IpFrame);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        camConnectBtn = new QPushButton(IpFrame);
+        camConnectBtn->setObjectName(QString::fromUtf8("camConnectBtn"));
 
-        horizontalLayout_3->addWidget(pushButton);
+        horizontalLayout_3->addWidget(camConnectBtn);
 
 
         verticalLayout_3->addWidget(IpFrame);
@@ -251,8 +257,8 @@ public:
         datTable->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         datTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        if (datTable->rowCount() < 3)
-            datTable->setRowCount(3);
+        if (datTable->rowCount() < 4)
+            datTable->setRowCount(4);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         datTable->setVerticalHeaderItem(0, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
@@ -260,11 +266,15 @@ public:
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         datTable->setVerticalHeaderItem(2, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        datTable->setItem(0, 1, __qtablewidgetitem5);
+        datTable->setVerticalHeaderItem(3, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        datTable->setItem(1, 1, __qtablewidgetitem6);
+        datTable->setItem(0, 1, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        datTable->setItem(2, 1, __qtablewidgetitem7);
+        datTable->setItem(1, 1, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        datTable->setItem(2, 1, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        datTable->setItem(3, 1, __qtablewidgetitem9);
         datTable->setObjectName(QString::fromUtf8("datTable"));
         datTable->setEnabled(false);
         datTable->setMinimumSize(QSize(150, 0));
@@ -367,6 +377,7 @@ public:
         tiposComboBox->addItem(QString());
         tiposComboBox->addItem(QString());
         tiposComboBox->addItem(QString());
+        tiposComboBox->addItem(QString());
         tiposComboBox->setObjectName(QString::fromUtf8("tiposComboBox"));
         tiposComboBox->setMinimumSize(QSize(180, 0));
 
@@ -446,7 +457,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 811, 22));
+        menubar->setGeometry(QRect(0, 0, 836, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -464,7 +475,8 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         ctrlGroup->setTitle(QApplication::translate("MainWindow", "Contro de REUM", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "Conectar", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Ip de c\303\241mara", nullptr));
+        camConnectBtn->setText(QApplication::translate("MainWindow", "Conectar", nullptr));
         LeftBtn->setText(QString());
         DownBtn->setText(QString());
         UpBtn->setText(QString());
@@ -480,15 +492,19 @@ public:
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Luz", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = datTable->verticalHeaderItem(2);
         ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Presion", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = datTable->verticalHeaderItem(3);
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Gas", nullptr));
 
         const bool __sortingEnabled = datTable->isSortingEnabled();
         datTable->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem5 = datTable->item(0, 1);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "C\302\260", nullptr));
-        QTableWidgetItem *___qtablewidgetitem6 = datTable->item(1, 1);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "%", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = datTable->item(2, 1);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "Pa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = datTable->item(0, 1);
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "C\302\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = datTable->item(1, 1);
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "%", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = datTable->item(2, 1);
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "Pa", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = datTable->item(3, 1);
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "%", nullptr));
         datTable->setSortingEnabled(__sortingEnabled);
 
         SaveDbBtn->setText(QApplication::translate("MainWindow", "Grabar Datos", nullptr));
@@ -500,8 +516,9 @@ public:
         groupBox->setTitle(QApplication::translate("MainWindow", "Filtros", nullptr));
         tiposComboBox->setItemText(0, QApplication::translate("MainWindow", "Todo", nullptr));
         tiposComboBox->setItemText(1, QApplication::translate("MainWindow", "Temperatura", nullptr));
-        tiposComboBox->setItemText(2, QApplication::translate("MainWindow", "Humedad", nullptr));
+        tiposComboBox->setItemText(2, QApplication::translate("MainWindow", "Luz", nullptr));
         tiposComboBox->setItemText(3, QApplication::translate("MainWindow", "Presi\303\263n", nullptr));
+        tiposComboBox->setItemText(4, QApplication::translate("MainWindow", "Gas (CO)", nullptr));
 
         timeCheck->setText(QApplication::translate("MainWindow", "Timestamp", nullptr));
         dateCheck->setText(QApplication::translate("MainWindow", "Date", nullptr));

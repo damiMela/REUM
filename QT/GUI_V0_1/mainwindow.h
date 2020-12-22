@@ -38,7 +38,7 @@ private slots:
     void connected_slot();
     void newTCPData_slot();
 
-    void on_pushButton_clicked();
+    void on_camConnectBtn_clicked();
 
     void on_UpBtn_pressed();
     void on_DownBtn_pressed();
@@ -51,14 +51,13 @@ private slots:
     void on_RightBtn_released();
 
     void on_SaveDbBtn_clicked();
-
     void on_loadDbBtn_clicked();
-
     void on_stopSaveBtn_clicked();
 
     void on_tipoFiltroBtn_clicked();
-
     void on_rangoFilrtoBtn_clicked();
+
+    void on_UpBtn_clicked();
 
 protected:
     void keyPressEvent(QKeyEvent *keyevent);

@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //<<<<<<<<<<<<<-Others->>>>>>>>>>>>>>//
     ui->datTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->IpCamTxb->setInputMask("000.000.000.000");
 }
 
 MainWindow::~MainWindow()
@@ -58,7 +59,8 @@ void MainWindow::connected_slot()
 
 void MainWindow::newTCPData_slot()
 {
-    #define CANT_ITEMS_RCV  3
+    #define CANT_ITEMS_RCV  4
+
     QByteArray datos = socket->readLine();
     QString str_input = QString::fromStdString(datos.toStdString());
     QStringList input_list = str_input.split("#");
@@ -138,7 +140,7 @@ void MainWindow::updateTable(char itemChar, QString val)
         case 't':   itemIndex = 0;      break;
         case 'l':   itemIndex = 1;      break;
         case 'p':   itemIndex = 2;      break;
-        case 'a':   itemIndex = 0;      break;
+        case 'g':   itemIndex = 3;      break;
         default:    itemIndex = 0;      break;
     }
 
@@ -157,8 +159,9 @@ void MainWindow::updateSQLdb(void){
     QString time, date;
 
     QString temp_s = "";
-    QString humd_s = "";
-    QString pres_S = "";
+    QString luz_s  = "";
+    QString pres_s = "";
+    QString gas_s  = "";
 
     //-------timestamp
     date = QDate::currentDate().toString();
@@ -171,18 +174,21 @@ void MainWindow::updateSQLdb(void){
         if(d_item){
             if(QString::compare(type, "Temperatura"))
                 temp_s = d_item->text();
-            if(QString::compare(type, "Humedad"))
-                humd_s = d_item->text();
+            if(QString::compare(type, "Luz"))
+                luz_s = d_item->text();
             if(QString::compare(type, "Presion"))
-                pres_S = d_item->text();
+                pres_s = d_item->text();
+            if(QString::compare(type, "Gas (CO)"))
+                gas_s = d_item->text();
         }
     }
-    consulta.append("INSERT INTO reumData(time, date, temp, humd, pres)"
+    consulta.append("INSERT INTO reumData(time, date, temp, luz, pres, gas)"
                     "VALUES ('"+time+
                     "', '"+date+
                     "', '"+temp_s+
-                    "', '"+humd_s+
-                    "', '"+pres_S+
+                    "', '"+luz_s +
+                    "', '"+pres_s+
+                    "', '"+gas_s +
                     "' );");
 
     QSqlQuery insert_data(db);
@@ -194,7 +200,7 @@ void MainWindow::updateSQLdb(void){
     consulta = "";
 }
 //------------------------------------------BUTTON SLOTS-----------------------------------------//
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_camConnectBtn_clicked()
 {
     QString url_string = "http://";
     url_string.append(ui->IpCamTxb->text());
@@ -235,8 +241,9 @@ void MainWindow::on_SaveDbBtn_clicked()
                                 "time VARCHAR(20) PRIMARY KEY,"
                                 "date VARCHAR(20), "
                                 "temp VARCHAR(5),"
-                                "humd VARCHAR (5),"
-                                "pres VARCHAR(5)"
+                                "luz  VARCHAR(5),"
+                                "pres VARCHAR(5),"
+                                "gas  VARCHAR(5)"
                                 ");");
 
     QSqlQuery tabla(db);
@@ -265,7 +272,9 @@ void MainWindow::on_loadDbBtn_clicked()
             tr("Abrir base de datos"), "",
             tr("qlite data base(*.sqlite);;All Files (*)"));
 
-    if(!QString::compare(rutaBase, db.databaseName())){
+    if(rutaBase == "")
+        return;
+    if(rutaBase == db.databaseName()){
         QMessageBox::critical(NULL, "data log - read", "la base de datos esta siendo utilizada");
         return;
     }
@@ -304,10 +313,12 @@ void MainWindow::on_tipoFiltroBtn_clicked()
                select_db_s = "*";
         else if(!selected.compare("Temperatura"))
                 select_db_s.append("temp");
-        else if(!selected.compare("Humedad"))
-                select_db_s.append("humd");
+        else if(!selected.compare("Luz"))
+                select_db_s.append("luz");
         else if(!selected.compare("Presión"))
                 select_db_s.append("pres");
+        else if(!selected.compare("Gas (CO)"))
+                select_db_s.append("gas");
 
         QSqlQuery sqlQuery(dbRead);
         QString consultaDB_read("SELECT "+select_db_s+" FROM reumData");
@@ -342,4 +353,10 @@ void MainWindow::on_rangoFilrtoBtn_clicked()
        sqlModel->setQuery(sqlQuery);
        ui->DbTableView->setModel(sqlModel);
    }
+}
+
+
+void MainWindow::on_UpBtn_clicked()
+{
+
 }

@@ -34,16 +34,28 @@
 #include <PR/PR_PWM.h>
 #include <PR/PR_ADC.h>
 #include <PR/PR_RGB.h>
+#include <PR/PR_I2C.h>
 #include <PR/PR_BMP280.h>
 #include <PR/PR_AM2320.h>
+#include <PR/PR_LCD.h>
 
 #include <AP/AP_Ultrasonido.h>
 
-
+char aux3[16];
 
 void func(void){
 	toggleRGB_r();
 	TimerStart(0, 3, func, SEG);
+}
+
+void FUNC3(void){
+	aux3[0] = 'h';
+	aux3[1] = 'o';
+	aux3[2] = 'l';
+	aux3[3] = 'a';
+	aux3[4] = '\0';
+	Display_LCD(aux3,RENGLON_2,0);
+	TimerStart(5,1,FUNC3,SEG);
 }
 
 int main(void) {
@@ -55,19 +67,17 @@ int main(void) {
 	InicializarBotones();
 	InicializarRelays();
 	InicializarPWM();
-	InicializarI2C();
+//	InicializarI2C();
 
 //	InicializarUS();
 	InicializarEINT_DR();
 
 	InicializarRGB();
-	InicializarAM2320();
-	InicializarBMP280();
+//	InicializarAM2320();
+//	InicializarBMP280();
 
 	//-------------PRUEBA TIMERS------------//FUNCIONANDO
 	TimerStart(0, 3, func, SEG);
-
-	//setRGB(0, 0, 0);
 
 
 	setDir(EXPANSION12, OUTPUT);
@@ -78,15 +88,17 @@ int main(void) {
 	//	TIMER0_EnableCount(1);
 
 
-	setRelay(RELAY1, OFF);
-	setRelay(RELAY2, OFF);
-	setRelay(RELAY3, OFF);
+	//config_LCD();
+	InitLCD();
+	TimerStart(8,1,FUNC3,SEG);//refresca la presentación del CANAL ADC
+
 
     while(1) {
     	//---agregar siempre---//
     	Timers_run();
     	ADC_run();
     	//---------------------//
+
 
 
     	//---------PRUEBA ADC-----------//FUNCIONANDO
@@ -165,18 +177,17 @@ int main(void) {
 */
 
     	//--------PRUEBA I2C-----------------//FUNCIONANDO - descomentar BMP280_run()
-		uint32_t temp = 0, pres = 0;
+/*		uint32_t temp = 0, pres = 0;
 		BMP280_getData();
 		temp =  getBMP280_temp();
 		pres =  getBMP280_pres();
 
 		if(temp >= 2820) setRelay(RELAY2, ON);
 		else setRelay(RELAY2, OFF);
-
+*/
 		//AM2320_getData();
-
-
     }
+
 
 
 }

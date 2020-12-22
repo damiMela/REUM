@@ -487,7 +487,7 @@ uint8_t maquina_Envio_data(void){
 
 		case WAIT_SENDING:{
 			if(connected_flag){
-				TimerStart(SEND_DATA_EV, 3, send_data_timer, SEG);
+				TimerStart(SEND_DATA_EV, 2, send_data_timer, SEG);
 				estado = SEND_DATA;
 			}
 			break;
@@ -506,13 +506,20 @@ uint8_t maquina_Envio_data(void){
 				BMP280_getData();
 				int16_t temp = getBMP280_temp();
 				uint16_t pres = getBMP280_pres();
-				uint16_t luz = getADC(ADC_2) * 100 /4095;
+				uint16_t luz = getADC(ADC_3) * 100 /4095;
+				uint16_t gas_read = getADC(ADC_2);
+				gas_read *= (33000 / 4095); //v * 10000
+
+				float gas = 19.7 + 41.9 *(gas_read / 10000)
+						-12.1 * (gas_read / 10000) *(gas_read / 10000)
+						+1.67 *(gas_read / 10000) *(gas_read / 10000) *(gas_read / 10000);
 
 				char msg[ARRAY_LENGHT] = {0};
 				sprintf(msg, "#t#%d.%d"
 						"#p#%d"
-						"#l#%d",
-						temp/100, temp%100, pres, luz);
+						"#l#%d"
+						"#g#%d.%d",
+						temp/100, temp%100, pres, luz, (int)gas/100, (int) gas%100);
 
 				UART1_SendString((uint8_t *)msg);
 			}

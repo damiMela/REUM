@@ -1,6 +1,6 @@
 /*******************************************************************************************************************************//**
  *
- * @file		PR_LCD.h
+ * @file		DR_LCD.h
  * @brief		Breve descripción del objetivo del Módulo
  * @date		Dec 21, 2020
  * @author		R2002 - Grupo2
@@ -11,24 +11,27 @@
  *** MODULO
  **********************************************************************************************************************************/
 
-#ifndef PR_PR_LCD_H_
-#define PR_PR_LCD_H_
+#ifndef DR_DR_LCD_H_
+#define DR_DR_LCD_H_
 
 /***********************************************************************************************************************************
  *** INCLUDES GLOBALES
  **********************************************************************************************************************************/
 #include <DR/DR_Tipos.h>
-#include <DR/DR_LCD.h>
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define		LCD_CONTROL		0 /*!< Macro para cuando envio un comando de control*/
-#define		LCD_DATA		1 /*!< Macro para cuando envio un dato*/
-#define		RENGLON_1		0x00 /*!< Macro para indicar que quiero escribir en el renglon 1*/
-#define		RENGLON_2		0x40 /*!< Macro para indicar que quiero escribir en el renglon 2*/
+
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
  **********************************************************************************************************************************/
+#define		LCD_E_OFF				SetPIN(LCD_E,0)
+#define		LCD_E_ON				SetPIN(LCD_E,1)
+#define		LCD_RS_OFF				SetPIN(LCD_RS,0)
+#define		LCD_RS_ON				SetPIN(LCD_RS,1)
+#define		LCD_DATO(d4,d5,d6,d7)	SetPIN(LCD_D4,d4);SetPIN(LCD_D5,d5);SetPIN(LCD_D6,d6);SetPIN(LCD_D7,d7)
+
+#define     TOPE_BUFFER_LCD        100
 
 /***********************************************************************************************************************************
  *** TIPO DE DATOS GLOBALES
@@ -37,10 +40,21 @@
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES
  **********************************************************************************************************************************/
-
+extern uint8_t Buffer_LCD[TOPE_BUFFER_LCD]; /*!< Buffer de datos relacionados con el LCD*/
+extern uint8_t inxOutLCD; /*!< Indice de output del LCD (Capa drivers)*/
+extern uint8_t inxInLCD; /*!< Indice de input del LCD (Capa primitivas)*/
+extern uint8_t cantidadColaLCD; /*!< Cantidad de datos que faltan convertir del buffer del LCD*/
+extern uint8_t Demora_LCD;
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
-void Display_lcd( char *, char, char);
-void Display_LCD( char *, char , char );
-#endif /* PR_PR_LCD_H_ */
+void InitLCD ( void );
+void Dato_LCD( void );
+void InitLCD ( void );
+void Dato_LCD ( void );
+int16_t PopLCD ( void );
+int8_t PushLCD ( uint8_t , uint8_t );
+void Display_LCD( char *, char, char);
+void GuardarMensajeLCD( char *, char * );
+
+#endif /* DR_DR_LCD_H_ */

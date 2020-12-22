@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
-    <height>723</height>
+    <width>836</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -65,10 +65,17 @@
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Ip de cámara</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLineEdit" name="IpCamTxb"/>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="camConnectBtn">
                    <property name="text">
                     <string>Conectar</string>
                    </property>
@@ -285,6 +292,11 @@
                <string>Presion</string>
               </property>
              </row>
+             <row>
+              <property name="text">
+               <string>Gas</string>
+              </property>
+             </row>
              <column>
               <property name="text">
                <string>Valor</string>
@@ -308,6 +320,11 @@
              <item row="2" column="1">
               <property name="text">
                <string>Pa</string>
+              </property>
+             </item>
+             <item row="3" column="1">
+              <property name="text">
+               <string>%</string>
               </property>
              </item>
             </widget>
@@ -480,12 +497,17 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Humedad</string>
+                  <string>Luz</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
                   <string>Presión</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gas (CO)</string>
                  </property>
                 </item>
                </widget>
@@ -613,7 +635,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>811</width>
+     <width>836</width>
      <height>22</height>
     </rect>
    </property>

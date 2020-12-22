@@ -6,7 +6,7 @@
  * Generated linker script file for LPC1769
  * Created from memory.ldt by FMCreateLinkMemory
  * Using Freemarker v2.3.23
- * MCUXpresso IDE v11.2.0 [Build 4120] [2020-07-09] on Dec 21, 2020 4:43:09 PM
+ * MCUXpresso IDE v11.2.0 [Build 4120] [2020-07-09] on Dec 22, 2020 12:16:12 AM
  */
 
 MEMORY

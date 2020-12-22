@@ -1,8 +1,8 @@
 /*******************************************************************************************************************************//**
  *
- * @file		DR_Systick.h
- * @brief		Funciones para utilización systick timer
- * @date		Sep 19, 2020
+ * @file		DR_LCD.c
+ * @brief		Descripcion del modulo
+ * @date		Dec 21, 2020
  * @author		R2002 - Grupo2
  *
  **********************************************************************************************************************************/
@@ -10,41 +10,23 @@
 /***********************************************************************************************************************************
  *** INCLUDES
  **********************************************************************************************************************************/
-#include <DR/DR_Systick.h>
-#include <DR/DR_PLL.h>
-#include <PR/PR_Timers.h>
-#include <DR/DR_ADC.h>
-#include <DR/DR_PWM.h>
-#include <DR/DR_Botones.h>
 #include <DR/DR_LCD.h>
+#include <DR/DR_GPIO.h>
+#include <DR/DR_Pinsel.h>
+#include <PR/PR_LCD.h>
+
+
 /***********************************************************************************************************************************
  *** DEFINES PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-#define ADC_T 10 //x2.5 ms
-#define PWM_T 5 //x2.5 ms
-#define BTN_T 5 //x2.5 ms
+
 /***********************************************************************************************************************************
  *** MACROS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-#define	SYSTICK	((systick_t*) 0xE000E010UL)
+
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO
  **********************************************************************************************************************************/
-typedef struct{
-	uint32_t Enable:1;
-	uint32_t TickInt:1;
-	uint32_t ClkSource:1;
-	uint32_t __a:13;  //RESERVED
-	uint32_t CountFlag:1;
-	uint32_t __b:15;
-}STCTRL_t;
-
-typedef struct{
-	__RW STCTRL_t STCTRL;
-	__RW uint32_t STRELOAD;
-	__RW uint32_t STCURR;
-	__R  uint32_t STCALIB;
-}systick_t;
 
 /***********************************************************************************************************************************
  *** TABLAS PRIVADAS AL MODULO
@@ -53,11 +35,11 @@ typedef struct{
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-uint8_t ADC_inUse = 0;
+uint8_t	Demora_LCD; /*!< Variable para realizar las demoras necesarias en la inicializacion del LCD*/
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-static uint32_t systickCounter = 0;
+
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
@@ -70,89 +52,120 @@ static uint32_t systickCounter = 0;
  *** FUNCIONES GLOBALES AL MODULO
  **********************************************************************************************************************************/
 /**
-	\fn  inicializarSystick
-	\brief Inicializa el systick timer en 10ms
+	\fn  Nombre de la Funcion
+	\brief Descripcion
  	\author R2002 - Grupo2
- 	\date Sep 19, 2020
+ 	\date Dec 21, 2020
+ 	\param [in] parametros de entrada
+ 	\param [out] parametros de salida
+	\return tipo y descripcion de retorno
 */
-void InicializarSystick(void){
-	SYSTICK->STRELOAD = SYSTICK->STCALIB/4 -1; //tick cada 2.5ms
-	SYSTICK->STCTRL.ClkSource = 1; //clock interno
-	SYSTICK->STCURR = 0;
-	SYSTICK->STCTRL.TickInt = 1;
-	SYSTICK->STCTRL.Enable = 1;
+
+void InitLCD( void ){
+	uint16_t i;
+
+	setPinsel( LCD_D4 , 0 );
+	setPinsel( LCD_D5 , 0 );
+	setPinsel( LCD_D6 , 0 );
+	setPinsel( LCD_D7 , 0 );
+	setPinsel( LCD_RS , 0 );
+	setPinsel( LCD_EN , 0 );
+
+	setDir( LCD_D4 , OUTPUT );
+	setDir( LCD_D5 , OUTPUT );
+	setDir( LCD_D6 , OUTPUT );
+	setDir( LCD_D7 , OUTPUT );
+	setDir( LCD_RS , OUTPUT );
+	setDir( LCD_EN , OUTPUT );
+
+	setPin ( LCD_EN , OFF );
+	Demora_LCD = 50;// 50
+	while( Demora_LCD );
+
+	for( i = 0 ; i < 3 ; i++ ){
+		setPin ( LCD_D4 , ON );
+		setPin ( LCD_D5 , ON );
+		setPin ( LCD_D6 , OFF );
+		setPin ( LCD_D7 , OFF );
+		setPin ( LCD_RS , OFF );
+		setPin ( LCD_EN , ON );
+		setPin ( LCD_EN , OFF );
+
+		Demora_LCD = 10;//10
+		while( Demora_LCD );
+	}
+
+	setPin ( LCD_D4 , OFF );
+	setPin ( LCD_D5 , ON );
+	setPin ( LCD_D6 , OFF );
+	setPin ( LCD_D7 , OFF );
+	setPin ( LCD_RS , OFF );
+	setPin ( LCD_EN , ON );
+	setPin ( LCD_EN , OFF );
+
+	Demora_LCD = 5;
+	while( Demora_LCD );
+
+	PushLCD( 0x28 , LCD_CONTROL );	//N = 1; 2 lineas; 5x7 puntos
+	Demora_LCD = 4;
+	while( Demora_LCD );
+	PushLCD( 0x08 , LCD_CONTROL );	//Cursor off
+	Demora_LCD = 4;
+	while( Demora_LCD );
+	PushLCD( 0x01 , LCD_CONTROL );	//Clear display
+	Demora_LCD = 4;
+	while( Demora_LCD );
+	PushLCD( 0x06 , LCD_CONTROL );	//incrementa puntero
+	Demora_LCD = 4;
+	while( Demora_LCD );
+	PushLCD( 0x0C , LCD_CONTROL );	//Activo LCD
+	Demora_LCD = 4;
+	while( Demora_LCD );
 }
 
 /**
-	\fn  SysTick_Handler
-	\brief handler de la interrupcion. Suma 1 al systickCounter
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
-*/
-void SysTick_Handler(void){
-	systickCounter++;
-	scheduler_run();
+ * @brief Funcion encargada de poner un dato en el LCD desde el buffer
+ */
+
+void Dato_LCD( void )
+{
+	int16_t data;
+
+	if( ( data = PopLCD( ) ) == -1 )
+		return;
+
+	setPin ( LCD_D4 , ( ( (uint8_t) data ) >> 0 ) & 0x01 );
+	setPin ( LCD_D5 , ( ( (uint8_t) data ) >> 1 ) & 0x01 );
+	setPin ( LCD_D6 , ( ( (uint8_t) data ) >> 2 ) & 0x01 );
+	setPin ( LCD_D7 , ( ( (uint8_t) data ) >> 3 ) & 0x01 );
+
+	if( ( (uint8_t) data ) & 0x80 )
+		setPin( LCD_RS , OFF );
+	else
+		setPin( LCD_RS , ON );
+
+	setPin ( LCD_EN , ON );
+	setPin ( LCD_EN , OFF );
 }
 
-
 /**
-	\fn  get_ticks
-	\brief fucnión para obtener la cantidad de ticks hechos
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
- 	\return valor guardado en systickCounter
-*/
-uint32_t get_ticks(void){
-	return systickCounter;
-}
+ * @brief Funcion encargada de sacar un dato del buffer del LCD
+ * @return Devuelve el dato o -1 si no hay dato en el buffer
+ */
 
+int16_t PopLCD( void )
+{
+	int16_t dato;
 
-/**
-	\fn  get_ticks
-	\brief función para resetear la cantidad de ticks
- 	\author R2002 - Grupo2
- 	\date Sep 19, 2020
- 	\return valor guardado en systickCounter
-*/
-void reset_ticks(void){
-	systickCounter = 0;
-}
+	if( cantidadColaLCD == 0 )
+		return -1;
 
+	dato = Buffer_LCD[ inxOutLCD ];
 
-/**
-	\fn  scheduler_run
-	\brief scheduler del programa
- 	\author R2002 - Grupo2
- 	\date Nov 04, 2020
-*/
-void scheduler_run(void){
-	//ADC está configurado en modo burst
+	cantidadColaLCD--;
 
-	//counters
-	static uint32_t pwm_counter = 0;
-	static uint32_t btn_counter = 0;
-	static uint32_t dsp_counter = 0;
-	//static uint32_t adc_counter = 0;
+	inxOutLCD++;
+	inxOutLCD %= TOPE_BUFFER_LCD;
 
-	//timer counter function
-	TimerDiscount();
-
-	//interations counter
-	pwm_counter++; 	pwm_counter %= PWM_T;
-	btn_counter++; 	btn_counter %= BTN_T;
-	dsp_counter++; 	btn_counter %= 1;
-	//adc_counter++;	adc_counter %= ADC_T;
-
-	if(!pwm_counter) PWM_update();
-	if(!btn_counter) TecladoSW();
-	//if(!adc_counter) ADC_startConvertion();
-	//if(!dsp_counter)	LCD_run();
-	if(Demora_LCD)
-		Demora_LCD--;
-
-	Dato_LCD();
-
-
-
-
+	return dato;
 }

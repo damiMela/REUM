@@ -1,0 +1,3 @@
+DR_LCD.c:64:6:InitLCD	16	static
+DR_LCD.c:130:6:Dato_LCD	16	static
+DR_LCD.c:156:9:PopLCD	16	static
