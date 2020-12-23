@@ -17,8 +17,12 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlRecord>
+
 #include <QTableWidgetItem>
 #include <QDateTime>
+
+#include <qcustomplot.h>
 
 #define UPDATE_DATA_TIME 250
 
@@ -57,8 +61,6 @@ private slots:
     void on_tipoFiltroBtn_clicked();
     void on_rangoFilrtoBtn_clicked();
 
-    void on_UpBtn_clicked();
-
 protected:
     void keyPressEvent(QKeyEvent *keyevent);
     void keyReleaseEvent(QKeyEvent *event);
@@ -71,12 +73,14 @@ private:
 
     QSqlDatabase db;
     QSqlDatabase dbRead;
+    QString rutaWriteDb;
 
-    void sendTCPmsg(QString msg);
+    void sendTCPmsg(QString msg, char raw = 0);
     void updateRobotDir(void);
     void updateTable(char itemIndex, QString val);
     void updateSQLdb(void);
 
+    void plotSqlModel(QSqlQueryModel *model);
     void configureDbTable(void);
 
 };

@@ -79,16 +79,22 @@ void MainWindow::newTCPData_slot()
 
 }
 
-void MainWindow::sendTCPmsg(QString msg){
-    QString send_msg = "#";
+void MainWindow::sendTCPmsg(QString msg, char raw){
+    QString send_msg = "";
+
+    if(!raw)send_msg.append("#");
+
     send_msg.append(msg);
-    send_msg.append("&");
-    send_msg.append("");
+
+    if(!raw){
+        send_msg.append("&");
+        send_msg.append("");
+    }
 
     std::string str_msg = send_msg.toStdString();
     const char* char_msg = str_msg.c_str();
     socket->write(char_msg);
-    qDebug() << char_msg;
+    //qDebug() << char_msg;
 }
 
 //---------------------------------------------KEY PRESS----------------------------------------//
@@ -172,13 +178,13 @@ void MainWindow::updateSQLdb(void){
         QTableWidgetItem *d_item = ui->datTable->item(i, 0);
         QString type = ui->datTable->verticalHeaderItem(i)->text();
         if(d_item){
-            if(QString::compare(type, "Temperatura"))
+            if(type == ui->datTable->verticalHeaderItem(0)->text())
                 temp_s = d_item->text();
-            if(QString::compare(type, "Luz"))
+            if(type == ui->datTable->verticalHeaderItem(1)->text())
                 luz_s = d_item->text();
-            if(QString::compare(type, "Presion"))
+            if(type == ui->datTable->verticalHeaderItem(2)->text())
                 pres_s = d_item->text();
-            if(QString::compare(type, "Gas (CO)"))
+            if(type == ui->datTable->verticalHeaderItem(3)->text())
                 gas_s = d_item->text();
         }
     }
@@ -224,13 +230,13 @@ void MainWindow::on_RightBtn_released(){dir = 'S';  }
 
 void MainWindow::on_SaveDbBtn_clicked()
 {
-    QString rutaBase = QFileDialog::getSaveFileName(this,
+    rutaWriteDb = QFileDialog::getSaveFileName(this,
                                         tr("Save Address Book"),
                                         "", tr("sqlite data base(*.sqlite);;All Files (*)"));
-    rutaBase.append(".sqlite");
+    rutaWriteDb.append(".sqlite");
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(rutaBase);
+    db.setDatabaseName(rutaWriteDb);
 
     if(!db.open())
     {  QMessageBox::critical(NULL, "data log", "Error en la apertura de la base de datos!");
@@ -238,12 +244,12 @@ void MainWindow::on_SaveDbBtn_clicked()
     }
 
     QString ConsultaREUM_data("CREATE TABLE IF NOT EXISTS reumData("
-                                "time VARCHAR(20) PRIMARY KEY,"
-                                "date VARCHAR(20), "
-                                "temp VARCHAR(5),"
-                                "luz  VARCHAR(5),"
-                                "pres VARCHAR(5),"
-                                "gas  VARCHAR(5)"
+                                "time TINYTEXT PRIMARY KEY,"
+                                "date TINYTEXT, "
+                                "temp TINYTEXT,"
+                                "luz  TINYTEXT,"
+                                "pres TINYTEXT,"
+                                "gas  TINYTEXT"
                                 ");");
 
     QSqlQuery tabla(db);
@@ -253,7 +259,7 @@ void MainWindow::on_SaveDbBtn_clicked()
     if (!tabla.exec())
         exit(1);
 
-    ui->DbLbl->setText(rutaBase);
+    ui->DbLbl->setText(rutaWriteDb);
     ui->SaveDbBtn->setEnabled(false);
     ui->stopSaveBtn->setEnabled(true);
 }
@@ -261,6 +267,7 @@ void MainWindow::on_SaveDbBtn_clicked()
 void MainWindow::on_stopSaveBtn_clicked()
 {
     db.close();
+    db.removeDatabase(rutaWriteDb);
     db.setDatabaseName("");
     ui->stopSaveBtn->setEnabled(false);
     ui->SaveDbBtn->setEnabled(true);
@@ -306,19 +313,21 @@ void MainWindow::on_tipoFiltroBtn_clicked()
 
     if(dbRead.isOpen()){
         QString selected = ui->tiposComboBox->currentText();
+
         if(ui->timeCheck->isChecked()) select_db_s.append("time, ");
         if(ui->dateCheck->isChecked()) select_db_s.append("date, ");
 
-        if(!selected.compare("Todo"))
-               select_db_s = "*";
-        else if(!selected.compare("Temperatura"))
-                select_db_s.append("temp");
-        else if(!selected.compare("Luz"))
-                select_db_s.append("luz");
-        else if(!selected.compare("Presión"))
-                select_db_s.append("pres");
-        else if(!selected.compare("Gas (CO)"))
-                select_db_s.append("gas");
+        if(selected == ui->tiposComboBox->itemText(0))
+           select_db_s = "*";
+        else if(selected == ui->tiposComboBox->itemText(1))
+            select_db_s.append("temp");
+        else if(selected == ui->tiposComboBox->itemText(2))
+            select_db_s.append("luz");
+        else if(selected == ui->tiposComboBox->itemText(3))
+            select_db_s.append("pres");
+        else if(selected == ui->tiposComboBox->itemText(4))
+           select_db_s.append("gas");
+
 
         QSqlQuery sqlQuery(dbRead);
         QString consultaDB_read("SELECT "+select_db_s+" FROM reumData");
@@ -331,17 +340,44 @@ void MainWindow::on_tipoFiltroBtn_clicked()
         QSqlQueryModel *sqlModel = new QSqlQueryModel;
         sqlModel->setQuery(sqlQuery);
         ui->DbTableView->setModel(sqlModel);
+
+        if(select_db_s != "*") plotSqlModel(sqlModel);
+        else{
+            if(ui->customPlot->graph()){
+                ui->customPlot->graph(0)->data()->clear();
+                ui->customPlot->replot();
+            }
+
+        }
     }
 }
 
-void MainWindow::on_rangoFilrtoBtn_clicked()
-{
+
+void MainWindow::on_rangoFilrtoBtn_clicked(){
+    if(ui->timeEditTo->time() < ui->timeEditFrom->time()){
+        QMessageBox::critical(NULL, "Datos incorrectos", "El tiempo final debe ser mayor al inicial");
+        return;
+    }
+
    if(dbRead.isOpen()){
        QString from = ui->timeEditFrom->time().toString();
        QString to = ui->timeEditTo->time().toString();
+       QString selected = ui->tiposComboBox->currentText();
+
+       QString select_db_s = "";
+       if(selected == ui->tiposComboBox->itemText(0))
+          select_db_s = "*";
+       else if(selected == ui->tiposComboBox->itemText(1))
+           select_db_s.append("temp");
+       else if(selected == ui->tiposComboBox->itemText(2))
+           select_db_s.append("luz");
+       else if(selected == ui->tiposComboBox->itemText(3))
+           select_db_s.append("pres");
+       else if(selected == ui->tiposComboBox->itemText(4))
+          select_db_s.append("gas");
 
        QSqlQuery sqlQuery(dbRead);
-       QString consultaDB_read("SELECT * FROM reumData WHERE time BETWEEN '"+from+"' AND '"+to+"'");
+       QString consultaDB_read("SELECT time, date, "+select_db_s+" FROM reumData WHERE time BETWEEN '"+from+"' AND '"+to+"'");
        qDebug() << "Query select:" << consultaDB_read.toLocal8Bit().constData() << endl;
 
        if(!sqlQuery.prepare(consultaDB_read))
@@ -352,11 +388,41 @@ void MainWindow::on_rangoFilrtoBtn_clicked()
        QSqlQueryModel *sqlModel = new QSqlQueryModel;
        sqlModel->setQuery(sqlQuery);
        ui->DbTableView->setModel(sqlModel);
+
+       if(select_db_s != "*") plotSqlModel(sqlModel);
+       else{
+           if(ui->customPlot->graph(0)){
+               ui->customPlot->graph(0)->data()->clear();
+               ui->customPlot->replot();
+           }
+
+       }
    }
 }
 
 
-void MainWindow::on_UpBtn_clicked()
-{
+void MainWindow::plotSqlModel(QSqlQueryModel *model){
+    int table_len = model->rowCount();
+    int table_width = model->columnCount();
+    unsigned int max_range = 0, min_range = 0xFFFFFFFF;
 
+    QVector<double> x(table_len), y(table_len);
+    for (int i = 0; i < table_len; i++) {
+        double data_f = model->record(i).value(table_width-1).toDouble();
+        x[i] = i;
+        y[i] =data_f;
+
+        if(data_f > max_range) max_range =data_f;
+        if(data_f < min_range) min_range =data_f;
+    }
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(0)->setData(x, y);
+    ui->customPlot->xAxis->setLabel("x");
+    ui->customPlot->yAxis->setLabel("y");
+    // set axes ranges, so we see all data:
+
+    ui->customPlot->xAxis->setRange(0, table_len+2);
+    ui->customPlot->yAxis->setRange(min_range-5, max_range+5);
+    ui->customPlot->replot();
 }

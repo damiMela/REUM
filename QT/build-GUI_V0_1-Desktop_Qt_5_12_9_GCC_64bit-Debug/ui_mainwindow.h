@@ -32,6 +32,7 @@
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "qcustomplot.h"
 #include "qwebengineview.h"
 
 QT_BEGIN_NAMESPACE
@@ -77,7 +78,10 @@ public:
     QPushButton *loadDbBtn;
     QLabel *DbDirLoadLbl;
     QSpacerItem *horizontalSpacer_3;
+    QFrame *frame_5;
+    QHBoxLayout *horizontalLayout_7;
     QTableView *DbTableView;
+    QCustomPlot *customPlot;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_6;
     QFrame *frame_3;
@@ -357,10 +361,26 @@ public:
 
         verticalLayout_5->addWidget(frame_2);
 
-        DbTableView = new QTableView(tab_2);
+        frame_5 = new QFrame(tab_2);
+        frame_5->setObjectName(QString::fromUtf8("frame_5"));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        horizontalLayout_7 = new QHBoxLayout(frame_5);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        DbTableView = new QTableView(frame_5);
         DbTableView->setObjectName(QString::fromUtf8("DbTableView"));
 
-        verticalLayout_5->addWidget(DbTableView);
+        horizontalLayout_7->addWidget(DbTableView);
+
+        customPlot = new QCustomPlot(frame_5);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        sizePolicy.setHeightForWidth(customPlot->sizePolicy().hasHeightForWidth());
+        customPlot->setSizePolicy(sizePolicy);
+
+        horizontalLayout_7->addWidget(customPlot);
+
+
+        verticalLayout_5->addWidget(frame_5);
 
         groupBox = new QGroupBox(tab_2);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -465,7 +485,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -493,7 +513,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem4 = datTable->verticalHeaderItem(2);
         ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Presion", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = datTable->verticalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Gas", nullptr));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Gas (CO)", nullptr));
 
         const bool __sortingEnabled = datTable->isSortingEnabled();
         datTable->setSortingEnabled(false);
