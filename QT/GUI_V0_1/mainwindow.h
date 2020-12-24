@@ -61,6 +61,8 @@ private slots:
     void on_tipoFiltroBtn_clicked();
     void on_rangoFilrtoBtn_clicked();
 
+    void on_lightBtn_clicked();
+
 protected:
     void keyPressEvent(QKeyEvent *keyevent);
     void keyReleaseEvent(QKeyEvent *event);
@@ -75,7 +77,7 @@ private:
     QSqlDatabase dbRead;
     QString rutaWriteDb;
 
-    void sendTCPmsg(QString msg, char raw = 0);
+    void sendTCPmsg(QString msg, bool raw = 0);
     void updateRobotDir(void);
     void updateTable(char itemIndex, QString val);
     void updateSQLdb(void);

@@ -149,7 +149,7 @@ void InicializarPWM_DR(void){
 	PCLKSEL0 &= ~(3 << PCLK_PWM1);
 	PCLKSEL0 |= (0x00 << PCLK_PWM1);
 
-	//F_pwm = PCLK/PR+1 = 25Mhz/24+01 =
+	//F_pwm = PCLK/PR+1 = 25Mhz/2499+01 = 10kHz
 	PWM1->PWMCtrl.PWMSel = 0; //set every pwm to single controlled edge
 	PWM1->PLLReg= 2499;
 

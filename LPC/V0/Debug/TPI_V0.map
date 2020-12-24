@@ -2,10 +2,6 @@ Archive member included to satisfy reference by file (symbol)
 
 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
                               ./src/cr_startup_lpc175x_6x.o (__main)
-/usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-                              ./src/AP/AP_Ultrasonido.o (__aeabi_ddiv)
-/usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-                              ./src/AP/AP_Ultrasonido.o (__aeabi_fmul)
 
 Discarded input sections
 
@@ -207,6 +203,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/PR/PR_LCD.o
  .data          0x0000000000000000        0x0 ./src/PR/PR_LCD.o
  .bss           0x0000000000000000        0x0 ./src/PR/PR_LCD.o
+ .text.Display_LCD
+                0x0000000000000000       0x6e ./src/PR/PR_LCD.o
  .text.GuardarMensajeLCD
                 0x0000000000000000       0x5c ./src/PR/PR_LCD.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/PR/PR_LCD.o
@@ -533,49 +531,6 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x34 ./src/DR/DR_Timer0.o
  .debug_macro   0x0000000000000000      0x1a8 ./src/DR/DR_Timer0.o
  .debug_macro   0x0000000000000000       0x22 ./src/DR/DR_Timer0.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .group         0x0000000000000000        0xc ./src/AP/AP_Ultrasonido.o
- .text          0x0000000000000000        0x0 ./src/AP/AP_Ultrasonido.o
- .data          0x0000000000000000        0x0 ./src/AP/AP_Ultrasonido.o
- .bss           0x0000000000000000        0x0 ./src/AP/AP_Ultrasonido.o
- .bss.distancia
-                0x0000000000000000        0x2 ./src/AP/AP_Ultrasonido.o
- .text.InicializarUS
-                0x0000000000000000       0x30 ./src/AP/AP_Ultrasonido.o
- .text.updateDistance
-                0x0000000000000000      0x138 ./src/AP/AP_Ultrasonido.o
- .text.getUSDistance
-                0x0000000000000000       0x14 ./src/AP/AP_Ultrasonido.o
- .bss.counter.3746
-                0x0000000000000000        0x1 ./src/AP/AP_Ultrasonido.o
- .bss.distancia_buff.3745
-                0x0000000000000000       0x14 ./src/AP/AP_Ultrasonido.o
- .debug_info    0x0000000000000000      0x21b ./src/AP/AP_Ultrasonido.o
- .debug_abbrev  0x0000000000000000      0x131 ./src/AP/AP_Ultrasonido.o
- .debug_aranges
-                0x0000000000000000       0x30 ./src/AP/AP_Ultrasonido.o
- .debug_ranges  0x0000000000000000       0x20 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x90 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000      0xaa8 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000      0x1ea ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x34 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000      0x1a8 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x22 ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x5e ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x1c ./src/AP/AP_Ultrasonido.o
- .debug_macro   0x0000000000000000       0x34 ./src/AP/AP_Ultrasonido.o
- .debug_line    0x0000000000000000      0x217 ./src/AP/AP_Ultrasonido.o
- .debug_str     0x0000000000000000     0x3d64 ./src/AP/AP_Ultrasonido.o
- .comment       0x0000000000000000       0x7a ./src/AP/AP_Ultrasonido.o
- .debug_frame   0x0000000000000000       0x74 ./src/AP/AP_Ultrasonido.o
- .ARM.attributes
-                0x0000000000000000       0x2d ./src/AP/AP_Ultrasonido.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
  .group         0x0000000000000000        0xc ./src/TPI_V0.o
@@ -596,6 +551,7 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/TPI_V0.o
  .data          0x0000000000000000        0x0 ./src/TPI_V0.o
  .bss           0x0000000000000000        0x0 ./src/TPI_V0.o
+ .bss.aux3      0x0000000000000000       0x10 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000      0xaa8 ./src/TPI_V0.o
  .debug_macro   0x0000000000000000      0x1ea ./src/TPI_V0.o
  .debug_macro   0x0000000000000000       0x34 ./src/TPI_V0.o
@@ -616,121 +572,48 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/cr_startup_lpc175x_6x.o
  .data          0x0000000000000000        0x0 ./src/cr_startup_lpc175x_6x.o
  .bss           0x0000000000000000        0x0 ./src/cr_startup_lpc175x_6x.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .group         0x0000000000000000        0xc ./inc/PR/PR_Ultrasonido.o
+ .text          0x0000000000000000        0x0 ./inc/PR/PR_Ultrasonido.o
+ .data          0x0000000000000000        0x0 ./inc/PR/PR_Ultrasonido.o
+ .bss           0x0000000000000000        0x0 ./inc/PR/PR_Ultrasonido.o
+ .bss.distancia
+                0x0000000000000000        0x2 ./inc/PR/PR_Ultrasonido.o
+ .text.InicializarUS
+                0x0000000000000000       0x24 ./inc/PR/PR_Ultrasonido.o
+ .text.updateDistance
+                0x0000000000000000       0x52 ./inc/PR/PR_Ultrasonido.o
+ .text.getUSDistance
+                0x0000000000000000       0x14 ./inc/PR/PR_Ultrasonido.o
+ .debug_info    0x0000000000000000       0xfb ./inc/PR/PR_Ultrasonido.o
+ .debug_abbrev  0x0000000000000000       0xd7 ./inc/PR/PR_Ultrasonido.o
+ .debug_aranges
+                0x0000000000000000       0x30 ./inc/PR/PR_Ultrasonido.o
+ .debug_ranges  0x0000000000000000       0x20 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x76 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000      0xaa8 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000      0x1ea ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x34 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x10 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000      0x1a8 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x22 ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x5e ./inc/PR/PR_Ultrasonido.o
+ .debug_macro   0x0000000000000000       0x1c ./inc/PR/PR_Ultrasonido.o
+ .debug_line    0x0000000000000000      0x18d ./inc/PR/PR_Ultrasonido.o
+ .debug_str     0x0000000000000000     0x3c75 ./inc/PR/PR_Ultrasonido.o
+ .comment       0x0000000000000000       0x7a ./inc/PR/PR_Ultrasonido.o
+ .debug_frame   0x0000000000000000       0x70 ./inc/PR/PR_Ultrasonido.o
+ .ARM.attributes
+                0x0000000000000000       0x2d ./inc/PR/PR_Ultrasonido.o
  .text          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
  .data          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
  .bss           0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
- .text          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .data          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .bss           0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dmul
-                0x0000000000000000      0x114 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_ddiv
-                0x0000000000000000      0x144 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dsub
-                0x0000000000000000      0x1a8 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dadd
-                0x0000000000000000      0x110 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_drsub
-                0x0000000000000000       0x10 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dneg
-                0x0000000000000000        0x6 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_d2f
-                0x0000000000000000       0x54 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_d2iz
-                0x0000000000000000       0x42 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_d2uiz
-                0x0000000000000000       0x32 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_d2lz
-                0x0000000000000000       0x70 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_d2ulz
-                0x0000000000000000       0x54 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__bhs_ui2d
-                0x0000000000000000       0x46 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__bhs_ul2d
-                0x0000000000000000       0x8a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_i2d
-                0x0000000000000000       0x12 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_ui2d
-                0x0000000000000000        0x8 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_l2d
-                0x0000000000000000       0x1c /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_ul2d
-                0x0000000000000000        0x8 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmpeq
-                0x0000000000000000       0x3c /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmplt
-                0x0000000000000000       0x58 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmpgt
-                0x0000000000000000       0x58 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmple
-                0x0000000000000000       0x62 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmpge
-                0x0000000000000000       0x68 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_dcmpun
-                0x0000000000000000       0x1a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_cdcmple
-                0x0000000000000000       0x2c /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text.__aeabi_cdrcmple
-                0x0000000000000000       0x14 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .comment       0x0000000000000000       0x7a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .ARM.attributes
-                0x0000000000000000       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
- .text          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .data          0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .bss           0x0000000000000000        0x0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fmul
-                0x0000000000000000       0xb0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fdiv
-                0x0000000000000000       0xc0 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fsub
-                0x0000000000000000       0xe4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fadd
-                0x0000000000000000       0xb4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_frsub
-                0x0000000000000000        0xc /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fneg
-                0x0000000000000000        0x6 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_f2iz
-                0x0000000000000000       0x34 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_f2uiz
-                0x0000000000000000       0x28 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_f2lz
-                0x0000000000000000       0x5c /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_f2ulz
-                0x0000000000000000       0x3e /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__bhs_ui2f
-                0x0000000000000000       0x26 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__bhs_ul2f
-                0x0000000000000000       0x46 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_i2f
-                0x0000000000000000       0x12 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_ui2f
-                0x0000000000000000        0x8 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_l2f
-                0x0000000000000000       0x1c /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_ul2f
-                0x0000000000000000        0x8 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_f2d
-                0x0000000000000000       0x38 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmpeq
-                0x0000000000000000       0x1e /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmplt
-                0x0000000000000000       0x3a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmpgt
-                0x0000000000000000       0x3a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmple
-                0x0000000000000000       0x3e /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmpge
-                0x0000000000000000       0x3e /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_fcmpun
-                0x0000000000000000       0x1a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_cfcmple
-                0x0000000000000000       0x20 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .text.__aeabi_cfrcmple
-                0x0000000000000000        0xa /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .comment       0x0000000000000000       0x7a /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
- .ARM.attributes
-                0x0000000000000000       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
 
 Memory Configuration
 
@@ -767,9 +650,9 @@ LOAD ./src/DR/DR_Pinsel.o
 LOAD ./src/DR/DR_Serial.o
 LOAD ./src/DR/DR_Systick.o
 LOAD ./src/DR/DR_Timer0.o
-LOAD ./src/AP/AP_Ultrasonido.o
 LOAD ./src/TPI_V0.o
 LOAD ./src/cr_startup_lpc175x_6x.o
+LOAD ./inc/PR/PR_Ultrasonido.o
 START GROUP
 LOAD /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a
 LOAD /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a
@@ -788,7 +671,7 @@ END GROUP
                 0x0000000020084000                __top_RamAHB32 = 0x20084000
                 0x0000000020084000                __top_RAM2 = 0x20084000
 
-.text           0x0000000000000000     0x1ba4
+.text           0x0000000000000000     0x1ae0
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -797,16 +680,16 @@ END GROUP
                 0x00000000000000cc                . = ALIGN (0x4)
                 0x00000000000000cc                __section_table_start = .
                 0x00000000000000cc                __data_section_table = .
-                0x00000000000000cc        0x4 LONG 0x1ba4 LOADADDR (.data)
+                0x00000000000000cc        0x4 LONG 0x1ae0 LOADADDR (.data)
                 0x00000000000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000d4        0x4 LONG 0x0 SIZEOF (.data)
-                0x00000000000000d8        0x4 LONG 0x1ba4 LOADADDR (.data_RAM2)
+                0x00000000000000d8        0x4 LONG 0x1ae0 LOADADDR (.data_RAM2)
                 0x00000000000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x00000000000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x00000000000000e4                __data_section_table_end = .
                 0x00000000000000e4                __bss_section_table = .
                 0x00000000000000e4        0x4 LONG 0x10000000 ADDR (.bss)
-                0x00000000000000e8        0x4 LONG 0x480 SIZEOF (.bss)
+                0x00000000000000e8        0x4 LONG 0x470 SIZEOF (.bss)
                 0x00000000000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
                 0x00000000000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
                 0x00000000000000f4                __bss_section_table_end = .
@@ -863,180 +746,174 @@ END GROUP
                 0x0000000000000240                InicializarBotones
  .text.PushLCD  0x00000000000002ac       0xd4 ./src/PR/PR_LCD.o
                 0x00000000000002ac                PushLCD
- .text.Display_LCD
-                0x0000000000000380       0x6e ./src/PR/PR_LCD.o
-                0x0000000000000380                Display_LCD
  .text.InicializarPWM
-                0x00000000000003ee       0x20 ./src/PR/PR_PWM.o
-                0x00000000000003ee                InicializarPWM
+                0x0000000000000380       0x20 ./src/PR/PR_PWM.o
+                0x0000000000000380                InicializarPWM
  .text.InicializarRGB
-                0x000000000000040e       0x62 ./src/PR/PR_RGB.o
-                0x000000000000040e                InicializarRGB
+                0x00000000000003a0       0x62 ./src/PR/PR_RGB.o
+                0x00000000000003a0                InicializarRGB
  .text.toggleRGB_r
-                0x0000000000000470       0x26 ./src/PR/PR_RGB.o
-                0x0000000000000470                toggleRGB_r
+                0x0000000000000402       0x26 ./src/PR/PR_RGB.o
+                0x0000000000000402                toggleRGB_r
  .text.InicializarRelays
-                0x0000000000000496       0x80 ./src/PR/PR_Relays.o
-                0x0000000000000496                InicializarRelays
+                0x0000000000000428       0x80 ./src/PR/PR_Relays.o
+                0x0000000000000428                InicializarRelays
  .text.InicializarSerial0
-                0x0000000000000516       0x20 ./src/PR/PR_Serial.o
-                0x0000000000000516                InicializarSerial0
- *fill*         0x0000000000000536        0x2 ff
+                0x00000000000004a8       0x20 ./src/PR/PR_Serial.o
+                0x00000000000004a8                InicializarSerial0
  .text.TimerStart
-                0x0000000000000538       0xb0 ./src/PR/PR_Timers.o
-                0x0000000000000538                TimerStart
+                0x00000000000004c8       0xb0 ./src/PR/PR_Timers.o
+                0x00000000000004c8                TimerStart
  .text.TimerDiscount
-                0x00000000000005e8       0x6c ./src/PR/PR_Timers.o
-                0x00000000000005e8                TimerDiscount
+                0x0000000000000578       0x6c ./src/PR/PR_Timers.o
+                0x0000000000000578                TimerDiscount
  .text.Timers_run
-                0x0000000000000654       0x48 ./src/PR/PR_Timers.o
-                0x0000000000000654                Timers_run
+                0x00000000000005e4       0x48 ./src/PR/PR_Timers.o
+                0x00000000000005e4                Timers_run
  .text.ADC_IRQHandler
-                0x000000000000069c      0x114 ./src/DR/DR_ADC.o
-                0x000000000000069c                ADC_IRQHandler
+                0x000000000000062c      0x114 ./src/DR/DR_ADC.o
+                0x000000000000062c                ADC_IRQHandler
  .text.ADC_startConvertion
-                0x00000000000007b0       0x24 ./src/DR/DR_ADC.o
-                0x00000000000007b0                ADC_startConvertion
+                0x0000000000000740       0x24 ./src/DR/DR_ADC.o
+                0x0000000000000740                ADC_startConvertion
  .text.TecladoHW
-                0x00000000000007d4       0x6e ./src/DR/DR_Botones.o
-                0x00000000000007d4                TecladoHW
- *fill*         0x0000000000000842        0x2 ff
+                0x0000000000000764       0x6e ./src/DR/DR_Botones.o
+                0x0000000000000764                TecladoHW
+ *fill*         0x00000000000007d2        0x2 ff
  .text.TecladoSW
-                0x0000000000000844       0xa8 ./src/DR/DR_Botones.o
-                0x0000000000000844                TecladoSW
+                0x00000000000007d4       0xa8 ./src/DR/DR_Botones.o
+                0x00000000000007d4                TecladoSW
  .text.InicializarEINT_DR
-                0x00000000000008ec       0x4c ./src/DR/DR_ExtInt.o
-                0x00000000000008ec                InicializarEINT_DR
+                0x000000000000087c       0x4c ./src/DR/DR_ExtInt.o
+                0x000000000000087c                InicializarEINT_DR
  .text.EINT2_IRQHandler
-                0x0000000000000938       0x70 ./src/DR/DR_ExtInt.o
-                0x0000000000000938                EINT2_IRQHandler
+                0x00000000000008c8       0x70 ./src/DR/DR_ExtInt.o
+                0x00000000000008c8                EINT2_IRQHandler
  .text.setPinmode
-                0x00000000000009a8       0x94 ./src/DR/DR_GPIO.o
-                0x00000000000009a8                setPinmode
+                0x0000000000000938       0x94 ./src/DR/DR_GPIO.o
+                0x0000000000000938                setPinmode
  .text.setPinmode_OD
-                0x0000000000000a3c       0x64 ./src/DR/DR_GPIO.o
-                0x0000000000000a3c                setPinmode_OD
- .text.setDir   0x0000000000000aa0       0x76 ./src/DR/DR_GPIO.o
-                0x0000000000000aa0                setDir
- *fill*         0x0000000000000b16        0x2 ff
- .text.setPin   0x0000000000000b18       0xe8 ./src/DR/DR_GPIO.o
-                0x0000000000000b18                setPin
- .text.getPin   0x0000000000000c00       0x4e ./src/DR/DR_GPIO.o
-                0x0000000000000c00                getPin
+                0x00000000000009cc       0x64 ./src/DR/DR_GPIO.o
+                0x00000000000009cc                setPinmode_OD
+ .text.setDir   0x0000000000000a30       0x76 ./src/DR/DR_GPIO.o
+                0x0000000000000a30                setDir
+ *fill*         0x0000000000000aa6        0x2 ff
+ .text.setPin   0x0000000000000aa8       0xe8 ./src/DR/DR_GPIO.o
+                0x0000000000000aa8                setPin
+ .text.getPin   0x0000000000000b90       0x4e ./src/DR/DR_GPIO.o
+                0x0000000000000b90                getPin
  .text.getPin_raw
-                0x0000000000000c4e       0x36 ./src/DR/DR_GPIO.o
-                0x0000000000000c4e                getPin_raw
+                0x0000000000000bde       0x36 ./src/DR/DR_GPIO.o
+                0x0000000000000bde                getPin_raw
  .text.I2C1_IRQHandler
-                0x0000000000000c84      0x304 ./src/DR/DR_I2C.o
-                0x0000000000000c84                I2C1_IRQHandler
- .text.InitLCD  0x0000000000000f88      0x1dc ./src/DR/DR_LCD.o
-                0x0000000000000f88                InitLCD
+                0x0000000000000c14      0x304 ./src/DR/DR_I2C.o
+                0x0000000000000c14                I2C1_IRQHandler
+ .text.InitLCD  0x0000000000000f18      0x1dc ./src/DR/DR_LCD.o
+                0x0000000000000f18                InitLCD
  .text.Dato_LCD
-                0x0000000000001164       0xb0 ./src/DR/DR_LCD.o
-                0x0000000000001164                Dato_LCD
- .text.PopLCD   0x0000000000001214       0x70 ./src/DR/DR_LCD.o
-                0x0000000000001214                PopLCD
+                0x00000000000010f4       0xb0 ./src/DR/DR_LCD.o
+                0x00000000000010f4                Dato_LCD
+ .text.PopLCD   0x00000000000011a4       0x70 ./src/DR/DR_LCD.o
+                0x00000000000011a4                PopLCD
  .text.InicializarPLL
-                0x0000000000001284      0x140 ./src/DR/DR_PLL.o
-                0x0000000000001284                InicializarPLL
+                0x0000000000001214      0x140 ./src/DR/DR_PLL.o
+                0x0000000000001214                InicializarPLL
  .text.InicializarPWM_DR
-                0x00000000000013c4       0xdc ./src/DR/DR_PWM.o
-                0x00000000000013c4                InicializarPWM_DR
+                0x0000000000001354       0xdc ./src/DR/DR_PWM.o
+                0x0000000000001354                InicializarPWM_DR
  .text.PWM_setDutyCicle
-                0x00000000000014a0       0x70 ./src/DR/DR_PWM.o
-                0x00000000000014a0                PWM_setDutyCicle
+                0x0000000000001430       0x70 ./src/DR/DR_PWM.o
+                0x0000000000001430                PWM_setDutyCicle
  .text.PWM_update
-                0x0000000000001510       0x5c ./src/DR/DR_PWM.o
-                0x0000000000001510                PWM_update
+                0x00000000000014a0       0x5c ./src/DR/DR_PWM.o
+                0x00000000000014a0                PWM_update
  .text.setPinsel
-                0x000000000000156c       0xa4 ./src/DR/DR_Pinsel.o
-                0x000000000000156c                setPinsel
+                0x00000000000014fc       0xa4 ./src/DR/DR_Pinsel.o
+                0x00000000000014fc                setPinsel
  .text.InicializarUART0_DR
-                0x0000000000001610       0x90 ./src/DR/DR_Serial.o
-                0x0000000000001610                InicializarUART0_DR
+                0x00000000000015a0       0x90 ./src/DR/DR_Serial.o
+                0x00000000000015a0                InicializarUART0_DR
  .text.UART0_pushRX
-                0x00000000000016a0       0x40 ./src/DR/DR_Serial.o
-                0x00000000000016a0                UART0_pushRX
+                0x0000000000001630       0x40 ./src/DR/DR_Serial.o
+                0x0000000000001630                UART0_pushRX
  .text.UART0_popTX
-                0x00000000000016e0       0x60 ./src/DR/DR_Serial.o
-                0x00000000000016e0                UART0_popTX
+                0x0000000000001670       0x60 ./src/DR/DR_Serial.o
+                0x0000000000001670                UART0_popTX
  .text.UART0_forceTX
-                0x0000000000001740       0x28 ./src/DR/DR_Serial.o
-                0x0000000000001740                UART0_forceTX
+                0x00000000000016d0       0x28 ./src/DR/DR_Serial.o
+                0x00000000000016d0                UART0_forceTX
  .text.UART0_IRQHandler
-                0x0000000000001768       0xa0 ./src/DR/DR_Serial.o
-                0x0000000000001768                UART0_IRQHandler
+                0x00000000000016f8       0xa0 ./src/DR/DR_Serial.o
+                0x00000000000016f8                UART0_IRQHandler
  .text.UART1_pushRX
-                0x0000000000001808       0x40 ./src/DR/DR_Serial.o
-                0x0000000000001808                UART1_pushRX
+                0x0000000000001798       0x40 ./src/DR/DR_Serial.o
+                0x0000000000001798                UART1_pushRX
  .text.UART1_popTX
-                0x0000000000001848       0x60 ./src/DR/DR_Serial.o
-                0x0000000000001848                UART1_popTX
+                0x00000000000017d8       0x60 ./src/DR/DR_Serial.o
+                0x00000000000017d8                UART1_popTX
  .text.UART1_forceTX
-                0x00000000000018a8       0x28 ./src/DR/DR_Serial.o
-                0x00000000000018a8                UART1_forceTX
+                0x0000000000001838       0x28 ./src/DR/DR_Serial.o
+                0x0000000000001838                UART1_forceTX
  .text.UART1_IRQHandler
-                0x00000000000018d0       0xa0 ./src/DR/DR_Serial.o
-                0x00000000000018d0                UART1_IRQHandler
+                0x0000000000001860       0xa0 ./src/DR/DR_Serial.o
+                0x0000000000001860                UART1_IRQHandler
  .text.InicializarSystick
-                0x0000000000001970       0x40 ./src/DR/DR_Systick.o
-                0x0000000000001970                InicializarSystick
+                0x0000000000001900       0x40 ./src/DR/DR_Systick.o
+                0x0000000000001900                InicializarSystick
  .text.SysTick_Handler
-                0x00000000000019b0       0x1c ./src/DR/DR_Systick.o
-                0x00000000000019b0                SysTick_Handler
+                0x0000000000001940       0x1c ./src/DR/DR_Systick.o
+                0x0000000000001940                SysTick_Handler
  .text.scheduler_run
-                0x00000000000019cc       0xa4 ./src/DR/DR_Systick.o
-                0x00000000000019cc                scheduler_run
+                0x000000000000195c       0xa4 ./src/DR/DR_Systick.o
+                0x000000000000195c                scheduler_run
  .text.TIMER0_getTime
-                0x0000000000001a70       0x14 ./src/DR/DR_Timer0.o
-                0x0000000000001a70                TIMER0_getTime
+                0x0000000000001a00       0x14 ./src/DR/DR_Timer0.o
+                0x0000000000001a00                TIMER0_getTime
  .text.TIMER0_rstTime
-                0x0000000000001a84       0x18 ./src/DR/DR_Timer0.o
-                0x0000000000001a84                TIMER0_rstTime
+                0x0000000000001a14       0x18 ./src/DR/DR_Timer0.o
+                0x0000000000001a14                TIMER0_rstTime
  .text.TIMER0_IRQHandler
-                0x0000000000001a9c       0x28 ./src/DR/DR_Timer0.o
-                0x0000000000001a9c                TIMER0_IRQHandler
- .text.func     0x0000000000001ac4       0x1c ./src/TPI_V0.o
-                0x0000000000001ac4                func
- .text.FUNC3    0x0000000000001ae0       0x44 ./src/TPI_V0.o
-                0x0000000000001ae0                FUNC3
- .text.main     0x0000000000001b24       0x7c ./src/TPI_V0.o
-                0x0000000000001b24                main
+                0x0000000000001a2c       0x28 ./src/DR/DR_Timer0.o
+                0x0000000000001a2c                TIMER0_IRQHandler
+ .text.func     0x0000000000001a54       0x1c ./src/TPI_V0.o
+                0x0000000000001a54                func
+ .text.main     0x0000000000001a70       0x6c ./src/TPI_V0.o
+                0x0000000000001a70                main
  .text.__weak_main
-                0x0000000000001ba0        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
-                0x0000000000001ba0                __main
-                0x0000000000001ba0                __weak_main
+                0x0000000000001adc        0x4 /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
+                0x0000000000001adc                __main
+                0x0000000000001adc                __weak_main
  *(.rodata .rodata.* .constdata .constdata.*)
-                0x0000000000001ba4                . = ALIGN (0x4)
+                0x0000000000001ae0                . = ALIGN (0x4)
 
-.glue_7         0x0000000000001ba4        0x0
- .glue_7        0x0000000000001ba4        0x0 linker stubs
+.glue_7         0x0000000000001ae0        0x0
+ .glue_7        0x0000000000001ae0        0x0 linker stubs
 
-.glue_7t        0x0000000000001ba4        0x0
- .glue_7t       0x0000000000001ba4        0x0 linker stubs
+.glue_7t        0x0000000000001ae0        0x0
+ .glue_7t       0x0000000000001ae0        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000001ba4        0x0
- .vfp11_veneer  0x0000000000001ba4        0x0 linker stubs
+.vfp11_veneer   0x0000000000001ae0        0x0
+ .vfp11_veneer  0x0000000000001ae0        0x0 linker stubs
 
-.v4_bx          0x0000000000001ba4        0x0
- .v4_bx         0x0000000000001ba4        0x0 linker stubs
+.v4_bx          0x0000000000001ae0        0x0
+ .v4_bx         0x0000000000001ae0        0x0 linker stubs
 
-.iplt           0x0000000000001ba4        0x0
- .iplt          0x0000000000001ba4        0x0 ./src/PR/PR_ADC.o
+.iplt           0x0000000000001ae0        0x0
+ .iplt          0x0000000000001ae0        0x0 ./src/PR/PR_ADC.o
 
-.rel.dyn        0x0000000000001ba4        0x0
- .rel.iplt      0x0000000000001ba4        0x0 ./src/PR/PR_ADC.o
+.rel.dyn        0x0000000000001ae0        0x0
+ .rel.iplt      0x0000000000001ae0        0x0 ./src/PR/PR_ADC.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000000000001ba4        0x0
-                0x0000000000001ba4                __exidx_start = .
+.ARM.exidx      0x0000000000001ae0        0x0
+                0x0000000000001ae0                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000001ba4                __exidx_end = .
-                0x0000000000001ba4                _etext = .
+                0x0000000000001ae0                __exidx_end = .
+                0x0000000000001ae0                _etext = .
 
-.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001ba4
+.data_RAM2      0x000000002007c000        0x0 load address 0x0000000000001ae0
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2 = .)
                 [!provide]                        PROVIDE (__start_data_RamAHB32 = .)
@@ -1057,7 +934,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000        0x0 load address 0x0000000000001ba4
+.data           0x0000000010000000        0x0 load address 0x0000000000001ae0
  FILL mask 0xff
                 0x0000000010000000                _data = .
                 [!provide]                        PROVIDE (__start_data_RAM = .)
@@ -1073,7 +950,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_data_RAM = .)
                 [!provide]                        PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x0000000010000000        0x0 load address 0x0000000000001ba4
+.igot.plt       0x0000000010000000        0x0 load address 0x0000000000001ae0
  .igot.plt      0x0000000010000000        0x0 ./src/PR/PR_ADC.o
 
 .bss_RAM2       0x000000002007c000        0x0
@@ -1087,7 +964,7 @@ END GROUP
                 [!provide]                        PROVIDE (__end_bss_RAM2 = .)
                 [!provide]                        PROVIDE (__end_bss_RamAHB32 = .)
 
-.bss            0x0000000010000000      0x480
+.bss            0x0000000010000000      0x470
                 0x0000000010000000                _bss = .
                 [!provide]                        PROVIDE (__start_bss_RAM = .)
                 [!provide]                        PROVIDE (__start_bss_RamLoc32 = .)
@@ -1221,11 +1098,9 @@ END GROUP
  .bss.TIM0_count
                 0x000000001000046c        0x4 ./src/DR/DR_Timer0.o
                 0x000000001000046c                TIM0_count
- .bss.aux3      0x0000000010000470       0x10 ./src/TPI_V0.o
-                0x0000000010000470                aux3
  *(COMMON)
-                0x0000000010000480                . = ALIGN (0x4)
-                0x0000000010000480                _ebss = .
+                0x0000000010000470                . = ALIGN (0x4)
+                0x0000000010000470                _ebss = .
                 [!provide]                        PROVIDE (__end_bss_RAM = .)
                 [!provide]                        PROVIDE (__end_bss_RamLoc32 = .)
                 [!provide]                        PROVIDE (end = .)
@@ -1241,24 +1116,24 @@ END GROUP
                 [!provide]                        PROVIDE (__end_noinit_RAM2 = .)
                 [!provide]                        PROVIDE (__end_noinit_RamAHB32 = .)
 
-.noinit         0x0000000010000480        0x0
-                0x0000000010000480                _noinit = .
+.noinit         0x0000000010000470        0x0
+                0x0000000010000470                _noinit = .
                 [!provide]                        PROVIDE (__start_noinit_RAM = .)
                 [!provide]                        PROVIDE (__start_noinit_RamLoc32 = .)
  *(.noinit*)
-                0x0000000010000480                . = ALIGN (0x4)
-                0x0000000010000480                _end_noinit = .
+                0x0000000010000470                . = ALIGN (0x4)
+                0x0000000010000470                _end_noinit = .
                 [!provide]                        PROVIDE (__end_noinit_RAM = .)
                 [!provide]                        PROVIDE (__end_noinit_RamLoc32 = .)
                 [!provide]                        PROVIDE (_pvHeapStart = DEFINED (__user_heap_base)?__user_heap_base:.)
                 0x0000000010008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 0xffffffffefff74da                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000001ba4                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000001ba4                _image_size = (_image_end - _image_start)
+                0x0000000000001ae0                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000001ae0                _image_size = (_image_end - _image_start)
 OUTPUT(TPI_V0.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x351b
+.debug_info     0x0000000000000000     0x3509
  .debug_info    0x0000000000000000       0xfe ./src/PR/PR_ADC.o
  .debug_info    0x00000000000000fe       0xba ./src/PR/PR_Botones.o
  .debug_info    0x00000000000001b8      0x1ba ./src/PR/PR_LCD.o
@@ -1279,8 +1154,8 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_info    0x0000000000002154      0x6d6 ./src/DR/DR_Serial.o
  .debug_info    0x000000000000282a      0x323 ./src/DR/DR_Systick.o
  .debug_info    0x0000000000002b4d      0x51b ./src/DR/DR_Timer0.o
- .debug_info    0x0000000000003068      0x241 ./src/TPI_V0.o
- .debug_info    0x00000000000032a9      0x272 ./src/cr_startup_lpc175x_6x.o
+ .debug_info    0x0000000000003068      0x22f ./src/TPI_V0.o
+ .debug_info    0x0000000000003297      0x272 ./src/cr_startup_lpc175x_6x.o
 
 .debug_abbrev   0x0000000000000000     0x1675
  .debug_abbrev  0x0000000000000000       0xc7 ./src/PR/PR_ADC.o
@@ -1306,7 +1181,7 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_abbrev  0x0000000000001467       0xf7 ./src/TPI_V0.o
  .debug_abbrev  0x000000000000155e      0x117 ./src/cr_startup_lpc175x_6x.o
 
-.debug_aranges  0x0000000000000000      0x540
+.debug_aranges  0x0000000000000000      0x538
  .debug_aranges
                 0x0000000000000000       0x38 ./src/PR/PR_ADC.o
  .debug_aranges
@@ -1348,11 +1223,11 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_aranges
                 0x0000000000000450       0x40 ./src/DR/DR_Timer0.o
  .debug_aranges
-                0x0000000000000490       0x30 ./src/TPI_V0.o
+                0x0000000000000490       0x28 ./src/TPI_V0.o
  .debug_aranges
-                0x00000000000004c0       0x80 ./src/cr_startup_lpc175x_6x.o
+                0x00000000000004b8       0x80 ./src/cr_startup_lpc175x_6x.o
 
-.debug_ranges   0x0000000000000000      0x3e0
+.debug_ranges   0x0000000000000000      0x3d8
  .debug_ranges  0x0000000000000000       0x28 ./src/PR/PR_ADC.o
  .debug_ranges  0x0000000000000028       0x18 ./src/PR/PR_Botones.o
  .debug_ranges  0x0000000000000040       0x20 ./src/PR/PR_LCD.o
@@ -1373,10 +1248,10 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_ranges  0x0000000000000298       0x58 ./src/DR/DR_Serial.o
  .debug_ranges  0x00000000000002f0       0x30 ./src/DR/DR_Systick.o
  .debug_ranges  0x0000000000000320       0x30 ./src/DR/DR_Timer0.o
- .debug_ranges  0x0000000000000350       0x20 ./src/TPI_V0.o
- .debug_ranges  0x0000000000000370       0x70 ./src/cr_startup_lpc175x_6x.o
+ .debug_ranges  0x0000000000000350       0x18 ./src/TPI_V0.o
+ .debug_ranges  0x0000000000000368       0x70 ./src/cr_startup_lpc175x_6x.o
 
-.debug_macro    0x0000000000000000     0x26d4
+.debug_macro    0x0000000000000000     0x26ca
  .debug_macro   0x0000000000000000       0x59 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000059      0xaa8 ./src/PR/PR_ADC.o
  .debug_macro   0x0000000000000b01      0x1ea ./src/PR/PR_ADC.o
@@ -1414,12 +1289,12 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_macro   0x000000000000192b       0x96 ./src/DR/DR_Systick.o
  .debug_macro   0x00000000000019c1       0x10 ./src/DR/DR_Systick.o
  .debug_macro   0x00000000000019d1       0x61 ./src/DR/DR_Timer0.o
- .debug_macro   0x0000000000001a32      0x155 ./src/TPI_V0.o
- .debug_macro   0x0000000000001b87       0x82 ./src/TPI_V0.o
- .debug_macro   0x0000000000001c09       0x1d ./src/cr_startup_lpc175x_6x.o
- .debug_macro   0x0000000000001c26      0xaae ./src/cr_startup_lpc175x_6x.o
+ .debug_macro   0x0000000000001a32      0x14b ./src/TPI_V0.o
+ .debug_macro   0x0000000000001b7d       0x82 ./src/TPI_V0.o
+ .debug_macro   0x0000000000001bff       0x1d ./src/cr_startup_lpc175x_6x.o
+ .debug_macro   0x0000000000001c1c      0xaae ./src/cr_startup_lpc175x_6x.o
 
-.debug_line     0x0000000000000000     0x2ac9
+.debug_line     0x0000000000000000     0x2a72
  .debug_line    0x0000000000000000      0x158 ./src/PR/PR_ADC.o
  .debug_line    0x0000000000000158      0x12f ./src/PR/PR_Botones.o
  .debug_line    0x0000000000000287      0x1d9 ./src/PR/PR_LCD.o
@@ -1440,10 +1315,10 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_line    0x0000000000001e61      0x307 ./src/DR/DR_Serial.o
  .debug_line    0x0000000000002168      0x202 ./src/DR/DR_Systick.o
  .debug_line    0x000000000000236a      0x18b ./src/DR/DR_Timer0.o
- .debug_line    0x00000000000024f5      0x475 ./src/TPI_V0.o
- .debug_line    0x000000000000296a      0x15f ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x00000000000024f5      0x41e ./src/TPI_V0.o
+ .debug_line    0x0000000000002913      0x15f ./src/cr_startup_lpc175x_6x.o
 
-.debug_str      0x0000000000000000     0x8c76
+.debug_str      0x0000000000000000     0x8c5a
  .debug_str     0x0000000000000000     0x3b03 ./src/PR/PR_ADC.o
                                        0x3b40 (size before relaxing)
  .debug_str     0x0000000000003b03       0xfe ./src/PR/PR_Botones.o
@@ -1484,9 +1359,9 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
                                        0x3e43 (size before relaxing)
  .debug_str     0x0000000000005494      0x1c9 ./src/DR/DR_Timer0.o
                                        0x3d11 (size before relaxing)
- .debug_str     0x000000000000565d     0x3453 ./src/TPI_V0.o
-                                       0x7328 (size before relaxing)
- .debug_str     0x0000000000008ab0      0x1c6 ./src/cr_startup_lpc175x_6x.o
+ .debug_str     0x000000000000565d     0x3437 ./src/TPI_V0.o
+                                       0x730c (size before relaxing)
+ .debug_str     0x0000000000008a94      0x1c6 ./src/cr_startup_lpc175x_6x.o
                                        0x2fba (size before relaxing)
 
 .comment        0x0000000000000000       0x79
@@ -1564,7 +1439,7 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .ARM.attributes
                 0x00000000000003de       0x2d /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libcr_c.a(__weak__main.o)
 
-.debug_frame    0x0000000000000000      0xef8
+.debug_frame    0x0000000000000000      0xedc
  .debug_frame   0x0000000000000000       0x90 ./src/PR/PR_ADC.o
  .debug_frame   0x0000000000000090       0x54 ./src/PR/PR_Botones.o
  .debug_frame   0x00000000000000e4       0x84 ./src/PR/PR_LCD.o
@@ -1585,8 +1460,8 @@ OUTPUT(TPI_V0.axf elf32-littlearm)
  .debug_frame   0x0000000000000a3c      0x188 ./src/DR/DR_Serial.o
  .debug_frame   0x0000000000000bc4       0xa8 ./src/DR/DR_Systick.o
  .debug_frame   0x0000000000000c6c       0xb8 ./src/DR/DR_Timer0.o
- .debug_frame   0x0000000000000d24       0x64 ./src/TPI_V0.o
- .debug_frame   0x0000000000000d88      0x170 ./src/cr_startup_lpc175x_6x.o
+ .debug_frame   0x0000000000000d24       0x48 ./src/TPI_V0.o
+ .debug_frame   0x0000000000000d6c      0x170 ./src/cr_startup_lpc175x_6x.o
 
 Cross Reference Table
 
@@ -1620,7 +1495,6 @@ DebugMon_Handler                                  ./src/cr_startup_lpc175x_6x.o
 Demora_LCD                                        ./src/DR/DR_LCD.o
                                                   ./src/DR/DR_Systick.o
 Display_LCD                                       ./src/PR/PR_LCD.o
-                                                  ./src/TPI_V0.o
 EINT0_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 EINT1_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 EINT2_IRQHandler                                  ./src/DR/DR_ExtInt.o
@@ -1628,7 +1502,6 @@ EINT3_IRQHandler                                  ./src/cr_startup_lpc175x_6x.o
 EINT_Enable                                       ./src/DR/DR_ExtInt.o
                                                   ./src/PR/PR_IntTime.o
 ENET_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
-FUNC3                                             ./src/TPI_V0.o
 GuardarMensajeLCD                                 ./src/PR/PR_LCD.o
 HardFault_Handler                                 ./src/cr_startup_lpc175x_6x.o
 I2C0_IRQHandler                                   ./src/cr_startup_lpc175x_6x.o
@@ -1673,6 +1546,7 @@ InicializarBMP280                                 ./src/PR/PR_BMP280.o
 InicializarBotones                                ./src/PR/PR_Botones.o
                                                   ./src/TPI_V0.o
 InicializarEINT_DR                                ./src/DR/DR_ExtInt.o
+                                                  ./inc/PR/PR_Ultrasonido.o
                                                   ./src/TPI_V0.o
                                                   ./src/PR/PR_IntTime.o
 InicializarI2C                                    ./src/PR/PR_I2C.o
@@ -1681,7 +1555,6 @@ InicializarI2C                                    ./src/PR/PR_I2C.o
 InicializarI2C_DR                                 ./src/DR/DR_I2C.o
                                                   ./src/PR/PR_I2C.o
 InicializarIntTime                                ./src/PR/PR_IntTime.o
-                                                  ./src/AP/AP_Ultrasonido.o
 InicializarMotores                                ./src/PR/PR_Motores.o
 InicializarPLL                                    ./src/DR/DR_PLL.o
                                                   ./src/TPI_V0.o
@@ -1700,12 +1573,13 @@ InicializarSerial1                                ./src/PR/PR_Serial.o
 InicializarSystick                                ./src/DR/DR_Systick.o
                                                   ./src/TPI_V0.o
 InicializarTimer0_DR                              ./src/DR/DR_Timer0.o
+                                                  ./inc/PR/PR_Ultrasonido.o
                                                   ./src/PR/PR_IntTime.o
 InicializarUART0_DR                               ./src/DR/DR_Serial.o
                                                   ./src/PR/PR_Serial.o
 InicializarUART1_DR                               ./src/DR/DR_Serial.o
                                                   ./src/PR/PR_Serial.o
-InicializarUS                                     ./src/AP/AP_Ultrasonido.o
+InicializarUS                                     ./inc/PR/PR_Ultrasonido.o
 InitLCD                                           ./src/DR/DR_LCD.o
                                                   ./src/TPI_V0.o
 IntDefaultHandler                                 ./src/cr_startup_lpc175x_6x.o
@@ -1757,7 +1631,6 @@ TimerPause                                        ./src/PR/PR_Timers.o
 TimerSet                                          ./src/PR/PR_Timers.o
 TimerStart                                        ./src/PR/PR_Timers.o
                                                   ./src/TPI_V0.o
-                                                  ./src/AP/AP_Ultrasonido.o
                                                   ./src/PR/PR_AM2320.o
 TimerStop                                         ./src/PR/PR_Timers.o
 Timers_run                                        ./src/PR/PR_Timers.o
@@ -1815,63 +1688,6 @@ USBActivity_IRQHandler                            ./src/cr_startup_lpc175x_6x.o
 USB_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
 UsageFault_Handler                                ./src/cr_startup_lpc175x_6x.o
 WDT_IRQHandler                                    ./src/cr_startup_lpc175x_6x.o
-__aeabi_cdcmpeq                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_cdcmple                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_cdrcmple                                  /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_cfcmpeq                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_cfcmple                                   /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_cfrcmple                                  /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_d2f                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_d2iz                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_d2lz                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_d2uiz                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-                                                  ./src/AP/AP_Ultrasonido.o
-__aeabi_d2ulz                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dadd                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmpeq                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmpge                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmpgt                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmple                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmplt                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dcmpun                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_ddiv                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-                                                  ./src/AP/AP_Ultrasonido.o
-__aeabi_dmul                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dneg                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_drsub                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_dsub                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_f2d                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-                                                  ./src/AP/AP_Ultrasonido.o
-__aeabi_f2iz                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_f2lz                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_f2uiz                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_f2ulz                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fadd                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmpeq                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmpge                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmpgt                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmple                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmplt                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fcmpun                                    /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fdiv                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fmul                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-                                                  ./src/AP/AP_Ultrasonido.o
-__aeabi_fneg                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_frsub                                     /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_fsub                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_i2d                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_i2f                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_l2d                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_l2f                                       /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__aeabi_ui2d                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_ui2f                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-                                                  ./src/AP/AP_Ultrasonido.o
-__aeabi_ul2d                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__aeabi_ul2f                                      /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__bhs_ui2d                                        /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__bhs_ui2f                                        /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
-__bhs_ul2d                                        /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(double.o)
-__bhs_ul2f                                        /usr/local/mcuxpressoide-11.2.0_4120/ide/plugins/com.nxp.mcuxpresso.tools.linux_11.2.0.202001021529/tools/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libcr_eabihelpers.a(float.o)
 __bss_section_table_end                           ./src/cr_startup_lpc175x_6x.o
 __data_section_table                              ./src/cr_startup_lpc175x_6x.o
 __data_section_table_end                          ./src/cr_startup_lpc175x_6x.o
@@ -1887,9 +1703,7 @@ cantidadColaLCD                                   ./src/PR/PR_LCD.o
                                                   ./src/DR/DR_LCD.o
 data_init                                         ./src/cr_startup_lpc175x_6x.o
 dev                                               ./src/PR/PR_BMP280.o
-distancia                                         ./src/AP/AP_Ultrasonido.o
 enableIntTime                                     ./src/PR/PR_IntTime.o
-                                                  ./src/AP/AP_Ultrasonido.o
 func                                              ./src/TPI_V0.o
 g_pfnVectors                                      ./src/cr_startup_lpc175x_6x.o
 getADC                                            ./src/PR/PR_ADC.o
@@ -1897,14 +1711,13 @@ getBMP280_pres                                    ./src/PR/PR_BMP280.o
 getBMP280_temp                                    ./src/PR/PR_BMP280.o
 getBtn                                            ./src/PR/PR_Botones.o
 getIntTime                                        ./src/PR/PR_IntTime.o
-                                                  ./src/AP/AP_Ultrasonido.o
 getPWMDuty                                        ./src/PR/PR_PWM.o
 getPin                                            ./src/DR/DR_GPIO.o
                                                   ./src/DR/DR_Botones.o
 getPin_raw                                        ./src/DR/DR_GPIO.o
                                                   ./src/PR/PR_Relays.o
                                                   ./src/PR/PR_RGB.o
-getUSDistance                                     ./src/AP/AP_Ultrasonido.o
+getUSDistance                                     ./inc/PR/PR_Ultrasonido.o
 get_comp_pres                                     ./src/PR/PR_BMP280.o
 get_comp_temp                                     ./src/PR/PR_BMP280.o
 get_ticks                                         ./src/DR/DR_Systick.o
@@ -1918,8 +1731,8 @@ main                                              ./src/TPI_V0.o
 reset_ticks                                       ./src/DR/DR_Systick.o
 scheduler_run                                     ./src/DR/DR_Systick.o
 setDir                                            ./src/DR/DR_GPIO.o
+                                                  ./inc/PR/PR_Ultrasonido.o
                                                   ./src/TPI_V0.o
-                                                  ./src/AP/AP_Ultrasonido.o
                                                   ./src/DR/DR_LCD.o
                                                   ./src/PR/PR_Relays.o
                                                   ./src/PR/PR_RGB.o
@@ -1931,12 +1744,13 @@ setMotoresVel                                     ./src/PR/PR_Motores.o
 setPWMDuty                                        ./src/PR/PR_PWM.o
 setPWMOff                                         ./src/PR/PR_PWM.o
 setPin                                            ./src/DR/DR_GPIO.o
-                                                  ./src/AP/AP_Ultrasonido.o
+                                                  ./inc/PR/PR_Ultrasonido.o
                                                   ./src/DR/DR_LCD.o
                                                   ./src/PR/PR_Relays.o
                                                   ./src/PR/PR_RGB.o
                                                   ./src/PR/PR_Motores.o
 setPinmode                                        ./src/DR/DR_GPIO.o
+                                                  ./inc/PR/PR_Ultrasonido.o
                                                   ./src/PR/PR_I2C.o
                                                   ./src/PR/PR_Botones.o
 setPinmode_OD                                     ./src/DR/DR_GPIO.o
@@ -1962,4 +1776,4 @@ toggleRGB_g                                       ./src/PR/PR_RGB.o
 toggleRGB_r                                       ./src/PR/PR_RGB.o
                                                   ./src/TPI_V0.o
 toggleRelay                                       ./src/PR/PR_Relays.o
-updateDistance                                    ./src/AP/AP_Ultrasonido.o
+updateDistance                                    ./inc/PR/PR_Ultrasonido.o

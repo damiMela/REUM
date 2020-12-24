@@ -131,7 +131,8 @@ uint8_t maquina_Conexion()
 					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
 					estado = CLIENTE_CONECTADO;
 				}
-				else estado = CONEXION_RESET;
+				else if(com_confirmed_msg != 'M')
+					estado = CONEXION_RESET;
 				break;
 			}
 			
@@ -173,7 +174,8 @@ uint8_t maquina_Lectura()
 		static uint8_t estado = RESET_READ;
 
 		int16_t data = UART1_popRX();
-		static uint8_t com_msg = 0, dir_msg = 0, vel_msg = 0;
+		static uint8_t com_msg = 0, last_com = 0;
+		static uint8_t dir_msg = 0, vel_msg = 0;
 
 		switch(estado)
 		{
@@ -197,9 +199,10 @@ uint8_t maquina_Lectura()
 			case WAIT_MSG_TYPE:{
 				if(data == -1)
 					break;
-				else if(COM_CHAR(data)){
+				else if(COM_CHAR(data) && (data != last_com)){
 					estado = WAIT_END;
 					com_msg = data;
+					last_com = com_msg;
 				}
 				else if(MOV_CHAR(data)){
 					estado = WAIT_MSG_VEL1;
@@ -212,11 +215,7 @@ uint8_t maquina_Lectura()
 			case WAIT_MSG_VEL1:{
 				if(data == -1)
 					break;
-				else if(NUM_CHAR(data) && (data == '0')){
-					vel_msg = (data - '0');
-					estado = WAIT_END;
-				}
-				else if(NUM_CHAR(data)){
+				if(NUM_CHAR(data)){
 					vel_msg = (data - '0') * 10;
 					estado = WAIT_MSG_VEL2;
 				}
@@ -316,6 +315,18 @@ uint8_t maquina_Movimiento()
 					confirmed_dir = 0;
 					confirmed_vel = -1;
 					estado = IZQUIERDA;
+				}
+				else if(confirmed_dir == 'P'){
+					setRGB(1, 1, 1);
+					TimerStop(LED_V_BLINK_EV);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
+				}
+				else if(confirmed_dir == 'A'){
+					setRGB(0, 0, 0);
+					TimerStart(LED_V_BLINK_EV, ledV_Blink_t, LedV_Blink, SEG);
+					confirmed_dir = 0;
+					confirmed_vel = -1;
 				}
 				else if((confirmed_dir == 'S') && (connected_flag))
 				{
@@ -466,11 +477,7 @@ uint8_t maquina_Movimiento()
 
 		return estado;
 }
-enum estado_enivo_data_en{
-	RESET_SENDING,
-	WAIT_SENDING,
-	SEND_DATA
-};
+
 
 uint8_t maquina_Envio_data(void){
 	static uint8_t estado = RESET_SENDING;
@@ -479,7 +486,6 @@ uint8_t maquina_Envio_data(void){
 		case RESET_SENDING:{
 			InicializarBMP280();
 			InicializarADC();
-			InicializarBMP280();
 			send_data_f = 0;
 			estado = WAIT_SENDING;
 			break;

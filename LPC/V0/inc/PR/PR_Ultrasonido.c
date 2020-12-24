@@ -77,10 +77,11 @@ void updateDistance(void){
 	for (uint16_t j = 1000; j; j--);             // for 10µs
 	setPin(US_TRIG_P, LOW);    // Set LOW again
 
-
+/*
 	EINT2_NO_INTERRUPTS;
 	distancia = (uint16_t)((intTime * 10) * (float)343.0 / 20000.0);
 	EINT2_INTERRUPTS;
+	*/
 }
 
 uint16_t getUSDistance(void){

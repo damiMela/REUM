@@ -58,10 +58,10 @@ public:
     QFrame *btnFrame;
     QGridLayout *gridLayout;
     QPushButton *LeftBtn;
-    QSpacerItem *horizontalSpacer;
     QPushButton *DownBtn;
     QPushButton *UpBtn;
     QPushButton *RightBtn;
+    QPushButton *lightBtn;
     QSlider *velocitySlide;
     QGroupBox *dataGroup;
     QHBoxLayout *horizontalLayout;
@@ -190,10 +190,6 @@ public:
 
         gridLayout->addWidget(LeftBtn, 2, 0, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(72, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer, 2, 1, 1, 1);
-
         DownBtn = new QPushButton(btnFrame);
         DownBtn->setObjectName(QString::fromUtf8("DownBtn"));
         sizePolicy2.setHeightForWidth(DownBtn->sizePolicy().hasHeightForWidth());
@@ -217,6 +213,14 @@ public:
         RightBtn->setMinimumSize(QSize(75, 75));
 
         gridLayout->addWidget(RightBtn, 2, 2, 1, 1);
+
+        lightBtn = new QPushButton(btnFrame);
+        lightBtn->setObjectName(QString::fromUtf8("lightBtn"));
+        sizePolicy2.setHeightForWidth(lightBtn->sizePolicy().hasHeightForWidth());
+        lightBtn->setSizePolicy(sizePolicy2);
+        lightBtn->setMinimumSize(QSize(75, 75));
+
+        gridLayout->addWidget(lightBtn, 2, 1, 1, 1);
 
 
         horizontalLayout_2->addWidget(btnFrame);
@@ -485,7 +489,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -501,6 +505,7 @@ public:
         DownBtn->setText(QString());
         UpBtn->setText(QString());
         RightBtn->setText(QString());
+        lightBtn->setText(QString());
         dataGroup->setTitle(QApplication::translate("MainWindow", "Entrada de datos", nullptr));
         QTableWidgetItem *___qtablewidgetitem = datTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Valor", nullptr));

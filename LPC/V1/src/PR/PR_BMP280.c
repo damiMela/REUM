@@ -22,8 +22,10 @@
 #define WR_BIT 0x00
 
 #define BMP280_ADDRESS (0x76)
+
 #define BMP280_WRITE 	BMP280_ADDRESS * 2
 #define BMP280_READ		BMP280_WRITE + 1
+
 #define BMP280_CHIPID (0x58)
 
 #define   BMP280_REG_DIG_T1 	 	0x88
@@ -183,7 +185,7 @@ uint8_t BMP280_getData(void){
  	\return (int32_t) temperatura en grados celcius *10 (25.3 C° --> 2530)
 */
 int32_t getBMP280_temp(){
-	return get_comp_temp(bmp280_temperature_data);;
+	return get_comp_temp(bmp280_temperature_data);
 }
 
 /**
@@ -194,7 +196,7 @@ int32_t getBMP280_temp(){
  	\return (uint32_t) Presion en Pascales
 */
 uint32_t getBMP280_pres(){
-	return get_comp_pres(bmp280_pressure_data);;
+	return get_comp_pres(bmp280_pressure_data);
 }
 
 

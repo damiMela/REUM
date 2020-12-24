@@ -5,4 +5,8 @@
         <file>images/right.png</file>
         <file>images/up.png</file>
     </qresource>
+    <qresource prefix="/llight">
+        <file>images/linterna_1.png</file>
+        <file>images/linterna_2.png</file>
+    </qresource>
 </RCC>

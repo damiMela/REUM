@@ -19,17 +19,20 @@ MainWindow::MainWindow(QWidget *parent)
     dir = 'S';
 
      //<<<<<<<<<<<<<-button icons->>>>>>>>>>>>>>//
-    ui->UpBtn->setIcon(QIcon("../GUI_V0/images/up.png"));
+    ui->UpBtn->setIcon(QIcon("../GUI_V0_1/images/up.png"));
     ui->UpBtn->setIconSize(ui->UpBtn->size());
 
-    ui->DownBtn->setIcon(QIcon("../GUI_V0/images/down.png"));
+    ui->DownBtn->setIcon(QIcon("../GUI_V0_1/images/down.png"));
     ui->DownBtn->setIconSize(ui->DownBtn->size());
 
-    ui->LeftBtn->setIcon(QIcon("../GUI_V0/images/left.png"));
+    ui->LeftBtn->setIcon(QIcon("../GUI_V0_1/images/left.png"));
     ui->LeftBtn->setIconSize(ui->LeftBtn->size());
 
-    ui->RightBtn->setIcon(QIcon("../GUI_V0/images/right.png"));
+    ui->RightBtn->setIcon(QIcon("../GUI_V0_1/images/right.png"));
     ui->RightBtn->setIconSize(ui->RightBtn->size());
+
+    ui->lightBtn->setIcon((QIcon("../GUI_V0_1/images/linterna_1.png")));
+    ui->lightBtn->setIconSize(ui->lightBtn->size());
 
     //<<<<<<<<<<<<<-Others->>>>>>>>>>>>>>//
     ui->datTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -49,7 +52,7 @@ void MainWindow::connected_slot()
     ui->btnFrame->setEnabled(true);
     ui->velocitySlide->setEnabled(true);
     ui->SaveDbBtn->setEnabled(true);
-    sendTCPmsg("C");
+    sendTCPmsg("C"); //connected msg
 
     //<<<<<<<<<<<<<<-QTimer->>>>>>>>>>>>>>>>//
     QTimer *update_dir_timer = new QTimer(this);
@@ -79,7 +82,7 @@ void MainWindow::newTCPData_slot()
 
 }
 
-void MainWindow::sendTCPmsg(QString msg, char raw){
+void MainWindow::sendTCPmsg(QString msg, bool raw){
     QString send_msg = "";
 
     if(!raw)send_msg.append("#");
@@ -94,10 +97,10 @@ void MainWindow::sendTCPmsg(QString msg, char raw){
     std::string str_msg = send_msg.toStdString();
     const char* char_msg = str_msg.c_str();
     socket->write(char_msg);
-    //qDebug() << char_msg;
+    qDebug() << char_msg;
 }
 
-//---------------------------------------------KEY PRESS----------------------------------------//
+//---------------------------------------------EVENTS KEY/CLOSE----------------------------------------//
 void MainWindow::keyPressEvent(QKeyEvent *keyevent)
 {
     int pressed_key = keyevent->key();
@@ -118,7 +121,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyevent)
 void MainWindow::closeEvent (QCloseEvent *event)
 {
     QMessageBox::StandardButton resBtn = QMessageBox::question( this, "APP_NAME",
-                                                                tr("Are you sure?\n"),
+                                                                tr("Seguro que desea salir?\n"),
                                                                 QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
                                                                 QMessageBox::Yes);
     if (resBtn != QMessageBox::Yes) {
@@ -126,7 +129,6 @@ void MainWindow::closeEvent (QCloseEvent *event)
     } else {
         sendTCPmsg("T");
         event->accept();
-
     }
 }
 
@@ -135,6 +137,7 @@ void MainWindow::updateRobotDir(){
     QString dir_s = QString(dir);
     int v_int = ui->velocitySlide->value();
 
+    if(v_int < 10) dir_s.append('0');
     dir_s.append(QString::number(v_int));
     sendTCPmsg(dir_s);
 }
@@ -160,7 +163,7 @@ void MainWindow::updateTable(char itemChar, QString val)
     }
 }
 
-void MainWindow::updateSQLdb(void){
+void MainWindow::updateSQLdb(void){ //from the table
     QString consulta;
     QString time, date;
 
@@ -188,6 +191,7 @@ void MainWindow::updateSQLdb(void){
                 gas_s = d_item->text();
         }
     }
+
     consulta.append("INSERT INTO reumData(time, date, temp, luz, pres, gas)"
                     "VALUES ('"+time+
                     "', '"+date+
@@ -200,11 +204,13 @@ void MainWindow::updateSQLdb(void){
     QSqlQuery insert_data(db);
     insert_data.prepare(consulta);
     if(!insert_data.exec()){
-        QMessageBox::critical(NULL, "Alumnos", "Error mientras se guardaban los datos.");
+        QMessageBox::critical(NULL, "DB log", "Error mientras se guardaban los datos.");
     }
     qDebug() << "Query insert:" << consulta.toLocal8Bit().constData() << endl;
     consulta = "";
 }
+
+
 //------------------------------------------BUTTON SLOTS-----------------------------------------//
 void MainWindow::on_camConnectBtn_clicked()
 {
@@ -226,6 +232,33 @@ void MainWindow::on_UpBtn_released(){   dir = 'S';  }
 void MainWindow::on_DownBtn_released(){ dir = 'S';  }
 void MainWindow::on_LeftBtn_released(){ dir = 'S';  }
 void MainWindow::on_RightBtn_released(){dir = 'S';  }
+
+void MainWindow::on_lightBtn_clicked()
+{
+    static char state = 0;
+    if(!state){
+        state = 1;
+        //redundant msgs
+        sendTCPmsg("P0");
+        sendTCPmsg("P0");
+        sendTCPmsg("P0");
+
+        ui->lightBtn->setIcon((QIcon("../GUI_V0_1/images/linterna_2.png")));
+        ui->lightBtn->setIconSize(ui->lightBtn->size());
+    }
+    else{
+        state = 0;
+        //redundant msgs
+        sendTCPmsg("A0");
+        sendTCPmsg("A0");
+        sendTCPmsg("A0");
+
+        ui->lightBtn->setIcon((QIcon("../GUI_V0_1/images/linterna_1.png")));
+        ui->lightBtn->setIconSize(ui->lightBtn->size());
+    }
+
+}
+
 
 
 void MainWindow::on_SaveDbBtn_clicked()
@@ -404,7 +437,7 @@ void MainWindow::on_rangoFilrtoBtn_clicked(){
 void MainWindow::plotSqlModel(QSqlQueryModel *model){
     int table_len = model->rowCount();
     int table_width = model->columnCount();
-    unsigned int max_range = 0, min_range = 0xFFFFFFFF;
+    double max_range = 0, min_range = 0xFFFFFFFF;
 
     QVector<double> x(table_len), y(table_len);
     for (int i = 0; i < table_len; i++) {

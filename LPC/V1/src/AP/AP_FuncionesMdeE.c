@@ -102,7 +102,9 @@ uint8_t MOV_CHAR(char dato){
 			|| dato == 'R'
 			|| dato == 'L'
 			|| dato == 'B'
-			|| dato == 'S')
+			|| dato == 'S'
+			|| dato == 'P'
+			|| dato == 'A')
 	{
 		return 1;
 	}

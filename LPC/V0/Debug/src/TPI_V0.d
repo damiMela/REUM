@@ -21,8 +21,7 @@ src/TPI_V0.o src/TPI_V0.d: ../src/TPI_V0.c \
  /home/damian/git/TPI/LPC/V0/inc/Others/stdint_local.h \
  /home/damian/git/TPI/LPC/V0/inc/PR/PR_AM2320.h \
  /home/damian/git/TPI/LPC/V0/inc/PR/PR_LCD.h \
- /home/damian/git/TPI/LPC/V0/inc/DR/DR_LCD.h \
- /home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h
+ /home/damian/git/TPI/LPC/V0/inc/DR/DR_LCD.h
 
 /home/damian/git/TPI/LPC/V0/inc/DR/DR_Tipos.h:
 
@@ -69,5 +68,3 @@ src/TPI_V0.o src/TPI_V0.d: ../src/TPI_V0.c \
 /home/damian/git/TPI/LPC/V0/inc/PR/PR_LCD.h:
 
 /home/damian/git/TPI/LPC/V0/inc/DR/DR_LCD.h:
-
-/home/damian/git/TPI/LPC/V0/inc/AP/AP_Ultrasonido.h:

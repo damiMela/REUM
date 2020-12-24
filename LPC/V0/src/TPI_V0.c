@@ -39,8 +39,6 @@
 #include <PR/PR_AM2320.h>
 #include <PR/PR_LCD.h>
 
-#include <AP/AP_Ultrasonido.h>
-
 char aux3[16];
 
 void func(void){
@@ -48,15 +46,6 @@ void func(void){
 	TimerStart(0, 3, func, SEG);
 }
 
-void FUNC3(void){
-	aux3[0] = 'h';
-	aux3[1] = 'o';
-	aux3[2] = 'l';
-	aux3[3] = 'a';
-	aux3[4] = '\0';
-	Display_LCD(aux3,RENGLON_2,0);
-	TimerStart(5,1,FUNC3,SEG);
-}
 
 int main(void) {
 	InicializarSystick();
@@ -90,7 +79,7 @@ int main(void) {
 
 	//config_LCD();
 	InitLCD();
-	TimerStart(8,1,FUNC3,SEG);//refresca la presentación del CANAL ADC
+
 
 
     while(1) {

@@ -77,6 +77,11 @@ enum estados_movimiento_en{
 	DERECHA
 };
 
+enum estado_enivo_data_en{
+	RESET_SENDING,
+	WAIT_SENDING,
+	SEND_DATA
+};
 
 /*********************************************************************************************************************************
 *** MACROS GLOBALES
@@ -98,5 +103,6 @@ uint8_t maquina_Conexion(void);
 uint8_t maquina_Lectura(void);
 uint8_t maquina_Movimiento(void);
 uint8_t maquina_Envio_data(void);
+
 
 #endif /* INC_MDEE_H_ */
